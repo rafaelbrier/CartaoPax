@@ -16,9 +16,13 @@
     color: white !important;
     &:hover, &:active, &:focus {
         color: $hoverColor !important;
-        background-color: transparent !important;       
+        background-color: transparent !important;        
     }     
 }   
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
 
 .dropdown-menu {
     background-color: $mainGreen !important;
