@@ -21,8 +21,11 @@
 }   
 
 .dropdown:hover .dropdown-menu {
-    display: block;
+    @media screen and (min-width: 769px){
+        display: block;
+    }      
 }
+   
 
 .dropdown-menu {
     background-color: $mainGreen !important;
@@ -30,7 +33,7 @@
         color: white !important;
         border-bottom: 1px solid #888888;
         white-space: normal;
-        &:hover, &:active {
+        &:hover, &:active, &:focus {
             color: $hoverColor !important;
             background-color: $mainGreen !important;
         } 
