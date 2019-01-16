@@ -18,7 +18,7 @@ export class HeaderComponent implements OnInit {
   
   @HostListener('window:scroll')
   shrinkMenu() {
-    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+    if (document.body.scrollTop > 60 || document.documentElement.scrollTop > 60) {
       document.getElementById("navbar-logo").classList.add("navbar-logo");
       document.getElementById("navbar").style.opacity = '0.5';
     } else {

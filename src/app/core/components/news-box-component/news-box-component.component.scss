@@ -1,0 +1,45 @@
+@import "../../../app.component.scss";
+
+.box {
+    width: 80% !important;
+    margin: 0 auto;
+    margin-bottom: 20px !important;    
+}
+
+.box-header {
+    padding: 0px !important;    
+}
+
+.box-title {
+    margin-top: 15px !important;
+}
+
+.box-subheader {
+    @media screen and (max-width: 768px){
+        display: block;           
+    }
+    background-color: $thirdGreen;
+    color: white;
+    display: flex;   
+    h5 {
+        font-size: 12px;
+        margin-bottom: 0 !important;
+        padding: 7px;
+        font-weight: 700;
+        i {
+            margin-left: 10px;
+            margin-right: 4px;
+        }
+    }
+}
+
+.box .overlay>.fas, .overlay-wrapper .overlay>.fas {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -15px;
+    margin-top: -15px;
+    color: #000;
+    font-size: 30px;
+}
+

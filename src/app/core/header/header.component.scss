@@ -14,8 +14,9 @@
     margin: 0 0.5vw 0 0.5vw !important;
     font-weight: 600;   
     color: white !important;
-    &:hover, &:active {
-        color: $hoverColor !important;       
+    &:hover, &:active, &:focus {
+        color: $hoverColor !important;
+        background-color: transparent !important;       
     }     
 }   
 

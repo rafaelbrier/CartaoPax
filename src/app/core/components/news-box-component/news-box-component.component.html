@@ -1,0 +1,26 @@
+<div class="box box-success">
+    <div class="box-header with-border">
+        <div class="box-subheader">
+
+          <h5>
+              <i class="far fa-calendar"></i>
+              15 jan 2019
+          </h5>
+
+          <h5>
+              <i class="far fa-comments"></i>
+              No comments
+          </h5>
+          
+        </div>
+        <h3 class="box-title">Loading state</h3>
+    </div>
+    <div class="box-body">
+        The body of the box
+    </div><!-- /.box-body -->
+    <!-- Loading (remove the following to stop the loading)-->
+    <div class="overlay" *ngIf="boxLoading">
+        <i class="fas fa-sync-alt fa-spin"></i>
+    </div>
+    <!-- end loading -->
+</div>
