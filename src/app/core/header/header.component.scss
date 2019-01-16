@@ -1,0 +1,37 @@
+/* NAVBAR */
+
+@import '../../app.component.scss';
+
+.navbar {
+    background-image: linear-gradient(to right, #036515 , #00b51f);
+}
+
+.navbar-logo {
+    max-height: 48px;
+}
+
+.nav-link {
+    margin: 0 0.5vw 0 0.5vw !important;
+    font-weight: 600;   
+    color: white !important;
+    &:hover, &:active {
+        color: $hoverColor !important;       
+    }     
+}   
+
+.dropdown-menu {
+    background-color: $mainGreen !important;
+    .dropdown-item {
+        color: white !important;
+        border-bottom: 1px solid #888888;
+        white-space: normal;
+        &:hover, &:active {
+            color: $hoverColor !important;
+            background-color: $mainGreen !important;
+        } 
+        &:last-child {
+            border-bottom: none;
+        }       
+    }
+}
+

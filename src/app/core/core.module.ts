@@ -2,19 +2,23 @@ import { NgModule } from '@angular/core';
 
 import { HeaderComponent } from './header/header.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BodyComponent } from './body/body.component';
 
 @NgModule({
   imports: [
     NgbModule
   ],
   declarations: [    
-    HeaderComponent
+    HeaderComponent,
+     BodyComponent
   ],
   exports: [    
-    HeaderComponent
+    HeaderComponent,
+     BodyComponent
   ],
   providers: [    
-    HeaderComponent
+    HeaderComponent,
+    BodyComponent
   ]
 })
 export class CoreModule { }

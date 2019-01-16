@@ -1,22 +1,23 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+<nav id="navbar" class="navbar navbar-expand-md navbar-dark fixed-top">
 
   <a class="navbar-brand" href="#">
-    <img id="navbar-logo" class="navbar-logo" src="../assets/images/cartaopax-logo.png">
+    <img id="navbar-logo" src="../assets/images/cartaopax-logo.png">
   </a>
 
   <button class="navbar-toggler hidden-sm-up" type="button" (click)="isNavbarCollapsed = !isNavbarCollapsed"
     data-target="#navbarsDefault" aria-controls="navbarsDefault" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div [ngbCollapse]="true" class="collapse navbar-collapse" id="navbarsDefault">
-    <ul class="navbar-nav mr-auto justify-content-center d-flex flex-fill">
+  <div [ngbCollapse]="isNavbarCollapsed" class="collapse navbar-collapse" id="navbarsDefault">
+    <ul class="nav navbar-nav ml-auto">
 
       <li class="nav-item">
-        <a class="nav-link" href="#">INÍCIO</a>
+        <a class="nav-link" href="#">INÍCIO</a>        
       </li>
 
       <li class="nav-item dropdown" ngbDropdown>
         <a class="nav-link dropdown-toggle" id="id01" href="#" ngbDropdownToggle>CARTÃO PAX DE ASSISTÊNCIA</a>
+        <!-- <div class="under-bar"></div>     -->
         <div class="dropdown-menu" aria-labelledby="id01" ngbDropdownMenu>
           <a class="dropdown-item" href="#">História</a>
           <a class="dropdown-item" href="#">Nossas Unidades</a>
@@ -25,45 +26,45 @@
       </li>
 
       <li class="nav-item dropdown" ngbDropdown>
-          <a class="nav-link dropdown-toggle" id="id01" href="#" ngbDropdownToggle>PLANOS</a>
-          <div class="dropdown-menu" aria-labelledby="id01" ngbDropdownMenu>
-            <a class="dropdown-item" href="#">Plano Participativo</a>
-            <a class="dropdown-item" href="#">Plano Bronze</a>
-            <a class="dropdown-item" href="#">Plano Prata</a>
-            <a class="dropdown-item" href="#">Plano Ouro</a>
-            <a class="dropdown-item" href="#">Plano Diamante</a>
-          </div>
-        </li>
+        <a class="nav-link dropdown-toggle" id="id01" href="#" ngbDropdownToggle>PLANOS</a>
+        <div class="dropdown-menu" aria-labelledby="id01" ngbDropdownMenu>
+          <a class="dropdown-item" href="#">Plano Participativo</a>
+          <a class="dropdown-item" href="#">Plano Bronze</a>
+          <a class="dropdown-item" href="#">Plano Prata</a>
+          <a class="dropdown-item" href="#">Plano Ouro</a>
+          <a class="dropdown-item" href="#">Plano Diamante</a>
+        </div>
+      </li>
 
-        <li class="nav-item dropdown" ngbDropdown>
-            <a class="nav-link dropdown-toggle" id="id01" href="#" ngbDropdownToggle>CONVÊNIOS</a>
-            <div class="dropdown-menu" aria-labelledby="id01" ngbDropdownMenu>
-              <a class="dropdown-item" href="#">Parceiros</a>
-              <a class="dropdown-item" href="#">Tabela Médica</a>
-            </div>
-          </li>
+      <li class="nav-item dropdown" ngbDropdown>
+        <a class="nav-link dropdown-toggle" id="id01" href="#" ngbDropdownToggle>CONVÊNIOS</a>
+        <div class="dropdown-menu" aria-labelledby="id01" ngbDropdownMenu>
+          <a class="dropdown-item" href="#">Parceiros</a>
+          <a class="dropdown-item" href="#">Tabela Médica</a>
+        </div>
+      </li>
 
-          <li class="nav-item dropdown" ngbDropdown>
-              <a class="nav-link dropdown-toggle" id="id01" href="#" ngbDropdownToggle>ASSISTÊNCIA FUNERÁRIA</a>
-              <div class="dropdown-menu" aria-labelledby="id01" ngbDropdownMenu>
-                <a class="dropdown-item" href="#">Como Funciona</a>
-                <a class="dropdown-item" href="#">Unidades de Atendimento</a>
-              </div>
-            </li>
+      <li class="nav-item dropdown" ngbDropdown>
+        <a class="nav-link dropdown-toggle" id="id01" href="#" ngbDropdownToggle>ASSISTÊNCIA FUNERÁRIA</a>
+        <div class="dropdown-menu" aria-labelledby="id01" ngbDropdownMenu>
+          <a class="dropdown-item" href="#">Como Funciona</a>
+          <a class="dropdown-item" href="#">Unidades de Atendimento</a>
+        </div>
+      </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="#">OBITUÁRIO</a>
-              </li>
-            
-            <li class="nav-item dropdown" ngbDropdown>
-                <a class="nav-link dropdown-toggle" id="id01" href="#" ngbDropdownToggle>FALE CONOSCO</a>
-                <div class="dropdown-menu" aria-labelledby="id01" ngbDropdownMenu>
-                  <a class="dropdown-item" href="#">Agende uma Visita</a>
-                  <a class="dropdown-item" href="#">Trabalhe Conosco</a>
-                  <a class="dropdown-item" href="#">Alterar Dados Cadastrais</a>
-                  <a class="dropdown-item" href="#">Chat</a>
-                </div>
-              </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">OBITUÁRIO</a>
+      </li>
+
+      <li class="nav-item dropdown" ngbDropdown>
+        <a class="nav-link dropdown-toggle" id="id01" href="#" ngbDropdownToggle>FALE CONOSCO</a>
+        <div class="dropdown-menu" aria-labelledby="id01" ngbDropdownMenu>
+          <a class="dropdown-item" href="#">Agende uma Visita</a>
+          <a class="dropdown-item" href="#">Trabalhe Conosco</a>
+          <a class="dropdown-item" href="#">Alterar Dados Cadastrais</a>
+          <a class="dropdown-item" href="#">Chat</a>
+        </div>
+      </li>
     </ul>
   </div>
 </nav>

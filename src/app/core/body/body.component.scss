@@ -1,0 +1,36 @@
+@import '../../app.component.scss';
+
+.row {
+      @media screen and (max-width: 768px){
+        margin-top: 170px !important; 
+        width: 100%;
+      }
+      margin-top: 200px !important;  
+      margin: 0 auto;
+      width: 80%;   
+}
+
+.news-content {
+    overflow: auto;
+    display: grid;
+    height: 50vh;
+    max-width: 75%;
+}
+
+.info-text {
+    @media screen and (max-width: 768px){
+        margin-top: 170px !important; 
+        width: 100%;
+        font-size: 3vh;
+      }
+    color: black;
+    font-size: 4vh;
+    padding: 3%;
+    padding-top: 0 !important;
+    &:after{
+        content: "";
+        display:block;
+        border-top: 4px solid $secondaryGreen;
+        width: 10%
+    }
+}
