@@ -1,30 +1,35 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { HeaderComponent } from './header/header.component';
+import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 import { BodyComponent } from './body/body.component';
-import { NewsBoxComponentComponent } from './components/news-box-component/news-box-component.component';
+import { HeaderComponent } from './header/header.component';
+import { NewsBoxComponent } from './components/news-box-component/news-box.component';
+import { NewsPageComponent } from './pages/news-page/news-page.component';
+
 
 @NgModule({
   imports: [
     NgbModule,
-    CommonModule
+    CommonModule,
+    HttpClientModule,
   ],
   declarations: [
     HeaderComponent,
     BodyComponent,
-    NewsBoxComponentComponent,
+    NewsBoxComponent,
+    NewsPageComponent,
   ],
   exports: [
     HeaderComponent,
     BodyComponent,
-    NewsBoxComponentComponent
+    NewsBoxComponent
   ],
   providers: [
     HeaderComponent,
     BodyComponent,
-    NewsBoxComponentComponent
+    NewsBoxComponent
   ]
 })
 export class CoreModule { }

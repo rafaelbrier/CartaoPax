@@ -4,7 +4,7 @@
 
           <h5>
               <i class="far fa-calendar"></i>
-              15 jan 2019
+              {{data?.date}}
           </h5>
 
           <h5>
@@ -13,13 +13,14 @@
           </h5>
           
         </div>
-        <h3 class="box-title">Loading state</h3>
+        <h3 class="box-title">{{data?.title}}</h3>
     </div>
     <div class="box-body">
-        The body of the box
-    </div><!-- /.box-body -->
+        {{data?.body}}
+        <a href="#" *ngIf="readMore">Leia Mais</a>
+    </div>
     <!-- Loading (remove the following to stop the loading)-->
-    <div class="overlay" *ngIf="boxLoading">
+    <div class="overlay" *ngIf="isBoxLoading">
         <i class="fas fa-sync-alt fa-spin"></i>
     </div>
     <!-- end loading -->
