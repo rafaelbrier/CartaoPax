@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DatabaseApiService } from '../services/database-api.service';
+import { NewsService } from '../services/news.service';
 
 @Component({
   selector: 'app-body',
@@ -12,12 +12,12 @@ export class BodyComponent implements OnInit {
   isBoxLoading: boolean = false;
   boxLoadingError: boolean= false;
 
-  constructor(private dabaseApiService: DatabaseApiService) { }
+  constructor(private newsService: NewsService) { }
 
   ngOnInit() {
     this.isBoxLoading = true;
 
-    this.dabaseApiService.findAllNews()
+    this.newsService.findAllNews()
     .subscribe(resData =>{
       this.newsData = resData;
       this.isBoxLoading = false;

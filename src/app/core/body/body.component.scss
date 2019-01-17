@@ -1,14 +1,5 @@
 @import '../../app.component.scss';
 
-.content {
-    @media screen and (max-width: 768px){
-        margin-top: 130px !important; 
-        width: 100%;
-      }
-      margin-top: 150px !important;  
-}
-
-
 .row {    
       margin: 0 auto;
       width: 90%;   

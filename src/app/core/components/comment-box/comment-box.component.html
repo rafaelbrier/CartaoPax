@@ -1,0 +1,17 @@
+<div class="avatar-text-container">
+    <div class="avatar-frame">
+      <span class="helper"></span>
+      <img alt="avatar" src="../../../../assets/images/avatar.png">
+    </div>
+
+    <div class="avatar-text-textcontainer">
+      <div class="comment-title">
+        Escrito por Autor - 15 Jan 2018 às 15:30      
+      </div>
+      <div class="comment-body">
+       {{fakeData}}
+       <span *ngIf="readMore" (click)="expandText()">Ver Mais</span>
+      </div>
+    </div>
+
+  </div>

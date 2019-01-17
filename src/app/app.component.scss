@@ -5,6 +5,14 @@ $secondaryGreen: #00b51f;
 $thirdGreen: #2dcb73;
 $hoverColor: #acffc2;
 
+.content {
+    @media screen and (max-width: 768px){
+        margin-top: 130px !important; 
+        width: 100%;
+      }
+      margin-top: 150px !important;  
+}
+
 .info-text {
     @media screen and (max-width: 768px){
         font-size: 3vh;
@@ -21,5 +29,34 @@ $hoverColor: #acffc2;
         display:block;
         border-top: 4px solid $secondaryGreen;
         width: 10%
+    }
+}
+
+.avatar-text-container {
+    @media screen and (max-width: 768px){
+        max-width: 100%;    
+        display: flex;    
+    }
+    .avatar-text-textcontainer {
+        margin-left: 40px;
+        max-width: 80%;
+    }
+    padding: 3%;
+    max-width: 80%;
+    margin: 3% auto;
+    display: flex;  
+}
+
+.avatar-frame {
+    .helper {
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
+    }
+    img {
+        width: 80px !important;
+        height: 80px;
+        border-radius: 50%;
+        vertical-align: middle;
     }
 }

@@ -7,17 +7,17 @@
               {{data?.date}}
           </h5>
 
-          <h5>
+          <h5 (click)="goToDetailComments()" class="comment-text">
               <i class="far fa-comments"></i>
               No comments
           </h5>
           
         </div>
-        <h3 class="box-title">{{data?.title}}</h3>
+        <h3 class="box-title" (click)="goToDetail()" >{{data?.title}}</h3>
     </div>
     <div class="box-body">
         {{data?.body}}
-        <a href="#" *ngIf="readMore">Leia Mais</a>
+        <a href="javascript:void(0)" (click)="goToDetail()"  *ngIf="readMore">Leia Mais</a>
     </div>
     <!-- Loading (remove the following to stop the loading)-->
     <div class="overlay" *ngIf="isBoxLoading">

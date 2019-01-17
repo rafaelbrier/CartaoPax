@@ -7,6 +7,7 @@ import { BodyComponent } from './body/body.component';
 import { HeaderComponent } from './header/header.component';
 import { NewsBoxComponent } from './components/news-box-component/news-box.component';
 import { NewsPageComponent } from './pages/news-page/news-page.component';
+import { CommentBoxComponent } from './components/comment-box/comment-box.component';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { NewsPageComponent } from './pages/news-page/news-page.component';
     BodyComponent,
     NewsBoxComponent,
     NewsPageComponent,
+    CommentBoxComponent,
   ],
   exports: [
     HeaderComponent,

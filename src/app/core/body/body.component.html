@@ -1,14 +1,16 @@
   <div class="content">
-    <app-news-page></app-news-page>
+    <!-- <app-news-page></app-news-page> -->
 
-  <!-- <div class="row">
+  <div class="row">
     <div class="col-md-6 col-8">
       <h3 class="info-text">
         Notícias
       </h3>
 
       <div class="news-content">
-        <news-box-component *ngFor="let newData of newsData" [newsData]="newData" [isBoxLoading]="isBoxLoading" [error]="boxLoadingError"></news-box-component>
+        <news-box-component *ngFor="let newData of newsData" [newsData]="newData" 
+          [isBoxLoading]="isBoxLoading" [error]="boxLoadingError">
+        </news-box-component>
        </div>
     </div>
 
@@ -34,5 +36,5 @@
         <img src="../assets/images/cartaopax-logo.png">
       </div>
     </div>
-  </div> -->
+  </div>
 </div>

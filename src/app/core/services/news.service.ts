@@ -5,7 +5,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class DatabaseApiService {
+export class NewsService {
 
   constructor(private http: HttpClient) { }
   
@@ -20,8 +20,12 @@ export class DatabaseApiService {
     return this.http.get(myConstants.restBaseUrl + myConstants.newsPath);
   }
 
-  removeNews(data: any) {
-    return this.http.delete(myConstants.restBaseUrl + myConstants.newsPath + '/' + data.id);
+  findById(newsId) {
+    return this.http.get(`${myConstants.restBaseUrl}${myConstants.newsPath}/${newsId}`);
+  }
+
+  removeNews(newsId: any) {
+    return this.http.delete(`${myConstants.restBaseUrl}${myConstants.newsPath}/${newsId}`);
   }
 
   test() {

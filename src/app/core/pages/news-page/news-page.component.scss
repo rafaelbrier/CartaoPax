@@ -1,5 +1,9 @@
 @import '../../../app.component.scss';
 
+.content {
+    max-width: 80% !important;
+}
+
 .title, .subheader, .body {
     background-color: rgb(236, 236, 236);
     border-top: 1px solid lightgray;
@@ -9,44 +13,25 @@
     padding: 1%;
 }
 
-.author-container {
-    @media screen and (max-width: 768px){
-        max-width: 100%;    
-        display: flex;    
-    }
-    background-color: $thirdGreen;
-    padding: 3%;
-    max-width: 80%;
-    margin: 3% auto;
-    display: flex;
+.avatar-text-container {   
+    background-color: $thirdGreen;  
 
-    .helper {
-        display: inline-block;
-        height: 100%;
-        vertical-align: middle;
-    }
-    img {
-        width: 80px !important;
-        height: 80px;
-        border-radius: 50%;
-        vertical-align: middle;
-    }
-
-    .author-textcontainer {
-        margin-left: 40px;
-        max-width: 80%;
-        .author-title, a {
+    .avatar-text-textcontainer {
+        .author-title, a, span {
             color: white !important;
             font-size: 16px;
             font-weight: 700;
             a{
-                text-decoration: underline;               
-            }
+                text-decoration: underline;                           
+            }            
         }
         .author-body {
             margin-top: 5px;
             font-size: 14px;
             color: white;
+            span {
+                cursor: pointer !important; 
+            }
         }
     }
 }

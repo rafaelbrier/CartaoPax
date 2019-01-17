@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'news-box-component',
@@ -24,7 +25,7 @@ export class NewsBoxComponent {
 
   readMore: boolean = false;
 
-  constructor() {   
+  constructor(private router: Router) {   
    }
 
    ngOnChanges() {   
@@ -39,6 +40,14 @@ export class NewsBoxComponent {
         this.readMore = true;
       }      
     }
+  }
+
+  goToDetail() {
+    this.router.navigate(['/news/' + this.data.id]);
+  }
+
+  goToDetailComments() {
+    location.href = '/news/' + this.data.id + '/#comments';
   }
 
 }

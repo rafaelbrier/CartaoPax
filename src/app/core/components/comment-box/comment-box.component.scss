@@ -1,0 +1,27 @@
+@import '../../../app.component.scss';
+
+.avatar-text-container {
+    padding: 1% !important;
+    margin: 1% auto !important;
+    border: 1px solid lightgray;
+    background-color: white;
+
+    .avatar-text-textcontainer {
+        margin-left: 20px !important;
+    }
+    .comment-title {       
+        font-size: 14px;
+        font-weight: 700;
+        a{
+            text-decoration: underline;               
+        }
+    }
+    .comment-body {
+        margin-top: 1px;
+        font-size: 12px;       
+    }
+}
+img {
+    height: 50px !important;
+    width: 50px !important;
+}
