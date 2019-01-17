@@ -26,22 +26,3 @@
     height: 65vh !important;
     max-width: 75%;
 }
-
-.info-text {
-    @media screen and (max-width: 768px){
-        font-size: 3vh;
-        &:after{
-            width: 25% !important;
-        }
-      }
-    color: black;
-    font-size: 4vh;
-    padding: 3%;
-    padding-top: 0 !important;
-    &:after{
-        content: "";
-        display:block;
-        border-top: 4px solid $secondaryGreen;
-        width: 10%
-    }
-}

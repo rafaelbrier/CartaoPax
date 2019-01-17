@@ -1,6 +1,4 @@
-.container {
-    
-}
+@import '../../../app.component.scss';
 
 .title, .subheader, .body {
     background-color: rgb(236, 236, 236);
@@ -9,4 +7,46 @@
     margin-top: 15px;
     margin-bottom: 15px;
     padding: 1%;
+}
+
+.author-container {
+    @media screen and (max-width: 768px){
+        max-width: 100%;    
+        display: flex;    
+    }
+    background-color: $thirdGreen;
+    padding: 3%;
+    max-width: 80%;
+    margin: 3% auto;
+    display: flex;
+
+    .helper {
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
+    }
+    img {
+        width: 80px !important;
+        height: 80px;
+        border-radius: 50%;
+        vertical-align: middle;
+    }
+
+    .author-textcontainer {
+        margin-left: 40px;
+        max-width: 80%;
+        .author-title, a {
+            color: white !important;
+            font-size: 16px;
+            font-weight: 700;
+            a{
+                text-decoration: underline;               
+            }
+        }
+        .author-body {
+            margin-top: 5px;
+            font-size: 14px;
+            color: white;
+        }
+    }
 }
