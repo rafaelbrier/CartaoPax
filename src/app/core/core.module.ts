@@ -24,12 +24,14 @@ import { NewsPageComponent } from './pages/news-page/news-page.component';
   exports: [
     HeaderComponent,
     BodyComponent,
-    NewsBoxComponent
+    NewsBoxComponent,
+    NewsPageComponent,
   ],
   providers: [
     HeaderComponent,
     BodyComponent,
-    NewsBoxComponent
+    NewsBoxComponent,
+    NewsPageComponent
   ]
 })
 export class CoreModule { }
