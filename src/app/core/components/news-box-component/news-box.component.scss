@@ -16,6 +16,10 @@
 
 .box-title {
     margin-top: 15px !important;
+    cursor: pointer;
+    &:hover {
+        color: $secondaryGreen;
+    }
 }
 
 .box-subheader {
@@ -37,6 +41,9 @@
     }
     .comment-text{
         cursor: pointer;
+        &:hover{
+            color: lightgray;
+        }
     }
 }
 

@@ -1,6 +1,5 @@
 import { Routes, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
-import { AppComponent } from './app.component';
 import { BodyComponent } from './core/body/body.component';
 import { NewsPageComponent } from './core/pages/news-page/news-page.component';
 

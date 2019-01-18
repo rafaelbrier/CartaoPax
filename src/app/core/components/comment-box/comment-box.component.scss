@@ -18,7 +18,11 @@
     }
     .comment-body {
         margin-top: 1px;
-        font-size: 12px;       
+        font-size: 12px;   
+        span {
+            color: $linkColor;
+            cursor: pointer;
+        }    
     }
 }
 img {
