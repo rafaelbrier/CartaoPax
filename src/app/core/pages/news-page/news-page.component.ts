@@ -11,6 +11,7 @@ import { CommentsService } from '../../services/comments-service';
 export class NewsPageComponent implements OnInit {
 
   charMax: number = 280;
+  commentsDefaultLimit: number = 2;
 
   fakeData: string = `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
   magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -21,40 +22,48 @@ export class NewsPageComponent implements OnInit {
   readMore: boolean = false;
 
   newsData: any = {};
+  newsId: String;
   commentsData: any = {};
   comments: any = [];
 
   constructor(
-              private activatedRoute: ActivatedRoute,
-              private newsService: NewsService,
-              private commentsService: CommentsService
-              ) {
+    private activatedRoute: ActivatedRoute,
+    private newsService: NewsService,
+    private commentsService: CommentsService
+  ) {
     if (window.outerWidth <= 768) {
       this.charMax = this.charMax - 100;
-    }    
+    }
   }
 
   ngOnInit() {
-    if(this.fakeData && this.fakeData.length > this.charMax) {  
+    if (this.fakeData && this.fakeData.length > this.charMax) {
       this.readMoreDataHolder = this.fakeData;
       this.fakeData = this.fakeData.substr(0, this.charMax) + "...";
       this.readMore = true;
-    } 
+    }
 
-    let newsId = this.activatedRoute.snapshot.params.id;
-    if(newsId) {
-      this.newsService.findById(newsId)
+    this.newsId = this.activatedRoute.snapshot.params.id;
+    if (this.newsId) {
+      this.newsService.findById(this.newsId)
         .subscribe(resData => {
           this.newsData = resData;
         });
-
-        this.commentsService.findCommentsByNewsIdPageable(newsId, 0, 10, "date", "desc")
-        .subscribe(resData => {
-          this.commentsData = resData;
-          this.comments = this.commentsData.content;
-          delete this.commentsData.content;          
-        })
+      this.loadComments(this.commentsDefaultLimit)
     }
+  }
+
+  loadMoreComments() {
+    this.loadComments(2 * this.commentsDefaultLimit);
+  }
+  
+  loadComments(limit: number) {
+    this.commentsService.findCommentsByNewsIdPageable(this.newsId, 0, limit, "date", "desc")
+      .subscribe(resData => {
+        this.commentsData = resData;
+        this.comments = this.commentsData.content;
+        delete this.commentsData.content;
+      })
   }
 
   expandText() {
