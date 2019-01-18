@@ -9,7 +9,8 @@
 
           <h5 (click)="goToDetailComments()" class="comment-text">
               <i class="far fa-comments"></i>
-              No comments
+              {{data?.commentCount > 0 ? data?.commentCount : "No"}} 
+              {{data?.commentCount === 1 ? "Comentário" : "Comentários"}}
           </h5>
           
         </div>

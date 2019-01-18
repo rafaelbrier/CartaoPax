@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-comment-box',
@@ -7,13 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CommentBoxComponent implements OnInit {
 
-  charMax: number = 190;
+  @Input()
+  comment: any;
 
-  fakeData: string = `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-  magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-  consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-  pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est
-  laborum.`;
+  charMax: number = 190;
 
   readMoreDataHolder: string;
   readMore: boolean = false;
@@ -21,20 +18,22 @@ export class CommentBoxComponent implements OnInit {
   constructor() {
     if (window.outerWidth <= 768) {
       this.charMax = this.charMax - 50;
-    }    
-   }
+    }
+  }
 
   ngOnInit() {
-    if(this.fakeData && this.fakeData.length > this.charMax) {  
-      this.readMoreDataHolder = this.fakeData;
-      this.fakeData = this.fakeData.substr(0, this.charMax) + "...";
-      this.readMore = true;
-    } 
+    if (this.comment) {
+      if (this.comment.body && this.comment.body.length > this.charMax) {
+        this.readMoreDataHolder = this.comment.body;
+        this.comment.body = this.comment.body.substr(0, this.charMax) + "...";
+        this.readMore = true;
+      }
+    }
   }
 
   expandText() {
     this.readMore = false;
-    this.fakeData = this.readMoreDataHolder;
+    this.comment.body = this.readMoreDataHolder;
   }
 
 }

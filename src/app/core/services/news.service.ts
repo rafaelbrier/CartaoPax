@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { myConstants } from './constants';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -20,15 +20,11 @@ export class NewsService {
     return this.http.get(myConstants.restBaseUrl + myConstants.newsPath);
   }
 
-  findById(newsId) {
+  findById(newsId: String) {
     return this.http.get(`${myConstants.restBaseUrl}${myConstants.newsPath}/${newsId}`);
   }
 
-  removeNews(newsId: any) {
+  removeNews(newsId: String) {
     return this.http.delete(`${myConstants.restBaseUrl}${myConstants.newsPath}/${newsId}`);
-  }
-
-  test() {
-    console.log("Teste")
   }
 }

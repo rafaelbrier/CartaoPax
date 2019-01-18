@@ -29,8 +29,8 @@
         <a href="#"> Rafael Brier </a>
       </div>
       <div class="author-body">
-       {{fakeData}}
-       <span href *ngIf="readMore" (click)="expandText()">Ver Mais</span>
+        {{fakeData}}
+        <span href *ngIf="readMore" (click)="expandText()">Ver Mais</span>
       </div>
     </div>
 
@@ -40,10 +40,18 @@
     Comentários
   </div>
 
-  <app-comment-box></app-comment-box>
-  <app-comment-box></app-comment-box>
-  <app-comment-box></app-comment-box>
-  <app-comment-box></app-comment-box>
-  <app-comment-box></app-comment-box>
+  <div class="subheader">
+    <h5 class="comment-count" *ngIf="commentsData?.numberOfElements != 0 && commentsData?.numberOfElements != null; else noComment">
+      Mostrando {{commentsData?.numberOfElements}} de {{commentsData?.totalElements}}
+      {{newsData?.commentCount === 1 ? "comentário." : "comentários."}}
+    </h5>
+    <ng-template #noComment>
+      <h5 class="comment-count">
+          Ninguém comentou a notícia ainda.
+      </h5>
+    </ng-template>
+  </div>
+
+  <app-comment-box *ngFor="let comment of comments" [comment]="comment"></app-comment-box>
 
 </div>

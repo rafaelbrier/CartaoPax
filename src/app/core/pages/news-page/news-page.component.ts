@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NewsService } from '../../services/news.service';
+import { CommentsService } from '../../services/comments-service';
 
 @Component({
   selector: 'app-news-page',
@@ -9,7 +10,7 @@ import { NewsService } from '../../services/news.service';
 })
 export class NewsPageComponent implements OnInit {
 
-  charMax: number = 190;
+  charMax: number = 280;
 
   fakeData: string = `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
   magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
@@ -20,8 +21,14 @@ export class NewsPageComponent implements OnInit {
   readMore: boolean = false;
 
   newsData: any = {};
+  commentsData: any = {};
+  comments: any = [];
 
-  constructor(private activatedRoute: ActivatedRoute, private newsService: NewsService) {
+  constructor(
+              private activatedRoute: ActivatedRoute,
+              private newsService: NewsService,
+              private commentsService: CommentsService
+              ) {
     if (window.outerWidth <= 768) {
       this.charMax = this.charMax - 100;
     }    
@@ -39,6 +46,13 @@ export class NewsPageComponent implements OnInit {
       this.newsService.findById(newsId)
         .subscribe(resData => {
           this.newsData = resData;
+        });
+
+        this.commentsService.findCommentsByNewsIdPageable(newsId, 0, 10, "date", "desc")
+        .subscribe(resData => {
+          this.commentsData = resData;
+          this.comments = this.commentsData.content;
+          delete this.commentsData.content;          
         })
     }
   }
