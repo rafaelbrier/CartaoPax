@@ -8,10 +8,14 @@ import { Component, OnInit } from '@angular/core';
 export class SidebarComponent implements OnInit {
 
   screenWidth: number;
+  sideBarOpened: boolean;
 
-  constructor() { }
+  constructor() {
+   }
 
   ngOnInit() {
+    this.sideBarOpened = false;
+
     this.screenWidth = window.innerWidth;
     window.onresize = () => {
     // set screenWidth on screen size change

@@ -1,5 +1,55 @@
+$grayBlue: #5f6f81;
+
 .responsive-btn {
     color: white;
     position: fixed;
     min-height: 100vh;
+}
+
+mat-toolbar {
+    padding: 0px !important;
+    border-bottom: 1px solid $grayBlue;
+    display: block;
+}
+
+.top-menu {
+    margin: 0;
+    padding: 0;
+    background: white;
+    color: #5f6f81;
+    list-style: none;
+    text-transform: none;
+    font-weight: 300;
+    font-family: 'Lato', Arial, sans-serif;
+    line-height: 60px;
+}
+
+.logout-btn {
+    float: right;
+    border-left: 1px solid $grayBlue;
+    span {
+        margin-left: 10px;
+        font-size: 26px;
+        vertical-align: middle;
+    }
+    &:hover span{
+        color: white;        
+    }
+}
+.sidebar-btn {
+    background: none;
+    border-right: 1px solid $grayBlue;
+    height: 64px;
+    padding: 0 30px;
+    min-width: 100px;
+    border-radius: 0 !important;
+    img {
+        height: 36px;
+    }
+    &:hover {
+        background: $grayBlue;
+        img {
+            filter: brightness(0) invert(1);
+        }
+    }
 }

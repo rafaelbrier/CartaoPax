@@ -13,10 +13,10 @@ import { ErrorLoadComponent } from './components/error-load/error-load.component
 import { MainPageComponent } from './dashboard/main-page/main-page.component';
 import { SidebarComponent } from './dashboard/sidebar/sidebar.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import {MatToolbarModule} from '@angular/material/toolbar';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NewsManagerComponent } from './dashboard/news-manager/news-manager.component';
 import { RouterModule } from '@angular/router';
-
 
 
 @NgModule({
@@ -25,6 +25,7 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     HttpClientModule,
     MatSidenavModule,
+    MatToolbarModule,
     BrowserAnimationsModule,
     RouterModule
   ],
