@@ -1,4 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -9,14 +10,24 @@ export class HeaderComponent implements OnInit {
 
   isNavBarCollapsed: boolean;
   showPassword: boolean = false;
+  routerUrl: string = "";
 
   isLoginCollapsed: boolean = false;
 
-  constructor() { 
+  constructor(private router: Router) { 
     this.isNavBarCollapsed = true;   
    }
 
   ngOnInit() {
+    this.router.events.subscribe(() => {
+      let indexOfBackslash = window.location.pathname.indexOf('/',1);
+      this.routerUrl = window.location.pathname.substring(0, indexOfBackslash > 0 ? indexOfBackslash : window.location.pathname.length);
+    });    
+  }
+
+
+  navigateToDashboard() {
+    this.router.navigate(['/dashboard']);
   }
   
   @HostListener('window:scroll')

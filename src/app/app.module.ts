@@ -14,7 +14,7 @@ import { routing } from './app.routing';
     BrowserModule,  
     CoreModule,
     RouterModule,
-    routing
+    routing,
     // NgBootstrap
   ],
   providers: [],

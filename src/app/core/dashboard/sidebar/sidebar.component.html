@@ -1,0 +1,18 @@
+<mat-sidenav-container fullscreen>
+    <mat-sidenav #sidenav [opened]="screenWidth > 840" [mode]="(screenWidth > 840) ? 'side' : 'over'">
+      <div class="sidenav-header">
+        <a routerLink="/"><h5>Hello world!</h5></a>
+      </div>
+    </mat-sidenav>
+  
+    <div [ngStyle]="{'display' : (screenWidth > 840) ? 'none' : 'block'}">
+      <button class="btn responsive-btn" type="button" md-button (click)="sidenav.open()" style="color: black">
+          <i class="fas fa-angle-right"></i>
+      </button>
+    </div>
+  
+    <a [routerLink]="['./newsmanager']">GOGOGOGOGOTOMANAGERPAGE</a>
+    
+    <ng-content></ng-content>
+  
+  </mat-sidenav-container>

@@ -11,12 +11,22 @@ import { CommentBoxComponent } from './components/comment-box/comment-box.compon
 import { Error404PageComponent } from './pages/error404-page.component';
 import { ErrorLoadComponent } from './components/error-load/error-load.component';
 import { MainPageComponent } from './dashboard/main-page/main-page.component';
+import { SidebarComponent } from './dashboard/sidebar/sidebar.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { NewsManagerComponent } from './dashboard/news-manager/news-manager.component';
+import { RouterModule } from '@angular/router';
+
+
 
 @NgModule({
   imports: [
     NgbModule,
     CommonModule,
     HttpClientModule,
+    MatSidenavModule,
+    BrowserAnimationsModule,
+    RouterModule
   ],
   declarations: [
     HeaderComponent,
@@ -27,6 +37,8 @@ import { MainPageComponent } from './dashboard/main-page/main-page.component';
     Error404PageComponent,
     ErrorLoadComponent,
     MainPageComponent,
+    SidebarComponent,
+    NewsManagerComponent,
   ],
   exports: [
     HeaderComponent,

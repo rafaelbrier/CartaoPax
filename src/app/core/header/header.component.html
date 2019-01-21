@@ -1,4 +1,4 @@
-<nav id="navbar" class="navbar navbar-expand-md navbar-dark fixed-top">
+<nav id="navbar" class="navbar navbar-expand-md navbar-dark fixed-top" *ngIf="!routerUrl.includes('dashboard')">
 
   <a class="navbar-brand" href="#">
     <img id="navbar-logo" src="../assets/images/cartaopax-logo.png">
@@ -9,7 +9,7 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div [ngbCollapse]="!isNavbarCollapsed" class="collapse navbar-collapse" id="navbarsDefault">
-    <ul class="nav navbar-nav ml-auto">
+    <ul class="nav navbar-nav">
 
       <li class="nav-item">
         <a class="nav-link" href="#">INÍCIO</a>
@@ -73,7 +73,7 @@
     [attr.aria-expanded]="!isLoginCollapsed" aria-controls="collapseLogin"><i class="fas fa-user"></i>Fazer Login</button>
   </div>
 
-  <div id="collapseLogin" [ngbCollapse]="isLoginCollapsed">
+  <div id="collapseLogin" [ngbCollapse]="!isLoginCollapsed">
       <div class="card">
         <div class="card-body">
             <form>
@@ -91,10 +91,10 @@
                     </div>
                 </div>                
                 <button type="submit" class="btn btn-success">Submit</button>                
-                <button class="btn btn-info"><i class="fas fa-key"></i>Esqueci a Senha</button>
+                <button class="btn btn-info" (click)="navigateToDashboard()"><i class="fas fa-key"></i>Esqueci a Senha</button>
               </form>
         </div>
       </div>
   </div>
-  
+
 </nav>

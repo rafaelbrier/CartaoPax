@@ -65,6 +65,7 @@ $linkColor: #3c8dbc;
 .btn-success {
     background-color: #008a11;
     border-color: #008a11;
+    padding: .375rem 1.2rem;
 }
 
 .btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active, .open>.dropdown-toggle.btn-success {
@@ -75,6 +76,7 @@ $linkColor: #3c8dbc;
 .btn-info {
     background-color: #117790;
     border-color: #117790;
+    padding: .375rem 1rem;
 }
 
 .btn-info:hover, .btn-info:focus, .btn-info:active, .btn-info.active, .open>.dropdown-toggle.btn-info {
