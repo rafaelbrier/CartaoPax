@@ -8,6 +8,9 @@ import { Component, OnInit, HostListener } from '@angular/core';
 export class HeaderComponent implements OnInit {
 
   isNavBarCollapsed: boolean;
+  showPassword: boolean = false;
+
+  isLoginCollapsed: boolean = false;
 
   constructor() { 
     this.isNavBarCollapsed = true;   

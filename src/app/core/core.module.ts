@@ -10,6 +10,7 @@ import { NewsPageComponent } from './pages/news-page/news-page.component';
 import { CommentBoxComponent } from './components/comment-box/comment-box.component';
 import { Error404PageComponent } from './pages/error404-page.component';
 import { ErrorLoadComponent } from './components/error-load/error-load.component';
+import { MainPageComponent } from './dashboard/main-page/main-page.component';
 
 @NgModule({
   imports: [
@@ -25,6 +26,7 @@ import { ErrorLoadComponent } from './components/error-load/error-load.component
     CommentBoxComponent,
     Error404PageComponent,
     ErrorLoadComponent,
+    MainPageComponent,
   ],
   exports: [
     HeaderComponent,

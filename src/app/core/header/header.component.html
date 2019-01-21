@@ -12,11 +12,11 @@
     <ul class="nav navbar-nav ml-auto">
 
       <li class="nav-item">
-        <a class="nav-link" href="#">INÍCIO</a>        
+        <a class="nav-link" href="#">INÍCIO</a>
       </li>
 
       <li class="nav-item dropdown" ngbDropdown>
-        <a class="nav-link dropdown-toggle" id="id01" href="#" ngbDropdownToggle >CARTÃO PAX DE ASSISTÊNCIA</a>
+        <a class="nav-link dropdown-toggle" id="id01" href="#" ngbDropdownToggle>CARTÃO PAX DE ASSISTÊNCIA</a>
         <!-- <div class="under-bar"></div>     -->
         <div class="dropdown-menu" aria-labelledby="id01" ngbDropdownMenu>
           <a class="dropdown-item" href="#">História</a>
@@ -67,4 +67,34 @@
       </li>
     </ul>
   </div>
+
+  <div class="login-button">
+    <button type="button" class="btn btn-success" (click)="isLoginCollapsed = !isLoginCollapsed" 
+    [attr.aria-expanded]="!isLoginCollapsed" aria-controls="collapseLogin"><i class="fas fa-user"></i>Fazer Login</button>
+  </div>
+
+  <div id="collapseLogin" [ngbCollapse]="isLoginCollapsed">
+      <div class="card">
+        <div class="card-body">
+            <form>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Email</label>
+                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">
+                </div>
+                <div class="form-group">
+                  <label for="exampleInputPassword1">Senha</label>
+                  <div class="inner-addon right-addon">
+                      <i class="fas fa-eye" (click)="showPassword = !showPassword" *ngIf="!showPassword" ></i>
+                      <i class="fas fa-eye-slash" (click)="showPassword = !showPassword" *ngIf="showPassword"></i>
+                      <input type="password" class="form-control" placeholder="Senha"
+                      [attr.type]="showPassword ? 'text' : 'password'"/>
+                    </div>
+                </div>                
+                <button type="submit" class="btn btn-success">Submit</button>                
+                <button class="btn btn-info"><i class="fas fa-key"></i>Esqueci a Senha</button>
+              </form>
+        </div>
+      </div>
+  </div>
+  
 </nav>

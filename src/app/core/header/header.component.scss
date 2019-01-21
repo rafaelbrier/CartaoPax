@@ -10,6 +10,13 @@
     max-height: 48px !important;
 }
 
+.login-button {
+    position: absolute;
+    display: flex;
+    top: 80%;
+    right: 3%;
+}
+
 .nav-link {
     margin: 0 0.5vw 0 0.5vw !important;
     font-weight: 600;   
@@ -21,7 +28,7 @@
 }   
 
 .dropdown:hover .dropdown-menu {
-    @media screen and (min-width: 769px){
+    @media screen and (min-width: 768px){
         display: block;
     }      
 }
@@ -43,3 +50,49 @@
     }
 }
 
+.collapse.show {
+    display: contents;
+}
+
+.btn {   
+    color: white;    
+}
+
+.btn-success i {
+        padding-right: 10%;
+}
+
+.btn-info {
+    float: right;
+    padding: .375rem 1rem;
+    i {
+        margin-right: 4%;
+    }
+}
+
+.card {
+    position: absolute;
+    right: 7%;
+    min-width: 25%;
+    top: 115%;
+    @media screen and (max-width: 767px){
+        min-width: 75%;
+    }     
+}
+
+.inner-addon {
+    position: relative;
+  }
+  
+  /* style glyph */
+  .inner-addon .fas {
+    position: absolute;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  /* align glyph */
+  .right-addon .fas { right: 0px;}
+  
+  /* add padding  */
+  .right-addon input { padding-right: 30px; }
