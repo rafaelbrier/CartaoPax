@@ -1,62 +1,66 @@
 <div class="content">
 
-  <h3 class="title">
-    {{newsData?.title}}
-  </h3>
+  <app-error-load [isLoading]="isLoading" [loadError]="loadError"></app-error-load>
 
-  <div class="subheader">
-    <h5>
-      <span>
-        Postado em
-      </span>
-      {{newsData?.date}}
-    </h5>
+  <div *ngIf="!isLoading && !loadError">
 
-  </div>
-  <div class="body">
-    {{newsData?.body}}
-  </div>
+    <h3 class="title">
+      {{newsData?.title}}
+    </h3>
 
-  <div class="avatar-text-container" id="comments">
-    <div class="avatar-frame">
-      <span class="helper"></span>
-      <img alt="avatar" src="../../../../assets/images/avatar.png">
-    </div>
-
-    <div class="avatar-text-textcontainer">
-      <div class="author-title">
-        Escrito por
-        <a href="#"> Rafael Brier </a>
-      </div>
-      <div class="author-body">
-        {{fakeData}}
-        <span href *ngIf="readMore" (click)="expandText()">Ver Mais</span>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="info-text">
-    Comentários
-  </div>
-
-  <div class="subheader">
-    <h5 class="comment-count" *ngIf="commentsData?.numberOfElements != 0 && commentsData?.numberOfElements != null; else noComment">
-      Mostrando {{commentsData?.numberOfElements}} de {{commentsData?.totalElements}}
-      {{newsData?.commentCount === 1 ? "comentário." : "comentários."}}
-    </h5>
-    <ng-template #noComment>
-      <h5 class="comment-count">
-          Ninguém comentou a notícia ainda.
+    <div class="subheader">
+      <h5>
+        <span>
+          Postado em
+        </span>
+        {{newsData?.date}}
       </h5>
-    </ng-template>
+
+    </div>
+    <div class="body">
+      {{newsData?.body}}
+    </div>
+
+    <div class="avatar-text-container" id="comments">
+      <div class="avatar-frame">
+        <span class="helper"></span>
+        <img alt="avatar" src="../../../../assets/images/avatar.png">
+      </div>
+
+      <div class="avatar-text-textcontainer">
+        <div class="author-title">
+          Escrito por
+          <a href="#"> Rafael Brier </a>
+        </div>
+        <div class="author-body">
+          {{fakeData}}
+          <span href *ngIf="readMore" (click)="expandText()">Ver Mais</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="info-text">
+      Comentários
+    </div>
+
+    <div class="subheader">
+      <h5 class="comment-count" *ngIf="commentsData?.numberOfElements != 0 && commentsData?.numberOfElements != null; else noComment">
+        Mostrando {{commentsData?.numberOfElements}} de {{commentsData?.totalElements}}
+        {{newsData?.commentCount === 1 ? "comentário." : "comentários."}}
+      </h5>
+      <ng-template #noComment>
+        <h5 class="comment-count">
+          Ninguém comentou a notícia ainda.
+        </h5>
+      </ng-template>
+    </div>
+
+    <app-comment-box *ngFor="let comment of comments" [comment]="comment"></app-comment-box>
+
+    <button type="button" class="btn btn-outline-success btn-lg btn-block" *ngIf="commentsData?.numberOfElements != commentsData.totalElements"
+      (click)="loadMoreComments()">Mostrar mais comentários</button>
+
   </div>
-
-  <app-comment-box *ngFor="let comment of comments" [comment]="comment"></app-comment-box>
-
-  <button type="button" class="btn btn-outline-success btn-lg btn-block"
-  *ngIf="commentsData?.numberOfElements != commentsData.totalElements"
-  (click)="loadMoreComments()"
-  >Mostrar mais comentários</button>
 
 </div>

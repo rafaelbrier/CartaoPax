@@ -8,9 +8,8 @@
       </h3>
 
       <div class="news-content">
-        <news-box-component *ngFor="let newData of newsData" [newsData]="newData" 
-          [isBoxLoading]="isBoxLoading" [error]="boxLoadingError">
-        </news-box-component>
+        <news-box-component *ngFor="let newData of newsData" [newsData]="newData"></news-box-component>
+        <app-error-load [loadError]="boxLoadingError" [isLoading]="isBoxLoading"></app-error-load>
        </div>
     </div>
 

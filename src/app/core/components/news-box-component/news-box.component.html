@@ -19,10 +19,5 @@
     <div class="box-body">
         {{data?.body}}
         <a href="javascript:void(0)" (click)="goToDetail()"  *ngIf="readMore">Leia Mais</a>
-    </div>
-    <!-- Loading (remove the following to stop the loading)-->
-    <div class="overlay" *ngIf="isBoxLoading">
-        <i class="fas fa-sync-alt fa-spin"></i>
-    </div>
-    <!-- end loading -->
+    </div>    
 </div>

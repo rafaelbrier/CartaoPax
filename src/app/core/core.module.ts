@@ -8,7 +8,8 @@ import { HeaderComponent } from './header/header.component';
 import { NewsBoxComponent } from './components/news-box-component/news-box.component';
 import { NewsPageComponent } from './pages/news-page/news-page.component';
 import { CommentBoxComponent } from './components/comment-box/comment-box.component';
-
+import { Error404PageComponent } from './pages/error404-page.component';
+import { ErrorLoadComponent } from './components/error-load/error-load.component';
 
 @NgModule({
   imports: [
@@ -22,18 +23,12 @@ import { CommentBoxComponent } from './components/comment-box/comment-box.compon
     NewsBoxComponent,
     NewsPageComponent,
     CommentBoxComponent,
+    Error404PageComponent,
+    ErrorLoadComponent,
   ],
   exports: [
     HeaderComponent,
-    BodyComponent,
-    NewsBoxComponent,
-    NewsPageComponent,
   ],
-  providers: [
-    HeaderComponent,
-    BodyComponent,
-    NewsBoxComponent,
-    NewsPageComponent
-  ]
+  providers: []
 })
 export class CoreModule { }

@@ -13,6 +13,9 @@ export class NewsPageComponent implements OnInit {
   charMax: number = 280;
   commentsDefaultLimit: number = 2;
 
+  isLoading: boolean = false;
+  loadError: boolean = false;
+
   fakeData: string = `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
   magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
   consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
@@ -37,6 +40,7 @@ export class NewsPageComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isLoading = true;
     if (this.fakeData && this.fakeData.length > this.charMax) {
       this.readMoreDataHolder = this.fakeData;
       this.fakeData = this.fakeData.substr(0, this.charMax) + "...";
@@ -48,15 +52,19 @@ export class NewsPageComponent implements OnInit {
       this.newsService.findById(this.newsId)
         .subscribe(resData => {
           this.newsData = resData;
+          this.isLoading = false;
+        }, () => {
+          this.isLoading = false;
+          this.loadError = true;
         });
       this.loadComments(this.commentsDefaultLimit)
     }
   }
 
   loadMoreComments() {
-    this.loadComments(2 * this.commentsDefaultLimit);
+    this.loadComments(2*this.commentsDefaultLimit);
   }
-  
+
   loadComments(limit: number) {
     this.commentsService.findCommentsByNewsIdPageable(this.newsId, 0, limit, "date", "desc")
       .subscribe(resData => {

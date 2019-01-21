@@ -8,7 +8,7 @@ import { NewsService } from '../services/news.service';
 })
 export class BodyComponent implements OnInit {
 
-  newsData: any = [{},{},{},{}];
+  newsData: any;
   isBoxLoading: boolean = false;
   boxLoadingError: boolean= false;
 
