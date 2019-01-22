@@ -1,6 +1,6 @@
 <mat-toolbar>
 
-  <button class="btn sidebar-btn menu-btn" (click)="toggleSideBar(sidenav)" [ngClass]="sideBarOpened ? 'sidebar-toggled' : ''">
+  <button class="btn sidebar-btn menu-btn ripple" (click)="toggleSideBar(sidenav)" [ngClass]="sideBarOpened ? 'sidebar-toggled' : ''">
 
     <img src="../../../../assets/images/menu.svg" alt="MENU">
   </button>
@@ -14,50 +14,65 @@
     </h2>
   </div>
 
-  <button class="btn sidebar-btn logout-btn">
-    <img src="../../../../assets/images/logout.svg" alt="MENU">
-    <span>Sair</span>
+  <button class="btn sidebar-btn logout-btn ripple" (click)="logOut()">
+    <img src="../../../../assets/images/logout.svg" alt="LOGOUT">
+    <a>Sair</a>
+  </button>
+
+  <button class="btn sidebar-btn logout-btn ripple" (click)="logOut()">
+    <img src="../../../../assets/images/home.svg" alt="HOME">
   </button>
 
 </mat-toolbar>
 
 <mat-sidenav-container>
 
-  <mat-sidenav #sidenav [opened]="screenWidth > 768" [mode]="(screenWidth > 768) ? 'side' : 'over'" [ngClass]="sideBarOpened ? 'scale-sidenav' : ''">
-
-    <div class="sidenav-header">
-      <a [routerLink]="['/']">
-        <h5>Hello world!</h5>
-      </a>
-    </div>
+  <mat-sidenav #sidenav [opened]="!isMobile" [mode]="!isMobile ? 'side' : 'over'" [ngClass]="sideBarOpened ? 'scale-sidenav' : ''">
 
     <div class="menu-content">
 
-      <ul class="menu-list">
+      <ul>
 
-        <li class="menu-item" [ngClass]="sideBarOpened ? '' : 'icon-only'">
+        <li class="menu-item ripple" [ngClass]="sideBarOpened ? '' : 'icon-only'" [routerLink]="['./newsmanager']">
           <img src="../../../../assets/images/gear.svg" alt="MENU">
-          <a [routerLink]="['./newsmanager']">Notícias</a>
+          <a>Menu 1</a>
         </li>
 
-        <li class="menu-item" [ngClass]="sideBarOpened ? '' : 'icon-only'">
+        <!-- with submenu -->
+        <div class="sub-menu">
+          <li class="menu-item ripple sub-menu-toggler" [ngClass]="sideBarOpened ? '' : 'icon-only'">
+            <img src="../../../../assets/images/gear.svg" alt="MENU">
+            <a>Menu 2</a>
+            <div class="arrow">&#9654;</div>
+          </li>
+
+          <div class="sub-menu-content">
+            <li class="menu-item ripple sub-item" [ngClass]="sideBarOpened ? '' : 'icon-only'" [routerLink]="['./newsmanager']">
+              <img src="../../../../assets/images/gear.svg" alt="MENU">
+              <a>Sub Menu 1</a>
+            </li>
+            <li class="menu-item ripple sub-item" [ngClass]="sideBarOpened ? '' : 'icon-only'" [routerLink]="['./newsmanager']">
+              <img src="../../../../assets/images/gear.svg" alt="MENU">
+              <a>Sub Menu 2</a>
+            </li>
+          </div>
+        </div>
+        <!-- with submenu -->
+
+
+        <li class="menu-item ripple" [ngClass]="sideBarOpened ? '' : 'icon-only'" [routerLink]="['./newsmanager']">
           <img src="../../../../assets/images/gear.svg" alt="MENU">
-          <a [routerLink]="['./newsmanager']">Notícias</a>
+          <a>Menu 3</a>
         </li>
 
-        <li class="menu-item" [ngClass]="sideBarOpened ? '' : 'icon-only'">
+        <li class="menu-item ripple" [ngClass]="sideBarOpened ? '' : 'icon-only'" [routerLink]="['./newsmanager']">
           <img src="../../../../assets/images/gear.svg" alt="MENU">
-          <a [routerLink]="['./newsmanager']">Notícias</a>
+          <a>Menu 4</a>
         </li>
 
-        <li class="menu-item" [ngClass]="sideBarOpened ? '' : 'icon-only'">
+        <li class="menu-item ripple" [ngClass]="sideBarOpened ? '' : 'icon-only'" [routerLink]="['./newsmanager']">
           <img src="../../../../assets/images/gear.svg" alt="MENU">
-          <a [routerLink]="['./newsmanager']">Notícias</a>
-        </li>
-
-        <li class="menu-item" [ngClass]="sideBarOpened ? '' : 'icon-only'">
-          <img src="../../../../assets/images/gear.svg" alt="MENU">
-          <a [routerLink]="['./newsmanager']">Notícias</a>
+          <a>Menu 5</a>
         </li>
 
       </ul>
@@ -67,7 +82,9 @@
   </mat-sidenav>
 
   <div class="dashboard-content">
+
     <ng-content></ng-content>
+    
   </div>
 
 </mat-sidenav-container>

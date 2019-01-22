@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,27 +8,36 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  screenWidth: number;
   sideBarOpened: boolean;
-  expandSideNav: boolean;
+  isMobile: boolean;
 
-  constructor() {
-   }
+  constructor(private router: Router) {
+  }
 
   ngOnInit() {
     this.sideBarOpened = false;
-
-    this.screenWidth = window.innerWidth;
+    this.checkMobileOrDesktop(window.innerWidth);
     window.onresize = () => {
-    this.screenWidth = window.innerWidth;
-  };
+      this.checkMobileOrDesktop(window.innerWidth);
+    };
   }
 
   toggleSideBar(sidenav: any) {
-    if(this.screenWidth > 768) {
-    this.sideBarOpened = !this.sideBarOpened;
+    if (!this.isMobile) {
+      this.sideBarOpened = !this.sideBarOpened;
     } else {
       sidenav.toggle();
     }
-  }  
+  }
+
+  checkMobileOrDesktop(screenWidth: number) {
+    if (screenWidth > 768)
+      this.isMobile = false;
+    else
+      this.isMobile = true;
+  }
+
+  logOut() {
+    this.router.navigate(['/']);
+  }
 }
