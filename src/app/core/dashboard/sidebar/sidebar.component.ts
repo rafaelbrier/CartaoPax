@@ -19,18 +19,15 @@ export class SidebarComponent implements OnInit {
 
     this.screenWidth = window.innerWidth;
     window.onresize = () => {
-    // set screenWidth on screen size change
     this.screenWidth = window.innerWidth;
   };
   }
-  
-  mouseEnterHandler(sidenav: any) {
-    if(!this.sideBarOpened)
-    sidenav.open();
-  }
 
-  mouseLeaveHandler(sidenav: any) {
-    if(!this.sideBarOpened)
-    sidenav.close();
-  }
+  toggleSideBar(sidenav: any) {
+    if(this.screenWidth > 768) {
+    this.sideBarOpened = !this.sideBarOpened;
+    } else {
+      sidenav.toggle();
+    }
+  }  
 }

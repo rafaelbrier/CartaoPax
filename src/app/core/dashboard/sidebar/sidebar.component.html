@@ -1,7 +1,6 @@
 <mat-toolbar>
 
-  <button class="btn sidebar-btn" (click)="sideBarOpened = !sideBarOpened" 
-  [ngClass]="sideBarOpened ? 'sidebar-toggled' : ''">
+  <button class="btn sidebar-btn menu-btn" (click)="toggleSideBar(sidenav)" [ngClass]="sideBarOpened ? 'sidebar-toggled' : ''">
 
     <img src="../../../../assets/images/menu.svg" alt="MENU">
   </button>
@@ -11,7 +10,7 @@
       breadCrumb
     </h4>
     <h2>
-      Cartão Pax Gerenciamento (Corrigir Responsividade Antes de COntinuar)
+      Cartão Pax Gerenciamento
     </h2>
   </div>
 
@@ -24,8 +23,7 @@
 
 <mat-sidenav-container>
 
-  <mat-sidenav #sidenav [opened]="screenWidth > 840" [mode]="(screenWidth > 840) ? 'side' : 'over'" 
-      [ngClass]="sideBarOpened ? 'scale-sidenav' : ''">
+  <mat-sidenav #sidenav [opened]="screenWidth > 768" [mode]="(screenWidth > 768) ? 'side' : 'over'" [ngClass]="sideBarOpened ? 'scale-sidenav' : ''">
 
     <div class="sidenav-header">
       <a [routerLink]="['/']">
@@ -33,7 +31,38 @@
       </a>
     </div>
 
-    <a [routerLink]="['./newsmanager']">GOGOGOGOGOTOMANAGERPAGE</a>
+    <div class="menu-content">
+
+      <ul class="menu-list">
+
+        <li class="menu-item" [ngClass]="sideBarOpened ? '' : 'icon-only'">
+          <img src="../../../../assets/images/gear.svg" alt="MENU">
+          <a [routerLink]="['./newsmanager']">Notícias</a>
+        </li>
+
+        <li class="menu-item" [ngClass]="sideBarOpened ? '' : 'icon-only'">
+          <img src="../../../../assets/images/gear.svg" alt="MENU">
+          <a [routerLink]="['./newsmanager']">Notícias</a>
+        </li>
+
+        <li class="menu-item" [ngClass]="sideBarOpened ? '' : 'icon-only'">
+          <img src="../../../../assets/images/gear.svg" alt="MENU">
+          <a [routerLink]="['./newsmanager']">Notícias</a>
+        </li>
+
+        <li class="menu-item" [ngClass]="sideBarOpened ? '' : 'icon-only'">
+          <img src="../../../../assets/images/gear.svg" alt="MENU">
+          <a [routerLink]="['./newsmanager']">Notícias</a>
+        </li>
+
+        <li class="menu-item" [ngClass]="sideBarOpened ? '' : 'icon-only'">
+          <img src="../../../../assets/images/gear.svg" alt="MENU">
+          <a [routerLink]="['./newsmanager']">Notícias</a>
+        </li>
+
+      </ul>
+
+    </div>
 
   </mat-sidenav>
 
