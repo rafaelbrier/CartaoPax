@@ -2,7 +2,7 @@
 
   <button class="btn sidebar-btn menu-btn ripple" (click)="toggleSideBar(sidenav)" [ngClass]="sideBarOpened ? 'sidebar-toggled' : ''">
 
-    <img src="../../../../assets/images/menu.svg" alt="MENU">
+    <img src="../../../../assets/images/icons/menu.svg" alt="MENU">
   </button>
 
   <div class="toolbar-content">
@@ -15,12 +15,12 @@
   </div>
 
   <button class="btn sidebar-btn logout-btn ripple" (click)="logOut()">
-    <img src="../../../../assets/images/logout.svg" alt="LOGOUT">
+    <img src="../../../../assets/images/icons/logout.svg" alt="LOGOUT">
     <a>Sair</a>
   </button>
 
   <button class="btn sidebar-btn logout-btn ripple" (click)="logOut()">
-    <img src="../../../../assets/images/home.svg" alt="HOME">
+    <img src="../../../../assets/images/icons/home.svg" alt="HOME">
   </button>
 
 </mat-toolbar>
@@ -33,26 +33,42 @@
 
       <ul>
 
-        <li class="menu-item ripple" [ngClass]="sideBarOpened ? '' : 'icon-only'" [routerLink]="['./newsmanager']">
-          <img src="../../../../assets/images/gear.svg" alt="MENU">
-          <a>Menu 1</a>
-        </li>
+        <!-- with submenu -->
+        <div class="sub-menu">
+          <li class="menu-item ripple sub-menu-toggler" [ngClass]="sideBarOpened ? '' : 'icon-only'">
+            <img src="../../../../assets/images/icons/news.svg" alt="MENU">
+            <a>Notícias</a>
+            <div class="arrow">&#9654;</div>
+          </li>
+
+          <div class="sub-menu-content">
+            <li class="menu-item ripple sub-item" [ngClass]="sideBarOpened ? '' : 'icon-only'" [routerLink]="['./newsmanager']">
+              <img src="../../../../assets/images/icons/add.svg" alt="MENU">
+              <a>Adicionar</a>
+            </li>
+            <li class="menu-item ripple sub-item" [ngClass]="sideBarOpened ? '' : 'icon-only'" [routerLink]="['./newsmanager']">
+              <img src="../../../../assets/images/icons/edit.svg" alt="MENU">
+              <a>Editar</a>
+            </li>
+          </div>
+        </div>
+        <!-- with submenu -->
 
         <!-- with submenu -->
         <div class="sub-menu">
           <li class="menu-item ripple sub-menu-toggler" [ngClass]="sideBarOpened ? '' : 'icon-only'">
-            <img src="../../../../assets/images/gear.svg" alt="MENU">
+            <img src="../../../../assets/images/icons/gear.svg" alt="MENU">
             <a>Menu 2</a>
             <div class="arrow">&#9654;</div>
           </li>
 
           <div class="sub-menu-content">
             <li class="menu-item ripple sub-item" [ngClass]="sideBarOpened ? '' : 'icon-only'" [routerLink]="['./newsmanager']">
-              <img src="../../../../assets/images/gear.svg" alt="MENU">
+              <img src="../../../../assets/images/icons/gear.svg" alt="MENU">
               <a>Sub Menu 1</a>
             </li>
             <li class="menu-item ripple sub-item" [ngClass]="sideBarOpened ? '' : 'icon-only'" [routerLink]="['./newsmanager']">
-              <img src="../../../../assets/images/gear.svg" alt="MENU">
+              <img src="../../../../assets/images/icons/gear.svg" alt="MENU">
               <a>Sub Menu 2</a>
             </li>
           </div>
@@ -61,17 +77,17 @@
 
 
         <li class="menu-item ripple" [ngClass]="sideBarOpened ? '' : 'icon-only'" [routerLink]="['./newsmanager']">
-          <img src="../../../../assets/images/gear.svg" alt="MENU">
+          <img src="../../../../assets/images/icons/gear.svg" alt="MENU">
           <a>Menu 3</a>
         </li>
 
         <li class="menu-item ripple" [ngClass]="sideBarOpened ? '' : 'icon-only'" [routerLink]="['./newsmanager']">
-          <img src="../../../../assets/images/gear.svg" alt="MENU">
+          <img src="../../../../assets/images/icons/gear.svg" alt="MENU">
           <a>Menu 4</a>
         </li>
 
         <li class="menu-item ripple" [ngClass]="sideBarOpened ? '' : 'icon-only'" [routerLink]="['./newsmanager']">
-          <img src="../../../../assets/images/gear.svg" alt="MENU">
+          <img src="../../../../assets/images/icons/gear.svg" alt="MENU">
           <a>Menu 5</a>
         </li>
 
