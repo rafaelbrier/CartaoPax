@@ -9,6 +9,7 @@ export class SidebarComponent implements OnInit {
 
   screenWidth: number;
   sideBarOpened: boolean;
+  expandSideNav: boolean;
 
   constructor() {
    }
@@ -22,5 +23,14 @@ export class SidebarComponent implements OnInit {
     this.screenWidth = window.innerWidth;
   };
   }
+  
+  mouseEnterHandler(sidenav: any) {
+    if(!this.sideBarOpened)
+    sidenav.open();
+  }
 
+  mouseLeaveHandler(sidenav: any) {
+    if(!this.sideBarOpened)
+    sidenav.close();
+  }
 }

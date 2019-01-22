@@ -1,29 +1,44 @@
-<mat-sidenav-container fullscreen>
+<mat-toolbar>
 
-  <mat-toolbar>
-    <button class="btn sidebar-btn"><img src="../../../../assets/images/menu.svg" alt="MENU"></button>
-    <button class="btn sidebar-btn logout-btn">
-      <img src="../../../../assets/images/logout.svg" alt="MENU">
-      <span>Sair</span>
-    </button>
-  </mat-toolbar>
+  <button class="btn sidebar-btn" (click)="sideBarOpened = !sideBarOpened" 
+  [ngClass]="sideBarOpened ? 'sidebar-toggled' : ''">
 
-  <mat-sidenav #sidenav [opened]="false" [mode]="(screenWidth > 840) ? 'side' : 'over'">
+    <img src="../../../../assets/images/menu.svg" alt="MENU">
+  </button>
+
+  <div class="toolbar-content">
+    <h4>
+      breadCrumb
+    </h4>
+    <h2>
+      Cartão Pax Gerenciamento (Corrigir Responsividade Antes de COntinuar)
+    </h2>
+  </div>
+
+  <button class="btn sidebar-btn logout-btn">
+    <img src="../../../../assets/images/logout.svg" alt="MENU">
+    <span>Sair</span>
+  </button>
+
+</mat-toolbar>
+
+<mat-sidenav-container>
+
+  <mat-sidenav #sidenav [opened]="screenWidth > 840" [mode]="(screenWidth > 840) ? 'side' : 'over'" 
+      [ngClass]="sideBarOpened ? 'scale-sidenav' : ''">
+
     <div class="sidenav-header">
       <a [routerLink]="['/']">
         <h5>Hello world!</h5>
       </a>
     </div>
+
+    <a [routerLink]="['./newsmanager']">GOGOGOGOGOTOMANAGERPAGE</a>
+
   </mat-sidenav>
 
-  <div [ngStyle]="{'display' : (screenWidth > 840) ? 'none' : 'block'}">
-    <button class="btn responsive-btn" type="button" md-button (click)="sidenav.open()" style="color: black">
-      <i class="fas fa-angle-right"></i>
-    </button>
+  <div class="dashboard-content">
+    <ng-content></ng-content>
   </div>
-
-  <a [routerLink]="['./newsmanager']">GOGOGOGOGOTOMANAGERPAGE</a>
-
-  <ng-content></ng-content>
 
 </mat-sidenav-container>
