@@ -31,7 +31,10 @@ export class NewsPageComponent implements OnInit {
   commentsData: any = {};
   comments: any = [];
 
+  // form
   commentForm: FormGroup;
+  submitting: boolean = false;
+
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -81,36 +84,39 @@ export class NewsPageComponent implements OnInit {
     if (this.commentForm.invalid) {
       return;
     } else {
-        const values = this.commentForm.value;
-        const comment = {
-          authorName: values.name,
-          authorEmail: values.email,
-          body: values.comment,
-          news: this.newsData
-        };
-        this.commentsService.registerComment(comment, this.newsId)
+      this.submitting = true;
+      const values = this.commentForm.value;
+      const comment = {
+        authorName: values.name,
+        authorEmail: values.email,
+        body: values.comment,
+        news: this.newsData
+      };
+      this.commentsService.registerComment(comment, this.newsId)
         .subscribe(() => {
+          this.submitting = false;
           this.commentForm.reset();
           this.loadComments(this.commentsDefaultLimit);
         }, err => {
+          this.submitting = false;
           console.log(err)
         })
-    }    
+    }
   }
 
-  triggerValidation(formName: FormGroup){
+  triggerValidation(formName: FormGroup) {
     Object.keys(formName.controls).forEach(field => {
-      const control = formName.get(field);          
-      control.markAsTouched({ onlySelf: true });   
+      const control = formName.get(field);
+      control.markAsTouched({ onlySelf: true });
     });
   }
   // convenience getter for easy access to form fields
   get f() { return this.commentForm.controls; }
   // FORM FUNCTIONS END -------------------------------------
 
-  
+
   loadMoreComments() {
-    this.commentsDefaultLimit = 2*this.commentsDefaultLimit;
+    this.commentsDefaultLimit = 2 * this.commentsDefaultLimit;
     this.loadComments(this.commentsDefaultLimit);
   }
 
@@ -125,7 +131,7 @@ export class NewsPageComponent implements OnInit {
 
   expandText() {
     this.readMore = false;
-    this.fakeData = this.readMoreDataHolder;    
+    this.fakeData = this.readMoreDataHolder;
   }
 
 }
