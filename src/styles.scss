@@ -1,6 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 @import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
 
+// FONTAWESOME
+@import "../node_modules/@fortawesome/fontawesome-free/css/all.min.css";
+
 $invalidRed: rgb(220, 53, 69);
 $validGreen: rgb(66, 169, 72);
 $normalBlue: rgb(60, 141, 188);
@@ -36,4 +39,8 @@ form {
         box-shadow: 0 0 0 0.2rem rgba(60, 141, 188, .25);
       }   
     }
+}
+
+.progress {
+  margin-top: 5px;
 }

@@ -4,7 +4,7 @@ import { BodyComponent } from './core/body/body.component';
 import { NewsPageComponent } from './core/pages/news-page/news-page.component';
 import { Error404PageComponent } from './core/pages/error404-page.component';
 import { MainPageComponent } from './core/dashboard/main-page/main-page.component';
-import { NewsManagerComponent } from './core/dashboard/news-manager/news-manager.component';
+import { NewsManagerComponent } from './core/dashboard/pages/news-manager/news-manager.component';
 
 
 export const routes: Routes = [

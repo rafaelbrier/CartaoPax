@@ -1,0 +1,14 @@
+
+
+<div>
+    <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" (change)="onChange($event)">
+    <div class="progress" *ngIf="inProgress">
+        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" [attr.aria-valuenow]="progressImg" aria-valuemin="0" aria-valuemax="100"
+        [ngClass]="[progressImg === 100 ? 'bg-success' :'' , uploadError ? 'bg-danger' : '']" [ngStyle]="{'width': progressImg + '%'}">
+            {{progressImg}}%
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<app-modal hidden="true"></app-modal>

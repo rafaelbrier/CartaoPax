@@ -12,7 +12,7 @@ import { CommentBoxComponent } from './components/comment-box/comment-box.compon
 import { ErrorLoadComponent } from './components/error-load/error-load.component';
 import { NewsBoxComponent } from './components/news-box-component/news-box.component';
 import { MainPageComponent } from './dashboard/main-page/main-page.component';
-import { NewsManagerComponent } from './dashboard/news-manager/news-manager.component';
+import { NewsManagerComponent } from './dashboard/pages/news-manager/news-manager.component';
 import { SidebarComponent } from './dashboard/sidebar/sidebar.component';
 import { HeaderComponent } from './header/header.component';
 import { Error404PageComponent } from './pages/error404-page.component';
@@ -49,7 +49,7 @@ import { ModalComponent } from './components/modal/modal.component';
     ModalComponent
   ],
   exports: [
-    HeaderComponent
+    HeaderComponent,
   ],
   providers: [NgbActiveModal], 
   entryComponents: [ModalComponent],
