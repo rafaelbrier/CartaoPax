@@ -14,6 +14,7 @@ export class CommentsService {
       authorName: data.authorName,
       authorEmail: data.authorEmail,
       body: data.body,
+      news: data.news
     });
   }
 

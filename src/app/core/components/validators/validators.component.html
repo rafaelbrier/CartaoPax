@@ -1,0 +1,9 @@
+<div *ngIf="input.invalid && input.touched" class="invalid-feedback">
+    <div *ngIf="required">
+        <p *ngIf="input.errors.whiteSpace; else isRequired">O {{inputName}} não pode começar com espaço.</p>
+        <ng-template #isRequired>
+            <p *ngIf="input.errors.required" >O {{inputName}} é obrigatório.</p>
+        </ng-template> 
+    </div>
+    <div *ngIf="email"><p *ngIf="input.errors.email">O {{inputName}} é inválido.</p></div>
+ </div>

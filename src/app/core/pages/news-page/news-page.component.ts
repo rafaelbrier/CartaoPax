@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NewsService } from '../../services/news.service';
 import { CommentsService } from '../../services/comments-service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { whiteSpace } from '../../components/validators/custom-validators';
 
 @Component({
   selector: 'app-news-page',
@@ -29,10 +31,13 @@ export class NewsPageComponent implements OnInit {
   commentsData: any = {};
   comments: any = [];
 
+  commentForm: FormGroup;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private newsService: NewsService,
-    private commentsService: CommentsService
+    private commentsService: CommentsService,
+    private formBuilder: FormBuilder
   ) {
     if (window.outerWidth <= 768) {
       this.charMax = this.charMax - 100;
@@ -41,6 +46,7 @@ export class NewsPageComponent implements OnInit {
 
   ngOnInit() {
     this.isLoading = true;
+    this.commentFormBuilder();
     if (this.fakeData && this.fakeData.length > this.charMax) {
       this.readMoreDataHolder = this.fakeData;
       this.fakeData = this.fakeData.substr(0, this.charMax) + "...";
@@ -61,8 +67,51 @@ export class NewsPageComponent implements OnInit {
     }
   }
 
+  // FORM FUNCTIONS
+  commentFormBuilder() {
+    this.commentForm = this.formBuilder.group({
+      comment: ['', [Validators.required, whiteSpace]],
+      name: ['', [Validators.required, whiteSpace]],
+      email: ['', [Validators.required, Validators.email, whiteSpace]],
+    });
+  }
+
+  submitCommentForm() {
+    this.triggerValidation(this.commentForm);
+    if (this.commentForm.invalid) {
+      return;
+    } else {
+        const values = this.commentForm.value;
+        const comment = {
+          authorName: values.name,
+          authorEmail: values.email,
+          body: values.comment,
+          news: this.newsData
+        };
+        this.commentsService.registerComment(comment, this.newsId)
+        .subscribe(() => {
+          this.commentForm.reset();
+          this.loadComments(this.commentsDefaultLimit);
+        }, err => {
+          console.log(err)
+        })
+    }    
+  }
+
+  triggerValidation(formName: FormGroup){
+    Object.keys(formName.controls).forEach(field => {
+      const control = formName.get(field);          
+      control.markAsTouched({ onlySelf: true });   
+    });
+  }
+  // convenience getter for easy access to form fields
+  get f() { return this.commentForm.controls; }
+  // FORM FUNCTIONS END -------------------------------------
+
+  
   loadMoreComments() {
-    this.loadComments(2*this.commentsDefaultLimit);
+    this.commentsDefaultLimit = 2*this.commentsDefaultLimit;
+    this.loadComments(this.commentsDefaultLimit);
   }
 
   loadComments(limit: number) {
@@ -76,7 +125,7 @@ export class NewsPageComponent implements OnInit {
 
   expandText() {
     this.readMore = false;
-    this.fakeData = this.readMoreDataHolder;
+    this.fakeData = this.readMoreDataHolder;    
   }
 
 }

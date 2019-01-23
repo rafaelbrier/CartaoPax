@@ -55,3 +55,15 @@ button {
     margin: 15px auto;    
     border: 1px solid $thirdGreen !important;
 }
+
+.comment-form-content {
+    padding: 3%;
+    h5 {
+        margin-bottom: 25px;
+        margin-left: 15px;
+        color: darkgray;
+    }
+}
+.comment-form {
+    display: flex;
+}
