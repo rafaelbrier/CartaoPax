@@ -12,7 +12,23 @@
     border: 1px solid lightgray;
     margin-top: 15px;
     margin-bottom: 15px;
-    padding: 1%;
+    padding: 2%;    
+}
+.body {
+    padding: 3%;
+    display: inline-block;
+    img {
+        margin-right: 30px;
+        float: left;
+    } 
+    p {text-align: justify;}
+    @media screen and (max-width: 767px){ 
+        margin-bottom: 30px;
+        img {max-height: 300px;}
+    }
+    @media screen and (min-width: 768px){        
+        img {max-height: 500px;}
+    }   
 }
 
 .subheader {
@@ -43,6 +59,7 @@
             margin-top: 5px;
             font-size: 14px;
             color: white;
+            text-align: justify;
             span {
                 cursor: pointer !important; 
             }
@@ -50,8 +67,12 @@
     }
 }
 
-button {
+.btn-lg {
     max-width: 80%;
+}
+
+button {
+    max-width: 100%;
     margin: 15px auto;    
     border: 1px solid $thirdGreen !important;
 }
@@ -65,5 +86,11 @@ button {
     }
 }
 .comment-form {
-    display: flex;
+    textarea { height: 6em; }
+    @media screen and (min-width: 767px){
+        display: flex;
+        textarea {
+            height: 10em;
+        }
+    }
 }

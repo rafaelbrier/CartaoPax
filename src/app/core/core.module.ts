@@ -6,7 +6,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule, NgbModalModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { BodyComponent } from './body/body.component';
 import { CommentBoxComponent } from './components/comment-box/comment-box.component';
 import { ErrorLoadComponent } from './components/error-load/error-load.component';
@@ -18,7 +18,7 @@ import { HeaderComponent } from './header/header.component';
 import { Error404PageComponent } from './pages/error404-page.component';
 import { NewsPageComponent } from './pages/news-page/news-page.component';
 import { ValidatorsComponent } from './components/validators/validators.component';
-
+import { ModalComponent } from './components/modal/modal.component';
 
 
 @NgModule({
@@ -31,7 +31,8 @@ import { ValidatorsComponent } from './components/validators/validators.componen
     BrowserAnimationsModule,
     RouterModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModalModule.forRoot()
   ],
   declarations: [
     HeaderComponent,
@@ -45,10 +46,12 @@ import { ValidatorsComponent } from './components/validators/validators.componen
     SidebarComponent,
     NewsManagerComponent,
     ValidatorsComponent,
+    ModalComponent
   ],
   exports: [
-    HeaderComponent,
+    HeaderComponent
   ],
-  providers: []
+  providers: [NgbActiveModal], 
+  entryComponents: [ModalComponent],
 })
 export class CoreModule { }

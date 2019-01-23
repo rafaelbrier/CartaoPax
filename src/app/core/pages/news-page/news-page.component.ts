@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { NewsService } from '../../services/news.service';
-import { CommentsService } from '../../services/comments-service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ModalComponent } from '../../components/modal/modal.component';
 import { whiteSpace } from '../../components/validators/custom-validators';
+import { CommentsService } from '../../services/comments-service';
+import { NewsService } from '../../services/news.service';
+
 
 @Component({
   selector: 'app-news-page',
@@ -11,6 +13,8 @@ import { whiteSpace } from '../../components/validators/custom-validators';
   styleUrls: ['./news-page.component.scss']
 })
 export class NewsPageComponent implements OnInit {
+
+  @ViewChild(ModalComponent) modal: ModalComponent;
 
   charMax: number = 280;
   commentsDefaultLimit: number = 2;
@@ -27,6 +31,7 @@ export class NewsPageComponent implements OnInit {
   readMore: boolean = false;
 
   newsData: any = {};
+  imgData: string = "http://cartaopax.com.br/wp-content/uploads/2014/04/acqua-pax.jpg";
   newsId: String;
   commentsData: any = {};
   comments: any = [];
@@ -97,8 +102,10 @@ export class NewsPageComponent implements OnInit {
           this.submitting = false;
           this.commentForm.reset();
           this.loadComments(this.commentsDefaultLimit);
+          this.modal.openModal("Sucesso!", "Seu comentário foi adicionado.", "success");
         }, err => {
           this.submitting = false;
+          this.modal.openModal("Erro!", "Houve algum erro ao processar seu comentário. Por favor tente novamente.", "fail");
           console.log(err)
         })
     }
@@ -132,6 +139,5 @@ export class NewsPageComponent implements OnInit {
   expandText() {
     this.readMore = false;
     this.fakeData = this.readMoreDataHolder;
-  }
-
+  } 
 }

@@ -18,7 +18,10 @@
 
     </div>
     <div class="body">
-      {{newsData?.body}}
+      <img *ngIf="imgData" src="http://cartaopax.com.br/wp-content/uploads/2014/04/acqua-pax.jpg">
+      <p>
+        {{newsData?.body}}
+      </p>
     </div>
 
     <div class="avatar-text-container" id="comments">
@@ -65,33 +68,32 @@
 
       <h5>Deixe um Comentário</h5>
 
-      <form class="comment-form" [formGroup]="commentForm"  (ngSubmit)="submitCommentForm()">
+      <form class="comment-form" [formGroup]="commentForm" (ngSubmit)="submitCommentForm()">
+
 
         <div class="col-sm-8 form-group">
-          <textarea formControlName="comment" type="text" class="form-control" placeholder="Mensagem" rows="6" tabindex="4"></textarea>
+          <textarea formControlName="comment" type="text" class="form-control" placeholder="Mensagem" ></textarea>
           <!-- Validador Comentário  -->
-          <app-validators [form]="commentForm" [input]="f.comment" [inputName]="'comentário'"
-                            [validators]="['required']"></app-validators>    
+          <app-validators [form]="commentForm" [input]="f.comment" [inputName]="'comentário'" [validators]="['required']"></app-validators>
         </div>
+
         <div class="col-sm-4">
 
           <div class="form-group">
             <input formControlName="name" type="text" class="form-control" placeholder="Nome">
             <!-- Validador Nome  -->
-            <app-validators [form]="commentForm" [input]="f.name" [inputName]="'nome'"
-                            [validators]="['required']"></app-validators>            
+            <app-validators [form]="commentForm" [input]="f.name" [inputName]="'nome'" [validators]="['required']"></app-validators>
           </div>
 
           <div class="form-group">
             <input formControlName="email" type="email" class="form-control" placeholder="A@a.com">
 
-             <!-- Validador Email  -->
-             <app-validators [form]="commentForm" [input]="f.email" [inputName]="'email'"
-                            [validators]="['required','email']"></app-validators>  
+            <!-- Validador Email  -->
+            <app-validators [form]="commentForm" [input]="f.email" [inputName]="'email'" [validators]="['required','email']"></app-validators>
           </div>
           <button type="submit" class="btn btn-success" [disabled]="submitting">Publicar Comentário</button>
         </div>
-
+        
       </form>
 
     </div>
@@ -99,3 +101,6 @@
   </div>
 
 </div>
+
+<!-- Modal -->
+<app-modal hidden="true"></app-modal>

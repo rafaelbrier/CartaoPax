@@ -1,0 +1,57 @@
+<div *ngIf="modalType === 'success'">
+    <div class="modal-header">
+        <h4 class="modal-title">{{title}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="check_mark">
+            <div class="sa-icon sa-success animate">
+                <span class="sa-line sa-tip animateSuccessTip"></span>
+                <span class="sa-line sa-long animateSuccessLong"></span>
+                <div class="sa-placeholder"></div>
+                <div class="sa-fix"></div>
+            </div>
+        </div>
+        <p>{{body}}</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Fechar</button>
+    </div>
+</div>
+
+<div *ngIf="modalType === 'fail'">
+    <div class="modal-header">
+        <h4 class="modal-title">{{title}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="c-container">
+            <div class="o-circle c-container__circle o-circle__sign--failure">
+                <div class="o-circle__sign"></div>
+            </div>
+        </div>
+        <p>{{body}}</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Fechar</button>
+    </div>
+</div>
+
+<div *ngIf="modalType === 'normal'">
+    <div class="modal-header">
+        <h4 class="modal-title">{{title}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p>{{body}}</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Fechar</button>
+    </div>
+</div>
