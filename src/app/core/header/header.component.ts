@@ -27,11 +27,13 @@ export class HeaderComponent implements OnInit {
   @HostListener('window:scroll')
   shrinkMenu() {
     if (document.body.scrollTop > 60 || document.documentElement.scrollTop > 60) {
+      document.getElementById("card").classList.add("card-after-scroll");
       document.getElementById("navbar-logo").classList.add("navbar-logo");
-      document.getElementById("navbar").style.opacity = '0.5';
+      document.getElementById("navbar").classList.add("navbar-opacity");
     } else {
+      document.getElementById("card").classList.remove("card-after-scroll");
       document.getElementById("navbar-logo").classList.remove("navbar-logo");
-      document.getElementById("navbar").style.opacity = '1';
+      document.getElementById("navbar").classList.remove("navbar-opacity");
     }
   }
 }

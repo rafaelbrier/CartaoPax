@@ -9,7 +9,9 @@
 .box-header {
     padding: 0px !important;    
 }
-
+.box-body {
+    word-break: break-word;
+}
 .box-body a {
     float: right;
 }

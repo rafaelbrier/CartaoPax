@@ -4,6 +4,7 @@ import { FireStorageService } from '../../../services/firebase-storage/fire-stor
 import { SharedService } from 'src/app/core/services/shared-services';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { whiteSpace } from 'src/app/core/components/validators/custom-validators';
+import { NewsService } from 'src/app/core/services/news.service';
 
 @Component({
   selector: 'app-news-manager',
@@ -18,47 +19,71 @@ export class NewsManagerComponent implements OnInit {
   progressImg: number;
   inProgress: boolean = false;
   uploadError: boolean = false;
-  downloadURL: String;
+  downloadURL: String = undefined;
 
   // Form
   newsManagerForm: FormGroup;
   submitting: boolean = false;
 
   constructor(private fireStorageService: FireStorageService,
-              private sharedService: SharedService,
-              private formBuilder: FormBuilder
-              ) { }
+    private sharedService: SharedService,
+    private formBuilder: FormBuilder,
+    private newsService: NewsService
+  ) { }
 
   ngOnInit() {
     this.newsManagerFormBuilder();
   }
 
-
   submitCommentForm() {
     this.sharedService.triggerValidation(this.newsManagerForm);
     if (this.newsManagerForm.invalid) {
       return;
-    } 
+    }
+    this.submitting = true;
     this.modal.openModal("Publicar Notícia", "Tem certeza que deseja publicar a notícia?", "normal", true)
-    .then(res => {
-      console.log("then", res)
-    }).catch(err => {
-      console.log("catch", err)
-    })
+      .then(() => {
+        if (this.file) {
+
+          this.retrieveImg()
+            .then((url) => {
+
+              this.downloadURL = url;
+              this.sendNews();
+
+            }).catch(() => { this.submitting = false; return });
+        } else {
+          this.sendNews();
+        }
+      }).catch(() => { this.submitting = false; return });
+  }
+
+  sendNews() {
     const values = this.newsManagerForm.value;
-    console.log(values)
-    // const news = {
-    //     title: values.name,
-    //     body: values.comment,
-    //     //imgPath: values.imgUrl
-    //   };
+    const news = {
+      title: values.title,
+      body: values.body,
+      imgPath: this.downloadURL
+    };
+    this.newsService.registerNews(news)
+      .subscribe((res: any) => {
+        this.submitting = false;
+        this.newsManagerForm.reset();
+        this.modal.openModal("Sucesso!",
+          `A notícia foi publicada. <a href="/news/${res.id}">Clique aqui </a> para visualizá-la.`
+          , "success");
+      }, err => {
+        this.submitting = false;
+        this.modal.openModal("Erro!", "Houve algum erro ao publicar a notícia. Por favor tente novamente.", "fail");
+        console.log(err)
+      })
   }
 
   newsManagerFormBuilder() {
     this.newsManagerForm = this.formBuilder.group({
       title: ['', [Validators.required, whiteSpace]],
-      body: ['', [Validators.required, whiteSpace]],    
-      image: [''],    
+      body: ['', [Validators.required, whiteSpace]],
+      image: [''],
     });
   }
 
@@ -71,14 +96,14 @@ export class NewsManagerComponent implements OnInit {
     this.file = files[0];
 
     if (!this.sharedService.checkIfIsImage(this.file))
-    return false;
+      return false;
 
     //this.retrieveImg();
   }
 
   retrieveImg() {
     this.inProgress = true;
-    let uploadTask = this.fireStorageService.uploadImage(this.file, 'news-images');   
+    let uploadTask = this.fireStorageService.uploadImage(this.file, 'news-images');
 
     uploadTask.uploadObs((snapshot: { bytesTransferred: number; totalBytes: number; }) => {
       this.progressImg = ((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
@@ -88,12 +113,11 @@ export class NewsManagerComponent implements OnInit {
       this.uploadError = true;
     });
 
-    uploadTask.uploadTask.then(() => { 
-      uploadTask.uploadTask.snapshot.ref.getDownloadURL()
-      .then(url => {
-        this.downloadURL = url;
-      })
+    return uploadTask.uploadTask.then(() => {
+      return uploadTask.uploadTask.snapshot.ref.getDownloadURL()
+        .then(url => {
+          return url;
+        });
     });
   }
-
 }

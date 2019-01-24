@@ -14,7 +14,7 @@
                 <div class="sa-fix"></div>
             </div>
         </div>
-        <p>{{body}}</p>
+        <p [innerHTML]="body">{{body}}</p>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Fechar</button>
@@ -34,7 +34,7 @@
                 <div class="o-circle__sign"></div>
             </div>
         </div>
-        <p>{{body}}</p>
+        <p [innerHTML]="body">{{body}}</p>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Fechar</button>
@@ -49,10 +49,10 @@
         </button>
     </div>
     <div class="modal-body">
-        <p>{{body}}</p>
+        <p [innerHTML]="body">{{body}}</p>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="activeModal.close(true)" *ngIf="withConfirm">Confirmar</button>
-        <button type="button" class="btn btn-outline-dark" (click)="activeModal.close(false)">Fechar</button>
+        <button type="button" class="btn btn-outline-warning" (click)="activeModal.close()" *ngIf="withConfirm">Confirmar</button>
+        <button type="button" class="btn btn-outline-dark" (click)="activeModal.dismiss()">Fechar</button>
     </div>
 </div>

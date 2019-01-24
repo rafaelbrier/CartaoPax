@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { SharedService } from '../../services/shared-services';
 
 @Component({
   selector: 'news-box-component',
@@ -19,12 +20,14 @@ export class NewsBoxComponent {
 
   readMore: boolean = false;
 
-  constructor(private router: Router) {   
+  constructor(private router: Router, private sharedService: SharedService) {   
    }
 
    ngOnChanges() {    
        this.data = this.newsData;
-      if(this.newsData && this.newsData.body && this.newsData.body.length > 100) {        
+       this.newsData.body = this.sharedService.htmlToText(this.newsData.body);  //conver HTML to Plain Text  
+
+      if(this.newsData && this.newsData.body && this.newsData.body.length > 100) { 
         this.data.body = this.newsData.body.substr(0, 100) + "...";
         this.readMore = true;           
     }

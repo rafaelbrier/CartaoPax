@@ -32,7 +32,6 @@ export class NewsPageComponent implements OnInit {
   readMore: boolean = false;
 
   newsData: any = {};
-  imgData: string = "http://cartaopax.com.br/wp-content/uploads/2014/04/acqua-pax.jpg";
   newsId: String;
   commentsData: any = {};
   comments: any = [];
@@ -66,7 +65,7 @@ export class NewsPageComponent implements OnInit {
     this.newsId = this.activatedRoute.snapshot.params.id;
     if (this.newsId) {
       this.newsService.findById(this.newsId)
-        .subscribe(resData => {
+        .subscribe((resData:any) => {
           this.newsData = resData;
           this.isLoading = false;
         }, () => {
@@ -112,7 +111,6 @@ export class NewsPageComponent implements OnInit {
         })
     }
   }
-
  
   // convenience getter for easy access to form fields
   get f() { return this.commentForm.controls; }

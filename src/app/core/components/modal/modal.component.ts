@@ -7,7 +7,6 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./modal.component.scss']
 })
 export class ModalComponent {
-
   constructor(public activeModal: NgbActiveModal, private modalService: NgbModal) {}
 
   openModal(title: string, body: string, modalType: string = "normal", withConfirm: boolean = false) {

@@ -13,6 +13,7 @@ export class NewsService {
     return this.http.post(myConstants.restBaseUrl + myConstants.newsPath, {
       title: data.title,
       body: data.body,
+      imgPath: data.imgPath
     });
   }
 

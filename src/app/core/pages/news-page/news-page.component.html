@@ -18,8 +18,8 @@
 
     </div>
     <div class="body">
-      <img *ngIf="imgData" src="{{imgData}}">
-      <p>
+      <img *ngIf="newsData?.imgPath" [src]="newsData?.imgPath">
+      <p [innerHTML]="newsData?.body">
         {{newsData?.body}}
       </p>
     </div>
