@@ -9,25 +9,39 @@ import { NewsService } from '../services/news.service';
 export class BodyComponent implements OnInit {
 
   newsData: any;
-  recentNewsData: any;
+  news: any;
+  recentNews: any;
   isBoxLoading: boolean = false;
   boxLoadingError: boolean= false;
+
+  newsLoadDefaultLimit: number = 7;
 
   constructor(private newsService: NewsService) { }
 
   ngOnInit() {
     this.isBoxLoading = true;
+    this.loadNews(this.newsLoadDefaultLimit);    
+  }
 
-    this.newsService.findAllNews()
-    .subscribe(resData =>{
+
+  loadNews(limit: number) {
+    this.newsService.findNewsPageable(0, limit, "date", "desc")
+    .subscribe((resData):any =>{
       this.newsData = resData;
-      this.recentNewsData = this.newsData.shift();
+      this.news = this.newsData.content;
+      delete this.newsData.content;
+      this.recentNews = this.news.shift();
       this.isBoxLoading = false;
     }, error => {
       this.isBoxLoading = false;
       this.boxLoadingError = true;
       console.log(error)
     })
+  }
+
+  loadMoreNews() {
+    this.newsLoadDefaultLimit = this.newsLoadDefaultLimit + 3;
+    this.loadNews(this.newsLoadDefaultLimit);
   }
 
 }

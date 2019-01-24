@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 const html = `
-<div class="container">
+<div class="wrapper">
     <div class="overlay" *ngIf="isLoading">
         <i class="fas fa-sync-alt fa-spin"></i>
     </div>
@@ -17,29 +17,22 @@ const html = `
 </div>
 `;
 const styles = `
-.container {
-  max-width: 50%;
+.wrapper {
+  max-width: 100%;
   color: #b5b0b0;
   text-align: center;
-  transform: translateY(50%);
-  -ms-transform: translateY(50%);
-  -moz-transform: translateY(50%);
-  -webkit-transform: translateY(50%);
-  -o-transform: translateY(50%);
+}
+
+:host(app-error-load) {
+  margin: 20px auto;
 }
 
 .overlay {
 }
 
-.container i {
+.wrapper i {
   font-size: 72px;
   margin-bottom: 15px;
-}
-
-@media screen and (max-width: 768px){
-  .container {
-      max-width: 100%;
-  }      
 }
 `;
 @Component({

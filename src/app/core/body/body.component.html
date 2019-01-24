@@ -2,10 +2,10 @@
 
   <div class="row">
 
-    <div class="col-sm-6">
+    <div class="col-sm-5">
       <div>
-        <img [src]="recentNewsData?.imgPath" height="20px">
-        <news-box-component [newsData]="recentNewsData"></news-box-component>
+        <img [src]="recentNews?.imgPath" width="100%" height="450px">
+        <news-box-component *ngIf="recentNews" [newsData]="recentNews"></news-box-component>
       </div>
     </div>
 
@@ -17,8 +17,13 @@
         Notícias
       </h3>
     <div class="row news-content">
-        <news-box-component class="col-sm-4" *ngFor="let newData of newsData" [newsData]="newData"></news-box-component>
+        <news-box-component class="col-sm-4" *ngFor="let new of news" [newsData]="new"></news-box-component>
         <app-error-load [loadError]="boxLoadingError" [isLoading]="isBoxLoading"></app-error-load>
+
+        
+        <button type="button" class="btn btn-outline-success" *ngIf="newsData?.numberOfElements != newsData?.totalElements"
+        (click)="loadMoreNews()">Mostrar mais notícias</button>
+        
     </div>
 
   </div>

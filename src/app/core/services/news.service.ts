@@ -21,6 +21,12 @@ export class NewsService {
     return this.http.get(myConstants.restBaseUrl + myConstants.newsPath);
   }
 
+  findNewsPageable(page: number, size: number, sort: String, order: String) {
+    return this.http.get(
+        `${myConstants.restBaseUrl}${myConstants.newsPath}?page=${page}&size=${size}&sort=${sort},${order}`
+        );
+  }
+
   findById(newsId: String) {
     return this.http.get(`${myConstants.restBaseUrl}${myConstants.newsPath}/${newsId}`);
   }
