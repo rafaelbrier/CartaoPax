@@ -17,7 +17,7 @@
         <h3 class="box-title" (click)="goToDetail()" >{{data?.title}}</h3>
     </div>
     <div class="box-body">
-            {{data?.body}}
+           <p [innerHTML]="data?.body">{{data?.body}}</p> 
         <a href="javascript:void(0)" (click)="goToDetail()"  *ngIf="readMore">Leia Mais</a>
     </div>    
 </div>

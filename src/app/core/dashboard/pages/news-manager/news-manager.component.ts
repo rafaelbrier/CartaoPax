@@ -81,7 +81,7 @@ export class NewsManagerComponent implements OnInit {
 
   newsManagerFormBuilder() {
     this.newsManagerForm = this.formBuilder.group({
-      title: ['', [Validators.required, whiteSpace]],
+      title: ['', [Validators.required, whiteSpace, Validators.maxLength(100)]],
       body: ['', [Validators.required, whiteSpace]],
       image: [''],
     });

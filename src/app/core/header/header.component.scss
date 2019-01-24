@@ -12,8 +12,13 @@
     }
 }
 
+.navbar-brand img{
+    transition: max-height 2s;  
+    max-height: 95px;
+}
 .navbar-logo {
-    max-height: 48px !important;    
+    max-height: 48px !important;  
+    transition: max-height 2s;  
 }
 
 .login-button {

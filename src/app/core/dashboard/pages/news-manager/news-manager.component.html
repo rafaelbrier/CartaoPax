@@ -9,7 +9,7 @@
             <label>Título da Notícia*</label>
             <input formControlName="title" type="text" class="form-control" placeholder="Mensagem">
             <!-- Validador Comentário  -->
-            <app-validators [form]="newsManagerForm" [input]="f.title" [inputName]="'Título da Notícia'" [validators]="['required']"></app-validators>
+            <app-validators [form]="newsManagerForm" [input]="f.title" [inputName]="'Título da Notícia'" [validators]="['required','maxlength', 100]"></app-validators>
         </div>
 
         <div class="form-group">

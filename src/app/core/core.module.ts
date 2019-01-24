@@ -35,7 +35,6 @@ import { QuillModule } from 'ngx-quill';
     ReactiveFormsModule,
     QuillModule.forRoot({
       modules: {
-        syntax: true,
         toolbar: [ ['bold', 'italic', 'underline', 'strike'], 
         ['blockquote', 'code-block'],    
         [{ 'list': 'ordered'}, { 'list': 'bullet' }],

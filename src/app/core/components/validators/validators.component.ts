@@ -17,11 +17,14 @@ export class ValidatorsComponent implements OnInit {
   inputName: string;
 
   @Input()
-  validators: string[];  
+  validators: any[];  
 
   required: boolean;
   email: boolean;
   whiteSpace: boolean;
+  maxlength: boolean;
+
+  maxlengthNum: number;
 
   constructor() { }
 
@@ -30,6 +33,11 @@ export class ValidatorsComponent implements OnInit {
     this.required = this.validators.includes('required');
     this.email = this.validators.includes('email');
     this.whiteSpace = this.validators.includes('whiteSpace');
+    this.maxlength = this.validators.includes('maxlength');
+    if(this.maxlength){
+      let maxLengthArrayPos = this.validators.indexOf('maxlength');
+      this.maxlengthNum = this.validators[maxLengthArrayPos + 1];
+    }
     }
   }
 
