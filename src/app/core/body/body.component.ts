@@ -9,6 +9,7 @@ import { NewsService } from '../services/news.service';
 export class BodyComponent implements OnInit {
 
   newsData: any;
+  recentNewsData: any;
   isBoxLoading: boolean = false;
   boxLoadingError: boolean= false;
 
@@ -20,6 +21,7 @@ export class BodyComponent implements OnInit {
     this.newsService.findAllNews()
     .subscribe(resData =>{
       this.newsData = resData;
+      this.recentNewsData = this.newsData.shift();
       this.isBoxLoading = false;
     }, error => {
       this.isBoxLoading = false;

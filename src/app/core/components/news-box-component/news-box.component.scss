@@ -1,9 +1,9 @@
 @import "../../../app.component.scss";
 
 .box {
-    width: 80% !important;
-    margin: 0 auto;
-    margin-bottom: 20px !important;    
+    margin-bottom: 35px !important;    
+    width: 100%;
+    min-height: 180px;
 }
 
 .box-header {
@@ -11,6 +11,8 @@
 }
 .box-body {
     word-break: break-word;
+    margin-left: 25px;
+    white-space: pre-line;
 }
 .box-body a {
     float: right;
@@ -18,6 +20,7 @@
 
 .box-title {
     margin-top: 15px !important;
+    margin-left: 20px !important;
     cursor: pointer;
     &:hover {
         color: $secondaryGreen;

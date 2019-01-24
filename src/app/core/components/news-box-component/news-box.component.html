@@ -9,15 +9,15 @@
 
           <h5 (click)="goToDetailComments()" class="comment-text">
               <i class="far fa-comments"></i>
-              {{data?.commentCount > 0 ? data?.commentCount : "No"}} 
-              {{data?.commentCount === 1 ? "Comentário" : "Comentários"}}
+              {{data?.commentCount > 0 ? data?.commentCount : "Nenhum"}} 
+              {{data?.commentCount > 1 ? "Comentários" : "Comentário"}}
           </h5>
           
         </div>
         <h3 class="box-title" (click)="goToDetail()" >{{data?.title}}</h3>
     </div>
     <div class="box-body">
-        {{data?.body}}
+            {{data?.body}}
         <a href="javascript:void(0)" (click)="goToDetail()"  *ngIf="readMore">Leia Mais</a>
     </div>    
 </div>

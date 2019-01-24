@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { SharedService } from '../../services/shared-services';
 
@@ -12,6 +12,8 @@ export class NewsBoxComponent {
   @Input()
   newsData: any;
 
+  maxChar: number = 100;
+
   data: any = {
     date: "-- --- ----",
     title: "Buscando....",
@@ -20,17 +22,24 @@ export class NewsBoxComponent {
 
   readMore: boolean = false;
 
-  constructor(private router: Router, private sharedService: SharedService) {   
-   }
+  constructor(private router: Router, private sharedService: SharedService) {
+  }
 
-   ngOnChanges() {    
-       this.data = this.newsData;
-       this.newsData.body = this.sharedService.htmlToText(this.newsData.body);  //conver HTML to Plain Text  
+  ngOnChanges() {
+    if (this.newsData) {
+      this.data = this.newsData;    
 
-      if(this.newsData && this.newsData.body && this.newsData.body.length > 100) { 
-        this.data.body = this.newsData.body.substr(0, 100) + "...";
-        this.readMore = true;           
+      this.newsData.body = this.sharedService.htmlToText(this.newsData.body);  //conver HTML to Plain Text  
+      let textOverFlow = this.sharedService.textOverFlow(this.newsData.body, this.maxChar, 3);
+      this.data.body = textOverFlow.text;
+      this.readMore = textOverFlow.overflow;
     }
+
+
+    // if (this.newsData && this.newsData.body && this.newsData.body.length > this.maxChar) {
+    //   this.data.body = this.newsData.body.substr(0, this.maxChar) + "...";
+    //   this.readMore = true;
+    // }
   }
 
   goToDetail() {

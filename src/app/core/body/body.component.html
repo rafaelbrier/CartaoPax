@@ -1,38 +1,25 @@
-  <div class="content">
+<div class="content">
 
   <div class="row">
-    <div class="col-sm-6">
-      <h3 class="info-text">
-        Notícias
-      </h3>
-
-      <div class="news-content">
-        <news-box-component *ngFor="let newData of newsData" [newsData]="newData"></news-box-component>
-        <app-error-load [loadError]="boxLoadingError" [isLoading]="isBoxLoading"></app-error-load>
-       </div>
-    </div>
 
     <div class="col-sm-6">
-      <div style="display: grid;">
-        <img src="../assets/images/cartaopax-logo.png">
-        <img src="../assets/images/cartaopax-logo.png">
-        <img src="../assets/images/cartaopax-logo.png">
-        <img src="../assets/images/cartaopax-logo.png">
-        <img src="../assets/images/cartaopax-logo.png">
-        <img src="../assets/images/cartaopax-logo.png">
-        <img src="../assets/images/cartaopax-logo.png">
-        <img src="../assets/images/cartaopax-logo.png">
-        <img src="../assets/images/cartaopax-logo.png">
-        <img src="../assets/images/cartaopax-logo.png">
-        <img src="../assets/images/cartaopax-logo.png">
-        <img src="../assets/images/cartaopax-logo.png">
-        <img src="../assets/images/cartaopax-logo.png">
-        <img src="../assets/images/cartaopax-logo.png">
-        <img src="../assets/images/cartaopax-logo.png">
-        <img src="../assets/images/cartaopax-logo.png">
-        <img src="../assets/images/cartaopax-logo.png">
-        <img src="../assets/images/cartaopax-logo.png">
+      <div>
+        <img [src]="recentNewsData?.imgPath" height="20px">
+        <news-box-component [newsData]="recentNewsData"></news-box-component>
       </div>
     </div>
+
+  </div>
+
+  <div class="app flex-row align-items-center">
+
+    <h3 class="info-text">
+        Notícias
+      </h3>
+    <div class="row news-content">
+        <news-box-component class="col-sm-4" *ngFor="let newData of newsData" [newsData]="newData"></news-box-component>
+        <app-error-load [loadError]="boxLoadingError" [isLoading]="isBoxLoading"></app-error-load>
+    </div>
+
   </div>
 </div>
