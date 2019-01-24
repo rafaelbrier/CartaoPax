@@ -5,6 +5,7 @@ import { ModalComponent } from '../../components/modal/modal.component';
 import { whiteSpace } from '../../components/validators/custom-validators';
 import { CommentsService } from '../../services/comments-service';
 import { NewsService } from '../../services/news.service';
+import { SharedService } from '../../services/shared-services';
 
 
 @Component({
@@ -45,7 +46,8 @@ export class NewsPageComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private newsService: NewsService,
     private commentsService: CommentsService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private sharedService: SharedService
   ) {
     if (window.outerWidth <= 768) {
       this.charMax = this.charMax - 100;
@@ -71,7 +73,7 @@ export class NewsPageComponent implements OnInit {
           this.isLoading = false;
           this.loadError = true;
         });
-      this.loadComments(this.commentsDefaultLimit)
+      this.loadComments(this.commentsDefaultLimit);
     }
   }
 
@@ -85,7 +87,7 @@ export class NewsPageComponent implements OnInit {
   }
 
   submitCommentForm() {
-    this.triggerValidation(this.commentForm);
+    this.sharedService.triggerValidation(this.commentForm);
     if (this.commentForm.invalid) {
       return;
     } else {
@@ -111,12 +113,7 @@ export class NewsPageComponent implements OnInit {
     }
   }
 
-  triggerValidation(formName: FormGroup) {
-    Object.keys(formName.controls).forEach(field => {
-      const control = formName.get(field);
-      control.markAsTouched({ onlySelf: true });
-    });
-  }
+ 
   // convenience getter for easy access to form fields
   get f() { return this.commentForm.controls; }
   // FORM FUNCTIONS END -------------------------------------

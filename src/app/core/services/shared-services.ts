@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Injectable({
     providedIn: 'root'
 })
-export class SharedServices {
+export class SharedService {
 
     constructor() { }
 
@@ -17,4 +18,13 @@ export class SharedServices {
             return true;
         }
     }
+
+    triggerValidation(formName: FormGroup) {
+        Object.keys(formName.controls).forEach(field => {
+          const control = formName.get(field);
+          control.markAsTouched({ onlySelf: true });
+        });
+      }
 }
+
+

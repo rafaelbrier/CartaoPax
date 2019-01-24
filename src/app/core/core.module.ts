@@ -19,6 +19,7 @@ import { Error404PageComponent } from './pages/error404-page.component';
 import { NewsPageComponent } from './pages/news-page/news-page.component';
 import { ValidatorsComponent } from './components/validators/validators.component';
 import { ModalComponent } from './components/modal/modal.component';
+import { QuillModule } from 'ngx-quill';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { ModalComponent } from './components/modal/modal.component';
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
+    QuillModule,
     NgbModalModule.forRoot()
   ],
   declarations: [

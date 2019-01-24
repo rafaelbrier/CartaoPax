@@ -26,9 +26,11 @@ export class ValidatorsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    if(this.validators) {
     this.required = this.validators.includes('required');
     this.email = this.validators.includes('email');
     this.whiteSpace = this.validators.includes('whiteSpace');
+    }
   }
 
 }

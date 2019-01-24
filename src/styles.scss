@@ -4,6 +4,10 @@
 // FONTAWESOME
 @import "../node_modules/@fortawesome/fontawesome-free/css/all.min.css";
 
+// QUILL
+@import "../node_modules/quill/dist/quill.core.css";
+@import "../node_modules/quill/dist/quill.snow.css";
+
 $invalidRed: rgb(220, 53, 69);
 $validGreen: rgb(66, 169, 72);
 $normalBlue: rgb(60, 141, 188);

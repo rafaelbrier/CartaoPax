@@ -10,10 +10,13 @@ export class ModalComponent {
 
   constructor(public activeModal: NgbActiveModal, private modalService: NgbModal) {}
 
-  openModal(title: string, body: string, modalType: string) {
+  openModal(title: string, body: string, modalType: string = "normal", withConfirm: boolean = false) {
     const modalRef = this.modalService.open(ModalComponent);
+    modalRef.componentInstance.withConfirm = withConfirm;
     modalRef.componentInstance.modalType = modalType;
     modalRef.componentInstance.title = title;
     modalRef.componentInstance.body = body;
+
+    return modalRef.result;
   }
 }

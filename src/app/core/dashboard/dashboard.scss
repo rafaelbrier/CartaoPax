@@ -1,0 +1,42 @@
+
+$grayBlue: #5f6f81;
+
+.component-title {
+    position: absolute;
+    top: 0;
+    font-size: 20px;
+    line-height: 35px;
+    color: $grayBlue;
+}
+
+.form-container {
+    padding: 5px;
+}
+
+.form-end span {
+    font-size: 12px;
+    margin-left: 10px;
+    color: darkgray;
+}
+
+@media screen and (max-width: 767px) {
+    .form-end {
+        button {
+            min-width: 100%;
+            margin-top: 10px;
+        }
+    } 
+}
+@media screen and (min-width: 768px) {
+    .form-end {       
+        button {
+            float: right;
+            margin: 0px 15px;
+        }
+    }
+}
+
+:host /deep/ .ql-editor {
+    min-height: 200px !important;
+}
+

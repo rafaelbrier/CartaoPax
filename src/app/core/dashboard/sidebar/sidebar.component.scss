@@ -27,7 +27,7 @@ $menuItemColor: #4D4D4D;
 @media screen and (min-width: 768px) {
 
     .dashboard-content {
-        margin: 25px 220px;
+        margin: 35px 220px;
         padding: 15px;
         max-width: 75%;
     }
@@ -57,7 +57,7 @@ $menuItemColor: #4D4D4D;
 @media screen and (max-width: 767px) { 
     .dashboard-content {
         max-width: 90%;
-        margin: 0 auto;
+        margin: 35px auto;
     }
 
     .toolbar-content {

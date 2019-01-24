@@ -8,11 +8,8 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
-  routerEventsSubscription: any;
-
   isNavBarCollapsed: boolean;
   showPassword: boolean = false;
-  routerUrl: string = "";
 
   isLoginCollapsed: boolean = false;
 
@@ -20,15 +17,7 @@ export class HeaderComponent implements OnInit {
     this.isNavBarCollapsed = true;
   }
 
-  ngOnInit(): void {
-    this.routerEventsSubscription =
-      this.router.events.subscribe(() => {
-        let indexOfBackslash = window.location.pathname.indexOf('/', 1);
-        this.routerUrl = window.location.pathname.substring(0, indexOfBackslash > 0 ? indexOfBackslash : window.location.pathname.length);
-      });
-  }
-  ngOnDestroy(): void {
-    this.routerEventsSubscription.unsubscribe();
+  ngOnInit(): void {   
   }
 
   navigateToDashboard(): void {

@@ -91,7 +91,9 @@
             <!-- Validador Email  -->
             <app-validators [form]="commentForm" [input]="f.email" [inputName]="'email'" [validators]="['required','email']"></app-validators>
           </div>
+
           <button type="submit" class="btn btn-success" [disabled]="submitting">Publicar Comentário</button>
+          
         </div>
         
       </form>

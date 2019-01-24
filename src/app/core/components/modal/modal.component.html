@@ -52,6 +52,7 @@
         <p>{{body}}</p>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Fechar</button>
+        <button type="button" class="btn btn-outline-dark" (click)="activeModal.close(true)" *ngIf="withConfirm">Confirmar</button>
+        <button type="button" class="btn btn-outline-dark" (click)="activeModal.close(false)">Fechar</button>
     </div>
 </div>

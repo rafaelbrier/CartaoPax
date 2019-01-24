@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ModalComponent } from '../../../components/modal/modal.component';
 import { FireStorageService } from '../../../services/firebase-storage/fire-storage.service';
-import { SharedServices } from 'src/app/core/services/shared-services';
+import { SharedService } from 'src/app/core/services/shared-services';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { whiteSpace } from 'src/app/core/components/validators/custom-validators';
 
 @Component({
   selector: 'app-news-manager',
@@ -18,11 +20,49 @@ export class NewsManagerComponent implements OnInit {
   uploadError: boolean = false;
   downloadURL: String;
 
+  // Form
+  newsManagerForm: FormGroup;
+  submitting: boolean = false;
+
   constructor(private fireStorageService: FireStorageService,
-              private sharedServices: SharedServices) { }
+              private sharedService: SharedService,
+              private formBuilder: FormBuilder
+              ) { }
 
   ngOnInit() {
+    this.newsManagerFormBuilder();
   }
+
+
+  submitCommentForm() {
+    this.sharedService.triggerValidation(this.newsManagerForm);
+    if (this.newsManagerForm.invalid) {
+      return;
+    } 
+    this.modal.openModal("Publicar Notícia", "Tem certeza que deseja publicar a notícia?", "normal", true)
+    .then(res => {
+      console.log("then", res)
+    }).catch(err => {
+      console.log("catch", err)
+    })
+    const values = this.newsManagerForm.value;
+    console.log(values)
+    // const news = {
+    //     title: values.name,
+    //     body: values.comment,
+    //     //imgPath: values.imgUrl
+    //   };
+  }
+
+  newsManagerFormBuilder() {
+    this.newsManagerForm = this.formBuilder.group({
+      title: ['', [Validators.required, whiteSpace]],
+      body: ['', [Validators.required, whiteSpace]],    
+      image: [''],    
+    });
+  }
+
+  get f() { return this.newsManagerForm.controls; }
 
   onChange(event: EventTarget) {
     let eventObj: MSInputMethodContext = <MSInputMethodContext>event;
@@ -30,7 +70,7 @@ export class NewsManagerComponent implements OnInit {
     let files: FileList = target.files;
     this.file = files[0];
 
-    if (!this.sharedServices.checkIfIsImage(this.file))
+    if (!this.sharedService.checkIfIsImage(this.file))
     return false;
 
     //this.retrieveImg();

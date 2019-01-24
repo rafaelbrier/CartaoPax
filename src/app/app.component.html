@@ -1,3 +1,3 @@
-<app-header></app-header>
+<app-header *ngIf="!routerUrl.includes('dashboard')"></app-header>
 
 <router-outlet></router-outlet>
