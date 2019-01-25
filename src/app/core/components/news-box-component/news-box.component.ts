@@ -34,12 +34,6 @@ export class NewsBoxComponent {
       this.data.body = textOverFlow.text;
       this.readMore = textOverFlow.overflow;
     }
-
-
-    // if (this.newsData && this.newsData.body && this.newsData.body.length > this.maxChar) {
-    //   this.data.body = this.newsData.body.substr(0, this.maxChar) + "...";
-    //   this.readMore = true;
-    // }
   }
 
   goToDetail() {

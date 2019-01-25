@@ -10,15 +10,15 @@ import { NewsAddComponent } from './core/dashboard/pages/news-add/news-add.compo
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },  
-  { path: 'home', component: BodyComponent },
-  { path: 'news', component: NewsPageComponent },
-  { path: 'news/:id', component: NewsPageComponent },
+  { path: 'home', component: BodyComponent,  data: { breadcrumb: "Home" } },
+  { path: 'news', component: NewsPageComponent,  data: { breadcrumb: "Notícias" } },
+  { path: 'news/:id', component: NewsPageComponent,  data: { breadcrumb: "Notícias" } },
   { 
     path: 'dashboard',
     component: MainPageComponent,
     children: [
-      { path: 'newsadd', component: NewsAddComponent },
-      { path: 'newsmanager', component: NewsManagerComponent },
+      { path: 'newsadd', component: NewsAddComponent,  data: { breadcrumb: "Adicionar Notícia" } },
+      { path: 'newsmanager', component: NewsManagerComponent,  data: { breadcrumb: "Gerenciar Notícias" } },
         //  { path: 'news/:id', component: NewsPageComponent },
       ]
   },

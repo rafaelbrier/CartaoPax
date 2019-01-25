@@ -24,6 +24,7 @@ import { HeaderComponent } from './header/header.component';
 import { Error404PageComponent } from './pages/error404-page.component';
 import { NewsPageComponent } from './pages/news-page/news-page.component';
 import { NewsAddComponent } from './dashboard/pages/news-add/news-add.component';
+import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 
 
 
@@ -73,7 +74,8 @@ import { NewsAddComponent } from './dashboard/pages/news-add/news-add.component'
     ValidatorsComponent,
     ModalComponent,
     ImgLazyComponent,
-    NewsAddComponent
+    NewsAddComponent,
+    BreadcrumbComponent
   ],
   exports: [
     HeaderComponent,
