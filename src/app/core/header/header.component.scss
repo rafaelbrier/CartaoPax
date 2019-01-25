@@ -10,11 +10,14 @@
        width: 100%;
    }
    .navbar-opacity {
-     opacity: 0.65;
+      opacity: 0.9;
    }   
    .nav {
-       margin-top: -66px !important;
+       margin-top: -75px !important;
    }  
+   .card {
+    top: 90% !important;
+    }   
    .navbar-brand img {
     margin-bottom: 35px;
     margin-right: 9px;
@@ -33,7 +36,7 @@
     }
     .login-button {
         top: 80% !important;   
-    }
+    }   
     .navbar-logo {
         max-height: 48px !important;  
         transition: max-height 1s;  
@@ -49,6 +52,15 @@
      max-height: 84px;     
 }
 
+.telephone {
+    position: fixed;
+    top: 60px;
+    left: 29vw;
+    font-weight: 700;
+    i {
+        margin-right: 15px;
+    }
+}
 
 .login-button {
     position: absolute;

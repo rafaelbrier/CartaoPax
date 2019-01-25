@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit, OnDestroy } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,11 +13,15 @@ export class HeaderComponent implements OnInit {
 
   isLoginCollapsed: boolean = false;
 
+  phoneElement: HTMLElement;
+
   constructor(private router: Router) {
     this.isNavBarCollapsed = true;
   }
 
   ngOnInit(): void {   
+    if(window.innerWidth < 1350)
+    document.getElementById("telephone").remove();
   }
 
   navigateToDashboard(): void {
@@ -26,7 +30,7 @@ export class HeaderComponent implements OnInit {
 
   @HostListener('window:scroll')
   shrinkMenu() {
-    if (document.body.scrollTop > 60 || document.documentElement.scrollTop > 60) {
+    if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
       document.getElementById("card").classList.add("card-after-scroll");
       document.getElementById("navbar-logo").classList.add("navbar-logo");
       document.getElementById("navbar").classList.add("navbar-opacity");
