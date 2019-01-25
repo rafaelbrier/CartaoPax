@@ -6,5 +6,7 @@
         </ng-template> 
     </div>
     <div *ngIf="email"><p *ngIf="input.errors.email">O {{inputName}} é inválido.</p></div>
-    <div *ngIf="maxlength"><p *ngIf="input.errors.maxlength">O {{inputName}} deve ter no máximo {{maxlengthNum}} {{maxlengthNum > 1 ? caracteres : caractere}}.</p></div>
+    <div *ngIf="maxLength"><p *ngIf="input.errors.maxlength">O {{inputName}} deve ter no máximo {{maxLengthNum}} {{maxLengthNum === 1 ? caractere : caracteres}}.</p></div>
+    <div *ngIf="minLength"><p *ngIf="input.errors.minlength">O {{inputName}} deve ter no mínimo {{minLengthNum}} {{minLength === 1 ? caractere : caracteres}}.</p></div>
+
  </div>

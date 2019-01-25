@@ -22,9 +22,11 @@ export class ValidatorsComponent implements OnInit {
   required: boolean;
   email: boolean;
   whiteSpace: boolean;
-  maxlength: boolean;
+  maxLength: boolean;
+  minLength: boolean;
 
-  maxlengthNum: number;
+  maxLengthNum: number;
+  minLengthNum: number;
 
   constructor() { }
 
@@ -33,10 +35,15 @@ export class ValidatorsComponent implements OnInit {
     this.required = this.validators.includes('required');
     this.email = this.validators.includes('email');
     this.whiteSpace = this.validators.includes('whiteSpace');
-    this.maxlength = this.validators.includes('maxlength');
-    if(this.maxlength){
+    this.maxLength = this.validators.includes('maxlength');
+    if(this.maxLength){
       let maxLengthArrayPos = this.validators.indexOf('maxlength');
-      this.maxlengthNum = this.validators[maxLengthArrayPos + 1];
+      this.maxLengthNum = this.validators[maxLengthArrayPos + 1];
+    }
+    this.minLength = this.validators.includes('minlength');
+    if(this.minLength){
+      let maxLengthArrayPos = this.validators.indexOf('minlength');
+      this.minLengthNum = this.validators[maxLengthArrayPos + 1];
     }
     }
   }

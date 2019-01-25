@@ -18,7 +18,7 @@
 
     </div>
     <div class="body">
-      <img *ngIf="newsData?.imgPath" [src]="newsData?.imgPath">
+      <image *ngIf="newsData?.imgPath" [imgSrc]="newsData?.imgPath"></image>
       <p [innerHTML]="newsData?.body">
         {{newsData?.body}}
       </p>

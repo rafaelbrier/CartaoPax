@@ -4,7 +4,7 @@
 
     <div class="col-sm-5">
       <div>
-        <img [src]="recentNews?.imgPath" width="100%" height="450px">
+        <image [imgSrc]="recentNews?.imgPath" [height]="'450px'" [width]="'100%'"></image>
         <news-box-component *ngIf="recentNews" [newsData]="recentNews"></news-box-component>
       </div>
     </div>
