@@ -12,8 +12,10 @@ $invalidRed: rgb(220, 53, 69);
 $validGreen: rgb(66, 169, 72);
 $normalBlue: rgb(60, 141, 188);
 
-body {
+body, html {
     background-color: #f4f6f9;
+    height:100%;
+    min-height:100%;
 }
 
 form {

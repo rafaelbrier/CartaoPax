@@ -29,7 +29,7 @@ $linkColor: #3c8dbc;
         content: "";
         display:block;
         border-top: 4px solid $secondaryGreen;
-        width: 10%
+        width:35px;
     }
 }
 
@@ -82,4 +82,8 @@ $linkColor: #3c8dbc;
 .btn-info:hover, .btn-info:focus, .btn-info:active, .btn-info.active, .open>.dropdown-toggle.btn-info {
     background-color: #1684a0;
     border-color: #1684a0;
+}
+
+.width-full {
+    width: 100% !important;
 }

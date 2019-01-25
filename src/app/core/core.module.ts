@@ -8,10 +8,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { NgbActiveModal, NgbModalModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
+import { NgxGalleryModule } from 'ngx-gallery';
 import { QuillModule } from 'ngx-quill';
 import { BodyComponent } from './body/body.component';
 import { CommentBoxComponent } from './components/comment-box/comment-box.component';
 import { ErrorLoadComponent } from './components/error-load/error-load.component';
+import { ImgLazyComponent } from './components/img-lazy/img-lazy.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { NewsBoxComponent } from './components/news-box-component/news-box.component';
 import { ValidatorsComponent } from './components/validators/validators.component';
@@ -21,7 +23,7 @@ import { SidebarComponent } from './dashboard/sidebar/sidebar.component';
 import { HeaderComponent } from './header/header.component';
 import { Error404PageComponent } from './pages/error404-page.component';
 import { NewsPageComponent } from './pages/news-page/news-page.component';
-import { ImgLazyComponent } from './components/img-lazy/img-lazy.component';
+
 
 
 
@@ -35,6 +37,7 @@ import { ImgLazyComponent } from './components/img-lazy/img-lazy.component';
     BrowserAnimationsModule,
     RouterModule,
     FormsModule,
+    NgxGalleryModule,
     LazyLoadImageModule,
     ReactiveFormsModule,
     QuillModule.forRoot({

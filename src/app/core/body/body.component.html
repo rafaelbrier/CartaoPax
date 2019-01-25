@@ -1,13 +1,22 @@
 <div class="content">
 
-  <div class="row">
+  <div class="row width-full">
 
     <div class="col-sm-5">
-      <div>
+        <h3 class="info-text">
+            Última
+          </h3>
         <image [imgSrc]="recentNews?.imgPath" [height]="'450px'" [width]="'100%'"></image>
         <news-box-component *ngIf="recentNews" [newsData]="recentNews"></news-box-component>
-      </div>
     </div>
+
+    <div class="col-sm-7">
+      <h3 class="info-text">
+          Seja Filiado
+        </h3>
+        <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
+        <article class="info-begin">SEJA UM ASSOCIADO DO CLUBE ACQUA PAX , UM COMPLETO COMPLEXO DE LAZER PARA TODA FAMÍLIA.</article>
+      </div>
 
   </div>
 
