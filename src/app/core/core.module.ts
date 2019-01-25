@@ -23,6 +23,7 @@ import { SidebarComponent } from './dashboard/sidebar/sidebar.component';
 import { HeaderComponent } from './header/header.component';
 import { Error404PageComponent } from './pages/error404-page.component';
 import { NewsPageComponent } from './pages/news-page/news-page.component';
+import { NewsAddComponent } from './dashboard/pages/news-add/news-add.component';
 
 
 
@@ -71,7 +72,8 @@ import { NewsPageComponent } from './pages/news-page/news-page.component';
     NewsManagerComponent,
     ValidatorsComponent,
     ModalComponent,
-    ImgLazyComponent
+    ImgLazyComponent,
+    NewsAddComponent
   ],
   exports: [
     HeaderComponent,

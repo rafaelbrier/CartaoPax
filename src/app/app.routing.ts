@@ -5,6 +5,7 @@ import { NewsPageComponent } from './core/pages/news-page/news-page.component';
 import { Error404PageComponent } from './core/pages/error404-page.component';
 import { MainPageComponent } from './core/dashboard/main-page/main-page.component';
 import { NewsManagerComponent } from './core/dashboard/pages/news-manager/news-manager.component';
+import { NewsAddComponent } from './core/dashboard/pages/news-add/news-add.component';
 
 
 export const routes: Routes = [
@@ -16,7 +17,8 @@ export const routes: Routes = [
     path: 'dashboard',
     component: MainPageComponent,
     children: [
-         { path: 'newsmanager', component: NewsManagerComponent },
+      { path: 'newsadd', component: NewsAddComponent },
+      { path: 'newsmanager', component: NewsManagerComponent },
         //  { path: 'news/:id', component: NewsPageComponent },
       ]
   },

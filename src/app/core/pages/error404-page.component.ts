@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Location } from '@angular/common';
 
 const html = `
 <div id="notfound" class="error404-content">
@@ -8,7 +9,7 @@ const html = `
 				<h1><span>4</span><span>0</span><span>4</span></h1>
 			</div>
             <h2>Pedimos desculpas mas o caminho não foi encontrado ou não existe.</h2>
-            <p>Você pode <a href="" ng-click="back()">voltar</a> ou seguir para <a href="#">home</a>.</p>
+            <p>Você pode <em (click)="back()">voltar</em> ou seguir para <em><a href="#">home</a></em>.</p>
 		</div>
 	</div>
 `;
@@ -51,6 +52,18 @@ const styles = `
     position: relative;
     height: 240px;
   }
+
+  em:hover {
+    color: #0056b3;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  em {
+      color: #007bff;
+      text-decoration: none;
+      background-color: transparent;
+      -webkit-text-decoration-skip: objects;
+    }
   
   .notfound .notfound-404 h1 {
     font-family: 'Montserrat', sans-serif;
@@ -125,6 +138,12 @@ const styles = `
   styles: [styles]
 })
 export class Error404PageComponent {
+  constructor(private location: Location) {}
+  
+  back() {
+    this.location.back();
+  }
 }
+
 
 
