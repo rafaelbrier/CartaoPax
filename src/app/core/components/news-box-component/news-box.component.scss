@@ -1,26 +1,47 @@
 @import "../../../app.component.scss";
 
 .box {
-    margin-bottom: 35px !important;    
+    margin-bottom: 35px;    
     width: 100%;
     min-height: 180px;
+    position: relative;
+    border-radius: 3px;
+    background: #ffffff;
+    border-top: 3px solid #d2d6de;
+    width: 100%;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    border-top-color: #00a65a;
 }
 
 .box-header {
-    padding: 0px !important;    
+    padding: 0px;   
+    color: #444;
+    display: block;
+    position: relative; 
+    
+}
+.box-header:before, .box-body:before, .box-header:after, .box-body:after {
+    content: " ";
+    display: table;
+    clear: both;
 }
 .box-body {
     word-break: break-word;
     margin-left: 25px;
     white-space: pre-line;
+    padding: 10px;
 }
 .box-body a {
     float: right;
 }
 
 .box-title {
-    margin-top: 15px !important;
-    margin-left: 20px !important;
+    font-size: 18px;
+    line-height: 1;
+    display: inline-block;
+    margin-top: 15px;
+    margin-left: 20px;
+    margin-bottom: 15px;
     color: darkgreen;
     cursor: pointer;
     &:hover {

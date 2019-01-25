@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss']
 })
-export class SidebarComponent implements OnInit {
+export class SidebarComponent implements OnInit, AfterViewInit {
 
   sideBarOpened: boolean;
   isMobile: boolean;
@@ -21,6 +21,13 @@ export class SidebarComponent implements OnInit {
       this.checkMobileOrDesktop(window.innerWidth);
     };
   }
+
+  ngAfterViewInit(): void {
+    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+    //Add 'implements AfterViewInit' to the class.
+    this.toggleSideBar("#sidenav");  
+      
+    }  
 
   toggleSideBar(sidenav: any) {
     if (!this.isMobile) {

@@ -27,7 +27,7 @@ $menuItemColor: #4D4D4D;
 @media screen and (min-width: 768px) {
 
     .dashboard-content {
-        margin: 35px 220px;
+        margin: 100px 150px 35px 210px;
         padding: 15px;
         max-width: 75%;
     }
@@ -50,14 +50,18 @@ $menuItemColor: #4D4D4D;
     h4 {
         color: $grayBlue;
         font-size: 15px;
-    }  
-
+    } 
 }
 
 @media screen and (max-width: 767px) { 
     .dashboard-content {
         max-width: 90%;
-        margin: 35px auto;
+        margin: 100px auto 35px auto;
+        // margin: 35px auto;
+    }
+
+    mat-sidenav {
+        margin-top: 56px !important;
     }
 
     .toolbar-content {
@@ -78,17 +82,21 @@ $menuItemColor: #4D4D4D;
 mat-toolbar {
     padding: 0px !important;
     border-bottom: 0.5px solid $borderColor;
+    position: fixed;
+    z-index: 2;
     background: $navBackColor;
     display: block;
     text-align: center;
 }
 
 mat-sidenav-container {
-    height: 100vh;
+    height: calc(100%-64px);
     background-color: #f4f6f9;
 }
 
 mat-sidenav {
+    margin-top: 64px;
+    position: fixed;
     background: $navBackColor;
     width: 100px;
     -webkit-transition: width 0.8s; /* Safari */

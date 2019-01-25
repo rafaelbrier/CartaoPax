@@ -1,41 +1,40 @@
 <div class="component-title">
-  Adicionar Notícia
+    Adicionar Notícia
 </div>
 
 <div class="form-container">
-  <form class="news-manager-form" [formGroup]="newsManagerForm" (ngSubmit)="submitCommentForm()">
+    <form class="news-manager-form" [formGroup]="newsManagerForm" (ngSubmit)="submitCommentForm()">
 
-      <div class="form-group">
-          <label>Título da Notícia*</label>
-          <input formControlName="title" type="text" class="form-control" placeholder="Mensagem">
-          <!-- Validador Comentário  -->
-          <app-validators [form]="newsManagerForm" [input]="f.title" [inputName]="'Título da Notícia'" [validators]="['required','maxlength', 100]"></app-validators>
-      </div>
+        <div class="form-group">
+            <label>Título da Notícia*</label>
+            <input formControlName="title" type="text" class="form-control" placeholder="Mensagem">
+            <!-- Validador Comentário  -->
+            <app-validators [form]="newsManagerForm" [input]="f.title" [inputName]="'Título da Notícia'" [validators]="['required','maxlength', 100]"></app-validators>
+        </div>
 
-      <div class="form-group">
-          <label>Corpo da Notícia*</label>
-          <quill-editor formControlName="body" placeholder="Digite a notícia aqui..." class="no-border"></quill-editor>            
-          <app-validators [form]="newsManagerForm" [input]="f.body" [inputName]="'Corpo da Notícia'" [validators]="['required']"></app-validators>
-      </div>
+        <div class="form-group">
+            <label>Corpo da Notícia*</label>
+            <quill-editor formControlName="body" placeholder="Digite a notícia aqui..." class="no-border"></quill-editor>
+            <app-validators [form]="newsManagerForm" [input]="f.body" [inputName]="'Corpo da Notícia'" [validators]="['required']"></app-validators>
+        </div>
 
-      <div class="form-group">
-          <label>Imagem Principal da Notícia</label>
-          <input type="file" id="avatar" class="form-control" name="avatar" accept="image/png, image/jpeg" (change)="onChange($event)">
-          <div class="progress" *ngIf="inProgress">
-              <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
-                  [attr.aria-valuenow]="progressImg" aria-valuemin="0" aria-valuemax="100" [ngClass]="[progressImg === 100 ? 'bg-success' :'' , uploadError ? 'bg-danger' : '']"
-                  [ngStyle]="{'width': progressImg + '%'}">
-                  {{progressImg}}%
-              </div>
-          </div>
-      </div>
-      <div class="form-end">
-          <span>Os campos com * são obrigatórios.</span>
-          <button type="submit" class="btn btn-success" [disabled]="submitting">Publicar Notícia</button>
-          <!-- <button type="reset" class="btn btn-info" [disabled]="submitting">Limpar Campos</button> -->
-      </div>
-  </form>
+        <div class="form-group">
+            <label>Imagem Principal da Notícia</label>
+            <input type="file" id="avatar" class="form-control" name="avatar" accept="image/png, image/jpeg" (change)="onChange($event)">
+            <div class="progress" *ngIf="inProgress">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                    [attr.aria-valuenow]="progressImg" aria-valuemin="0" aria-valuemax="100" [ngClass]="[progressImg === 100 ? 'bg-success' :'' , uploadError ? 'bg-danger' : '']"
+                    [ngStyle]="{'width': progressImg + '%'}">
+                    {{progressImg}}%
+                </div>
+            </div>
+        </div>
+        <div class="form-end">
+            <span>Os campos com * são obrigatórios.</span>
+            <button type="submit" class="btn btn-success" [disabled]="submitting">Publicar Notícia</button>
+            <!-- <button type="reset" class="btn btn-info" [disabled]="submitting">Limpar Campos</button> -->
+        </div>
+    </form>
 </div>
-
 <!-- Modal -->
 <app-modal hidden="true"></app-modal>
