@@ -23,12 +23,12 @@ export class BodyComponent implements OnInit {
 
   ngOnInit() {
     this.initGallery();
-    this.isBoxLoading = true;
     this.loadNews(this.newsLoadDefaultLimit);
   }
 
 
   loadNews(limit: number) {
+    this.isBoxLoading = true;
     this.newsService.findNewsPageable(0, limit, "date", "desc")
       .subscribe((resData): any => {
         this.newsData = resData;

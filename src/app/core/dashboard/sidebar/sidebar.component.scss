@@ -20,16 +20,17 @@ $menuItemColor: #4D4D4D;
 
 .dashboard-content {
     border-radius: 2%;
-    border: 1px solid lightgray;
+    border: 2px solid lightgray;
     background-color: white;
+    width: fit-content;
 }
 
 @media screen and (min-width: 768px) {
 
     .dashboard-content {
+        min-width: 75%;
         margin: 100px 150px 35px 220px;
         padding: 15px;
-        max-width: 75%;
     }
 
     .toolbar-content {
@@ -55,7 +56,7 @@ $menuItemColor: #4D4D4D;
 
 @media screen and (max-width: 767px) { 
     .dashboard-content {
-        max-width: 90%;
+        min-width: 90%;
         margin: 100px auto 35px auto;
         // margin: 35px auto;
     }
@@ -219,9 +220,6 @@ ul {
         animation-duration: 0.7s;
     }
 
-    &:first-child {
-        border-top: 0.5px solid $borderColor;
-    }    
     &:hover {
         background-color: $grayBlue;
         img {

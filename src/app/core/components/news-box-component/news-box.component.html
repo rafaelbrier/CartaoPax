@@ -4,7 +4,7 @@
 
           <h5>
               <i class="far fa-calendar"></i>
-              {{data?.date}}
+              {{data?.date | date: 'dd MMM yyyy' }}
           </h5>
 
           <h5 (click)="goToDetailComments()" class="comment-text">

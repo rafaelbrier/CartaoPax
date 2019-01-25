@@ -40,3 +40,33 @@ $grayBlue: #5f6f81;
     min-height: 200px !important;
 }
 
+// Tables
+table {
+    text-align: center;
+
+}
+
+.table-container {
+    h6 {
+        padding: 5px;
+    }
+}
+
+.data-info {
+    line-height: 36px;
+    color: $grayBlue;
+}
+
+tbody td, tbody th {
+    vertical-align: middle;
+    button:last-child {
+        margin-left: 10px;
+    }
+}
+
+.btn-table:hover {
+    img
+    {
+        filter: brightness(0) invert(1);
+    }
+}

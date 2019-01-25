@@ -7,14 +7,21 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./modal.component.scss']
 })
 export class ModalComponent {
-  constructor(public activeModal: NgbActiveModal, private modalService: NgbModal) {}
+  constructor(public activeModal: NgbActiveModal, private modalService: NgbModal) { }
 
   openModal(title: string, body: string, modalType: string = "normal", withConfirm: boolean = false) {
     const modalRef = this.modalService.open(ModalComponent);
     modalRef.componentInstance.withConfirm = withConfirm;
     modalRef.componentInstance.modalType = modalType;
     modalRef.componentInstance.title = title;
-    modalRef.componentInstance.body = body;
+
+    if (modalType === "image") {
+      setTimeout(() => {
+        modalRef.componentInstance.body = body;
+      }, 1000);
+    } else {
+      modalRef.componentInstance.body = body;
+    }
 
     return modalRef.result;
   }

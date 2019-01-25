@@ -1,3 +1,82 @@
 <div class="component-title">
     Gerenciar Notícia
 </div>
+
+<div class="table-container">
+
+    <h6>Buscar Notícias</h6>
+    <div class="form-inline justify-content-center">
+
+        <div class="col-sm-4 d-flex">
+            <label>Mostrar</label>
+            <select class="custom-select" [(ngModel)]="limitValue" (ngModelChange)="onSelectChange($event)">
+                <option *ngFor="let limitOption of limitOptions" [value]="limitOption">{{limitOption}}</option>
+            </select>
+            <label>entradas.</label>
+        </div>
+
+        <div class="col-sm-4 offset-sm-4 d-flex">
+            <label>Filtrar:</label>
+            <input type="text" class="form-control" placeholder="id, título, corpo ..." (ngModelChange)="onSearchChange($event)"
+                [(ngModel)]="searchValue">
+        </div>
+        <!-- onChange={this.onSearchChange} className="list-select list-select-sm search-field" -->
+    </div>
+
+    <table class="table">
+
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Data</th>
+                <th scope="col">Título</th>
+                <th scope="col">Corpo</th>
+                <th scope="col">Imagem</th>
+                <th scope="col">Ações</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let new of news">
+                <th scope="row">{{new?.id}}</th>
+                <td>{{new?.date | date: 'dd MMM yyyy - HH:mm'}}</td>
+                <td>{{new?.title}}</td>
+                <td>
+                    <button type="button" class="btn btn-outline-info btn-table" (click)="showBody(new?.body)">
+                        <img src="../../../../assets/images/icons/newspaper.svg" width="24px" height="24px">
+                    </button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-outline-success btn-table" (click)="showImage(new?.imgPath)">
+                        <img src="../../../../assets/images/icons/picture.svg" width="24px" height="24px">
+                    </button>
+                </td>
+                <td>
+                    <button type="button" class="btn btn-outline-warning btn-table" (click)="editNews()">
+                        <img src="../../../../assets/images/icons/edit.svg" width="24px" height="24px">
+                    </button>
+                    <button type="button" class="btn btn-outline-danger btn-table" (click)="deleteNews()">
+                        <img src="../../../../assets/images/icons/delete.svg" width="24px" height="24px">
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <app-error-load [loadError]="boxLoadingError" [isLoading]="isBoxLoading"></app-error-load>
+
+    <div class="row">
+        <div class="col-sm-4 d-flex justify-content-center data-info">
+            Mostrando {{newsData?.numberOfElements}} de {{newsData?.totalElements}}
+            {{newsData?.commentCount === 1 ? "notícia." : "notícias."}}
+        </div>
+        <div class="col">
+            <ngb-pagination class="d-flex justify-content-end" [collectionSize]="pagNumberOfPages" [page]="pages + 1"
+                [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="onPageChange($event)"></ngb-pagination>
+        </div>
+    </div>
+
+</div>
+
+<!-- Modal -->
+<app-modal hidden="true"></app-modal>

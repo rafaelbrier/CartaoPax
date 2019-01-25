@@ -1,1 +1,23 @@
 @import '../../dashboard.scss';
+
+.form-inline {
+    margin-bottom: 15px;
+    label {
+        height: calc(2.25rem + 2px);
+        color: $grayBlue;
+        margin: 0 10px;
+    }
+}
+
+select {
+text-indent: 1.5vw;
+}
+
+@media screen and (max-width: 767px) {
+    .col-sm-4 {
+        margin: 10px 0;
+    }
+    select {
+        text-indent: 40%;
+    }
+}

@@ -1,5 +1,6 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-sidebar',
@@ -11,7 +12,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   sideBarOpened: boolean;
   isMobile: boolean;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private cdRef: ChangeDetectorRef) {
   }
 
   ngOnInit() {
@@ -23,7 +24,8 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.toggleSideBar("#sidenav");        
+    this.toggleSideBar("#sidenav");   
+    this.cdRef.detectChanges();     
     }  
 
   toggleSideBar(sidenav: any) {

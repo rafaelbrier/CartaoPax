@@ -11,22 +11,17 @@ interface IBreadcrumb {
 @Component({
   selector: "breadcrumb",
   template: `
-      <p>
         <a [routerLink]="['../' + homePage]" class="home-page">
           {{homePage}}         
         </a>     
         <a *ngFor="let breadcrumb of breadcrumbs" [routerLink]="['../'+homePage+breadcrumb.url, breadcrumb.params]">
           / {{breadcrumb.label}}
         </a>   
-      </p>     
       `,
 styles: [`
   .home-page {
     text-transform: capitalize;
-  }
-  a {
-    color: #5f6f81;
-  }
+  }  
 `]})
 export class BreadcrumbComponent implements OnInit {
 
@@ -51,7 +46,6 @@ export class BreadcrumbComponent implements OnInit {
       //set breadcrumbs
       let root: ActivatedRoute = this.activatedRoute.root;
       this.breadcrumbs = this.getBreadcrumbs(root);
-      console.log(this.breadcrumbs)
     });
   }
 
