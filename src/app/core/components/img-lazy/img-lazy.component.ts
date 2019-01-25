@@ -14,8 +14,6 @@ export class ImgLazyComponent {
 
   @Input() width: string;
 
-
-
   defaultImage: string = '../../assets/images/ripple-loader.svg';
   errorImage: string = '../../assets/images/notfound.png';
   offset = 100;

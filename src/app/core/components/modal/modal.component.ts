@@ -25,4 +25,13 @@ export class ModalComponent {
 
     return modalRef.result;
   }
+
+  loaderModal() {
+    const modalRef = this.modalService.open(ModalComponent, {keyboard: false, backdrop: 'static'});
+    modalRef.componentInstance.modalType = "loader";
+  }
+
+  closeAll() {
+    this.modalService.dismissAll();
+  }
 }

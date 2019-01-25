@@ -39,6 +39,22 @@ export class NewsManagerComponent implements OnInit {
   showBody(body: string) {
     this.modal.openModal("Corpo da Notícia", body);
   }
+
+  deleteNews(newsId: string) {
+    this.modal.openModal("Deletar Notícia", `Tem certeza que deseja deletar a notícia de id <b>#${newsId}</b>?`, "normal", true)
+    .then(() => {      
+      this.modal.loaderModal();
+
+      this.newsService.removeNews(newsId)
+      .subscribe(() => {
+        this.modal.closeAll();
+        this.modal.openModal("Notícia Deletada", `A notícia de id <b>#${newsId}</b> foi deletada com sucesso.`, "success");
+      }, () => {
+        this.modal.openModal("Erro!", "Houve algum erro ao deletar a notícia. Por favor tente novamente.", "fail");
+      });
+
+    }).catch(()=>{return});
+  }
   
   onSearchChange(searchValue: string) {
     console.log(searchValue);

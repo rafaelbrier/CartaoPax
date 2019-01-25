@@ -5,7 +5,7 @@
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    <div class="modal-body">
+    <div class="modal-body text-center">
         <div class="check_mark">
             <div class="sa-icon sa-success animate">
                 <span class="sa-line sa-tip animateSuccessTip"></span>
@@ -28,7 +28,7 @@
             <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    <div class="modal-body">
+    <div class="modal-body text-center">
         <div class="c-container">
             <div class="o-circle c-container__circle o-circle__sign--failure">
                 <div class="o-circle__sign"></div>
@@ -58,17 +58,29 @@
 </div>
 
 <div *ngIf="modalType === 'image'">
-        <div class="modal-header">
-            <h4 class="modal-title">{{title}}</h4>
-            <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <div class="modal-body">
-            <image [imgSrc]="body" [height]="'450px'" [width]="'100%'"></image>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-outline-warning" (click)="activeModal.close()" *ngIf="withConfirm">Confirmar</button>
-            <button type="button" class="btn btn-outline-dark" (click)="activeModal.dismiss()">Fechar</button>
-        </div>
+    <div class="modal-header">
+        <h4 class="modal-title">{{title}}</h4>
+        <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
+    <div class="modal-body text-center">
+        <image [imgSrc]="body" [height]="'450px'" [width]="'100%'"></image>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-warning" (click)="activeModal.close()" *ngIf="withConfirm">Confirmar</button>
+        <button type="button" class="btn btn-outline-dark" (click)="activeModal.dismiss()">Fechar</button>
+    </div>
+</div>
+
+<div *ngIf="modalType === 'loader'">
+    <div class="modal-header">
+        <h4 class="modal-title">Aguarde...</h4>
+    </div>
+    <div class="modal-body text-center">
+        <img src="../../../../assets/images/ripple-loader.svg" height="300px" width="300px">
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" disabled>Fechar</button>
+    </div>
+</div>

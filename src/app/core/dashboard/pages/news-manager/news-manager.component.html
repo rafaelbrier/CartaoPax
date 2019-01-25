@@ -1,10 +1,9 @@
 <div class="component-title">
-    Gerenciar Notícia
+    Gerenciar Notícias
 </div>
 
 <div class="table-container">
 
-    <h6>Buscar Notícias</h6>
     <div class="form-inline justify-content-center">
 
         <div class="col-sm-4 d-flex">
@@ -20,7 +19,6 @@
             <input type="text" class="form-control" placeholder="id, título, corpo ..." (ngModelChange)="onSearchChange($event)"
                 [(ngModel)]="searchValue">
         </div>
-        <!-- onChange={this.onSearchChange} className="list-select list-select-sm search-field" -->
     </div>
 
     <table class="table">
@@ -55,7 +53,7 @@
                     <button type="button" class="btn btn-outline-warning btn-table" (click)="editNews()">
                         <img src="../../../../assets/images/icons/edit.svg" width="24px" height="24px">
                     </button>
-                    <button type="button" class="btn btn-outline-danger btn-table" (click)="deleteNews()">
+                    <button type="button" class="btn btn-outline-danger btn-table" (click)="deleteNews(new?.id)">
                         <img src="../../../../assets/images/icons/delete.svg" width="24px" height="24px">
                     </button>
                 </td>
