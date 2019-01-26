@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { ModalComponent } from '../../components/modal/modal.component';
-import { whiteSpace } from '../../components/validators/custom-validators';
+import { ModalComponent } from '../../components/utils/modal/modal.component';
+import { whiteSpace } from '../../components/utils/validators/custom-validators';
 import { CommentsService } from '../../services/comments-service';
 import { NewsService } from '../../services/news.service';
 import { SharedService } from '../../services/shared-services';

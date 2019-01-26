@@ -12,11 +12,11 @@ import { NgxGalleryModule } from 'ngx-gallery';
 import { QuillModule } from 'ngx-quill';
 import { BodyComponent } from './body/body.component';
 import { CommentBoxComponent } from './components/comment-box/comment-box.component';
-import { ErrorLoadComponent } from './components/error-load/error-load.component';
-import { ImgLazyComponent } from './components/img-lazy/img-lazy.component';
-import { ModalComponent } from './components/modal/modal.component';
+import { ErrorLoadComponent } from './components/utils/error-load/error-load.component';
+import { ImgLazyComponent } from './components/utils/img-lazy/img-lazy.component';
+import { ModalComponent } from './components/utils/modal/modal.component';
 import { NewsBoxComponent } from './components/news-box-component/news-box.component';
-import { ValidatorsComponent } from './components/validators/validators.component';
+import { ValidatorsComponent } from './components/utils/validators/validators.component';
 import { MainPageComponent } from './dashboard/main-page/main-page.component';
 import { NewsManagerComponent } from './dashboard/pages/news-manager/news-manager.component';
 import { SidebarComponent } from './dashboard/sidebar/sidebar.component';
@@ -24,7 +24,7 @@ import { HeaderComponent } from './header/header.component';
 import { Error404PageComponent } from './pages/error404-page.component';
 import { NewsPageComponent } from './pages/news-page/news-page.component';
 import { NewsAddComponent } from './dashboard/pages/news-add/news-add.component';
-import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
+import { BreadcrumbComponent } from './components/utils/breadcrumb/breadcrumb.component';
 
 
 

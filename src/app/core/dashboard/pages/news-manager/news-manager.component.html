@@ -37,23 +37,27 @@
         <tbody>
             <tr *ngFor="let new of news">
                 <th scope="row">{{new?.id}}</th>
-                <td>{{new?.date | date: 'dd MMM yyyy - HH:mm'}}</td>
+                <td class="td-full-wd">{{new?.date | date: 'dd MMM yyyy - HH:mm'}}</td>
                 <td>{{new?.title}}</td>
                 <td>
-                    <button type="button" class="btn btn-outline-info btn-table" (click)="showBody(new?.body)">
+                    <button type="button" class="btn btn-outline-info btn-table" (click)="showBody(new?.body)"
+                        ngbTooltip="Visualizar o corpo da notícia">
                         <img src="../../../../assets/images/icons/newspaper.svg" width="24px" height="24px">
                     </button>
                 </td>
                 <td>
-                    <button type="button" class="btn btn-outline-success btn-table" (click)="showImage(new?.imgPath)">
+                    <button type="button" class="btn btn-outline-success btn-table" (click)="showImage(new?.imgPath)"
+                        ngbTooltip="Visualizar imagem principal da notícia">
                         <img src="../../../../assets/images/icons/picture.svg" width="24px" height="24px">
                     </button>
                 </td>
-                <td>
-                    <button type="button" class="btn btn-outline-warning btn-table" (click)="editNews()">
+                <td class="td-full-wd">
+                    <button type="button" class="btn btn-outline-warning btn-table" (click)="editNews(new)"
+                     ngbTooltip="Editar notícia">
                         <img src="../../../../assets/images/icons/edit.svg" width="24px" height="24px">
                     </button>
-                    <button type="button" class="btn btn-outline-danger btn-table" (click)="deleteNews(new?.id)">
+                    <button type="button" class="btn btn-outline-danger btn-table" (click)="deleteNews(new?.id)"
+                        ngbTooltip="Remover notícia">
                         <img src="../../../../assets/images/icons/delete.svg" width="24px" height="24px">
                     </button>
                 </td>
@@ -64,7 +68,7 @@
     <app-error-load [loadError]="boxLoadingError" [isLoading]="isBoxLoading"></app-error-load>
 
     <div class="row">
-        <div class="col-sm-4 d-flex justify-content-center data-info">
+        <div class="col-sm-4 d-flex justify-content-center data-info" *ngIf="newsData">
             Mostrando {{newsData?.numberOfElements}} de {{newsData?.totalElements}}
             {{newsData?.commentCount === 1 ? "notícia." : "notícias."}}
         </div>

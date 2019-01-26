@@ -1,3 +1,5 @@
+@import '../../app.component.scss';
+
 $grayBlue: #5f6f81;
 
 .component-title {
@@ -51,7 +53,7 @@ table {
 
 tbody td, tbody th {
     vertical-align: middle;
-    button:last-child {
+    .btn-outline-danger {
         margin-left: 10px;
     }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ModalComponent } from '../../../components/modal/modal.component';
+import { ModalComponent } from '../../../components/utils/modal/modal.component';
 import { NewsService } from 'src/app/core/services/news.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-news-manager',
@@ -26,7 +27,7 @@ export class NewsManagerComponent implements OnInit {
   orderBy: string = "date";
   orderAscOrDesc: string = "desc";
 
-  constructor(private newsService: NewsService) { }
+  constructor(private newsService: NewsService, private router: Router) { }
 
   ngOnInit() {
     this.loadNews(this.pages, this.limit, this.orderBy, this.orderAscOrDesc);
@@ -54,6 +55,11 @@ export class NewsManagerComponent implements OnInit {
       });
 
     }).catch(()=>{return});
+  }
+
+  editNews(news: any) {
+    console.log(news);
+    // this.router.navigate()
   }
   
   onSearchChange(searchValue: string) {
