@@ -11,6 +11,8 @@ export class NewsService {
   
   registerNews(data: any) {
     return this.http.post(myConstants.restBaseUrl + myConstants.newsPath, {
+      id: data.id ? data.id : '',
+      date: data.date ? data.date : '',
       title: data.title,
       body: data.body,
       imgPath: data.imgPath

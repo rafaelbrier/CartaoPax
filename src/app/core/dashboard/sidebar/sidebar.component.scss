@@ -150,7 +150,7 @@ mat-sidenav {
     border-left: 0.5px solid $borderColor;
     a {
         margin-left: 10px;
-        font-size: 26px;
+        font-size: 24px;
         vertical-align: middle;
         color: $grayBlue;
     }
@@ -208,7 +208,7 @@ ul {
         overflow: hidden;
         text-overflow: ellipsis;
         display: block;
-        font-size: 26px;
+        font-size: 20px;
         height: 100%;
         opacity: 0;
         color: $grayBlue;
@@ -242,7 +242,7 @@ ul {
     }
     a {
         color: rgba(95,111,129,0.6);
-        font-size: 22px !important;
+        font-size: 18px !important;
     }
 }
 

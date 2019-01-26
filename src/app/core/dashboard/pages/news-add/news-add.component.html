@@ -1,9 +1,9 @@
 <div class="component-title">
-    Adicionar Notícia
+    {{isEditing ? 'Editar' : 'Adicionar'}} Notícia <b>{{isEditing ? [' - #' + newsToEdit?.id] : ''}}</b>
 </div>
 
 <div class="form-container">
-    <form class="news-manager-form" [formGroup]="newsManagerForm" (ngSubmit)="submitCommentForm()">
+    <form class="news-manager-form" [formGroup]="newsManagerForm" (ngSubmit)="submitNewsForm()">
 
         <div class="form-group">
             <label>Título da Notícia*</label>
@@ -19,7 +19,16 @@
         </div>
 
         <div class="form-group">
-            <label>Imagem Principal da Notícia</label>
+            <label>
+                Imagem Principal da Notícia
+                <b  target="_blank" *ngIf="isEditing">
+                    <span *ngIf="downloadURL !== 'null'; else noimage">
+                        <a href="{{downloadURL}}">-- Imagem Atual --</a>
+                        <i class="fas fa-times" (click)="removeMainImg()" ngbTooltip="Remover imagem principal da notícia"></i>
+                    </span>                    
+                    <ng-template #noimage>-- Nenhuma imagem salva na notícia --</ng-template>
+                </b>
+            </label>
             <input type="file" id="avatar" class="form-control" name="avatar" accept="image/png, image/jpeg" (change)="onChange($event)">
             <div class="progress" *ngIf="inProgress">
                 <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"

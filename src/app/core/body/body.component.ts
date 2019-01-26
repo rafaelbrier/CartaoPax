@@ -50,11 +50,6 @@ export class BodyComponent implements OnInit {
 
 
   initGallery() {
-    // [
-    //   { "imagePercent": 80, "thumbnailsPercent": 20, "thumbnailsColumns": 6, "thumbnailsMargin": 0, "thumbnailMargin": 0 }
-    //   { "breakpoint": 500, "width": "300px", "height": "300px", "thumbnailsColumns": 3 }
-    //   { "breakpoint": 300, "width": "100%", "height": "200px", "thumbnailsColumns": 2 }
-    //   ]
     this.galleryOptions = [
       {
         "thumbnailsColumns": 6, "thumbnailsPercent": 20, "imagePercent": 100, "thumbnailMargin": 0,

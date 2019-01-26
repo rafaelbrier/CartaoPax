@@ -50,6 +50,7 @@ export class NewsManagerComponent implements OnInit {
       .subscribe(() => {
         this.modal.closeAll();
         this.modal.openModal("Notícia Deletada", `A notícia de id <b>#${newsId}</b> foi deletada com sucesso.`, "success");
+        this.loadNews(this.pages, this.limit, this.orderBy, this.orderAscOrDesc);
       }, () => {
         this.modal.closeAll();
         this.modal.openModal("Erro!", "Houve algum erro ao deletar a notícia. Por favor tente novamente.", "fail");
@@ -59,8 +60,7 @@ export class NewsManagerComponent implements OnInit {
   }
 
   editNews(news: any) {
-    console.log(news);
-    // this.router.navigate()
+    this.router.navigate(['dashboard/newsadd', news], { skipLocationChange: true });
   }
   
   onSearchChange(searchValue: string) {

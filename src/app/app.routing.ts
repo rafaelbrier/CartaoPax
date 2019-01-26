@@ -19,7 +19,6 @@ export const routes: Routes = [
     children: [
       { path: 'newsadd', component: NewsAddComponent,  data: { breadcrumb: "Adicionar Notícia" } },
       { path: 'newsmanager', component: NewsManagerComponent,  data: { breadcrumb: "Gerenciar Notícias" } },
-        //  { path: 'news/:id', component: NewsPageComponent },
       ]
   },
   { path: '404', component: Error404PageComponent },

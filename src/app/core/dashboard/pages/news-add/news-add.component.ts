@@ -5,6 +5,7 @@ import { SharedService } from 'src/app/core/services/shared-services';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { whiteSpace } from 'src/app/core/components/utils/validators/custom-validators';
 import { NewsService } from 'src/app/core/services/news.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-news-add',
@@ -25,26 +26,49 @@ export class NewsAddComponent implements OnInit {
   newsManagerForm: FormGroup;
   submitting: boolean = false;
 
+  //Edit
+  isEditing: boolean = false;
+  newsToEdit: any;
+
   constructor(private fireStorageService: FireStorageService,
     private sharedService: SharedService,
     private formBuilder: FormBuilder,
-    private newsService: NewsService
+    private newsService: NewsService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
     this.newsManagerFormBuilder();
+    this.checkIfIsEdit();
   }
- 
-  submitCommentForm() {
+
+  checkIfIsEdit(): void {
+    if (this.activatedRoute.snapshot.params['id']) {
+      this.isEditing = true;
+      this.newsToEdit = this.activatedRoute.snapshot.params;
+      this.newsManagerForm.setValue({
+        title: this.newsToEdit.title,
+        body: this.newsToEdit.body,
+        image: this.newsToEdit.imgPath
+      });
+      this.downloadURL = this.newsToEdit.imgPath;
+    } else {
+      this.isEditing = false;
+      this.newsToEdit = null;
+    }
+  }
+
+  submitNewsForm(): void {
     this.sharedService.triggerValidation(this.newsManagerForm);
     if (this.newsManagerForm.invalid) {
       return;
     }
     this.submitting = true;
-    this.modal.openModal("Publicar Notícia", "Tem certeza que deseja publicar a notícia?", "normal", true)
+    this.modal.openModal("Publicar Notícia",
+      `Tem certeza que deseja publicar a notícia ${this.isEditing ? `editada de id <b>#${this.newsToEdit.id}</b>` : ''}?`, "normal", true)
       .then(() => {
         if (this.file) {
-
           this.retrieveImg()
             .then((url) => {
 
@@ -58,13 +82,24 @@ export class NewsAddComponent implements OnInit {
       }).catch(() => { this.submitting = false; return });
   }
 
-  sendNews() {
+  sendNews(): void {
     const values = this.newsManagerForm.value;
-    const news = {
-      title: values.title,
-      body: values.body,
-      imgPath: this.downloadURL
-    };
+    let news = {};
+    if (this.isEditing) {
+      news = {
+        id: this.newsToEdit.id,
+        date: this.newsToEdit.date,
+        title: values.title,
+        body: values.body,
+        imgPath: this.downloadURL ? this.downloadURL : this.newsToEdit.imgPath
+      }
+    } else {
+      news = {
+        title: values.title,
+        body: values.body,
+        imgPath: this.downloadURL
+      }
+    }
     this.newsService.registerNews(news)
       .subscribe((res: any) => {
         this.submitting = false;
@@ -72,14 +107,15 @@ export class NewsAddComponent implements OnInit {
         this.modal.openModal("Sucesso!",
           `A notícia foi publicada. <a href="/news/${res.id}">Clique aqui </a> para visualizá-la.`
           , "success");
+        if(this.isEditing) this.router.navigate(['dashboard/newsmanager']);
       }, err => {
         this.submitting = false;
-        this.modal.openModal("Erro!", "Houve algum erro ao publicar a notícia. Por favor tente novamente.", "fail");
+        this.modal.openModal("Erro!", "Houve algum erro ao publicar a notícia. Por favor tente novamente mais tarde.", "fail");
         console.log(err)
       })
   }
 
-  newsManagerFormBuilder() {
+  newsManagerFormBuilder(): void {
     this.newsManagerForm = this.formBuilder.group({
       title: ['', [Validators.required, whiteSpace, Validators.maxLength(100)]],
       body: ['', [Validators.required, whiteSpace]],
@@ -89,7 +125,7 @@ export class NewsAddComponent implements OnInit {
 
   get f() { return this.newsManagerForm.controls; }
 
-  onChange(event: EventTarget) {
+  onChange(event: EventTarget): boolean {
     let eventObj: MSInputMethodContext = <MSInputMethodContext>event;
     let target: HTMLInputElement = <HTMLInputElement>eventObj.target;
     let files: FileList = target.files;
@@ -97,11 +133,9 @@ export class NewsAddComponent implements OnInit {
 
     if (!this.sharedService.checkIfIsImage(this.file))
       return false;
-
-    //this.retrieveImg();
   }
 
-  retrieveImg() {
+  retrieveImg(): Promise<any> {
     this.inProgress = true;
     let uploadTask = this.fireStorageService.uploadImage(this.file, 'news-images');
 
@@ -119,5 +153,9 @@ export class NewsAddComponent implements OnInit {
           return url;
         });
     });
+  }
+
+  removeMainImg() {
+    this.downloadURL = 'null';
   }
 }

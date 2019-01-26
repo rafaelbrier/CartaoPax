@@ -26,7 +26,8 @@ export class FireStorageService {
         
         this.checkLoginBeforeContinue();
 
-         this.uploadTask = this.storageRef.child(folder + '/' + file.name.split('.')[0] + Math.random().toString().split('.').pop())
+         this.uploadTask = this.storageRef
+         .child(folder + '/' + file.name.split('.')[0] + Math.random().toString().split('.').pop() + '.jpg')
             .put(file, this.fileMetadata);
          let uploadObs = this.uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED);
 
