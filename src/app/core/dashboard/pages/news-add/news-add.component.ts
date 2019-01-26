@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ModalComponent } from '../../../components/utils/modal/modal.component';
 import { FireStorageService } from '../../../services/firebase-storage/fire-storage.service';
 import { SharedService } from 'src/app/core/services/shared-services';
@@ -14,6 +14,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class NewsAddComponent implements OnInit {
 
+  @ViewChild('inputFile') inputFile: ElementRef;
   @ViewChild(ModalComponent) modal: ModalComponent;
 
   file: File;
@@ -66,7 +67,7 @@ export class NewsAddComponent implements OnInit {
     }
     this.submitting = true;
     this.modal.openModal("Publicar Notícia",
-      `Tem certeza que deseja publicar a notícia ${this.isEditing ? `editada de id <b>#${this.newsToEdit.id}</b>` : ''}?`, "normal", true)
+      `Tem certeza que deseja publicar a notícia${this.isEditing ? ` editada de id <b>#${this.newsToEdit.id}</b>` : ''}?`, "normal", true)
       .then(() => {
         if (this.file) {
           this.retrieveImg()
@@ -102,12 +103,11 @@ export class NewsAddComponent implements OnInit {
     }
     this.newsService.registerNews(news)
       .subscribe((res: any) => {
-        this.submitting = false;
-        this.newsManagerForm.reset();
         this.modal.openModal("Sucesso!",
           `A notícia foi publicada. <a href="/news/${res.id}">Clique aqui </a> para visualizá-la.`
           , "success");
         if(this.isEditing) this.router.navigate(['dashboard/newsmanager']);
+        this.submitComplete();
       }, err => {
         this.submitting = false;
         this.modal.openModal("Erro!", "Houve algum erro ao publicar a notícia. Por favor tente novamente mais tarde.", "fail");
@@ -157,5 +157,18 @@ export class NewsAddComponent implements OnInit {
 
   removeMainImg() {
     this.downloadURL = 'null';
+  }
+
+  submitComplete() {
+    this.inProgress = false;
+    this.submitting = false;
+    this.isEditing = false;
+    this.newsManagerForm.reset();
+    this.removeSelectedImg();
+  }
+
+  removeSelectedImg() {
+    this.file = null;
+    this.inputFile.nativeElement.value = '';
   }
 }

@@ -21,15 +21,21 @@
         <div class="form-group">
             <label>
                 Imagem Principal da Notícia
-                <b  target="_blank" *ngIf="isEditing">
+                <b target="_blank" *ngIf="isEditing">
                     <span *ngIf="downloadURL !== 'null'; else noimage">
                         <a href="{{downloadURL}}">-- Imagem Atual --</a>
                         <i class="fas fa-times" (click)="removeMainImg()" ngbTooltip="Remover imagem principal da notícia"></i>
-                    </span>                    
+                    </span>
                     <ng-template #noimage>-- Nenhuma imagem salva na notícia --</ng-template>
                 </b>
             </label>
-            <input type="file" id="avatar" class="form-control" name="avatar" accept="image/png, image/jpeg" (change)="onChange($event)">
+
+            <div class="inner-addon right-addon">
+                <i class="fas fa-times" *ngIf="file" (click)="removeSelectedImg()" ngbTooltip="Remover imagem selecionada"></i>
+                <input #inputFile type="file" class="form-control" name="avatar" accept="image/png, image/jpeg"
+                    (change)="onChange($event)">
+            </div>
+
             <div class="progress" *ngIf="inProgress">
                 <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
                     [attr.aria-valuenow]="progressImg" aria-valuemin="0" aria-valuemax="100" [ngClass]="[progressImg === 100 ? 'bg-success' :'' , uploadError ? 'bg-danger' : '']"
