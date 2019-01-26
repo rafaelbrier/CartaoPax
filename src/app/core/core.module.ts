@@ -25,6 +25,7 @@ import { Error404PageComponent } from './pages/error404-page.component';
 import { NewsPageComponent } from './pages/news-page/news-page.component';
 import { NewsAddComponent } from './dashboard/pages/news-add/news-add.component';
 import { BreadcrumbComponent } from './components/utils/breadcrumb/breadcrumb.component';
+import { NewsCommentsComponent } from './dashboard/pages/news-comments/news-comments.component';
 
 
 
@@ -75,7 +76,8 @@ import { BreadcrumbComponent } from './components/utils/breadcrumb/breadcrumb.co
     ModalComponent,
     ImgLazyComponent,
     NewsAddComponent,
-    BreadcrumbComponent
+    BreadcrumbComponent,
+    NewsCommentsComponent
   ],
   exports: [
     HeaderComponent,

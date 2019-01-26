@@ -71,3 +71,43 @@ tbody td, tbody th {
     font-size: 16px;
     cursor: pointer;
 }
+
+.arrow-down {
+        &::after {
+            content: "";
+            display: inline-block;
+            vertical-align: middle;
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 5px solid #5f6f81;
+            margin-left: 5px;
+        }
+        &::before {
+            content: "";
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            margin-left: 5px;
+        }
+  }
+
+  .arrow-up {
+    &::after {
+        content: "";
+        display: inline-block;
+        vertical-align: middle;
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-bottom: 5px solid #5f6f81;
+        margin-left: 5px;
+    }
+    &::before {
+        content: "";
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        margin-left: 5px;
+    }
+}
