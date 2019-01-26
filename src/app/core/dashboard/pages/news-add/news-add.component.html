@@ -14,7 +14,7 @@
 
         <div class="form-group">
             <label>Corpo da Notícia*</label>
-            <quill-editor formControlName="body" placeholder="Digite a notícia aqui..." class="no-border"></quill-editor>
+            <quill-editor formControlName="body" placeholder="Digite a notícia aqui..."></quill-editor>
             <app-validators [form]="newsManagerForm" [input]="f.body" [inputName]="'Corpo da Notícia'" [validators]="['required']"></app-validators>
         </div>
 

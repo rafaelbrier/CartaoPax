@@ -23,9 +23,9 @@ export class NewsService {
     return this.http.get(myConstants.restBaseUrl + myConstants.newsPath);
   }
 
-  findNewsPageable(page: number, size: number, sort: String, order: String) {
+  findNewsPageable(page: number, size: number, sort: String, order: String, searchTerm: string = '') {
     return this.http.get(
-        `${myConstants.restBaseUrl}${myConstants.newsPath}?page=${page}&size=${size}&sort=${sort},${order}`
+        `${myConstants.restBaseUrl}${myConstants.newsPath}?page=${page}&size=${size}&sort=${sort},${order}&searchTerm=${searchTerm}`
         );
   }
 

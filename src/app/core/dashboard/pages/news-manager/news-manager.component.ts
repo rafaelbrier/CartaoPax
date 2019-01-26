@@ -30,7 +30,7 @@ export class NewsManagerComponent implements OnInit {
   constructor(private newsService: NewsService, private router: Router) { }
 
   ngOnInit() {
-    this.loadNews(this.pages, this.limit, this.orderBy, this.orderAscOrDesc);
+    this.loadNews(this.pages, this.limit, this.orderBy, this.orderAscOrDesc, this.searchValue);
   }
 
   showImage(imgPath: string) {
@@ -50,10 +50,10 @@ export class NewsManagerComponent implements OnInit {
       .subscribe(() => {
         this.modal.closeAll();
         this.modal.openModal("Notícia Deletada", `A notícia de id <b>#${newsId}</b> foi deletada com sucesso.`, "success");
-        this.loadNews(this.pages, this.limit, this.orderBy, this.orderAscOrDesc);
+        this.loadNews(this.pages, this.limit, this.orderBy, this.orderAscOrDesc, this.searchValue);
       }, () => {
         this.modal.closeAll();
-        this.modal.openModal("Erro!", "Houve algum erro ao deletar a notícia. Por favor tente novamente.", "fail");
+        this.modal.openModal("Erro!", "Houve algum erro ao deletar a notícia. Por favor tente novamente mais tarde.", "fail");
       });
 
     }).catch(()=>{return});
@@ -64,31 +64,38 @@ export class NewsManagerComponent implements OnInit {
   }
   
   onSearchChange(searchValue: string) {
-    console.log(searchValue);
+    this.searchValue = searchValue;
+    this.loadNews(this.pages, this.limit, this.orderBy, this.orderAscOrDesc, this.searchValue);
   }
   
   onSelectChange(limitValue: number) {
-    this.loadNews(this.pages, limitValue, this.orderBy, this.orderAscOrDesc);
+    this.limit = limitValue;
+    this.loadNews(this.pages, this.limit, this.orderBy, this.orderAscOrDesc, this.searchValue);
   }
 
   onPageChange(page: number) {
     this.pages = page - 1;
-    this.loadNews(this.pages, this.limit, this.orderBy, this.orderAscOrDesc);
+    this.loadNews(this.pages, this.limit, this.orderBy, this.orderAscOrDesc, this.searchValue);
   }
   
-  loadNews(pages: number, limit: number, orderBy: string, orderAscOrDesc: string) {
+  loadNews(pages: number, limit: number, orderBy: string, orderAscOrDesc: string, searchTerm: string) {
+
     this.isBoxLoading = true;
-    this.newsService.findNewsPageable(pages, limit, orderBy, orderAscOrDesc)
+    this.boxLoadingError = false;
+
+    this.newsService.findNewsPageable(pages, limit, orderBy, orderAscOrDesc, searchTerm)
+
       .subscribe((resData): any => {
         this.newsData = resData;
         this.news = this.newsData.content;
         delete this.newsData.content;
         this.pagNumberOfPages = 10*Math.ceil(this.newsData.totalElements / this.limitValue);
         this.isBoxLoading = false;
-      }, error => {
+
+      }, () => {
         this.isBoxLoading = false;
         this.boxLoadingError = true;
-        console.log(error)
-      })
+      });
+
   }
 }

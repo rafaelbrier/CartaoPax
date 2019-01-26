@@ -106,7 +106,7 @@ export class NewsPageComponent implements OnInit {
           this.modal.openModal("Sucesso!", "Seu comentário foi adicionado.", "success");
         }, err => {
           this.submitting = false;
-          this.modal.openModal("Erro!", "Houve algum erro ao processar seu comentário. Por favor tente novamente.", "fail");
+          this.modal.openModal("Erro!", "Houve algum erro ao processar seu comentário. Por favor tente novamente mais tarde.", "fail");
           console.log(err)
         })
     }
