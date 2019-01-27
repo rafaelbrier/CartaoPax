@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { ModalComponent } from '../../../components/utils/modal/modal.component';
-import { FireStorageService } from '../../../services/firebase-storage/fire-storage.service';
+import { ModalComponent } from '../../../core/components/utils/modal/modal.component';
+import { FireStorageService } from '../../../core/services/firebase-storage/fire-storage.service';
 import { SharedService } from 'src/app/core/services/shared-services';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { whiteSpace } from 'src/app/core/components/utils/validators/custom-validators';
