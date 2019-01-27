@@ -54,6 +54,9 @@ export class NewsAddComponent implements OnInit {
         image: this.newsToEdit.imgPath
       });
       this.downloadURL = this.newsToEdit.imgPath;
+      //Vem do db como "null" e não null, por algum motivo
+      this.downloadURL = this.downloadURL === "null" ? null : this.downloadURL;
+      
     } else {
       this.isEditing = false;
       this.newsToEdit = null;
@@ -92,7 +95,7 @@ export class NewsAddComponent implements OnInit {
         date: this.newsToEdit.date,
         title: values.title,
         body: values.body,
-        imgPath: this.downloadURL ? this.downloadURL : this.newsToEdit.imgPath
+        imgPath: this.downloadURL
       }
     } else {
       news = {
@@ -106,7 +109,7 @@ export class NewsAddComponent implements OnInit {
         this.modal.openModal("Sucesso!",
           `A notícia foi publicada. <a href="/news/${res.id}">Clique aqui </a> para visualizá-la.`
           , "success");
-        if(this.isEditing) this.router.navigate(['dashboard/newsmanager']);
+        if (this.isEditing) this.router.navigate(['dashboard/newsmanager']);
         this.submitComplete();
       }, err => {
         this.submitting = false;

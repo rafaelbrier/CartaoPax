@@ -22,7 +22,7 @@
             <label>
                 Imagem Principal da Notícia
                 <b target="_blank" *ngIf="isEditing">
-                    <span *ngIf="downloadURL !== 'null'; else noimage">
+                    <span *ngIf="downloadURL; else noimage">
                         <a href="{{downloadURL}}">-- Imagem Atual --</a>
                         <i class="fas fa-times" (click)="removeMainImg()" ngbTooltip="Remover imagem principal da notícia"></i>
                     </span>

@@ -18,7 +18,7 @@ export class NewsPageComponent implements OnInit {
   @ViewChild(ModalComponent) modal: ModalComponent;
 
   charMax: number = 280;
-  commentsDefaultLimit: number = 2;
+  commentsDefaultLimit: number = 4;
 
   isLoading: boolean = false;
   loadError: boolean = false;
