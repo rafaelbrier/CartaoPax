@@ -25,12 +25,12 @@
 
         <thead>
             <tr>
-                <th scope="col" class="arrow-down">#</th>
-                <th scope="col" class="arrow-up">Data</th>
-                <th scope="col">Título</th>
-                <th scope="col">Corpo</th>
-                <th scope="col">Imagem</th>
-                <th scope="col">Ações</th>
+                <th id="id" class="mw-px-1" scope="col" (click)="sortBy('id')" appSortTable [sort]="[orderBy,orderAscOrDesc]">#</th>
+                <th id="date" class="mw-px-3" scope="col" (click)="sortBy('date')" appSortTable [sort]="[orderBy,orderAscOrDesc]">Data</th>
+                <th id="title" class="mw-px-3" scope="col" (click)="sortBy('title')" appSortTable [sort]="[orderBy,orderAscOrDesc]">Título</th>
+                <th scope="col" class="mw-px-1">Corpo</th>
+                <th scope="col" class="mw-px-1">Imagem</th>
+                <th scope="col" class="mw-px-2">Ações</th>
             </tr>
         </thead>
 

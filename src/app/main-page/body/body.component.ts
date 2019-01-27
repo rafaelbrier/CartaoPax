@@ -29,6 +29,7 @@ export class BodyComponent implements OnInit {
 
   loadNews(limit: number) {
     this.isBoxLoading = true;
+    this.boxLoadingError = false;
     this.newsService.findNewsPageable(0, limit, "date", "desc")
       .subscribe((resData): any => {
         this.newsData = resData;

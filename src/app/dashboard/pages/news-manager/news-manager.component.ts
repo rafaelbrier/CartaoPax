@@ -59,6 +59,12 @@ export class NewsManagerComponent implements OnInit {
     }).catch(()=>{return});
   }
 
+  sortBy(orderBy: string) {
+    this.orderBy = orderBy;
+    this.orderAscOrDesc = this.orderAscOrDesc === "asc" ? "desc" : "asc";
+    this.loadNews(this.pages, this.limit, this.orderBy, this.orderAscOrDesc, this.searchValue);
+  }
+
   editNews(news: any) {
     this.router.navigate(['dashboard/newsadd', news], { skipLocationChange: true });
   }
@@ -96,6 +102,5 @@ export class NewsManagerComponent implements OnInit {
         this.isBoxLoading = false;
         this.boxLoadingError = true;
       });
-
   }
 }

@@ -1,6 +1,7 @@
 @import '../app.component.scss';
 
 $grayBlue: #5f6f81;
+$menuItemColor: #4D4D4D;
 
 .component-title {
     position: absolute;
@@ -73,6 +74,7 @@ tbody td, tbody th {
 }
 
 .arrow-down {
+    cursor: pointer;
         &::after {
             content: "";
             display: inline-block;
@@ -92,7 +94,8 @@ tbody td, tbody th {
         }
   }
 
-  .arrow-up {
+.arrow-up {
+    cursor: pointer;
     &::after {
         content: "";
         display: inline-block;
@@ -103,6 +106,29 @@ tbody td, tbody th {
         border-right: 5px solid transparent;
         border-bottom: 5px solid #5f6f81;
         margin-left: 5px;
+        margin-bottom: 2px;
+    }
+    &::before {
+        content: "";
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        margin-left: 5px;
+    }
+}
+
+.arrow-right {
+    cursor: pointer;
+    &::after {
+        content: "";
+        display: inline-block;
+        vertical-align: middle;
+        width: 0;
+        height: 0;
+        border-left: 5px solid #5f6f81;
+        border-top: 5px solid transparent;
+        border-bottom: 5px solid transparent;
+        margin-left: 5px;
+        margin-bottom: 2px;
     }
     &::before {
         content: "";

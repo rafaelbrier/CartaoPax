@@ -13,6 +13,7 @@ import { ErrorLoadComponent } from './components/utils/error-load/error-load.com
 import { ImgLazyComponent } from './components/utils/img-lazy/img-lazy.component';
 import { ModalComponent } from './components/utils/modal/modal.component';
 import { ValidatorsComponent } from './components/utils/validators/validators.component';
+import { SortTableDirective } from './directive/sort-table.directive';
 
 @NgModule({
   imports: [
@@ -34,7 +35,8 @@ import { ValidatorsComponent } from './components/utils/validators/validators.co
     ErrorLoadComponent,
     ImgLazyComponent,
     ModalComponent,
-    ValidatorsComponent
+    ValidatorsComponent,
+    SortTableDirective
   ],
 
   exports: [
@@ -46,6 +48,9 @@ import { ValidatorsComponent } from './components/utils/validators/validators.co
     ImgLazyComponent,
     ModalComponent,
     ValidatorsComponent,
+
+    //Exported Directives
+    SortTableDirective,
 
     //Exported Modules
     NgbModule,

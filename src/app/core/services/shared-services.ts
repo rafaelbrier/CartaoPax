@@ -27,16 +27,19 @@ export class SharedService {
     }
 
     textOverFlow(text: string, maxNumberOfChar: number, maxNumberOfLines: number): { text: string, overflow: boolean } {
-        if (maxNumberOfLines) {
-            let stringSepByLine = text.split(/\n/);
+        let stringSepByLine = text.split(/\n/);
+
+        if (maxNumberOfLines && stringSepByLine.length >= maxNumberOfLines) {
             stringSepByLine[maxNumberOfLines - 1] = stringSepByLine[maxNumberOfLines - 1] + " ...";
             let slicedString = stringSepByLine.slice(0, maxNumberOfLines);
             text = slicedString.join('\n');
         }
+
         if (maxNumberOfChar && text.length > maxNumberOfChar) {
             text = text.substr(0, maxNumberOfChar) + " ...";
-        }        
-        if (maxNumberOfChar || maxNumberOfLines) {
+        }
+
+        if (stringSepByLine.length >= maxNumberOfLines || text.length > maxNumberOfChar) {
             return { text: text, overflow: true };
         } else {
             return { text: text, overflow: false };

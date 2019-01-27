@@ -156,7 +156,7 @@ export class NewsAddComponent implements OnInit {
   }
 
   removeMainImg() {
-    this.downloadURL = 'null';
+    this.downloadURL = null;
   }
 
   submitComplete() {
