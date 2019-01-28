@@ -81,22 +81,30 @@
   <div id="collapseLogin" [ngbCollapse]="!isLoginCollapsed">
       <div class="card" id="card">
         <div class="card-body">
-            <form>
+          
+            <form [formGroup]="loginForm" (ngSubmit)="submitLoginForm()">
+
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Email</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">
+                  <label for="exampleInputEmail1">Usuário</label>
+                  <input formControlName="username" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="Usuário" placeholder="Email">
+                  <app-validators [form]="loginForm" [input]="f.username" [inputName]="'usuário'" [validators]="['required']"></app-validators>
                 </div>
+
                 <div class="form-group">
                   <label for="exampleInputPassword1">Senha</label>
                   <div class="inner-addon right-addon">
                       <i class="fas fa-eye" (click)="showPassword = !showPassword" *ngIf="!showPassword" ></i>
                       <i class="fas fa-eye-slash" (click)="showPassword = !showPassword" *ngIf="showPassword"></i>
-                      <input type="password" class="form-control" placeholder="Senha"
+                      <input type="password" formControlName="password" class="form-control" placeholder="Senha"
                       [attr.type]="showPassword ? 'text' : 'password'"/>
                     </div>
-                </div>                
-                <button type="submit" class="btn btn-success">Submit</button>                
-                <button class="btn btn-info" (click)="navigateToDashboard()"><i class="fas fa-key"></i>Esqueci a Senha</button>
+                    <app-validators [form]="loginForm" [input]="f.password" [inputName]="'senha'" [validators]="['required']"></app-validators>
+                </div>     
+
+                <p class="alert alert-danger" *ngIf="loginError">Usuário ou Senha inválidos.</p>
+                <button type="submit" class="btn btn-success" [disabled]="submitting">Submit</button>                
+                <button class="btn btn-info" (click)="navigateToDashboard()" [disabled]="submitting"><i class="fas fa-key"></i>Esqueci a Senha</button>
+
               </form>
         </div>
       </div>

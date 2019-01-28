@@ -1,12 +1,12 @@
 <div *ngIf="input.invalid && input.touched" class="invalid-feedback">
     <div *ngIf="required">
-        <p *ngIf="input.errors.whiteSpace; else isRequired">O {{inputName}} não pode começar com espaço.</p>
+        <p *ngIf="input.errors.whiteSpace; else isRequired">O campo {{inputName}} não pode começar com espaço.</p>
         <ng-template #isRequired>
-            <p *ngIf="input.errors.required" >O {{inputName}} é obrigatório.</p>
+            <p *ngIf="input.errors.required">O campo {{inputName}} é obrigatório.</p>
         </ng-template> 
     </div>
-    <div *ngIf="email"><p *ngIf="input.errors.email">O {{inputName}} é inválido.</p></div>
-    <div *ngIf="maxLength"><p *ngIf="input.errors.maxlength">O {{inputName}} deve ter no máximo {{maxLengthNum}} {{maxLengthNum === 1 ? caractere : caracteres}}.</p></div>
-    <div *ngIf="minLength"><p *ngIf="input.errors.minlength">O {{inputName}} deve ter no mínimo {{minLengthNum}} {{minLength === 1 ? caractere : caracteres}}.</p></div>
+    <div *ngIf="email"><p *ngIf="input.errors.email">O campo {{inputName}} é inválido.</p></div>
+    <div *ngIf="maxLength"><p *ngIf="input.errors.maxlength">O campo{{inputName}} deve ter no máximo {{maxLengthNum}} {{maxLengthNum === 1 ? caractere : caracteres}}.</p></div>
+    <div *ngIf="minLength"><p *ngIf="input.errors.minlength">O campo {{inputName}} deve ter no mínimo {{minLengthNum}} {{minLength === 1 ? caractere : caracteres}}.</p></div>
 
  </div>

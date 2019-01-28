@@ -1,5 +1,9 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { whiteSpace } from 'src/app/core/components/utils/validators/custom-validators';
+import { SharedService } from 'src/app/core/services/shared-services';
+import { LoginService } from 'src/app/core/services/login-service';
 
 @Component({
   selector: 'app-header',
@@ -15,14 +19,58 @@ export class HeaderComponent implements OnInit {
 
   phoneElement: HTMLElement;
 
-  constructor(private router: Router) {
+  // Login
+  loginForm: FormGroup;
+  submitting: boolean = false;
+  loginError: boolean = false;
+
+  constructor(private router: Router,
+    private formBuilder: FormBuilder,
+    private sharedService: SharedService,
+    private loginService: LoginService) {
     this.isNavBarCollapsed = true;
   }
 
-  ngOnInit(): void {   
-    if(window.innerWidth < 1350)
-    document.getElementById("telephone").remove();
+  ngOnInit(): void {
+    if (window.innerWidth < 1350)
+      document.getElementById("telephone").remove();
+
+    this.loginFormBuilder();
   }
+
+  submitLoginForm(): void {
+    this.sharedService.triggerValidation(this.loginForm);
+    if (this.loginForm.invalid) {
+      return;
+    }
+
+    this.submitting = true;
+    this.loginError = false;
+
+    const values = this.loginForm.value;
+    const loginData = {
+      username: values.username,
+      password: values.password
+    };
+
+    this.loginService.login(loginData)
+    .subscribe(() => {
+      this.submitting = false;
+      this.loginError = false;
+    }, () => {
+      this.submitting = false;
+      this.loginError = true;
+    })
+  }
+
+  loginFormBuilder(): void {
+    this.loginForm = this.formBuilder.group({
+      username: ['', [Validators.required, whiteSpace]],
+      password: ['', [Validators.required, whiteSpace]]
+    });
+  }
+
+  get f() { return this.loginForm.controls; }
 
   navigateToDashboard(): void {
     this.router.navigate(['/dashboard']);

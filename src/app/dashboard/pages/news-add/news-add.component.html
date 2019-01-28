@@ -9,13 +9,13 @@
             <label>Título da Notícia*</label>
             <input formControlName="title" type="text" class="form-control" placeholder="Mensagem">
             <!-- Validador Comentário  -->
-            <app-validators [form]="newsManagerForm" [input]="f.title" [inputName]="'Título da Notícia'" [validators]="['required','maxlength', 100]"></app-validators>
+            <app-validators [form]="newsManagerForm" [input]="f.title" [inputName]="'título da notícia'" [validators]="['required','maxlength', 100]"></app-validators>
         </div>
 
         <div class="form-group">
             <label>Corpo da Notícia*</label>
             <quill-editor formControlName="body" placeholder="Digite a notícia aqui..."></quill-editor>
-            <app-validators [form]="newsManagerForm" [input]="f.body" [inputName]="'Corpo da Notícia'" [validators]="['required']"></app-validators>
+            <app-validators [form]="newsManagerForm" [input]="f.body" [inputName]="'corpo da notícia'" [validators]="['required']"></app-validators>
         </div>
 
         <div class="form-group">
