@@ -1,5 +1,6 @@
-import { Component, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UsersService } from 'src/app/core/services/users-service';
 
 
 @Component({
@@ -12,7 +13,8 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   sideBarOpened: boolean;
   isMobile: boolean;
 
-  constructor(private router: Router, private cdRef: ChangeDetectorRef) {
+  constructor(private router: Router, private cdRef: ChangeDetectorRef,
+              private usersService: UsersService) {
   }
 
   ngOnInit() {
@@ -43,7 +45,11 @@ export class SidebarComponent implements OnInit, AfterViewInit {
       this.isMobile = true;
   }
 
-  logOut() {
-    this.router.navigate(['/']);
+  logout() {
+    this.usersService.logout();
+  }
+
+  goToHome() {
+    this.router.navigate(["/"]);
   }
 }

@@ -11,18 +11,43 @@ import { AuthGuard } from './_guard/auth.guard';
 
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },  
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: BodyComponent, data: { breadcrumb: "Home" } },
-  { path: 'news', component: NewsPageComponent,  data: { breadcrumb: "Notícias" } },
-  { path: 'news/:id', component: NewsPageComponent,  data: { breadcrumb: "Notícias" } },
-  { 
+  { path: 'news', component: NewsPageComponent, data: { breadcrumb: "Notícias" } },
+  { path: 'news/:id', component: NewsPageComponent, data: { breadcrumb: "Notícias" } },
+  {
     path: 'dashboard',
     component: MainPageComponent,
+    canActivate: [AuthGuard],
     children: [
-      { path: 'newsadd', component: NewsAddComponent,  canActivate: [AuthGuard], data: { breadcrumb: "Adicionar Notícia" } },
-      { path: 'newsmanager', component: NewsManagerComponent, canActivate: [AuthGuard],  data: { breadcrumb: "Gerenciar Notícias" } },
-      { path: 'usersadd', component: UsersAddComponent, canActivate: [AuthGuard],  data: { breadcrumb: "Adicionar Usuário" } },
-          ]
+      {
+        path: 'newsadd',
+        component: NewsAddComponent,
+        canActivate: [AuthGuard],
+        data: {
+          breadcrumb: "Adicionar Notícia",
+          expectedRole: 'ADMIN'
+        }
+      },
+      {
+        path: 'newsmanager',
+        component: NewsManagerComponent,
+        canActivate: [AuthGuard],
+        data: {
+          breadcrumb: "Gerenciar Notícias",
+          expectedRole: 'ADMIN'
+        }
+      },
+      {
+        path: 'usersadd',
+        component: UsersAddComponent,
+        canActivate: [AuthGuard],
+        data: {
+          breadcrumb: "Adicionar Usuário",
+          expectedRole: 'ADMIN'
+        }
+      },
+    ]
   },
   { path: '404', component: Error404PageComponent },
   { path: '**', redirectTo: '404' }

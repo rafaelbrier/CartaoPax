@@ -1,11 +1,11 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { ModalComponent } from '../../../core/components/utils/modal/modal.component';
-import { FireStorageService } from '../../../core/services/firebase-storage/fire-storage.service';
-import { SharedService } from 'src/app/core/services/shared-services';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { whiteSpace } from 'src/app/core/components/utils/validators/custom-validators';
 import { NewsService } from 'src/app/core/services/news.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { SharedService } from 'src/app/core/services/shared-services';
+import { ModalComponent } from '../../../core/components/utils/modal/modal.component';
+import { FireStorageService } from '../../../core/services/firebase-storage/fire-storage.service';
 
 @Component({
   selector: 'app-news-add',

@@ -4,6 +4,7 @@ import { myConstants } from './constants';
 import { TokenService } from './token-service';
 import { SharedService } from './shared-services';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 export class User {
   cpf: string;
@@ -20,11 +21,12 @@ export class UsersService {
 
   constructor(private http: HttpClient,
     private tokenService: TokenService,
-    private sharedService: SharedService) {
+    private sharedService: SharedService,
+    private router: Router) {
 
     this.currentUserSubject = new BehaviorSubject<User>(
-      this.getUser() ? {cpf: this.getUser(), Expires_At: this.getExpiration()} : null
-      );
+      this.getUser() ? { cpf: this.getUser(), Expires_At: this.getExpiration() } : null
+    );
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
@@ -33,7 +35,7 @@ export class UsersService {
   }
 
   private setCurrentUserValue(data: User): void {
-      this.currentUserSubject.next(data);
+    this.currentUserSubject.next(data);
   }
 
   signUp(data: any) {
@@ -69,7 +71,8 @@ export class UsersService {
   logout() {
     localStorage.removeItem("Authentication");
     localStorage.removeItem("Expires_At");
-    location.reload(true);
+    this.unsetCurrentUser();
+    this.router.navigate(['home']);
   }
 
   getExpiration() {
@@ -97,27 +100,66 @@ export class UsersService {
     return localStorage.getItem("Authentication");
   }
 
+  private getTokenPayload() {
+    return this.tokenService.decodeToken(this.getToken());
+  }
+
   public getUser() {
-      const userCpf = this.tokenService.decodeToken(this.getToken());
-      if (userCpf) {
-        return userCpf.cpf;
-      } else {
-        return null;
+    const payload = this.getTokenPayload();
+    if (payload) {
+      return payload.cpf;
+    } else {
+      return null;
+    }
+  }
+
+  public havePermission(Role: String) {
+    let userRole = this.getRole();
+
+    if (userRole) {
+      switch (userRole) {
+        case "ADMIN":
+          return true;
+        case "EMPLOYEE":
+          return Role === "ADMIN" ? false : true;
+        case "CLIENT":
+          return Role === "ADMIN" || Role === "EMPLOYEE" ? false : true;
+        default:
+          return false;
       }
+    } else {
+      return false;
+    }
+
   }
 
   public getRole() {
-    const role = this.tokenService.decodeToken(this.getToken());
-      if (role) {
-        return role.role;
-      } else {
-        return null;
-      }
+    const payload = this.getTokenPayload();
+    if (payload) {
+      return payload.role;
+    } else {
+      return null;
+    }
   }
 
-  setCurrentUser() {
-    if(!this.currentUserValue) {
-      this.setCurrentUserValue(this.getUser() ? {cpf: this.getUser(), Expires_At: this.getExpiration()} : null);
+  public getName() {
+    const payload = this.getTokenPayload();
+    if (payload) {
+      return payload.role;
+    } else {
+      return null;
+    }
+  }
+
+  private setCurrentUser() {
+    if (!this.currentUserValue) {
+      this.setCurrentUserValue(this.getUser() ? { cpf: this.getUser(), Expires_At: this.getExpiration() } : null);
+    }
+  }
+
+  private unsetCurrentUser() {
+    if (this.currentUserValue) {
+      this.setCurrentUserValue(null);
     }
   }
 

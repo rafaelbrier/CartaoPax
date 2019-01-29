@@ -27,6 +27,7 @@ export class HeaderComponent implements OnInit {
   loginForm: FormGroup;
   submitting: boolean = false;
   loginError: boolean = false;
+  unknownError: boolean = false;
 
   constructor(private router: Router,
     private formBuilder: FormBuilder,
@@ -42,7 +43,6 @@ export class HeaderComponent implements OnInit {
     this.userSubscription = this.usersService.currentUser.subscribe(u => {
       this.isAnyUserLogged = u ? true : false;
     });
-
     this.loginFormBuilder();
   }
 
@@ -57,6 +57,7 @@ export class HeaderComponent implements OnInit {
     }
 
     this.submitting = true;
+    this.unknownError = false;
     this.loginError = false;
 
     const values = this.loginForm.value;
@@ -66,13 +67,18 @@ export class HeaderComponent implements OnInit {
     };
 
     this.usersService.login(loginData)
-      .subscribe(() => {
+      .subscribe((res) => {
         this.submitting = false;
         this.loginError = false;
-        this.router.navigate(["dashboard"]);
-      }, () => {
+        this.navigateToDashboard(true);
+      }, (err) => {
+        if(err.status != 401)
+        {
+          this.unknownError = true;
+        } else {
+          this.loginError = true;
+        }
         this.submitting = false;
-        this.loginError = true;
       })
   }
 
@@ -85,8 +91,9 @@ export class HeaderComponent implements OnInit {
 
   get f() { return this.loginForm.controls; }
 
-  navigateToDashboard(): void {
-    this.router.navigate(['/dashboard']);
+  navigateToDashboard(logInNow: boolean): void {
+    logInNow ? location.href = '/dashboard/' :
+               this.router.navigate(['/dashboard']);
   }
 
   logout() {

@@ -77,7 +77,8 @@
     <button type="button" class="btn btn-success" (click)="isLoginCollapsed = !isLoginCollapsed" *ngIf="!isAnyUserLogged; else SignOutButton"
       [attr.aria-expanded]="!isLoginCollapsed" aria-controls="collapseLogin"><i class="fas fa-user"></i>Fazer Login</button>
     <ng-template #SignOutButton>
-      <button type="button" class="btn btn-success" (click)="logout()"><i class="fas fa-sign-out-alt"></i>Deslogar</button>
+      <button type="button" class="btn btn-info" (click)="navigateToDashboard()"><i class="fab fa-artstation"></i>Área do Cliente</button>
+      <button type="button" class="btn btn-dark" (click)="logout()"><i class="fas fa-sign-out-alt"></i></button>
     </ng-template>
   </div>
 
@@ -104,8 +105,9 @@
             <app-validators [form]="loginForm" [input]="f.password" [inputName]="'senha'" [validators]="['required']"></app-validators>
           </div>
 
+          <p class="alert alert-danger" *ngIf="unknownError">Usuário ou Senha inválidos.</p>
           <p class="alert alert-danger" *ngIf="loginError">Usuário ou Senha inválidos.</p>
-          <button type="submit" class="btn btn-success" [disabled]="submitting">Submit</button>
+          <button type="submit" class="btn btn-success" [disabled]="submitting">Entrar</button>
           <button class="btn btn-info" (click)="navigateToDashboard()" [disabled]="submitting"><i class="fas fa-key"></i>Esqueci
             a Senha</button>
 
