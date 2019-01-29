@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { whiteSpace } from 'src/app/core/components/utils/validators/custom-validators';
 import { SharedService } from 'src/app/core/services/shared-services';
 import { UsersService } from 'src/app/core/services/users-service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -11,6 +12,9 @@ import { UsersService } from 'src/app/core/services/users-service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+
+  isAnyUserLogged: boolean = false;
+  userSubscription: Subscription;
 
   isNavBarCollapsed: boolean;
   showPassword: boolean = false;
@@ -35,7 +39,15 @@ export class HeaderComponent implements OnInit {
     if (window.innerWidth < 1350)
       document.getElementById("telephone").remove();
 
+    this.userSubscription = this.usersService.currentUser.subscribe(u => {
+      this.isAnyUserLogged = u ? true : false;
+    });
+
     this.loginFormBuilder();
+  }
+
+  ngOnDestroy() {
+    this.userSubscription.unsubscribe();
   }
 
   submitLoginForm(): void {
@@ -54,13 +66,14 @@ export class HeaderComponent implements OnInit {
     };
 
     this.usersService.login(loginData)
-    .subscribe(() => {
-      this.submitting = false;
-      this.loginError = false;
-    }, () => {
-      this.submitting = false;
-      this.loginError = true;
-    })
+      .subscribe(() => {
+        this.submitting = false;
+        this.loginError = false;
+        this.router.navigate(["dashboard"]);
+      }, () => {
+        this.submitting = false;
+        this.loginError = true;
+      })
   }
 
   loginFormBuilder(): void {
@@ -74,6 +87,10 @@ export class HeaderComponent implements OnInit {
 
   navigateToDashboard(): void {
     this.router.navigate(['/dashboard']);
+  }
+
+  logout() {
+    this.usersService.logout();
   }
 
   @HostListener('window:scroll')

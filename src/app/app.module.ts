@@ -9,6 +9,9 @@ import { fireBaseConfig } from './core/services/firebase-storage/config';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { MainPageModule } from './main-page/mainpage.module';
 import { Error404PageComponent } from './main-page/pages/error404-page.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from './_guard/jwt.interceptor';
+import { ErrorInterceptor } from './_guard/error.interceptor';
 
 firebase.initializeApp(fireBaseConfig);
 
@@ -26,7 +29,10 @@ firebase.initializeApp(fireBaseConfig);
     AppRoutingModule
   ],
   exports: [],  
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
   entryComponents: []
 })

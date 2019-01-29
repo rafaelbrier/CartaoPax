@@ -7,20 +7,21 @@ import { MainPageComponent } from './dashboard/main-page/main-page.component';
 import { NewsManagerComponent } from './dashboard/pages/news-manager/news-manager.component';
 import { NewsAddComponent } from './dashboard/pages/news-add/news-add.component';
 import { UsersAddComponent } from './dashboard/pages/users-add/users-add.component';
+import { AuthGuard } from './_guard/auth.guard';
 
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },  
-  { path: 'home', component: BodyComponent,  data: { breadcrumb: "Home" } },
+  { path: 'home', component: BodyComponent, data: { breadcrumb: "Home" } },
   { path: 'news', component: NewsPageComponent,  data: { breadcrumb: "Notícias" } },
   { path: 'news/:id', component: NewsPageComponent,  data: { breadcrumb: "Notícias" } },
   { 
     path: 'dashboard',
     component: MainPageComponent,
     children: [
-      { path: 'newsadd', component: NewsAddComponent,  data: { breadcrumb: "Adicionar Notícia" } },
-      { path: 'newsmanager', component: NewsManagerComponent,  data: { breadcrumb: "Gerenciar Notícias" } },
-      { path: 'usersadd', component: UsersAddComponent,  data: { breadcrumb: "Adicionar Usuário" } },
+      { path: 'newsadd', component: NewsAddComponent,  canActivate: [AuthGuard], data: { breadcrumb: "Adicionar Notícia" } },
+      { path: 'newsmanager', component: NewsManagerComponent, canActivate: [AuthGuard],  data: { breadcrumb: "Gerenciar Notícias" } },
+      { path: 'usersadd', component: UsersAddComponent, canActivate: [AuthGuard],  data: { breadcrumb: "Adicionar Usuário" } },
           ]
   },
   { path: '404', component: Error404PageComponent },

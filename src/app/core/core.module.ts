@@ -14,6 +14,7 @@ import { ImgLazyComponent } from './components/utils/img-lazy/img-lazy.component
 import { ModalComponent } from './components/utils/modal/modal.component';
 import { ValidatorsComponent } from './components/utils/validators/validators.component';
 import { SortTableDirective } from './directive/sort-table.directive';
+import { TokenService } from './services/token-service';
 
 @NgModule({
   imports: [
@@ -64,7 +65,7 @@ import { SortTableDirective } from './directive/sort-table.directive';
     NgbModalModule
   ],
 
-  providers: [NgbActiveModal],
+  providers: [NgbActiveModal, TokenService],
   entryComponents: [ModalComponent],
 })
 export class CoreModule {

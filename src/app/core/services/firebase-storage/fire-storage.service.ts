@@ -3,6 +3,7 @@ import * as firebase from 'firebase/app';
 import 'firebase/storage';
 import 'firebase/auth';
 import { fireBaseConfig, loginEmail } from './config';
+import { UsersService } from '../users-service';
 
 @Injectable({
     providedIn: 'root'
@@ -17,34 +18,36 @@ export class FireStorageService {
 
     token: string;
 
-    constructor() {
+    constructor(private usersService: UsersService) {
         this.storageRef = firebase.storage().ref();
         this.token = fireBaseConfig.apiKey.split('-').pop();
     }
 
     uploadImage(file: File, folder: string) {
-        
+
         this.checkLoginBeforeContinue();
 
-         this.uploadTask = this.storageRef
-         .child(folder + '/' + file.name.split('.')[0] + Math.random().toString().split('.').pop() + '.jpg')
+        this.uploadTask = this.storageRef
+            .child(folder + '/' + file.name.split('.')[0] + Math.random().toString().split('.').pop() + '.jpg')
             .put(file, this.fileMetadata);
-         let uploadObs = this.uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED);
+        let uploadObs = this.uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED);
 
-         return { uploadTask: this.uploadTask, uploadObs: uploadObs };       
+        return { uploadTask: this.uploadTask, uploadObs: uploadObs };
     }
 
     checkLoginBeforeContinue() {
-        firebase.auth().onAuthStateChanged((user: firebase.User) => {
-            if (user) {
-                return;
-            } else {
-                firebase.auth().signInWithEmailAndPassword(loginEmail, this.token)
-                    .catch((err) => {
-                        console.log(err);
-                    });
-                return;
-            }
-        });
+        if (this.usersService.getRole() === "ADMIN") {
+            firebase.auth().onAuthStateChanged((user: firebase.User) => {
+                if (user) {
+                    return;
+                } else {
+                    firebase.auth().signInWithEmailAndPassword(loginEmail, this.token)
+                        .catch((err) => {
+                            console.log(err);
+                        });
+                    return;
+                }
+            });
+        }
     }
 }

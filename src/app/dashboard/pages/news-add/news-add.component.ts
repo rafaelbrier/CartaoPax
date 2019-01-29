@@ -114,7 +114,6 @@ export class NewsAddComponent implements OnInit {
       }, err => {
         this.submitting = false;
         this.modal.openModal("Erro!", "Houve algum erro ao publicar a notícia. Por favor tente novamente mais tarde.", "fail");
-        console.log(err)
       })
   }
 

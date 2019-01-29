@@ -40,7 +40,6 @@ export class BodyComponent implements OnInit {
       }, error => {
         this.isBoxLoading = false;
         this.boxLoadingError = true;
-        console.log(error)
       })
   }
 
