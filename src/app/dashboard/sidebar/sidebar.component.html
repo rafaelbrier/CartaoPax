@@ -33,6 +33,27 @@
 
       <ul>
 
+         <!-- with submenu -->
+         <div class="sub-menu">
+            <li class="menu-item ripple sub-menu-toggler" [ngClass]="sideBarOpened ? '' : 'icon-only'">
+              <img src="../../../../assets/images/icons/user.svg" alt="MENU">
+              <a>Usuários</a>
+              <div class="arrow">&#9654;</div>
+            </li>
+  
+            <div class="sub-menu-content">
+              <li class="menu-item ripple sub-item" [ngClass]="sideBarOpened ? '' : 'icon-only'" [routerLink]="['./usersadd']">
+                <img src="../../../../assets/images/icons/add.svg" alt="MENU">
+                <a>Adicionar</a>
+              </li>
+              <li class="menu-item ripple sub-item" [ngClass]="sideBarOpened ? '' : 'icon-only'" [routerLink]="['./newsmanager']">
+                <img src="../../../../assets/images/icons/edit.svg" alt="MENU">
+                <a>Gerenciar</a>
+              </li>
+            </div>
+          </div>
+          <!-- with submenu -->
+
         <!-- with submenu -->
         <div class="sub-menu">
           <li class="menu-item ripple sub-menu-toggler" [ngClass]="sideBarOpened ? '' : 'icon-only'">
@@ -48,32 +69,13 @@
             </li>
             <li class="menu-item ripple sub-item" [ngClass]="sideBarOpened ? '' : 'icon-only'" [routerLink]="['./newsmanager']">
               <img src="../../../../assets/images/icons/edit.svg" alt="MENU">
-              <a>Editar</a>
+              <a>Gerenciar</a>
             </li>
           </div>
         </div>
         <!-- with submenu -->
 
-        <!-- with submenu -->
-        <div class="sub-menu">
-          <li class="menu-item ripple sub-menu-toggler" [ngClass]="sideBarOpened ? '' : 'icon-only'">
-            <img src="../../../../assets/images/icons/gear.svg" alt="MENU">
-            <a>Menu 2</a>
-            <div class="arrow">&#9654;</div>
-          </li>
-
-          <div class="sub-menu-content">
-            <li class="menu-item ripple sub-item" [ngClass]="sideBarOpened ? '' : 'icon-only'" [routerLink]="['./newsmanager']">
-              <img src="../../../../assets/images/icons/gear.svg" alt="MENU">
-              <a>Sub Menu 1</a>
-            </li>
-            <li class="menu-item ripple sub-item" [ngClass]="sideBarOpened ? '' : 'icon-only'" [routerLink]="['./newsmanager']">
-              <img src="../../../../assets/images/icons/gear.svg" alt="MENU">
-              <a>Sub Menu 2</a>
-            </li>
-          </div>
-        </div>
-        <!-- with submenu -->
+       
 
 
         <li class="menu-item ripple" [ngClass]="sideBarOpened ? '' : 'icon-only'" [routerLink]="['./newsmanager']">

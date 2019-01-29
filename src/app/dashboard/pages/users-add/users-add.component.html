@@ -1,0 +1,80 @@
+<div class="component-title">
+    {{isEditing ? 'Editar' : 'Adicionar'}} Usuário <b>{{isEditing ? [' - #' + usersToEdit?.id] : ''}}</b>
+</div>
+
+<div class="form-container">
+    <form class="news-manager-form" [formGroup]="usersAddForm" (ngSubmit)="submitUserForm()">
+
+        <div class="form-group">
+            <label>Nome Completo*</label>
+            <input formControlName="name" type="text" class="form-control" placeholder="Nome Completo">
+            <!-- Validador Comentário  -->
+            <app-validators [form]="usersAddForm" [input]="f.name" [inputName]="'nome completo'" [validators]="['required','maxlength', 100]"></app-validators>
+        </div>
+
+        <div class="col-sm-4 d-flex">
+            <label>CPF*</label>
+            <input formControlName="cpf" type="text" class="form-control" placeholder="XXX.XXX.XXX-XX">
+            <!-- Validador Comentário  -->
+            <app-validators [form]="usersAddForm" [input]="f.cpf" [inputName]="'cpf'" [validators]="['required']"></app-validators>
+        </div>
+
+        <div class="col-sm-4 d-flex">
+            <label>Sexo*</label>
+            <select class="custom-select" formControlName="sex" >
+                <option *ngFor="let sexOption of sexOptions" [value]="sexOption?.value">{{sexOption?.info}}</option>
+            </select>
+        </div>
+
+        <div class="col-sm-4 d-flex">
+            <label>Data de Nascimento*</label>
+            <input formControlName="birthDate" type="text" class="form-control" placeholder="DD/MM/YYYY">
+            <!-- Validador Comentário  -->
+            <app-validators [form]="usersAddForm" [input]="f.birthDate" [inputName]="'data de nascimento'" [validators]="['required']"></app-validators>
+        </div>
+
+        <div class="col-sm-4 d-flex">
+                <label>Tipo de Conta*</label>
+                <select class="custom-select" formControlName="role">
+                    <option *ngFor="let roleOption of roleOptions" [value]="roleOption.value">{{roleOption?.info}}</option>
+                </select>
+            </div>
+
+
+        <div class="form-group">
+            <label>
+                Imagem de Perfil
+                <b target="_blank" *ngIf="isEditing">
+                    <span *ngIf="downloadURL; else noimage">
+                        <a href="{{downloadURL}}">-- Imagem Atual --</a>
+                        <i class="fas fa-times" (click)="removeMainImg()" ngbTooltip="Remover imagem de perfil"></i>
+                    </span>
+                    <ng-template #noimage>-- Nenhuma imagem salva na notícia --</ng-template>
+                </b>
+            </label>
+
+            <div class="inner-addon right-addon">
+                <i class="fas fa-times" *ngIf="file" (click)="removeSelectedImg()" ngbTooltip="Remover imagem selecionada"></i>
+                <input #inputFile type="file" class="form-control" name="usersAvatar" accept="image/png, image/jpeg"
+                    (change)="onChange($event)">
+            </div>
+
+            <div class="progress" *ngIf="inProgress">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                    [attr.aria-valuenow]="progressImg" aria-valuemin="0" aria-valuemax="100" [ngClass]="[progressImg === 100 ? 'bg-success' :'' , uploadError ? 'bg-danger' : '']"
+                    [ngStyle]="{'width': progressImg + '%'}">
+                    {{progressImg}}%
+                </div>
+            </div>
+        </div>
+
+        <div class="form-end">
+            <span>Os campos com * são obrigatórios.</span>
+            <button type="submit" class="btn btn-success" [disabled]="submitting">Cadastrar Usuário</button>
+            <!-- <button type="reset" class="btn btn-info" [disabled]="submitting">Limpar Campos</button> -->
+        </div>
+
+    </form>
+</div>
+<!-- Modal -->
+<app-modal hidden="true"></app-modal>

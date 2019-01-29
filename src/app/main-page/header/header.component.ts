@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { whiteSpace } from 'src/app/core/components/utils/validators/custom-validators';
 import { SharedService } from 'src/app/core/services/shared-services';
-import { LoginService } from 'src/app/core/services/login-service';
+import { UsersService } from 'src/app/core/services/users-service';
 
 @Component({
   selector: 'app-header',
@@ -27,7 +27,7 @@ export class HeaderComponent implements OnInit {
   constructor(private router: Router,
     private formBuilder: FormBuilder,
     private sharedService: SharedService,
-    private loginService: LoginService) {
+    private usersService: UsersService) {
     this.isNavBarCollapsed = true;
   }
 
@@ -53,7 +53,7 @@ export class HeaderComponent implements OnInit {
       password: values.password
     };
 
-    this.loginService.login(loginData)
+    this.usersService.login(loginData)
     .subscribe(() => {
       this.submitting = false;
       this.loginError = false;

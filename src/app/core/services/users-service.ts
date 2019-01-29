@@ -6,9 +6,20 @@ import { myConstants } from './constants';
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class UsersService {
 
   constructor(private http: HttpClient) { }
+
+
+  signUp(data: any) {
+    let httpPost = this.http.post(myConstants.restBaseUrl + myConstants.signUpPath, {
+      name: data.name,
+      sex: data.sex,
+      cpf: data.cpf,
+      birthDate: data.birthDate,
+      roles: {role: data.role}
+    }).subscribe(res => {console.log("res",res), err => console.log("err",err)}) 
+  }
 
   login(data: any) {
 
@@ -25,6 +36,7 @@ export class LoginService {
   }
 
   private setSession(token: any) {
+    // localStorage.setItem('Authentication', token.Authorization);
     localStorage.setItem('Authentication', token.Authorization.split("Bearer ").pop());
     localStorage.setItem("Expires_At", token.expirationTime);
   }

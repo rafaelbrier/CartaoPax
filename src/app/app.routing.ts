@@ -6,6 +6,7 @@ import { Error404PageComponent } from './main-page/pages/error404-page.component
 import { MainPageComponent } from './dashboard/main-page/main-page.component';
 import { NewsManagerComponent } from './dashboard/pages/news-manager/news-manager.component';
 import { NewsAddComponent } from './dashboard/pages/news-add/news-add.component';
+import { UsersAddComponent } from './dashboard/pages/users-add/users-add.component';
 
 
 export const routes: Routes = [
@@ -19,7 +20,8 @@ export const routes: Routes = [
     children: [
       { path: 'newsadd', component: NewsAddComponent,  data: { breadcrumb: "Adicionar Notícia" } },
       { path: 'newsmanager', component: NewsManagerComponent,  data: { breadcrumb: "Gerenciar Notícias" } },
-      ]
+      { path: 'usersadd', component: UsersAddComponent,  data: { breadcrumb: "Adicionar Usuário" } },
+          ]
   },
   { path: '404', component: Error404PageComponent },
   { path: '**', redirectTo: '404' }

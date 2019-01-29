@@ -1,15 +1,13 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { RouterModule } from '@angular/router';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { QuillModule } from 'ngx-quill';
 import { CoreModule } from '../core/core.module';
 import { MainPageComponent } from './main-page/main-page.component';
 import { NewsAddComponent } from './pages/news-add/news-add.component';
 import { NewsCommentsComponent } from './pages/news-comments/news-comments.component';
 import { NewsManagerComponent } from './pages/news-manager/news-manager.component';
+import { UsersAddComponent } from './pages/users-add/users-add.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
@@ -40,7 +38,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
         SidebarComponent,
         NewsAddComponent,
         NewsManagerComponent,
-        NewsCommentsComponent
+        NewsCommentsComponent,
+        UsersAddComponent
     ],
     exports: [],
     providers: [],
