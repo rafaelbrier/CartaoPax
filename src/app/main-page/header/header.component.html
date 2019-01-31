@@ -105,7 +105,7 @@
             <app-validators [form]="loginForm" [input]="f.password" [inputName]="'senha'" [validators]="['required']"></app-validators>
           </div>
 
-          <p class="alert alert-danger" *ngIf="unknownError">Usuário ou Senha inválidos.</p>
+          <p class="alert alert-danger" *ngIf="unknownError">Ocorreu um erro desconhecido.</p>
           <p class="alert alert-danger" *ngIf="loginError">Usuário ou Senha inválidos.</p>
           <button type="submit" class="btn btn-success" [disabled]="submitting">Entrar</button>
           <button class="btn btn-info" (click)="navigateToDashboard()" [disabled]="submitting"><i class="fas fa-key"></i>Esqueci
