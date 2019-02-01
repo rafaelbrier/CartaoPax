@@ -26,6 +26,10 @@ export class ModalComponent {
     return modalRef.result;
   }
 
+  hasOpenModals() {
+    return this.modalService.hasOpenModals();
+  }
+
   loaderModal() {
     const modalRef = this.modalService.open(ModalComponent, {keyboard: false, backdrop: 'static'});
     modalRef.componentInstance.modalType = "loader";

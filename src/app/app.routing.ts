@@ -26,7 +26,7 @@ export const routes: Routes = [
         canActivate: [AuthGuard],
         data: {
           breadcrumb: "Adicionar Notícia",
-          expectedRole: 'ADMIN'
+          expectedRole: 'EMPLOYEE'
         }
       },
       {
@@ -35,7 +35,7 @@ export const routes: Routes = [
         canActivate: [AuthGuard],
         data: {
           breadcrumb: "Gerenciar Notícias",
-          expectedRole: 'ADMIN'
+          expectedRole: 'EMPLOYEE'
         }
       },
       {
@@ -44,7 +44,7 @@ export const routes: Routes = [
         canActivate: [AuthGuard],
         data: {
           breadcrumb: "Adicionar Usuário",
-          expectedRole: 'ADMIN'
+          expectedRole: 'EMPLOYEE'
         }
       },
     ]

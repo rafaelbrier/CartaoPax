@@ -15,6 +15,7 @@ import { ModalComponent } from './components/utils/modal/modal.component';
 import { ValidatorsComponent } from './components/utils/validators/validators.component';
 import { SortTableDirective } from './directive/sort-table.directive';
 import { TokenService } from './services/token-service';
+import { BrPhoneFormatPipe } from './pipes/br-phone.pipe';
 
 @NgModule({
   imports: [
@@ -37,7 +38,9 @@ import { TokenService } from './services/token-service';
     ImgLazyComponent,
     ModalComponent,
     ValidatorsComponent,
-    SortTableDirective
+    SortTableDirective,
+     //Pipe
+     BrPhoneFormatPipe
   ],
 
   exports: [
@@ -52,6 +55,9 @@ import { TokenService } from './services/token-service';
 
     //Exported Directives
     SortTableDirective,
+
+    //Exporter Pipes
+    BrPhoneFormatPipe,
 
     //Exported Modules
     NgbModule,

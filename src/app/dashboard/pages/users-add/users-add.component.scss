@@ -1,0 +1,19 @@
+@import "../../dashboard.scss";
+
+
+@media screen and (max-width: 767px) {
+    .form-container {
+        padding: 30px 5px !important;
+    }
+
+    .form-row div:not(:last-child) {
+        margin-bottom: 1rem;
+    }
+}
+.form-container {
+    padding: 15px 5px;
+}
+
+\deep\ p {
+    margin-bottom: -5px !important;
+}

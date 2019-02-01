@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
     providedIn: 'root'
 })
 export class SharedService {
 
-    constructor() { }
+    constructor(private http: HttpClient) { }
 
     checkIfIsImage(fileInput: File) {
         let filePath = fileInput.name;
@@ -85,6 +86,17 @@ export class SharedService {
         if (Resto != parseInt(strCPF.substring(10, 11))) return false;
         return true;
     }
+
+    consultaCEP(cep: string) {
+        cep = cep.replace(/\D/g, '');
+    
+        if (cep !== '') {
+          const validacep = /^[0-9]{8}$/;
+          if (validacep.test(cep)) {
+            return this.http.get(`//viacep.com.br/ws/${cep}/json`);
+          }
+        }
+      }
 }
 
 

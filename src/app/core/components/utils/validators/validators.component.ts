@@ -3,7 +3,9 @@ import { FormControlName, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-validators',
-  templateUrl: './validators.component.html'
+  templateUrl: './validators.component.html',
+  styles: [ ` p {
+    margin-bottom: 5px;  } `   ]
 })
 export class ValidatorsComponent implements OnInit {
 
