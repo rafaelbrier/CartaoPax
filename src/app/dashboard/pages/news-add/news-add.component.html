@@ -43,6 +43,8 @@
                     {{progressImg}}%
                 </div>
             </div>
+            <p *ngIf="fileOverSize" class="text-danger">Tamanho limite de 1MB para a imagem!</p>
+            <p *ngIf="mustBeImg" class="text-danger">O arquivo deve ser uma imagem!</p>
         </div>
         <div class="form-end">
             <span>Os campos com * são obrigatórios.</span>

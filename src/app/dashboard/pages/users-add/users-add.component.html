@@ -23,56 +23,45 @@
                     </div>
                     <div class="offset-sm-1 col-sm-5 floating-label">
                         <select class="custom-select form-control" formControlName="sex" required>
-                            <option *ngFor="let sexOption of sexOptions" [value]="sexOption?.value"
-                            placeholder=" ">{{sexOption?.info}}</option>
+                            <option *ngFor="let sexOption of sexOptions" [value]="sexOption?.value" placeholder=" ">{{sexOption?.info}}</option>
                         </select>
                         <span>Sexo*</span>
                     </div>
                 </div>
             </div>
 
-            <div class="form-group offset-sm-1 col-sm-4">
-                <label>
-                    <!-- Imagem de Perfil -->
-                    <b target="_blank" *ngIf="isEditing">
-                        <span *ngIf="downloadURL; else noimage">
-                            <a href="{{downloadURL}}">-- Imagem Atual --</a>
-                            <i class="fas fa-times" (click)="removeMainImg()" ngbTooltip="Remover imagem de perfil"></i>
-                        </span>
-                        <ng-template #noimage>-- Nenhuma imagem salva na notícia --</ng-template>
-                    </b>
-                </label>
+            <div class="form-group col-sm-6">
 
-                <div class="inner-addon right-addon">
-                    <i class="fas fa-times" *ngIf="file" (click)="removeSelectedImg()" ngbTooltip="Remover imagem selecionada"></i>
-                    <input #inputFile type="file" class="form-control" name="usersAvatar" accept="image/png, image/jpeg"
-                        (change)="onChange($event)">
-                </div>
+                <div class="col-sm-10 mx-auto">
+                    <app-img-input-file (imgFile)="test($event)"></app-img-input-file>
 
-                <div class="progress" *ngIf="inProgress">
-                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
-                        [attr.aria-valuenow]="progressImg" aria-valuemin="0" aria-valuemax="100" [ngClass]="[progressImg === 100 ? 'bg-success' :'' , uploadError ? 'bg-danger' : '']"
-                        [ngStyle]="{'width': progressImg + '%'}">
-                        {{progressImg}}%
+                    <div class="progress" *ngIf="inProgress">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                            [attr.aria-valuenow]="progressImg" aria-valuemin="0" aria-valuemax="100" [ngClass]="[progressImg === 100 ? 'bg-success' :'' , uploadError ? 'bg-danger' : '']"
+                            [ngStyle]="{'width': progressImg + '%'}">
+                            {{progressImg}}%
+                        </div>
                     </div>
+
                 </div>
+
             </div>
         </div>
 
         <div class="form-row">
-                <div class="form-group col-sm-3 floating-label">
-                    <input formControlName="cpf" type="text" class="form-control" placeholder=" ">
-                    <span>Data de Nascimento*</span>
-                    <!-- Validador  -->
-                    <app-validators [form]="usersAddForm" [input]="f.cpf" [inputName]="'cpf'" [validators]="['required']"></app-validators>
-                </div>
-    
-                <div class="form-group offset-sm-1 col-sm-4 floating-label">
-                    <select class="custom-select form-control" formControlName="sex" required>
-                        <option *ngFor="let sexOption of sexOptions" [value]="sexOption?.value">{{sexOption?.info}}</option>
-                    </select>
-                    <span>Escolaridade*</span>
-                </div>
+            <div class="form-group col-sm-3 floating-label">
+                <input formControlName="cpf" type="text" class="form-control" placeholder=" ">
+                <span>Data de Nascimento*</span>
+                <!-- Validador  -->
+                <app-validators [form]="usersAddForm" [input]="f.cpf" [inputName]="'cpf'" [validators]="['required']"></app-validators>
+            </div>
+
+            <div class="form-group offset-sm-1 col-sm-4 floating-label">
+                <select class="custom-select form-control" formControlName="sex" required>
+                    <option *ngFor="let sexOption of sexOptions" [value]="sexOption?.value">{{sexOption?.info}}</option>
+                </select>
+                <span>Escolaridade*</span>
+            </div>
 
             <div class="form-group offset-sm-1 col-sm-3 floating-label">
                 <input formControlName="birthDate" type="text" class="form-control" placeholder=" ">
@@ -84,40 +73,91 @@
         </div>
 
         <div class="form-row">
-                <div class="form-group col-sm-3 floating-label">
-                    <select class="custom-select" formControlName="role" required>
-                        <option *ngFor="let roleOption of roleOptions" [value]="roleOption.value">{{roleOption?.info}}</option>
-                    </select>
-                    <span>Tipo de Conta*</span>
-                </div>
-
-                <div class="form-group offset-sm-1 col-sm-4 floating-label">
-                    <input formControlName="cpf" type="text" class="form-control" placeholder=" ">
-                    <span>Email</span>
-                    <!-- Validador  -->
-                    <app-validators [form]="usersAddForm" [input]="f.cpf" [inputName]="'cpf'" [validators]="['required']"></app-validators>
-                </div>
-
-    
-                <div class="form-group offset-sm-1 col-sm-3 floating-label">
-                    <input formControlName="cpf" type="text" class="form-control" placeholder=" ">
-                    <span>Telefone Opcional</span>
-                </div>    
+            <div class="form-group col-sm-3 floating-label">
+                <select class="custom-select" formControlName="role" required>
+                    <option *ngFor="let roleOption of roleOptions" [value]="roleOption.value">{{roleOption?.info}}</option>
+                </select>
+                <span>Tipo de Conta*</span>
             </div>
+
+            <div class="form-group offset-sm-1 col-sm-4 floating-label">
+                <input formControlName="cpf" type="text" class="form-control" placeholder=" ">
+                <span>Email</span>
+                <!-- Validador  -->
+                <app-validators [form]="usersAddForm" [input]="f.cpf" [inputName]="'cpf'" [validators]="['required']"></app-validators>
+            </div>
+
+
+            <div class="form-group offset-sm-1 col-sm-3 floating-label">
+                <input formControlName="cpf" type="text" class="form-control" placeholder=" ">
+                <span>Telefone Opcional</span>
+            </div>
+        </div>
+
+        <hr>
 
         <div class="form-row">
-            <div class="form-group col-sm-3">
-                <label>CEP*</label>
-                <input type="text" class="form-control">
+            <div class="form-group col-sm-3 floating-label">
+                <input formControlName="cpf" type="text" class="form-control" placeholder=" ">
+                <span>CEP*</span>
             </div>
-            <div class="form-group col-sm-5">
-                <label>Cidade*</label>
-                <input type="text" class="form-control">
+        </div>
+
+        <div class="form-row">
+
+            <div class="form-group col-sm-4 floating-label">
+                <input formControlName="cpf" type="text" class="form-control" placeholder=" ">
+                <span>Endereço*</span>
+                <!-- Validador  -->
+                <app-validators [form]="usersAddForm" [input]="f.cpf" [inputName]="'cpf'" [validators]="['required']"></app-validators>
             </div>
-            <div class="form-group col-sm-4">
-                <label>Estado*</label>
-                <input type="text" class="form-control">
+
+
+            <div class="form-group offset-sm-1 col-sm-2 floating-label">
+                <input formControlName="cpf" type="text" class="form-control" placeholder=" ">
+                <span>Nº* </span>
+                <!-- Validador  -->
+                <app-validators [form]="usersAddForm" [input]="f.cpf" [inputName]="'cpf'" [validators]="['required']"></app-validators>
             </div>
+
+
+            <div class="form-group offset-sm-1 col-sm-4 floating-label">
+                <input formControlName="cpf" type="text" class="form-control" placeholder=" ">
+                <span>Complemento</span>
+            </div>
+        </div>
+
+        <div class="form-row">
+
+            <div class="form-group col-sm-3 floating-label">
+                <input formControlName="cpf" type="text" class="form-control" placeholder=" ">
+                <span>Bairro*</span>
+                <!-- Validador  -->
+                <app-validators [form]="usersAddForm" [input]="f.cpf" [inputName]="'cpf'" [validators]="['required']"></app-validators>
+            </div>
+
+            <div class="form-group offset-sm-1 col-sm-3 floating-label">
+                <input formControlName="cpf" type="text" class="form-control" placeholder=" ">
+                <span>Estado*</span>
+            </div>
+
+            <div class="form-group offset-sm-1 col-sm-4 floating-label">
+                <input formControlName="cpf" type="text" class="form-control" placeholder=" ">
+                <span>Cidade* </span>
+                <!-- Validador  -->
+                <app-validators [form]="usersAddForm" [input]="f.cpf" [inputName]="'cpf'" [validators]="['required']"></app-validators>
+            </div>
+
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-sm-6 floating-label">
+                <select class="custom-select form-control" formControlName="sex" required>
+                    <option *ngFor="let sexOption of sexOptions" [value]="sexOption?.value">{{sexOption?.info}}</option>
+                </select>
+                <span>Plano*</span>
+            </div>
+            <span class="preco-mensalidade">Preço Mensalidade: <b>R$98,49</b></span>
         </div>
 
         <div class="form-end">

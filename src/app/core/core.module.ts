@@ -16,6 +16,7 @@ import { ValidatorsComponent } from './components/utils/validators/validators.co
 import { SortTableDirective } from './directive/sort-table.directive';
 import { TokenService } from './services/token-service';
 import { BrPhoneFormatPipe } from './pipes/br-phone.pipe';
+import { ImgInputFileComponent } from './components/img-input-file/img-input-file.component';
 
 @NgModule({
   imports: [
@@ -40,7 +41,8 @@ import { BrPhoneFormatPipe } from './pipes/br-phone.pipe';
     ValidatorsComponent,
     SortTableDirective,
      //Pipe
-     BrPhoneFormatPipe
+     BrPhoneFormatPipe,
+     ImgInputFileComponent
   ],
 
   exports: [
@@ -52,6 +54,7 @@ import { BrPhoneFormatPipe } from './pipes/br-phone.pipe';
     ImgLazyComponent,
     ModalComponent,
     ValidatorsComponent,
+    ImgInputFileComponent,
 
     //Exported Directives
     SortTableDirective,

@@ -20,6 +20,10 @@ export class SharedService {
         }
     }
 
+    isFileOverSized(fileInput: File, limitSizePowerOfTwo: number) {
+        return fileInput.size > Math.pow(2, limitSizePowerOfTwo) ? true : false;
+    }
+
     triggerValidation(formName: FormGroup) {
         Object.keys(formName.controls).forEach(field => {
             const control = formName.get(field);

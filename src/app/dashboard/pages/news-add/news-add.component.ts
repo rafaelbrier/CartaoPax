@@ -22,6 +22,8 @@ export class NewsAddComponent implements OnInit {
   inProgress: boolean = false;
   uploadError: boolean = false;
   downloadURL: String = undefined;
+  fileOverSize: boolean = false;
+  mustBeImg: boolean = false;
 
   // Form
   newsManagerForm: FormGroup;
@@ -111,7 +113,7 @@ export class NewsAddComponent implements OnInit {
           , "success");
         if (this.isEditing) this.router.navigate(['dashboard/newsmanager']);
         this.submitComplete();
-      }, err => {
+      }, () => {
         this.submitting = false;
         this.modal.openModal("Erro!", "Houve algum erro ao publicar a notícia. Por favor tente novamente mais tarde.", "fail");
       })
@@ -128,13 +130,24 @@ export class NewsAddComponent implements OnInit {
   get f() { return this.newsManagerForm.controls; }
 
   onChange(event: EventTarget): boolean {
+    this.fileOverSize = false;
+    this.mustBeImg = false;
+
     let eventObj: MSInputMethodContext = <MSInputMethodContext>event;
     let target: HTMLInputElement = <HTMLInputElement>eventObj.target;
     let files: FileList = target.files;
-    this.file = files[0];
 
-    if (!this.sharedService.checkIfIsImage(this.file))
+    if (!this.sharedService.checkIfIsImage(files[0])) {
+      this.mustBeImg = true;
+      this.removeSelectedImg();
       return false;
+    }
+    if (this.sharedService.isFileOverSized(files[0], 20)) {
+      this.fileOverSize = true;
+      this.removeSelectedImg();
+      return false;
+    }  
+    this.file = files[0];
   }
 
   retrieveImg(): Promise<any> {

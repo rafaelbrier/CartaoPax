@@ -14,10 +14,9 @@ import { PlanosService } from 'src/app/core/services/planos-service';
 })
 export class UsersAddComponent implements OnInit {
 
-  @ViewChild('inputFile') inputFile: ElementRef;
   @ViewChild(ModalComponent) modal: ModalComponent;
 
-  file: File;
+  profileImg: File;
   progressImg: number;
   inProgress: boolean = false;
   uploadError: boolean = false;
@@ -78,7 +77,6 @@ export class UsersAddComponent implements OnInit {
       cidade: ['', [Validators.required, whiteSpace, Validators.maxLength(50)]],
       role: ['', [Validators.required, whiteSpace, Validators.maxLength(20)]],
       plano: ['', [Validators.required, whiteSpace, Validators.maxLength(50)]],
-      imgProfile: [''],
     });
     this.usersAddForm.controls['role'].setValue(this.role, { onlySelf: true });
   }
@@ -126,6 +124,11 @@ export class UsersAddComponent implements OnInit {
           this.planosOption.push({ value: value, info: info });
         })
       }, () => { this.errorOnRetrieve() })
+  }
+
+  test(imgFile: File) {
+    this.profileImg = imgFile;
+    console.log(this.profileImg)
   }
 
   errorOnRetrieve() {

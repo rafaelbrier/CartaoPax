@@ -1,0 +1,21 @@
+<div class="container">
+
+  <img src="{{imgPath || '../../../../assets/images/add-user-avatar.png'}}">
+
+  <div class="upload-btn-wrapper">
+      <button class="btn">
+        <i class="fas fa-upload"></i>
+      </button>
+      <span>
+        <span *ngIf="!fileOverSize && !fileNotImg">Enviar imagem de perfil</span>
+        <p class="text-danger" *ngIf="fileOverSize">Tamanho máximo de 1MB!</p>
+        <p class="text-danger" *ngIf="fileNotImg">Deve ser uma imagem!</p>
+      </span> 
+      <input #inputFile type="file" name="myfile" (change)="onChange($event)"  accept="image/png, image/jpeg"/>
+    
+    </div>
+
+    <div *ngIf="file">
+        <i class="fas fa-times" (click)="removeMainImg()" ngbTooltip="Remover imagem de perfil"></i>        
+    </div>
+</div>
