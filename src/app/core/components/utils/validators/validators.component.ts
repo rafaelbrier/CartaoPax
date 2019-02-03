@@ -44,8 +44,8 @@ export class ValidatorsComponent implements OnInit {
     }
     this.minLength = this.validators.includes('minlength');
     if(this.minLength){
-      let maxLengthArrayPos = this.validators.indexOf('minlength');
-      this.minLengthNum = this.validators[maxLengthArrayPos + 1];
+      let minLengthArrayPos = this.validators.indexOf('minlength');
+      this.minLengthNum = this.validators[minLengthArrayPos + 1];
     }
     }
   }

@@ -1,24 +1,18 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import {Pipe, PipeTransform} from '@angular/core';
+import * as vanillaMasker from '../../../assets/js/vanilla-min.js';
 
 @Pipe({
-    name: 'brphone'
+  name: 'brphone',
 })
 export class BrPhoneFormatPipe implements PipeTransform {
+   private telefoneFixoPattern = '(99) 9999-9999';
+   private telefoneCelularPattern = '(99) 99999-9999';
 
-    transform(value: string): string {
-
-        if (!value) {
-            return '';
-        }
-
-        let result = '';
-        if (value.length > 10) {
-            result = `(${value.substring(0, 2)}) ${value.substring(2,7)}-${value.substring(7)}`
-        }else{
-            result = `(${value.substring(0, 2)}) ${value.substring(2,6)}-${value.substring(6)}`
-        }
-
-        return result
-    }
-
+  transform(value: any) {
+    if (!value) {
+      return '';
+    } 
+    const telefonePattern: string = value.toString().length === 14 ? this.telefoneFixoPattern : this.telefoneCelularPattern;
+    return vanillaMasker.toPattern(value, telefonePattern);
+  }
 }

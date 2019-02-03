@@ -8,24 +8,31 @@
         <div class="form-row">
             <div class="form-group col-sm-6">
                 <div class="form-group floating-label">
-                    <input formControlName="name" type="text" class="form-control" placeholder=" ">
-                    <span>Nome Completo</span>
+                    <input formControlName="name" type="text" class="form-control" placeholder=" "
+                    maxlength="101">
+                    <span>Nome Completo*</span>
                     <!-- Validador  -->
-                    <app-validators [form]="usersAddForm" [input]="f.name" [inputName]="'nome completo'" [validators]="['required','maxlength', 100]"></app-validators>
+                    <app-validators [form]="usersAddForm" [input]="f.name" [inputName]="'nome completo'"
+                     [validators]="['required','maxlength', 100]"></app-validators>
                 </div>
 
                 <div class="form-row">
                     <div class="col-sm-6 floating-label">
-                        <input formControlName="cpf" type="text" class="form-control" placeholder=" ">
+                        <input formControlName="cpf" type="text" class="form-control" placeholder=" "
+                        [value]="v.cpf | cpf" maxlength="14">
                         <span>CPF*</span>
                         <!-- Validador  -->
-                        <app-validators [form]="usersAddForm" [input]="f.cpf" [inputName]="'cpf'" [validators]="['required']"></app-validators>
+                        <app-validators [form]="usersAddForm" [input]="f.cpf" [inputName]="'cpf'"
+                         [validators]="['required','maxlength', 14, 'minlength', 14]"></app-validators>
                     </div>
                     <div class="offset-sm-1 col-sm-5 floating-label">
                         <select class="custom-select form-control" formControlName="sex" required>
                             <option *ngFor="let sexOption of sexOptions" [value]="sexOption?.value" placeholder=" ">{{sexOption?.info}}</option>
                         </select>
                         <span>Sexo*</span>
+                         <!-- Validador  -->
+                        <app-validators [form]="usersAddForm" [input]="f.sex" [inputName]="'sexo'" 
+                        [validators]="['required']"></app-validators>
                     </div>
                 </div>
             </div>
@@ -50,114 +57,157 @@
 
         <div class="form-row">
             <div class="form-group col-sm-3 floating-label">
-                <input formControlName="cpf" type="text" class="form-control" placeholder=" ">
+                <input formControlName="birthDate" type="text" class="form-control" placeholder=" ">
                 <span>Data de Nascimento*</span>
                 <!-- Validador  -->
-                <app-validators [form]="usersAddForm" [input]="f.cpf" [inputName]="'cpf'" [validators]="['required']"></app-validators>
+                <app-validators [form]="usersAddForm" [input]="f.birthDate" [inputName]="'data de nascimento'" 
+                [validators]="['required','maxlength', 10]"></app-validators>
             </div>
 
             <div class="form-group offset-sm-1 col-sm-4 floating-label">
-                <select class="custom-select form-control" formControlName="sex" required>
-                    <option *ngFor="let sexOption of sexOptions" [value]="sexOption?.value">{{sexOption?.info}}</option>
+                <select class="custom-select form-control" formControlName="escolaridade" required>
+                    <option *ngFor="let escolaridadeOption of escolaridadeOptions" [value]="escolaridadeOption">{{escolaridadeOption}}</option>
                 </select>
                 <span>Escolaridade*</span>
+                 <!-- Validador  -->
+                <app-validators [form]="usersAddForm" [input]="f.escolaridade" [inputName]="'escolaridade'" 
+                [validators]="['required']"></app-validators>
             </div>
 
             <div class="form-group offset-sm-1 col-sm-3 floating-label">
-                <input formControlName="birthDate" type="text" class="form-control" placeholder=" ">
+                <input formControlName="telephone" type="tel" class="form-control" placeholder=" "
+                [value]="v.telephone | brphone" maxlength="15"
+                onkeypress="return event.charCode >= 48 && event.charCode <= 57">
                 <span>Telefone*</span>
                 <!-- Validador  -->
-                <app-validators [form]="usersAddForm" [input]="f.birthDate" [inputName]="'data de nascimento'"
-                    [validators]="['required']"></app-validators>
+                <app-validators [form]="usersAddForm" [input]="f.telephone" [inputName]="'telefone'"
+                    [validators]="['required','maxlength', 16, 'minlength', 16]"></app-validators>
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group col-sm-3 floating-label">
-                <select class="custom-select" formControlName="role" required>
+                <select class="custom-select form-control" formControlName="role" required>
                     <option *ngFor="let roleOption of roleOptions" [value]="roleOption.value">{{roleOption?.info}}</option>
                 </select>
                 <span>Tipo de Conta*</span>
+                <!-- Validador  -->
+                <app-validators [form]="usersAddForm" [input]="f.role" [inputName]="'tipo de conta'"
+                    [validators]="['required']"></app-validators>
             </div>
 
             <div class="form-group offset-sm-1 col-sm-4 floating-label">
-                <input formControlName="cpf" type="text" class="form-control" placeholder=" ">
+                <input formControlName="email" type="email" class="form-control" placeholder=" "
+                maxlength="101">
                 <span>Email</span>
                 <!-- Validador  -->
-                <app-validators [form]="usersAddForm" [input]="f.cpf" [inputName]="'cpf'" [validators]="['required']"></app-validators>
+                <app-validators [form]="usersAddForm" [input]="f.email" [inputName]="'email'"
+                 [validators]="['required', 'maxlength',100]"></app-validators>
             </div>
 
 
             <div class="form-group offset-sm-1 col-sm-3 floating-label">
-                <input formControlName="cpf" type="text" class="form-control" placeholder=" ">
+                <input formControlName="telephoneOp" type="tel" class="form-control" placeholder=" "
+                [value]="v.telephoneOp | brphone" maxlength="15"
+                onkeypress="return event.charCode >= 48 && event.charCode <= 57">
                 <span>Telefone Opcional</span>
+                <!-- Validador  -->
+                <app-validators [form]="usersAddForm" [input]="f.telephoneOp" [inputName]="'telefone opcional'">
+                </app-validators>
             </div>
         </div>
 
-        <hr>
+        <hr class="d-none d-sm-block">
 
         <div class="form-row">
             <div class="form-group col-sm-3 floating-label">
-                <input formControlName="cpf" type="text" class="form-control" placeholder=" ">
+                <input formControlName="cep" type="text" class="form-control" placeholder=" "
+                [value]="v.cep | cep" maxlength="9">
                 <span>CEP*</span>
+                <app-validators [form]="usersAddForm" [input]="f.cep" [inputName]="'cep'"
+                [validators]="['required','maxlength',9]"></app-validators>
             </div>
+            <a href="http://www.buscacep.correios.com.br/sistemas/buscacep/" target="_blank" class="cep-btn">
+                <button type="button" class="btn btn-outline-warning">Consultar CEP</button>
+            </a> 
         </div>
 
         <div class="form-row">
 
             <div class="form-group col-sm-4 floating-label">
-                <input formControlName="cpf" type="text" class="form-control" placeholder=" ">
+                <input formControlName="endereco" type="text" class="form-control" placeholder=" "
+                maxlength="101">
                 <span>Endereço*</span>
                 <!-- Validador  -->
-                <app-validators [form]="usersAddForm" [input]="f.cpf" [inputName]="'cpf'" [validators]="['required']"></app-validators>
+                <app-validators [form]="usersAddForm" [input]="f.endereco" [inputName]="'endereço'"
+                 [validators]="['required', 'maxlength', 100]"></app-validators>
             </div>
 
 
             <div class="form-group offset-sm-1 col-sm-2 floating-label">
-                <input formControlName="cpf" type="text" class="form-control" placeholder=" ">
+                <input formControlName="numero" type="number" class="form-control" placeholder=" "
+                maxlength="7">
                 <span>Nº* </span>
                 <!-- Validador  -->
-                <app-validators [form]="usersAddForm" [input]="f.cpf" [inputName]="'cpf'" [validators]="['required']"></app-validators>
+                <app-validators [form]="usersAddForm" [input]="f.numero" [inputName]="'numero'" 
+                [validators]="['required', 'maxlength', 6]"></app-validators>
             </div>
 
 
             <div class="form-group offset-sm-1 col-sm-4 floating-label">
-                <input formControlName="cpf" type="text" class="form-control" placeholder=" ">
+                <input formControlName="complemento" type="text" class="form-control" placeholder=" "
+                maxlength="16">
                 <span>Complemento</span>
+                  <!-- Validador  -->
+                  <app-validators [form]="usersAddForm" [input]="f.complemento" [inputName]="'complemento'" 
+                  [validators]="['required', 'maxlength', 15]"></app-validators>
             </div>
         </div>
 
         <div class="form-row">
 
             <div class="form-group col-sm-3 floating-label">
-                <input formControlName="cpf" type="text" class="form-control" placeholder=" ">
+                <input formControlName="bairro" type="text" class="form-control" placeholder=" "
+                maxlength="51">
                 <span>Bairro*</span>
                 <!-- Validador  -->
-                <app-validators [form]="usersAddForm" [input]="f.cpf" [inputName]="'cpf'" [validators]="['required']"></app-validators>
+                <app-validators [form]="usersAddForm" [input]="f.bairro" [inputName]="'bairro'"
+                 [validators]="['required', 'maxlength', 50]"></app-validators>
             </div>
 
             <div class="form-group offset-sm-1 col-sm-3 floating-label">
-                <input formControlName="cpf" type="text" class="form-control" placeholder=" ">
+                <input formControlName="estado" type="text" class="form-control" placeholder=" "
+                maxlength="51">
                 <span>Estado*</span>
+                 <!-- Validador  -->
+                 <app-validators [form]="usersAddForm" [input]="f.estado" [inputName]="'estado'"
+                 [validators]="['required', 'maxlength', 50]"></app-validators>
             </div>
 
             <div class="form-group offset-sm-1 col-sm-4 floating-label">
-                <input formControlName="cpf" type="text" class="form-control" placeholder=" ">
+                <input formControlName="cidade" type="text" class="form-control" placeholder=" "
+                maxlength="51">
                 <span>Cidade* </span>
                 <!-- Validador  -->
-                <app-validators [form]="usersAddForm" [input]="f.cpf" [inputName]="'cpf'" [validators]="['required']"></app-validators>
+                <app-validators [form]="usersAddForm" [input]="f.cidade" [inputName]="'cidade'" 
+                [validators]="['required', 'maxlength', 50]"></app-validators>
             </div>
 
         </div>
 
         <div class="form-row">
             <div class="form-group col-sm-6 floating-label">
-                <select class="custom-select form-control" formControlName="sex" required>
-                    <option *ngFor="let sexOption of sexOptions" [value]="sexOption?.value">{{sexOption?.info}}</option>
+                <select class="custom-select form-control" formControlName="plano" required>
+                    <option *ngFor="let planosOption of planosOptions" [value]="planosOption?.value">{{planosOption?.info}}</option>
                 </select>
                 <span>Plano*</span>
+                 <!-- Validador  -->
+                 <app-validators [form]="usersAddForm" [input]="f.plano" [inputName]="'plano'" 
+                 [validators]="['required', 'maxlength', 50]"></app-validators>
             </div>
+
             <span class="preco-mensalidade">Preço Mensalidade: <b>R$98,49</b></span>
+
         </div>
 
         <div class="form-end">

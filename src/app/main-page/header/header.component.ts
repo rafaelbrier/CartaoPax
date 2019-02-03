@@ -1,10 +1,11 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { whiteSpace } from 'src/app/core/components/utils/validators/custom-validators';
 import { SharedService } from 'src/app/core/services/shared-services';
 import { UsersService } from 'src/app/core/services/users-service';
 import { Subscription } from 'rxjs';
+import { ModalComponent } from 'src/app/core/components/utils/modal/modal.component';
 
 @Component({
   selector: 'app-header',
@@ -12,6 +13,8 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+
+  @ViewChild(ModalComponent) modal: ModalComponent;
 
   isAnyUserLogged: boolean = false;
   userSubscription: Subscription;
@@ -98,6 +101,12 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.usersService.logout();
+  }
+
+  openHelpModal() {
+    this.modal.openModal('Senha',
+    `<p class="text-info font-weight-bold">A senha é sua Data de Nascimento no formato DD/MM/YYYY. (Ex: 10/04/2018)</p>
+    <p class="text-secondary">Caso não consiga acesso mesmo assim, favor contatar o administrador do Cartão Pax!</p>`)
   }
 
   @HostListener('window:scroll')

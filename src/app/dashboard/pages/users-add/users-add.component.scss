@@ -11,6 +11,17 @@
     .form-row div:not(:last-child) {
         margin-bottom: 1rem;
     }    
+    .cep-btn {
+        margin-top: -1rem;
+        margin-left: 5px;
+        margin-bottom: 2rem;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .cep-btn {
+        margin-left: 25px;
+    }
 }
 .form-container {
     padding: 15px 5px;

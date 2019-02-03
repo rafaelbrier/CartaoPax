@@ -6,6 +6,7 @@ import { SharedService } from 'src/app/core/services/shared-services';
 import { UsersService } from 'src/app/core/services/users-service';
 import { RolesService } from 'src/app/core/services/roles-service';
 import { PlanosService } from 'src/app/core/services/planos-service';
+import { FireStorageService } from 'src/app/core/services/firebase-storage/fire-storage.service';
 
 @Component({
   selector: 'app-users-add',
@@ -25,17 +26,17 @@ export class UsersAddComponent implements OnInit {
   sex: string;
   sexOptions: any[] = [{ value: "M", info: "Masculino" }, { value: "F", info: "Feminino" }]; //ISO/IEC 5218
 
-  role: string = "CLIENT";
+  role: string;
   roleOptions: any[] = [];
 
   plano: string;
-  planosOption: any[] = [];
+  planosOptions: any[] = [];
 
   escolaridade: string;
-  escolaridadeOptions: [{value: "FUNDAMENTAL INCOMPLETO"},{value: "FUNDAMENTAL COMPLETO"}, {value: "MÉDIO INCOMPLETO"},
-  {value: "MÉDIO COMPLETO"},{value: "SUPERIOR INCOMPLETO"},{value: "SUPERIOR COMPLETO"},{value: "PÓS (LATO-SENSO) INCOMPLETO"},
-  {value: "PÓS (LATO-SENSO) COMPLETO"},{value: "MESTRADO INCOMPLETO"},{value: "MESTRADO COMPLETO"},
-  {value: "DOUTORADO INCOMPLETO"},{value: "DOUTORADO COMPLETO"}];
+  escolaridadeOptions: ["FUNDAMENTAL INCOMPLETO","FUNDAMENTAL COMPLETO", "MÉDIO INCOMPLETO",
+  "MÉDIO COMPLETO","SUPERIOR INCOMPLETO", "SUPERIOR COMPLETO","PÓS (LATO-SENSO) INCOMPLETO",
+  "PÓS (LATO-SENSO) COMPLETO","MESTRADO INCOMPLETO","MESTRADO COMPLETO",
+  "DOUTORADO INCOMPLETO","DOUTORADO COMPLETO"];
 
   // Form
   usersAddForm: FormGroup;
@@ -49,23 +50,29 @@ export class UsersAddComponent implements OnInit {
     private sharedService: SharedService,
     private usersService: UsersService,
     private rolesService: RolesService,
-    private planosService: PlanosService) { }
+    private planosService: PlanosService,
+    private fireStorageService: FireStorageService) { }
 
   ngOnInit() {
     this.usersAddFormBuilder();
 
     this.populateRoles();
     this.populatePlanos();
+
+    this.usersAddForm.controls['cep'].valueChanges.subscribe((cep) => {
+         this.consultaCep(cep);
+    });
+    
   }
 
   usersAddFormBuilder(): void {
     this.usersAddForm = this.formBuilder.group({
       name: ['', [Validators.required, whiteSpace, Validators.maxLength(100)]],
-      cpf: ['', [Validators.required, whiteSpace, Validators.maxLength(400)]],
+      cpf: ['', [Validators.required, whiteSpace, Validators.maxLength(14), Validators.minLength(14)]],
       sex: ['', [Validators.required, whiteSpace], Validators.maxLength(2)],
-      telephone: ['', [Validators.required, whiteSpace, Validators.maxLength(16)]],
-      telephoneOp: ['', [Validators.maxLength(16)]],
-      email: ['', [Validators.required, whiteSpace, Validators.maxLength(100)]],
+      telephone: ['', [Validators.required, whiteSpace, Validators.maxLength(15)]],
+      telephoneOp: ['', Validators.maxLength(15)],
+      email: ['', [Validators.maxLength(100)]],
       birthDate: ['', [Validators.required, whiteSpace, Validators.maxLength(10)]],
       cep: ['', [Validators.required, whiteSpace, Validators.maxLength(9)]],
       endereco: ['', [Validators.required, whiteSpace, Validators.maxLength(100)]],
@@ -83,8 +90,11 @@ export class UsersAddComponent implements OnInit {
 
   get f() { return this.usersAddForm.controls; }
 
+  get v() { return this.usersAddForm.value; }
+
   submitUserForm(): void {
     this.sharedService.triggerValidation(this.usersAddForm);
+    console.log(this.usersAddForm.value)
     if (this.usersAddForm.invalid) {
       return;
     }
@@ -97,6 +107,7 @@ export class UsersAddComponent implements OnInit {
       birthDate: values.birthDate,
       role: values.role
     }
+    
 
     this.usersService.signUp(signUpData);
   }
@@ -121,9 +132,49 @@ export class UsersAddComponent implements OnInit {
         Object.keys(res).map((keys) => {
           let value = res[keys]["id"];
           let info = res[keys]["name"];
-          this.planosOption.push({ value: value, info: info });
+          this.planosOptions.push({ value: value, info: info });
         })
       }, () => { this.errorOnRetrieve() })
+  }
+
+  retrieveImg(): Promise<any> {
+    this.inProgress = true;
+    let uploadTask = this.fireStorageService.uploadImage(this.profileImg, 'profile-images');
+
+    uploadTask.uploadObs((snapshot: { bytesTransferred: number; totalBytes: number; }) => {
+      this.progressImg = ((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+      this.progressImg = Math.round(this.progressImg);
+    }, (err: string) => {
+      this.modal.openModal("Erro!", "Houve algum erro ao processar a imagem. Por favor tente novamente.\n" + err, "fail");
+      this.uploadError = true;
+    });
+
+    return uploadTask.uploadTask.then(() => {
+      return uploadTask.uploadTask.snapshot.ref.getDownloadURL()
+        .then(url => {
+          return url;
+        });
+    });
+  }
+
+  consultaCep(Cep: string) {
+    let addr: any;
+    
+    if(Cep.length === 9) {
+      this.disableAddrFields();
+
+      this.sharedService.consultaCEP(Cep)
+      .subscribe(res => {
+       addr = res;
+       this.usersAddForm.patchValue({
+         endereco: addr.logradouro,
+         bairro: addr.bairro,
+         estado: addr.uf,
+         cidade: addr.localidade
+       });
+       this.enableAddrFields();
+      }, () =>{ this.enableAddrFields(); });
+    }
   }
 
   test(imgFile: File) {
@@ -136,5 +187,18 @@ export class UsersAddComponent implements OnInit {
     // this.modal.openModal("Erro!",
     //   `Não foi possível recuperar os dados do servidor, favor tentar novamente mais tarde.`
     //   , "fail");
+  }
+
+  disableAddrFields() {
+    this.f.endereco.disable();
+    this.f.bairro.disable();
+    this.f.estado.disable();
+    this.f.cidade.disable();
+  }
+  enableAddrFields() {
+    this.f.endereco.enable();
+    this.f.bairro.enable();
+    this.f.estado.enable();
+    this.f.cidade.enable();
   }
 }

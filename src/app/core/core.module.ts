@@ -17,6 +17,8 @@ import { SortTableDirective } from './directive/sort-table.directive';
 import { TokenService } from './services/token-service';
 import { BrPhoneFormatPipe } from './pipes/br-phone.pipe';
 import { ImgInputFileComponent } from './components/img-input-file/img-input-file.component';
+import { CepPipe } from './pipes/cep.pipe';
+import { CpfPipe } from './pipes/cpf.pipe';
 
 @NgModule({
   imports: [
@@ -42,7 +44,9 @@ import { ImgInputFileComponent } from './components/img-input-file/img-input-fil
     SortTableDirective,
      //Pipe
      BrPhoneFormatPipe,
-     ImgInputFileComponent
+     ImgInputFileComponent,
+     CepPipe,
+     CpfPipe
   ],
 
   exports: [
@@ -61,6 +65,8 @@ import { ImgInputFileComponent } from './components/img-input-file/img-input-fil
 
     //Exporter Pipes
     BrPhoneFormatPipe,
+    CepPipe,
+    CpfPipe,
 
     //Exported Modules
     NgbModule,
