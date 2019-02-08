@@ -27,12 +27,22 @@ export class FireStorageService {
 
         this.checkLoginBeforeContinue();
 
+        const fileName = file.name.split('.')[0] + Math.random().toString().split('.').pop() + '.jpg';
+
         this.uploadTask = this.storageRef
-            .child(folder + '/' + file.name.split('.')[0] + Math.random().toString().split('.').pop() + '.jpg')
+            .child(folder + '/' + fileName)
             .put(file, this.fileMetadata);
         let uploadObs = this.uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED);
 
-        return { uploadTask: this.uploadTask, uploadObs: uploadObs };
+        return { uploadTask: this.uploadTask, uploadObs: uploadObs, fileName: fileName };
+    }
+
+    deleteImg(fileName: string, folder: string) {
+
+        this.checkLoginBeforeContinue();
+
+        let deleteRef = this.storageRef.child(folder + '/' + fileName);
+        return deleteRef.delete();
     }
 
     checkLoginBeforeContinue() {

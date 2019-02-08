@@ -11,6 +11,28 @@ export class User {
   Expires_At: string;
 }
 
+interface userData {
+  name: string,
+  cpf: string,
+  imgProfile: string,
+  telephone: string,
+  telephoneOp: string,
+  email: string,
+  escolaridade: string,
+  cep: string,
+  endereco: string,
+  numero: string,
+  bairro: string,
+  estado: string,
+  cidade: string,
+  complemento: string,
+  sex: string,
+  birthDate: string,
+  roles: { id: number},
+  planos: { id: number},
+  planPrice: number
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -38,14 +60,8 @@ export class UsersService {
     this.currentUserSubject.next(data);
   }
 
-  signUp(data: any) {
-    return this.http.post(myConstants.restBaseUrl + myConstants.signUpPath, {
-      name: data.name,
-      sex: data.sex,
-      cpf: data.cpf,
-      birthDate: data.birthDate,
-      roles: { role: data.role }
-    });
+  signUp(data: userData) {
+    return this.http.post(myConstants.restBaseUrl + myConstants.signUpPath, data);
   }
 
   login(data: any) {

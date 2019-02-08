@@ -40,7 +40,7 @@
             <div class="form-group col-sm-6">
 
                 <div class="col-sm-10 mx-auto">
-                    <app-img-input-file (imgFile)="test($event)"></app-img-input-file>
+                    <app-img-input-file (imgFile)="fileImg($event)"></app-img-input-file>
 
                     <div class="progress" *ngIf="inProgress">
                         <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
@@ -57,7 +57,9 @@
 
         <div class="form-row">
             <div class="form-group col-sm-3 floating-label">
-                <input formControlName="birthDate" type="text" class="form-control" placeholder=" ">
+                <input formControlName="birthDate" type="text" class="form-control" placeholder=" "
+                [value]="v.birthDate | MyDate" maxlength="10"
+                onkeypress="return event.charCode >= 48 && event.charCode <= 57">
                 <span>Data de Nascimento*</span>
                 <!-- Validador  -->
                 <app-validators [form]="usersAddForm" [input]="f.birthDate" [inputName]="'data de nascimento'" 
@@ -160,7 +162,7 @@
                 <span>Complemento</span>
                   <!-- Validador  -->
                   <app-validators [form]="usersAddForm" [input]="f.complemento" [inputName]="'complemento'" 
-                  [validators]="['required', 'maxlength', 15]"></app-validators>
+                  [validators]="['maxlength', 15]"></app-validators>
             </div>
         </div>
 
@@ -206,7 +208,8 @@
                  [validators]="['required', 'maxlength', 50]"></app-validators>
             </div>
 
-            <span class="preco-mensalidade">Preço Mensalidade: <b>R$98,49</b></span>
+            <span class="preco-mensalidade">Preço Mensalidade: <b>{{v.precomensalidade | BRCurrencyPipe}}</b></span>
+            
 
         </div>
 

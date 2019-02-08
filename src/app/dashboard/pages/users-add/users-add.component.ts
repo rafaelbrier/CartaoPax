@@ -21,7 +21,8 @@ export class UsersAddComponent implements OnInit {
   progressImg: number;
   inProgress: boolean = false;
   uploadError: boolean = false;
-  downloadURL: String = undefined;
+  downloadURL: string = undefined;
+  uploadedFileName: string = undefined;
 
   sex: string;
   sexOptions: any[] = [{ value: "M", info: "Masculino" }, { value: "F", info: "Feminino" }]; //ISO/IEC 5218
@@ -33,7 +34,7 @@ export class UsersAddComponent implements OnInit {
   planosOptions: any[] = [];
 
   escolaridade: string;
-  escolaridadeOptions: ["FUNDAMENTAL INCOMPLETO","FUNDAMENTAL COMPLETO", "MÉDIO INCOMPLETO",
+  escolaridadeOptions: string[] = ["FUNDAMENTAL INCOMPLETO","FUNDAMENTAL COMPLETO", "MÉDIO INCOMPLETO",
   "MÉDIO COMPLETO","SUPERIOR INCOMPLETO", "SUPERIOR COMPLETO","PÓS (LATO-SENSO) INCOMPLETO",
   "PÓS (LATO-SENSO) COMPLETO","MESTRADO INCOMPLETO","MESTRADO COMPLETO",
   "DOUTORADO INCOMPLETO","DOUTORADO COMPLETO"];
@@ -69,7 +70,7 @@ export class UsersAddComponent implements OnInit {
     this.usersAddForm = this.formBuilder.group({
       name: ['', [Validators.required, whiteSpace, Validators.maxLength(100)]],
       cpf: ['', [Validators.required, whiteSpace, Validators.maxLength(14), Validators.minLength(14)]],
-      sex: ['', [Validators.required, whiteSpace], Validators.maxLength(2)],
+      sex: ['', [Validators.required, whiteSpace, Validators.maxLength(2)]],
       telephone: ['', [Validators.required, whiteSpace, Validators.maxLength(15)]],
       telephoneOp: ['', Validators.maxLength(15)],
       email: ['', [Validators.maxLength(100)]],
@@ -77,13 +78,14 @@ export class UsersAddComponent implements OnInit {
       cep: ['', [Validators.required, whiteSpace, Validators.maxLength(9)]],
       endereco: ['', [Validators.required, whiteSpace, Validators.maxLength(100)]],
       numero: ['', [Validators.required, whiteSpace, Validators.maxLength(6)]],
-      complemento: ['', [Validators.required, whiteSpace], Validators.maxLength(15)],
+      complemento: ['', [Validators.maxLength(15)]],
       escolaridade: ['', [Validators.required, whiteSpace, Validators.maxLength(50)]],
       bairro: ['', [Validators.required, whiteSpace, Validators.maxLength(50)]],
       estado: ['', [Validators.required, whiteSpace, Validators.maxLength(50)]],
       cidade: ['', [Validators.required, whiteSpace, Validators.maxLength(50)]],
       role: ['', [Validators.required, whiteSpace, Validators.maxLength(20)]],
       plano: ['', [Validators.required, whiteSpace, Validators.maxLength(50)]],
+      precomensalidade: [0.00, [Validators.required, whiteSpace, Validators.maxLength(10)]]
     });
     this.usersAddForm.controls['role'].setValue(this.role, { onlySelf: true });
   }
@@ -94,22 +96,71 @@ export class UsersAddComponent implements OnInit {
 
   submitUserForm(): void {
     this.sharedService.triggerValidation(this.usersAddForm);
-    console.log(this.usersAddForm.value)
     if (this.usersAddForm.invalid) {
       return;
     }
 
+    this.submitting = true;
+    this.modal.openModal("Cadastrar Usuário",
+      `Tem certeza que deseja cadastrar o usuário de <b>CPF: ${this.usersAddForm.value.cpf}</b>?`, "normal", true)
+      .then(() => {
+        if (this.profileImg) {
+          this.retrieveImg()
+            .then((url) => {
+
+              this.downloadURL = url;
+              this.sendUser();
+
+            }).catch(() => { this.submitting = false; return });
+        } else {
+          this.uploadedFileName = null;
+          this.sendUser();
+        }
+      }).catch(() => { this.submitting = false; return });
+  }
+
+  sendUser() {
     const values = this.usersAddForm.value;
     const signUpData = {
       name: values.name,
       cpf: values.cpf,
+      imgProfile: this.downloadURL,
+      telephone: values.telephone,
+      telephoneOp: values.telephoneOp,
+      email: values.email,
+      escolaridade: values.escolaridade,
+      cep: values.cep,
+      endereco: values.endereco,
+      numero: values.numero,
+      bairro: values.bairro,
+      estado: values.estado,
+      cidade: values.cidade,
+      complemento: values.complemento,
       sex: values.sex,
       birthDate: values.birthDate,
-      role: values.role
+      roles: {id: values.role},
+      planos: {id: values.plano},
+      planPrice: values.precomensalidade
     }
-    
 
-    this.usersService.signUp(signUpData);
+    this.usersService.signUp(signUpData)
+      .subscribe(() => {
+        this.modal.openModal("Usuário Cadastrado com Sucesso!",
+          `O usuário de <b>CPF: ${this.usersAddForm.value.cpf}</b> foi cadastrado com sucesso!`
+          , "success");
+       
+      }, (res) => {
+        this.submitting = false;
+        if(this.uploadedFileName) {
+          this.fireStorageService.deleteImg(this.uploadedFileName, 'profiles-images');
+        }
+        console.log(res)
+        if(res.error) {
+          this.modal.openModal("Erro!", res.error, "fail");
+        } else {
+          this.modal.openModal("Erro!", "Houve algum erro ao cadastrar o usuário. Por favor tente novamente mais tarde.", "fail");
+        }
+      })
   }
 
   populateRoles() {
@@ -139,12 +190,14 @@ export class UsersAddComponent implements OnInit {
 
   retrieveImg(): Promise<any> {
     this.inProgress = true;
-    let uploadTask = this.fireStorageService.uploadImage(this.profileImg, 'profile-images');
+    let uploadTask = this.fireStorageService.uploadImage(this.profileImg, 'profiles-images');
+    this.uploadedFileName = uploadTask.fileName;
 
     uploadTask.uploadObs((snapshot: { bytesTransferred: number; totalBytes: number; }) => {
       this.progressImg = ((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
       this.progressImg = Math.round(this.progressImg);
     }, (err: string) => {
+      this.uploadedFileName = null;
       this.modal.openModal("Erro!", "Houve algum erro ao processar a imagem. Por favor tente novamente.\n" + err, "fail");
       this.uploadError = true;
     });
@@ -177,16 +230,15 @@ export class UsersAddComponent implements OnInit {
     }
   }
 
-  test(imgFile: File) {
+  fileImg(imgFile: File) {
     this.profileImg = imgFile;
-    console.log(this.profileImg)
   }
 
   errorOnRetrieve() {
-    // if(!this.modal.hasOpenModals())
-    // this.modal.openModal("Erro!",
-    //   `Não foi possível recuperar os dados do servidor, favor tentar novamente mais tarde.`
-    //   , "fail");
+    if(!this.modal.hasOpenModals())
+    this.modal.openModal("Erro!",
+      `Não foi possível recuperar os dados do servidor, favor tentar novamente mais tarde.`
+      , "fail");
   }
 
   disableAddrFields() {

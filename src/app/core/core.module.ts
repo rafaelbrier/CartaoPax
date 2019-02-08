@@ -19,6 +19,8 @@ import { BrPhoneFormatPipe } from './pipes/br-phone.pipe';
 import { ImgInputFileComponent } from './components/img-input-file/img-input-file.component';
 import { CepPipe } from './pipes/cep.pipe';
 import { CpfPipe } from './pipes/cpf.pipe';
+import { MyDatePipe } from './pipes/date.pipe';
+import { BRCurrencyPipe } from './pipes/brcurrency.pipe';
 
 @NgModule({
   imports: [
@@ -46,7 +48,9 @@ import { CpfPipe } from './pipes/cpf.pipe';
      BrPhoneFormatPipe,
      ImgInputFileComponent,
      CepPipe,
-     CpfPipe
+     CpfPipe,
+     MyDatePipe,
+     BRCurrencyPipe
   ],
 
   exports: [
@@ -67,6 +71,8 @@ import { CpfPipe } from './pipes/cpf.pipe';
     BrPhoneFormatPipe,
     CepPipe,
     CpfPipe,
+    MyDatePipe,
+    BRCurrencyPipe,
 
     //Exported Modules
     NgbModule,
