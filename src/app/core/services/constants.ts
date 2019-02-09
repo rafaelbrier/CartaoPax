@@ -6,5 +6,6 @@ export const myConstants = {
     usersPath: '/users',
     signUpPath: '/users/signup',
     roles: '/roles',
-    planos: '/planos'
+    planos: '/planos',
+    planosPrice: '/planos/price'
 }

@@ -8,6 +8,7 @@ import { NewsManagerComponent } from './dashboard/pages/news-manager/news-manage
 import { NewsAddComponent } from './dashboard/pages/news-add/news-add.component';
 import { UsersAddComponent } from './dashboard/pages/users-add/users-add.component';
 import { AuthGuard } from './_guard/auth.guard';
+import { ProfileComponent } from './dashboard/pages/profile/profile.component';
 
 
 export const routes: Routes = [
@@ -20,6 +21,14 @@ export const routes: Routes = [
     component: MainPageComponent,
     canActivate: [AuthGuard],
     children: [
+      {
+        path: '',
+        component: ProfileComponent,
+        canActivate: [AuthGuard],
+        data: {
+          expectedRole: 'CLIENT'
+        }
+      },
       {
         path: 'newsadd',
         component: NewsAddComponent,

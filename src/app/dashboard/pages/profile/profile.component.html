@@ -1,0 +1,93 @@
+<div class="component-title">
+  Perfil
+</div>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-3 text-center">
+      <img src="{{user?.imgProfile || '../../../../assets/images/add-user-avatar.png'}}" width="80%" height="158px">
+      <div class="text-left sub-menu">
+        <p>Tipo:
+          <b
+            [ngClass]="{'text-success': userRole==='ADMIN', 'text-warning': userRole==='EMPLOYEE', 'text-primary': userRole!=='ADMIN' || userRole!=='EMPLOYEE'}">
+            {{user?.roles?.name}}
+          </b>
+        </p>
+        <p>Status: <b [ngClass]="{'text-primary': user?.active, 'text-danger': !user?.active}">
+          {{user?.active ? "ATIVO" : "DESATIVADO"}}
+        </b>
+      </p>
+        <p>Plano: <b style="color: #8c0202">{{user?.planos?.name}}</b></p>
+        <p>Mensalidade: <b class="text-info">{{(user?.planPrice || 0.00) | BRCurrencyPipe}}</b></p>
+      </div>
+
+    </div>
+    <div class="col-sm-9">
+
+      <div class="row">
+        <div class="col-sm-7">
+          <p>Nome: <b>{{user?.name}}</b></p>
+        </div>
+        <div class="col-sm-5">
+          <p>CPF: <b>{{user?.cpf}}</b></p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-7">
+          <p>Data de Nascimento: <b>{{user?.birthDate}}</b></p>
+        </div>
+        <div class="col-sm-5">
+          <p>Idade: <b>{{user?.age}} anos</b></p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-7">
+          <p>Escolaridade: <b>{{user?.escolaridade}}</b></p>
+        </div>
+        <div class="col-sm-5">
+          <p>Sexo: <b>{{user?.sex === 'M' ? "Masculino" : "Feminino"}}</b></p>
+        </div>
+      </div>
+
+      <p>Email: <b>{{user?.email}}</b></p>
+      <hr class="d-none d-sm-block">
+
+      <div class="row">
+        <div class="col-sm-7">
+          <p>CEP: <b>{{user?.cep}}</b></p>
+        </div>
+        <div class="col-sm-5">
+          <p>Estado: <b>{{user?.estado}}</b></p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-7">
+          <p>Cidade: <b>{{user?.cidade}}</b></p>
+        </div>
+        <div class="col-sm-5">
+          <p>Bairro: <b>{{user?.bairro}}</b></p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-7">
+          <p>Endereço: <b>{{user?.endereco}}</b></p>
+        </div>
+        <div class="col-sm-5">
+          <p>Número: <b>{{user?.numero}}</b></p>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-7">
+          <p>Complemento: <b>{{user?.complemento}}</b></p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

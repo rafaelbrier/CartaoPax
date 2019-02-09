@@ -9,6 +9,7 @@ import { NewsCommentsComponent } from './pages/news-comments/news-comments.compo
 import { NewsManagerComponent } from './pages/news-manager/news-manager.component';
 import { UsersAddComponent } from './pages/users-add/users-add.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 @NgModule({
     imports: [
@@ -39,7 +40,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
         NewsAddComponent,
         NewsManagerComponent,
         NewsCommentsComponent,
-        UsersAddComponent
+        UsersAddComponent,
+        ProfileComponent
     ],
     exports: [],
     providers: [],

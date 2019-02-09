@@ -73,21 +73,23 @@ export class SharedService {
     validateCpf(strCPF: string) {
         let Soma = 0;
         let Resto;
-        if (strCPF == "00000000000") return false;
-        if (strCPF == "cartaopaxadmin") return true;
+        let Cpf = strCPF.split(".").join("")
+        Cpf = Cpf.split("-").join("");
+        if (Cpf == "00000000000") return false;
+        if (Cpf == "cartaopaxadmin") return true;
 
-        for (let i = 1; i <= 9; i++) Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (11 - i);
+        for (let i = 1; i <= 9; i++) Soma = Soma + parseInt(Cpf.substring(i - 1, i)) * (11 - i);
         Resto = (Soma * 10) % 11;
 
         if ((Resto == 10) || (Resto == 11)) Resto = 0;
-        if (Resto != parseInt(strCPF.substring(9, 10))) return false;
+        if (Resto != parseInt(Cpf.substring(9, 10))) return false;
 
         Soma = 0;
-        for (let i = 1; i <= 10; i++) Soma = Soma + parseInt(strCPF.substring(i - 1, i)) * (12 - i);
+        for (let i = 1; i <= 10; i++) Soma = Soma + parseInt(Cpf.substring(i - 1, i)) * (12 - i);
         Resto = (Soma * 10) % 11;
 
         if ((Resto == 10) || (Resto == 11)) Resto = 0;
-        if (Resto != parseInt(strCPF.substring(10, 11))) return false;
+        if (Resto != parseInt(Cpf.substring(10, 11))) return false;
         return true;
     }
 

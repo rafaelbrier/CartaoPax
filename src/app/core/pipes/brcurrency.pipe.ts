@@ -8,7 +8,6 @@ export class BRCurrencyPipe implements PipeTransform {
 
     transform(value: number): string {
         if (isNaN(value)) {
-          console.log(value)
             return '';
         }
 

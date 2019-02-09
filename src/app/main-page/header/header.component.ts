@@ -94,6 +94,8 @@ export class HeaderComponent implements OnInit {
 
   get f() { return this.loginForm.controls; }
 
+  get v() { return this.loginForm.value; }
+
   navigateToDashboard(logInNow: boolean): void {
     logInNow ? location.href = '/dashboard/' :
                this.router.navigate(['/dashboard']);

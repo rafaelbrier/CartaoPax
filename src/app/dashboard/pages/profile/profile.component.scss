@@ -1,0 +1,19 @@
+@import "../../dashboard.scss";
+
+
+.sub-menu {
+    margin-top: 20px;
+}
+
+.row {
+    img {
+        border-radius: 50%;
+    }
+    p  {
+        color: #6c757d;
+    }
+    b {
+        text-transform: uppercase;
+        color: black;
+    }
+}

@@ -11,7 +11,7 @@ export class User {
   Expires_At: string;
 }
 
-interface userData {
+export interface userData {
   name: string,
   cpf: string,
   imgProfile: string,
@@ -58,6 +58,10 @@ export class UsersService {
 
   private setCurrentUserValue(data: User): void {
     this.currentUserSubject.next(data);
+  }
+
+  findUserByCpf(Cpf: string) {
+    return this.http.get(`${myConstants.restBaseUrl}${myConstants.usersPath}?searchTerm=${Cpf}`)
   }
 
   signUp(data: userData) {

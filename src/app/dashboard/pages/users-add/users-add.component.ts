@@ -34,10 +34,10 @@ export class UsersAddComponent implements OnInit {
   planosOptions: any[] = [];
 
   escolaridade: string;
-  escolaridadeOptions: string[] = ["FUNDAMENTAL INCOMPLETO","FUNDAMENTAL COMPLETO", "MÉDIO INCOMPLETO",
-  "MÉDIO COMPLETO","SUPERIOR INCOMPLETO", "SUPERIOR COMPLETO","PÓS (LATO-SENSO) INCOMPLETO",
-  "PÓS (LATO-SENSO) COMPLETO","MESTRADO INCOMPLETO","MESTRADO COMPLETO",
-  "DOUTORADO INCOMPLETO","DOUTORADO COMPLETO"];
+  escolaridadeOptions: string[] = ["FUNDAMENTAL INCOMPLETO", "FUNDAMENTAL COMPLETO", "MÉDIO INCOMPLETO",
+    "MÉDIO COMPLETO", "SUPERIOR INCOMPLETO", "SUPERIOR COMPLETO", "PÓS (LATO-SENSO) INCOMPLETO",
+    "PÓS (LATO-SENSO) COMPLETO", "MESTRADO INCOMPLETO", "MESTRADO COMPLETO",
+    "DOUTORADO INCOMPLETO", "DOUTORADO COMPLETO"];
 
   // Form
   usersAddForm: FormGroup;
@@ -61,9 +61,15 @@ export class UsersAddComponent implements OnInit {
     this.populatePlanos();
 
     this.usersAddForm.controls['cep'].valueChanges.subscribe((cep) => {
-         this.consultaCep(cep);
+      this.consultaCep(cep);
     });
-    
+    this.usersAddForm.controls['birthDate'].valueChanges.subscribe((birthDate) => {
+      this.consultaPrecoPlano(birthDate, this.v.plano);
+    });
+    this.usersAddForm.controls['plano'].valueChanges.subscribe((plano) => {
+      this.consultaPrecoPlano(this.v.birthDate, plano);
+    });
+
   }
 
   usersAddFormBuilder(): void {
@@ -71,11 +77,11 @@ export class UsersAddComponent implements OnInit {
       name: ['', [Validators.required, whiteSpace, Validators.maxLength(100)]],
       cpf: ['', [Validators.required, whiteSpace, Validators.maxLength(14), Validators.minLength(14)]],
       sex: ['', [Validators.required, whiteSpace, Validators.maxLength(2)]],
-      telephone: ['', [Validators.required, whiteSpace, Validators.maxLength(15)]],
-      telephoneOp: ['', Validators.maxLength(15)],
+      telephone: ['', [Validators.required, whiteSpace, Validators.maxLength(15), Validators.minLength(14)]],
+      telephoneOp: ['', [Validators.maxLength(15), Validators.minLength(14)]],
       email: ['', [Validators.maxLength(100)]],
       birthDate: ['', [Validators.required, whiteSpace, Validators.maxLength(10)]],
-      cep: ['', [Validators.required, whiteSpace, Validators.maxLength(9)]],
+      cep: ['', [Validators.required, whiteSpace, Validators.maxLength(9), Validators.minLength(9)]],
       endereco: ['', [Validators.required, whiteSpace, Validators.maxLength(100)]],
       numero: ['', [Validators.required, whiteSpace, Validators.maxLength(6)]],
       complemento: ['', [Validators.maxLength(15)]],
@@ -138,8 +144,8 @@ export class UsersAddComponent implements OnInit {
       complemento: values.complemento,
       sex: values.sex,
       birthDate: values.birthDate,
-      roles: {id: values.role},
-      planos: {id: values.plano},
+      roles: { id: values.role },
+      planos: { id: values.plano },
       planPrice: values.precomensalidade
     }
 
@@ -148,19 +154,33 @@ export class UsersAddComponent implements OnInit {
         this.modal.openModal("Usuário Cadastrado com Sucesso!",
           `O usuário de <b>CPF: ${this.usersAddForm.value.cpf}</b> foi cadastrado com sucesso!`
           , "success");
-       
-      }, (res) => {
+
+      }, (err) => {
         this.submitting = false;
-        if(this.uploadedFileName) {
-          this.fireStorageService.deleteImg(this.uploadedFileName, 'profiles-images');
-        }
-        console.log(res)
-        if(res.error) {
-          this.modal.openModal("Erro!", res.error, "fail");
-        } else {
-          this.modal.openModal("Erro!", "Houve algum erro ao cadastrar o usuário. Por favor tente novamente mais tarde.", "fail");
-        }
+        this.handleErrorResponse(err);
       })
+  }
+
+  handleErrorResponse(err: any) {
+    if (this.uploadedFileName) {
+      this.fireStorageService.deleteImg(this.uploadedFileName, 'profiles-images');
+    }
+    if (err.error) {
+      if (err.error.errors) {
+        if (err.error.errors.length >= 1) {
+          let errorsArr = err.error.errors;
+          let messagesArr = [];
+          errorsArr.forEach(element => {
+            messagesArr.push('<div>- ' + element["defaultMessage"]+'</div>');
+          });
+          let errorMessages = `<div class="alert alert-danger text-left col-sm-11 mx-auto">
+          ${messagesArr.join('')}</div>`;
+          this.modal.openModal("Erro!", errorMessages, "fail");
+          return;
+        }
+      }
+    }
+    this.modal.openModal("Erro!", "Houve algum erro ao cadastrar o usuário. Por favor tente novamente mais tarde.", "fail");
   }
 
   populateRoles() {
@@ -172,9 +192,9 @@ export class UsersAddComponent implements OnInit {
           this.roleOptions.push({ value: value, info: info });
         })
         this.roleOptions =
-        this.roleOptions.filter(obj => this.usersService.havePermission(obj.info) === true);
+          this.roleOptions.filter(obj => this.usersService.havePermission(obj.info) === true);
 
-      }, () => {});
+      }, () => { });
   }
 
   populatePlanos() {
@@ -210,23 +230,31 @@ export class UsersAddComponent implements OnInit {
     });
   }
 
+  consultaPrecoPlano(birthDate: string, planoId: number) {
+    this.planosService.getPlanPrice(birthDate, planoId)
+      .subscribe(res => {
+        if (res)
+          this.usersAddForm.patchValue({ precomensalidade: res })
+      });
+  }
+
   consultaCep(Cep: string) {
     let addr: any;
-    
-    if(Cep.length === 9) {
+
+    if (Cep.length === 9) {
       this.disableAddrFields();
 
       this.sharedService.consultaCEP(Cep)
-      .subscribe(res => {
-       addr = res;
-       this.usersAddForm.patchValue({
-         endereco: addr.logradouro,
-         bairro: addr.bairro,
-         estado: addr.uf,
-         cidade: addr.localidade
-       });
-       this.enableAddrFields();
-      }, () =>{ this.enableAddrFields(); });
+        .subscribe(res => {
+          addr = res;
+          this.usersAddForm.patchValue({
+            endereco: addr.logradouro,
+            bairro: addr.bairro,
+            estado: addr.uf,
+            cidade: addr.localidade
+          });
+          this.enableAddrFields();
+        }, () => { this.enableAddrFields(); });
     }
   }
 
@@ -235,10 +263,10 @@ export class UsersAddComponent implements OnInit {
   }
 
   errorOnRetrieve() {
-    if(!this.modal.hasOpenModals())
-    this.modal.openModal("Erro!",
-      `Não foi possível recuperar os dados do servidor, favor tentar novamente mais tarde.`
-      , "fail");
+    if (!this.modal.hasOpenModals())
+      this.modal.openModal("Erro!",
+        `Não foi possível recuperar os dados do servidor, favor tentar novamente mais tarde.`
+        , "fail");
   }
 
   disableAddrFields() {

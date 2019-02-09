@@ -91,7 +91,8 @@
           <div class="form-group">
             <label for="exampleInputEmail1">Usuário</label>
             <input formControlName="username" type="email" class="form-control" id="exampleInputEmail1"
-              aria-describedby="Usuário" placeholder="Email">
+              aria-describedby="Usuário" placeholder="CPF"
+              [value]="v.username | cpf">
             <app-validators [form]="loginForm" [input]="f.username" [inputName]="'usuário'" [validators]="['required']"></app-validators>
           </div>
 

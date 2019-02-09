@@ -19,7 +19,8 @@
                 <div class="form-row">
                     <div class="col-sm-6 floating-label">
                         <input formControlName="cpf" type="text" class="form-control" placeholder=" "
-                        [value]="v.cpf | cpf" maxlength="14">
+                        [value]="v.cpf | cpf" maxlength="14"
+                        onkeypress="return event.charCode >= 48 && event.charCode <= 57">
                         <span>CPF*</span>
                         <!-- Validador  -->
                         <app-validators [form]="usersAddForm" [input]="f.cpf" [inputName]="'cpf'"
@@ -83,7 +84,7 @@
                 <span>Telefone*</span>
                 <!-- Validador  -->
                 <app-validators [form]="usersAddForm" [input]="f.telephone" [inputName]="'telefone'"
-                    [validators]="['required','maxlength', 16, 'minlength', 16]"></app-validators>
+                    [validators]="['required','maxlength', 15, 'minlength', 14]"></app-validators>
             </div>
         </div>
 
@@ -124,10 +125,11 @@
         <div class="form-row">
             <div class="form-group col-sm-3 floating-label">
                 <input formControlName="cep" type="text" class="form-control" placeholder=" "
-                [value]="v.cep | cep" maxlength="9">
+                [value]="v.cep | cep" maxlength="9"
+                onkeypress="return event.charCode >= 48 && event.charCode <= 57">
                 <span>CEP*</span>
                 <app-validators [form]="usersAddForm" [input]="f.cep" [inputName]="'cep'"
-                [validators]="['required','maxlength',9]"></app-validators>
+                [validators]="['required','maxlength',9, 'minlengt', 9]"></app-validators>
             </div>
             <a href="http://www.buscacep.correios.com.br/sistemas/buscacep/" target="_blank" class="cep-btn">
                 <button type="button" class="btn btn-outline-warning">Consultar CEP</button>
