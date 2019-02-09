@@ -10,6 +10,7 @@ import { NewsManagerComponent } from './pages/news-manager/news-manager.componen
 import { UsersAddComponent } from './pages/users-add/users-add.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { UsersManagerComponent } from './pages/users-manager/users-manager.component';
 
 @NgModule({
     imports: [
@@ -41,7 +42,8 @@ import { ProfileComponent } from './pages/profile/profile.component';
         NewsManagerComponent,
         NewsCommentsComponent,
         UsersAddComponent,
-        ProfileComponent
+        ProfileComponent,
+        UsersManagerComponent
     ],
     exports: [],
     providers: [],

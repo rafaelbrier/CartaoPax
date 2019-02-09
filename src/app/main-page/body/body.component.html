@@ -6,7 +6,8 @@
         <h3 class="info-text">
             Última
           </h3>
-        <image [imgSrc]="recentNews?.imgPath" [height]="'450px'" [width]="'100%'"></image>
+        <image [imgSrc]="recentNews?.imgPath || '../../../assets/images/default-banner.jpg'"
+         [height]="'450px'" [width]="'100%'"></image>
         <news-box-component *ngIf="recentNews" [newsData]="recentNews"></news-box-component>
     </div>
 

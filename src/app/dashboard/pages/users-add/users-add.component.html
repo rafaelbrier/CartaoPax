@@ -101,11 +101,11 @@
 
             <div class="form-group offset-sm-1 col-sm-4 floating-label">
                 <input formControlName="email" type="email" class="form-control" placeholder=" "
-                maxlength="101">
+                maxlength="100" email>
                 <span>Email</span>
                 <!-- Validador  -->
                 <app-validators [form]="usersAddForm" [input]="f.email" [inputName]="'email'"
-                 [validators]="['required', 'maxlength',100]"></app-validators>
+                 [validators]="['required', 'email', 'maxlength',100]"></app-validators>
             </div>
 
 
@@ -217,8 +217,8 @@
 
         <div class="form-end">
             <span>Os campos com * são obrigatórios.</span>
+            <button type="reset" class="btn btn-info" [disabled]="submitting">Limpar Campos</button>
             <button type="submit" class="btn btn-success" [disabled]="submitting">Cadastrar Usuário</button>
-            <!-- <button type="reset" class="btn btn-info" [disabled]="submitting">Limpar Campos</button> -->
         </div>
 
     </form>

@@ -9,6 +9,7 @@ import { NewsAddComponent } from './dashboard/pages/news-add/news-add.component'
 import { UsersAddComponent } from './dashboard/pages/users-add/users-add.component';
 import { AuthGuard } from './_guard/auth.guard';
 import { ProfileComponent } from './dashboard/pages/profile/profile.component';
+import { PlanosComponent } from './main-page/pages/planos/planos.component';
 
 
 export const routes: Routes = [
@@ -16,6 +17,7 @@ export const routes: Routes = [
   { path: 'home', component: BodyComponent, data: { breadcrumb: "Home" } },
   { path: 'news', component: NewsPageComponent, data: { breadcrumb: "Notícias" } },
   { path: 'news/:id', component: NewsPageComponent, data: { breadcrumb: "Notícias" } },
+  { path: 'planos', component: PlanosComponent, data: { breadcrumb: "Planos" } },
   {
     path: 'dashboard',
     component: MainPageComponent,

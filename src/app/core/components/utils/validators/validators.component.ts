@@ -34,14 +34,17 @@ export class ValidatorsComponent implements OnInit {
 
   ngOnInit() {
     if(this.validators) {
+
     this.required = this.validators.includes('required');
     this.email = this.validators.includes('email');
     this.whiteSpace = this.validators.includes('whiteSpace');
+
     this.maxLength = this.validators.includes('maxlength');
     if(this.maxLength){
       let maxLengthArrayPos = this.validators.indexOf('maxlength');
       this.maxLengthNum = this.validators[maxLengthArrayPos + 1];
     }
+
     this.minLength = this.validators.includes('minlength');
     if(this.minLength){
       let minLengthArrayPos = this.validators.indexOf('minlength');

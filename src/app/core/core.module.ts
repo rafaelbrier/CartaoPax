@@ -50,7 +50,7 @@ import { BRCurrencyPipe } from './pipes/brcurrency.pipe';
      CepPipe,
      CpfPipe,
      MyDatePipe,
-     BRCurrencyPipe
+     BRCurrencyPipe,
   ],
 
   exports: [

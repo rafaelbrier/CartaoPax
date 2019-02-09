@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ModalComponent } from 'src/app/core/components/utils/modal/modal.component';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { whiteSpace } from 'src/app/core/components/utils/validators/custom-validators';
@@ -151,10 +151,11 @@ export class UsersAddComponent implements OnInit {
 
     this.usersService.signUp(signUpData)
       .subscribe(() => {
+        this.submitComplete();
         this.modal.openModal("Usuário Cadastrado com Sucesso!",
           `O usuário de <b>CPF: ${this.usersAddForm.value.cpf}</b> foi cadastrado com sucesso!`
           , "success");
-
+       
       }, (err) => {
         this.submitting = false;
         this.handleErrorResponse(err);
@@ -178,9 +179,12 @@ export class UsersAddComponent implements OnInit {
           this.modal.openModal("Erro!", errorMessages, "fail");
           return;
         }
+      } else {
+        this.modal.openModal("Erro!",  `<div class="alert alert-danger text-left col-sm-11 mx-auto">${err.error}</div>`, "fail");
       }
+    } else {
+      this.modal.openModal("Erro!", "Houve algum erro ao cadastrar o usuário. Por favor tente novamente mais tarde.", "fail");
     }
-    this.modal.openModal("Erro!", "Houve algum erro ao cadastrar o usuário. Por favor tente novamente mais tarde.", "fail");
   }
 
   populateRoles() {
@@ -260,6 +264,12 @@ export class UsersAddComponent implements OnInit {
 
   fileImg(imgFile: File) {
     this.profileImg = imgFile;
+  }
+
+  submitComplete() {
+    this.inProgress = false;
+    this.submitting = false;
+    this.usersAddForm.reset();
   }
 
   errorOnRetrieve() {

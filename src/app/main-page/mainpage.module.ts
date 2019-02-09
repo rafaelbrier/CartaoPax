@@ -4,6 +4,7 @@ import { CoreModule } from '../core/core.module';
 import { BodyComponent } from './body/body.component';
 import { HeaderComponent } from './header/header.component';
 import { NewsPageComponent } from './pages/news-page/news-page.component';
+import { PlanosComponent } from './pages/planos/planos.component';
 
 @NgModule({
     imports: [
@@ -14,6 +15,7 @@ import { NewsPageComponent } from './pages/news-page/news-page.component';
         BodyComponent,
         HeaderComponent,
         NewsPageComponent,
+        PlanosComponent,
     ],
     exports: [
         HeaderComponent,
