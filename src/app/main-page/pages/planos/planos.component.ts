@@ -11,8 +11,6 @@ import { whiteSpace } from 'src/app/core/components/utils/validators/custom-vali
 })
 export class PlanosComponent implements OnInit {
   
-  @ViewChild(ModalComponent) modal: ModalComponent;
-
   isBoxLoading: boolean = false;
   boxLoadingError: boolean = false;
 
@@ -41,6 +39,7 @@ export class PlanosComponent implements OnInit {
   consultaPrecoPlano(birthDate: string, planoId: number) {
     this.isBoxLoading = true;
     this.boxLoadingError = false;
+
     this.planosService.getPlanPrice(birthDate, planoId)
       .subscribe((res: number) => {
         if (res)
@@ -62,6 +61,9 @@ export class PlanosComponent implements OnInit {
   get v() { return this.planosPriceForm.value; }
 
   populatePlanos() {
+    this.isBoxLoading = true;
+    this.boxLoadingError = false;
+
     this.planosService.findAll()
       .subscribe(res => {
         Object.keys(res).map((keys) => {
@@ -69,14 +71,12 @@ export class PlanosComponent implements OnInit {
           let info = res[keys]["name"];
           this.planosOptions.push({ value: value, info: info });
         })
+        this.isBoxLoading = false;
       }, () => { this.errorOnRetrieve(); })
   }
 
   errorOnRetrieve() {
     this.boxLoadingError = true;
-    if (!this.modal.hasOpenModals())
-      this.modal.openModal("Erro!",
-        `Não foi possível recuperar os dados do servidor, favor tentar novamente mais tarde.`
-        , "fail");
-  }
+    this.isBoxLoading = false;
+     }
 }

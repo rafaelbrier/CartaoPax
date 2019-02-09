@@ -14,7 +14,13 @@ export class ProfileComponent implements OnInit {
 
   constructor(private usersService: UsersService) { }
 
+  isBoxLoading: boolean = false;
+  boxLoadingError: boolean = false;
+
   ngOnInit() {
+    this.isBoxLoading = true;
+    this.boxLoadingError = false;
+
     this.userRole = this.usersService.getRole();
     this.usersService.findUserByCpf(this.usersService.getUser())
     .subscribe( (res:any) =>
@@ -22,8 +28,14 @@ export class ProfileComponent implements OnInit {
         if(res.content) {
           this.user = res.content[0];
         }
-      }, err => {console.log(err)}
+        this.isBoxLoading = false;
+      }, () => { this.errorOnRetrieve(); }
       )
   }
+
+  errorOnRetrieve() {
+    this.boxLoadingError = true;
+    this.isBoxLoading = false;
+     }
 
 }

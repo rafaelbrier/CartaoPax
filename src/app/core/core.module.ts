@@ -21,6 +21,7 @@ import { CepPipe } from './pipes/cep.pipe';
 import { CpfPipe } from './pipes/cpf.pipe';
 import { MyDatePipe } from './pipes/date.pipe';
 import { BRCurrencyPipe } from './pipes/brcurrency.pipe';
+import { EmptyListComponent } from './components/utils/empty-list/empty-list.component';
 
 @NgModule({
   imports: [
@@ -51,6 +52,7 @@ import { BRCurrencyPipe } from './pipes/brcurrency.pipe';
      CpfPipe,
      MyDatePipe,
      BRCurrencyPipe,
+     EmptyListComponent,
   ],
 
   exports: [
@@ -63,7 +65,8 @@ import { BRCurrencyPipe } from './pipes/brcurrency.pipe';
     ModalComponent,
     ValidatorsComponent,
     ImgInputFileComponent,
-
+    EmptyListComponent,
+    
     //Exported Directives
     SortTableDirective,
 

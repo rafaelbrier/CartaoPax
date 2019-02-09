@@ -4,9 +4,11 @@
 
 
 <div class="container">
-  <div class="row">
+  <app-error-load [loadError]="boxLoadingError" [isLoading]="isBoxLoading"></app-error-load>
+  <div *ngIf="!boxLoadingError && !isBoxLoading" class="row">
     <div class="col-sm-3 text-center">
-      <img src="{{user?.imgProfile || '../../../../assets/images/add-user-avatar.png'}}" width="80%" height="158px">
+      <image [imgSrc]="user?.imgProfile || '../../../../assets/images/add-user-avatar.png'" [width]="'80%'" [height]="'158px'"
+      [style]="{'border-radius': '50%'}"></image>
       <div class="text-left sub-menu">
         <p>Tipo:
           <b

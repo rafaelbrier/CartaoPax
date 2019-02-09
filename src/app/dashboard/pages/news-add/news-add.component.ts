@@ -18,6 +18,7 @@ export class NewsAddComponent implements OnInit {
   @ViewChild(ModalComponent) modal: ModalComponent;
 
   file: File;
+  uploadedFileName: string = null;
   progressImg: number;
   inProgress: boolean = false;
   uploadError: boolean = false;
@@ -115,6 +116,9 @@ export class NewsAddComponent implements OnInit {
         this.submitComplete();
       }, () => {
         this.submitting = false;
+        if (this.uploadedFileName) {
+          this.fireStorageService.deleteImg(this.uploadedFileName, 'news-images');
+        }
         this.modal.openModal("Erro!", "Houve algum erro ao publicar a notícia. Por favor tente novamente mais tarde.", "fail");
       })
   }
@@ -153,11 +157,13 @@ export class NewsAddComponent implements OnInit {
   retrieveImg(): Promise<any> {
     this.inProgress = true;
     let uploadTask = this.fireStorageService.uploadImage(this.file, 'news-images');
+    this.uploadedFileName = uploadTask.fileName;
 
     uploadTask.uploadObs((snapshot: { bytesTransferred: number; totalBytes: number; }) => {
       this.progressImg = ((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
       this.progressImg = Math.round(this.progressImg);
     }, (err: string) => {
+      this.uploadedFileName = null;
       this.modal.openModal("Erro!", "Houve algum erro ao processar a imagem. Por favor tente novamente.\n" + err, "fail");
       this.uploadError = true;
     });

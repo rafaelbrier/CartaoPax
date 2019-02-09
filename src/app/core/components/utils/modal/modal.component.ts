@@ -14,14 +14,7 @@ export class ModalComponent {
     modalRef.componentInstance.withConfirm = withConfirm;
     modalRef.componentInstance.modalType = modalType;
     modalRef.componentInstance.title = title;
-
-    if (modalType === "image") {
-      setTimeout(() => {
-        modalRef.componentInstance.body = body;
-      }, 1000);
-    } else {
-      modalRef.componentInstance.body = body;
-    }
+    modalRef.componentInstance.body = body;
 
     return modalRef.result;
   }
@@ -31,7 +24,7 @@ export class ModalComponent {
   }
 
   loaderModal() {
-    const modalRef = this.modalService.open(ModalComponent, {keyboard: false, backdrop: 'static'});
+    const modalRef = this.modalService.open(ModalComponent, { keyboard: false, backdrop: 'static' });
     modalRef.componentInstance.modalType = "loader";
   }
 
