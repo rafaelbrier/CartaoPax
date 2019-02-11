@@ -235,15 +235,13 @@ export class UsersAddComponent implements OnInit {
 
   populateRoles() {
     this.rolesService.findAll()
-      .subscribe(res => {
-        Object.keys(res).map((keys) => {
-          let value = res[keys]["id"];
-          let info = res[keys]["name"];
+      .subscribe((res: any) => {
+        let allowedRoles = res.filter(obj => this.usersService.havePermission(obj.role) === true);
+        Object.keys(allowedRoles).map((keys) => {
+          let value = allowedRoles[keys]["id"];
+          let info = allowedRoles[keys]["name"];
           this.roleOptions.push({ value: value, info: info });
         })
-        this.roleOptions =
-          this.roleOptions.filter(obj => this.usersService.havePermission(obj.info) === true);
-
       }, () => { });
   }
 

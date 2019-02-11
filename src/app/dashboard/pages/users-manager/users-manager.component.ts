@@ -124,8 +124,15 @@ export class UsersManagerComponent implements OnInit {
         this.pagNumberOfPages = 10*Math.ceil(this.usersData.totalElements / this.limitValue);
         this.isBoxLoading = false;
 
+        let totalElementsCount = this.users ? this.users.length : 0;
         this.users = 
         this.users.filter(obj => this.usersService.havePermission(obj.roles.role) === true);
+        let croppedElementsCount = totalElementsCount - this.users.length;
+
+        if(this.users) {
+          this.usersData.totalElements = this.usersData.totalElements - croppedElementsCount;
+          this.usersData.numberOfElements = this.usersData.numberOfElements - croppedElementsCount;
+        }
 
       }, () => {
         this.isBoxLoading = false;
