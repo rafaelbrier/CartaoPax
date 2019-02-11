@@ -33,6 +33,11 @@
 
       <ul>
 
+          <li class="menu-item ripple" [ngClass]="sideBarOpened ? '' : 'icon-only'" [routerLink]="['/dashboard']">
+            <img src="../../../../assets/images/icons/profile.svg" alt="MENU">
+            <a>Perfil</a>
+          </li>
+
          <!-- with submenu -->
          <div class="sub-menu">
             <li class="menu-item ripple sub-menu-toggler" [ngClass]="sideBarOpened ? '' : 'icon-only'">
@@ -46,7 +51,7 @@
                 <img src="../../../../assets/images/icons/add.svg" alt="MENU">
                 <a>Adicionar</a>
               </li>
-              <li class="menu-item ripple sub-item" [ngClass]="sideBarOpened ? '' : 'icon-only'" [routerLink]="['./newsmanager']">
+              <li class="menu-item ripple sub-item" [ngClass]="sideBarOpened ? '' : 'icon-only'" [routerLink]="['./usersmanager']">
                 <img src="../../../../assets/images/icons/edit.svg" alt="MENU">
                 <a>Gerenciar</a>
               </li>

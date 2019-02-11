@@ -1,5 +1,5 @@
 <div class="component-title">
-    {{isEditing ? 'Editar' : 'Adicionar'}} Usuário <b>{{isEditing ? [' - #' + usersToEdit?.id] : ''}}</b>
+    {{isEditing ? 'Editar' : 'Adicionar'}} Usuário <b>{{isEditing ? [' - CPF: ' + userToEdit?.cpf] : ''}}</b>
 </div>
 
 <div class="form-container">
@@ -41,7 +41,7 @@
             <div class="form-group col-sm-6">
 
                 <div class="col-sm-10 mx-auto">
-                    <app-img-input-file (imgFile)="fileImg($event)"></app-img-input-file>
+                    <app-img-input-file [imgPath]="downloadURL" (imgFile)="fileImg($event)"></app-img-input-file>
 
                     <div class="progress" *ngIf="inProgress">
                         <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
@@ -218,7 +218,8 @@
         <div class="form-end">
             <span>Os campos com * são obrigatórios.</span>
             <button type="reset" class="btn btn-info" [disabled]="submitting">Limpar Campos</button>
-            <button type="submit" class="btn btn-success" [disabled]="submitting">Cadastrar Usuário</button>
+            <button type="submit" class="btn btn-success" [disabled]="submitting">
+                {{this.isEditing ? "Editar": "Cadastrar"}} Usuário</button>
         </div>
 
     </form>

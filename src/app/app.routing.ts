@@ -10,6 +10,7 @@ import { UsersAddComponent } from './dashboard/pages/users-add/users-add.compone
 import { AuthGuard } from './_guard/auth.guard';
 import { ProfileComponent } from './dashboard/pages/profile/profile.component';
 import { PlanosComponent } from './main-page/pages/planos/planos.component';
+import { UsersManagerComponent } from './dashboard/pages/users-manager/users-manager.component';
 
 
 export const routes: Routes = [
@@ -28,7 +29,7 @@ export const routes: Routes = [
         component: ProfileComponent,
         canActivate: [AuthGuard],
         data: {
-          expectedRole: 'CLIENT'
+          expectedRole: 'CLIENT' //Mínima Role que pode visualizar
         }
       },
       {
@@ -58,6 +59,16 @@ export const routes: Routes = [
           expectedRole: 'EMPLOYEE'
         }
       },
+      {
+        path: 'usersmanager',
+        component: UsersManagerComponent,
+        canActivate: [AuthGuard],
+        data: {
+          breadcrumb: "Gerenciar Usuários",
+          expectedRole: 'EMPLOYEE'
+        }
+      },
+      
     ]
   },
   { path: '404', component: Error404PageComponent },

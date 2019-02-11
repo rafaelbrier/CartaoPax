@@ -84,28 +84,29 @@ $linkColor: #3c8dbc;
     border-color: #1684a0;
 }
 
-.td-full-wd {
-    white-space: nowrap;
-}
-
 .inner-addon {
     position: relative;
   }
   
   /* style glyph */
   .inner-addon .fas {
-    position: absolute;
+      position: absolute;
     padding: 10px;
     cursor: pointer;
-  }
-  
-  /* align glyph */
-  .right-addon .fas { right: 0px; line-height: 21px;}
-  
-  /* add padding  */
-  .right-addon input { padding-right: 30px; }
+}
 
-    .mw-px-1 { min-width: 80px;}
+/* align glyph */
+.right-addon .fas { right: 0px; line-height: 21px;}
+
+/* add padding  */
+.right-addon input { padding-right: 30px; }
+
+.mw-px-1 { min-width: 80px;}
+
+.td-full-wd {
+    white-space: nowrap;
+}
+
     .mw-px-2 { min-width: 160px;}
     .mw-px-3 { min-width: 240px;}      
     .mw-px-4 { min-width: 320px;}

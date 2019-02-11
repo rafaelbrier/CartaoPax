@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Output, ViewChild, ElementRef, Input } from '@angular/core';
 import { SharedService } from '../../services/shared-services';
 import { EventEmitter } from '@angular/core';
 
@@ -11,10 +11,11 @@ export class ImgInputFileComponent implements OnInit {
 
   @ViewChild('inputFile') inputFile: ElementRef;
 
+  @Input() imgPath: String | ArrayBuffer;
+
   @Output() imgFile = new EventEmitter();
 
   file: File;
-  imgPath: String | ArrayBuffer;
   fileOverSize: boolean = false;
   fileNotImg: boolean = false;
 

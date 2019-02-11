@@ -12,6 +12,7 @@ export class User {
 }
 
 export interface userData {
+  id?: string,
   name: string,
   cpf: string,
   imgProfile: string,
@@ -28,8 +29,8 @@ export interface userData {
   complemento: string,
   sex: string,
   birthDate: string,
-  roles: { id: number},
-  planos: { id: number},
+  roles: { id: number, name?: string},
+  planos: { id: number, name?: string},
   planPrice: number
 }
 
@@ -62,6 +63,14 @@ export class UsersService {
 
   findUserByCpf(Cpf: string) {
     return this.http.get(`${myConstants.restBaseUrl}${myConstants.usersPath}?searchTerm=${Cpf}`)
+  }
+  
+  findUserById(id: string) {
+    return this.http.get(`${myConstants.restBaseUrl}${myConstants.usersPath}/${id}`);
+  }
+
+  findAllPageable(page: number, size: number, sort: String, order: String, searchTerm: string = '') {
+    return this.http.get(`${myConstants.restBaseUrl}${myConstants.usersPath}?page=${page}&size=${size}&sort=${sort},${order}&searchTerm=${searchTerm}`);
   }
 
   signUp(data: userData) {
@@ -135,7 +144,7 @@ export class UsersService {
 
   public havePermission(Role: String) {
     let userRole = this.getRole();
-
+    
     if (userRole) {
       switch (userRole) {
         case "ADMIN":
@@ -181,6 +190,10 @@ export class UsersService {
     if (this.currentUserValue) {
       this.setCurrentUserValue(null);
     }
+  }
+
+  public delete(userId: String) {
+    return this.http.delete(`${myConstants.restBaseUrl}${myConstants.usersPath}/${userId}`);
   }
 
 }

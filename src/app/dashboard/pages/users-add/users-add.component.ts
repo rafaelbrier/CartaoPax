@@ -3,10 +3,11 @@ import { ModalComponent } from 'src/app/core/components/utils/modal/modal.compon
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { whiteSpace } from 'src/app/core/components/utils/validators/custom-validators';
 import { SharedService } from 'src/app/core/services/shared-services';
-import { UsersService } from 'src/app/core/services/users-service';
+import { UsersService, userData } from 'src/app/core/services/users-service';
 import { RolesService } from 'src/app/core/services/roles-service';
 import { PlanosService } from 'src/app/core/services/planos-service';
 import { FireStorageService } from 'src/app/core/services/firebase-storage/fire-storage.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-users-add',
@@ -45,9 +46,10 @@ export class UsersAddComponent implements OnInit {
 
   //Edit
   isEditing: boolean = false;
-  usersToEdit: any;
+  userToEdit: userData;
 
   constructor(private formBuilder: FormBuilder,
+    private activatedRoute: ActivatedRoute,
     private sharedService: SharedService,
     private usersService: UsersService,
     private rolesService: RolesService,
@@ -70,6 +72,46 @@ export class UsersAddComponent implements OnInit {
       this.consultaPrecoPlano(this.v.birthDate, plano);
     });
 
+    this.checkIfIsEdit();
+
+  }
+
+  checkIfIsEdit(): void {
+    if (this.activatedRoute.snapshot.queryParams['id']) {
+      this.isEditing = true;
+      this.usersService.findUserById(this.activatedRoute.snapshot.queryParams['id'])
+      .subscribe((res: userData) => {
+        this.userToEdit = res;
+        this.usersAddForm.patchValue({
+          name: this.userToEdit.name,
+          cpf: this.userToEdit.cpf,
+          sex: this.userToEdit.sex,
+          telephone: this.userToEdit.telephone,
+          telephoneOp: this.userToEdit.telephoneOp,
+          email: this.userToEdit.email,
+          birthDate: this.userToEdit.birthDate,
+          cep: this.userToEdit.cep,
+          endereco: this.userToEdit.endereco,
+          numero: this.userToEdit.numero,
+          complemento: this.userToEdit.complemento,
+          escolaridade: this.userToEdit.escolaridade,
+          bairro: this.userToEdit.bairro,
+          estado: this.userToEdit.estado,
+          cidade: this.userToEdit.cidade,
+          role: this.userToEdit.roles.id,
+          plano: this.userToEdit.planos.id,
+          precomensalidade: this.userToEdit.planPrice,
+        });
+        this.downloadURL = this.userToEdit.imgProfile;
+        //Vem do db como "null" e não null, por algum motivo
+        this.downloadURL = this.downloadURL === "null" ? null : this.downloadURL;
+      },
+      () => {})
+     
+    } else {
+      this.isEditing = false;
+      this.userToEdit = null;
+    }
   }
 
   usersAddFormBuilder(): void {
@@ -107,8 +149,8 @@ export class UsersAddComponent implements OnInit {
     }
 
     this.submitting = true;
-    this.modal.openModal("Cadastrar Usuário",
-      `Tem certeza que deseja cadastrar o usuário de <b>CPF: ${this.usersAddForm.value.cpf}</b>?`, "normal", true)
+    this.modal.openModal(`${this.isEditing ? "Editar": "Cadastrar"} Usuário`,
+      `Tem certeza que deseja ${this.isEditing ? "editar": "cadastrar"} o usuário de <b>CPF: ${this.usersAddForm.value.cpf}</b>?`, "normal", true)
       .then(() => {
         if (this.profileImg) {
           this.retrieveImg()
@@ -128,6 +170,7 @@ export class UsersAddComponent implements OnInit {
   sendUser() {
     const values = this.usersAddForm.value;
     const signUpData = {
+      id: this.userToEdit ? this.userToEdit.id : "",
       name: values.name,
       cpf: values.cpf,
       imgProfile: this.downloadURL,
@@ -149,15 +192,19 @@ export class UsersAddComponent implements OnInit {
       planPrice: values.precomensalidade
     }
 
+    this.modal.loaderModal();
+
     this.usersService.signUp(signUpData)
       .subscribe(() => {
         this.submitComplete();
-        this.modal.openModal("Usuário Cadastrado com Sucesso!",
-          `O usuário de <b>CPF: ${this.usersAddForm.value.cpf}</b> foi cadastrado com sucesso!`
+        this.modal.closeAll();
+        this.modal.openModal(`Usuário ${this.isEditing ? "Editado": "Cadastrado"} com Sucesso!`,
+          `O usuário de <b>CPF: ${signUpData.cpf}</b> foi ${this.isEditing ? "editado": "cadastrado"} com sucesso!`
           , "success");
-       
+
       }, (err) => {
         this.submitting = false;
+        this.modal.closeAll();
         this.handleErrorResponse(err);
       })
   }
@@ -172,7 +219,7 @@ export class UsersAddComponent implements OnInit {
           let errorsArr = err.error.errors;
           let messagesArr = [];
           errorsArr.forEach(element => {
-            messagesArr.push('<div>- ' + element["defaultMessage"]+'</div>');
+            messagesArr.push('<div>- ' + element["defaultMessage"] + '</div>');
           });
           let errorMessages = `<div class="alert alert-danger text-left col-sm-11 mx-auto">
           ${messagesArr.join('')}</div>`;
@@ -180,10 +227,10 @@ export class UsersAddComponent implements OnInit {
           return;
         }
       } else {
-        this.modal.openModal("Erro!",  `<div class="alert alert-danger text-left col-sm-11 mx-auto">${err.error}</div>`, "fail");
+        this.modal.openModal("Erro!", `<div class="alert alert-danger text-left col-sm-11 mx-auto">${err.error}</div>`, "fail");
       }
     } else {
-      this.modal.openModal("Erro!", "Houve algum erro ao cadastrar o usuário. Por favor tente novamente mais tarde.", "fail");
+      this.modal.openModal("Erro!", `Houve algum erro ao ${this.isEditing ? "editar": "cadastrar"} o usuário. Por favor tente novamente mais tarde.`, "fail");
     }
   }
 
@@ -244,25 +291,27 @@ export class UsersAddComponent implements OnInit {
 
   consultaCep(Cep: string) {
     let addr: any;
+    if (Cep) {
+      if (Cep.length === 9) {
+        this.disableAddrFields();
 
-    if (Cep.length === 9) {
-      this.disableAddrFields();
-
-      this.sharedService.consultaCEP(Cep)
-        .subscribe(res => {
-          addr = res;
-          this.usersAddForm.patchValue({
-            endereco: addr.logradouro,
-            bairro: addr.bairro,
-            estado: addr.uf,
-            cidade: addr.localidade
-          });
-          this.enableAddrFields();
-        }, () => { this.enableAddrFields(); });
+        this.sharedService.consultaCEP(Cep)
+          .subscribe(res => {
+            addr = res;
+            this.usersAddForm.patchValue({
+              endereco: addr.logradouro,
+              bairro: addr.bairro,
+              estado: addr.uf,
+              cidade: addr.localidade
+            });
+            this.enableAddrFields();
+          }, () => { this.enableAddrFields(); });
+      }
     }
   }
 
   fileImg(imgFile: File) {
+    if(!imgFile) this.downloadURL = null;
     this.profileImg = imgFile;
   }
 
@@ -270,6 +319,10 @@ export class UsersAddComponent implements OnInit {
     this.inProgress = false;
     this.submitting = false;
     this.usersAddForm.reset();
+  }
+
+  removeMainImg() {
+    this.downloadURL = null;
   }
 
   errorOnRetrieve() {
