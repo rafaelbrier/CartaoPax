@@ -30,8 +30,9 @@ import { UsersManagerComponent } from './pages/users-manager/users-manager.compo
               [{ 'color': [] }, { 'background': [] }],
               [{ 'font': [] }],
               [{ 'align': [] }],    
-              ['clean'],  ]
-            }
+              ['clean'],
+              ['link'] 
+            ],}
           }),
     ],
     declarations: [

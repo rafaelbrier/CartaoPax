@@ -6,6 +6,7 @@ import { whiteSpace } from '../../../core/components/utils/validators/custom-val
 import { CommentsService } from '../../../core/services/comments-service';
 import { NewsService } from '../../../core/services/news.service';
 import { SharedService } from '../../../core/services/shared-services';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 @Component({
@@ -46,7 +47,8 @@ export class NewsPageComponent implements OnInit {
     private newsService: NewsService,
     private commentsService: CommentsService,
     private formBuilder: FormBuilder,
-    private sharedService: SharedService
+    private sharedService: SharedService,
+    private sanitizer: DomSanitizer
   ) {
     if (window.outerWidth <= 768) {
       this.charMax = this.charMax - 100;
@@ -67,6 +69,7 @@ export class NewsPageComponent implements OnInit {
       this.newsService.findById(this.newsId)
         .subscribe((resData:any) => {
           this.newsData = resData;
+          this.newsData.body = this.sanitizer.bypassSecurityTrustHtml(this.newsData.body);
           this.isLoading = false;
         }, () => {
           this.isLoading = false;
@@ -104,7 +107,7 @@ export class NewsPageComponent implements OnInit {
           this.commentForm.reset();
           this.loadComments(this.commentsDefaultLimit);
           this.modal.openModal("Sucesso!", "Seu comentário foi adicionado.", "success");
-        }, err => {
+        }, () => {
           this.submitting = false;
           this.modal.openModal("Erro!", "Houve algum erro ao processar seu comentário. Por favor tente novamente mais tarde.", "fail");
         })
