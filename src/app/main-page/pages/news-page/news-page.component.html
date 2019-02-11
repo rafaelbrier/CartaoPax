@@ -18,7 +18,7 @@
 
     </div>
     <div class="body">
-      <image *ngIf="newsData?.imgPath" [imgSrc]="newsData?.imgPath"></image>
+      <image *ngIf="newsData?.imgPath" [imgSrc]="newsData?.imgPath" [style]="{'max-width':'300px'}"></image>
       <p [innerHTML]="newsData?.body">
         {{newsData?.body}}
       </p>

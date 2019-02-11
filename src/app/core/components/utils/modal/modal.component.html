@@ -62,7 +62,7 @@
         </button>
     </div>
     <div class="modal-body text-center">
-        <image [imgSrc]="body" [height]="'450px'" [width]="'100%'"></image>
+        <image [imgSrc]="body" [style]="{'max-height': '450px', 'max-width': '100%'}"></image>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-outline-warning" (click)="activeModal.close()" *ngIf="withConfirm">Confirmar</button>
@@ -75,7 +75,7 @@
         <h4 class="modal-title">Aguarde...</h4>
     </div>
     <div class="modal-body text-center">
-        <img src="../../../../assets/images/ripple-loader.svg" height="300px" width="300px">
+        <img src="../../../../assets/images/ripple-loader.svg" style="height: 300px; width: 300px;">
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-outline-dark" disabled>Fechar</button>

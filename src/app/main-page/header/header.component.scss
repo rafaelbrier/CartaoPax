@@ -52,9 +52,19 @@
      max-height: 84px;     
 }
 
+@media screen and (min-width: 1700px) {
+    .telephone {
+        top: 3.7vw;
+    }
+}
+@media screen and (min-width: 1500px) {
+    .navbar-container {
+        min-width: 22%; 
+    }
+}
+
 .telephone {
     position: fixed;
-    top: 60px;
     left: 29vw;
     font-weight: 700;
     i {

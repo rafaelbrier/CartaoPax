@@ -16,6 +16,7 @@ $linkColor: #3c8dbc;
 .info-text {
     @media screen and (max-width: 768px){
         font-size: 3vh;
+        margin-top: 25px;
         &:after{
             width: 25% !important;
         }

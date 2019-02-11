@@ -18,11 +18,10 @@ export class ImgLazyComponent {
   @Input() style: any = {};
 
   styleObject(): Object {
-    if (this.height && this.width) {
-      if (this.style) {
-        return Object.assign({}, { 'height': this.height, 'width': this.width }, this.style);
-      }
-      return { 'height': this.height, 'width': this.width };
+    if (this.height || this.width || this.style) {
+        return Object.assign({}, { 
+          'height': this.height ? this.height : '', 'width': this.width ? this.width : ''
+         }, this.style);
     } else {
       return {};
     }
