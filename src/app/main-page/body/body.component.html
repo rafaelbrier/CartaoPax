@@ -27,10 +27,15 @@
     <h3 class="info-text">
         Notícias
       </h3>
+      
     <div class="row news-content">
-        <news-box-component class="col-sm-4" *ngFor="let new of news" [newsData]="new"></news-box-component>
+      <!-- Erro e Vazio Handlers -->
+      <div class="mx-auto">
         <app-error-load [loadError]="boxLoadingError" [isLoading]="isBoxLoading"></app-error-load>
+        <app-empty-list [show]="newsData?.totalElements === 0"></app-empty-list>
+      </div>
 
+        <news-box-component class="col-sm-4" *ngFor="let new of news" [newsData]="new"></news-box-component>
         
         <button type="button" class="btn btn-outline-success" *ngIf="newsData?.numberOfElements != newsData?.totalElements"
         (click)="loadMoreNews()">Mostrar mais notícias</button>

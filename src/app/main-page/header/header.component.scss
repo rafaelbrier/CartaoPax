@@ -91,11 +91,13 @@
         background-color: transparent !important;        
     }     
 }   
-
-.dropdown:hover .dropdown-menu {
-    @media screen and (min-width: 768px){
+@media screen and (min-width: 768px) {
+    .dropdown:hover .dropdown-menu {
         display: block;
-    }      
+    }
+    .nav-link {
+        font-size: 1.1vw;
+    }
 }
    
 
