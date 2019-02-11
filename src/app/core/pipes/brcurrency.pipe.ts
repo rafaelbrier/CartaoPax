@@ -10,6 +10,9 @@ export class BRCurrencyPipe implements PipeTransform {
         if (isNaN(value)) {
             return '';
         }
+        if(!value) {
+            value = 0.00;
+        }
 
         return vanillaMasker.toMoney(value,
          {

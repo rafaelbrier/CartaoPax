@@ -135,7 +135,6 @@ export class UsersAddComponent implements OnInit {
       plano: ['', [Validators.required, whiteSpace, Validators.maxLength(50)]],
       precomensalidade: [0.00, [Validators.required, whiteSpace, Validators.maxLength(10)]]
     });
-    this.usersAddForm.controls['role'].setValue(this.role, { onlySelf: true });
   }
 
   get f() { return this.usersAddForm.controls; }
@@ -282,11 +281,15 @@ export class UsersAddComponent implements OnInit {
   }
 
   consultaPrecoPlano(birthDate: string, planoId: number) {
-    this.planosService.getPlanPrice(birthDate, planoId)
-      .subscribe(res => {
-        if (res)
-          this.usersAddForm.patchValue({ precomensalidade: res })
-      });
+    if(birthDate && planoId) {
+      this.planosService.getPlanPrice(birthDate, planoId)
+        .subscribe(res => {
+          if (res)
+            this.usersAddForm.patchValue({ precomensalidade: res });
+        });
+    } else {
+      this.usersAddForm.patchValue({ precomensalidade: 0.00 });
+    }
   }
 
   consultaCep(Cep: string) {
@@ -318,6 +321,7 @@ export class UsersAddComponent implements OnInit {
   submitComplete() {
     this.inProgress = false;
     this.submitting = false;
+    this.removeMainImg();
     this.usersAddForm.reset();
   }
 
