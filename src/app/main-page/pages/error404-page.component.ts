@@ -16,7 +16,7 @@ const html = `
 
 const styles = `
 
-@media screen and (max-width: 768px){
+@media screen and (max-width: 767px){
     .error404-content{
         margin-top: 130px !important; 
         width: 100%;

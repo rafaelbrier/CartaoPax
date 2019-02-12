@@ -5,7 +5,7 @@ $hoverColor: #acffc2;
 $linkColor: #3c8dbc;
 
 .content {
-    @media screen and (max-width: 768px){
+    @media screen and (max-width: 767px){
         margin-top: 130px !important; 
         width: 100%;
       }
@@ -14,7 +14,7 @@ $linkColor: #3c8dbc;
 }
 
 .info-text {
-    @media screen and (max-width: 768px){
+    @media screen and (max-width: 767px){
         font-size: 3vh;
         margin-top: 25px;
         &:after{
@@ -34,7 +34,7 @@ $linkColor: #3c8dbc;
 }
 
 .avatar-text-container {
-    @media screen and (max-width: 768px){
+    @media screen and (max-width: 767px){
         max-width: 100%;    
         display: flex;    
     }
