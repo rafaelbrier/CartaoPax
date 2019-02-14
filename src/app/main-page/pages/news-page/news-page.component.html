@@ -86,7 +86,7 @@
           </div>
 
           <div class="form-group">
-            <input formControlName="email" type="email" class="form-control" placeholder="A@a.com">
+            <input formControlName="email" type="email" class="form-control" placeholder="A@a.com" email>
 
             <!-- Validador Email  -->
             <app-validators [form]="commentForm" [input]="f.email" [inputName]="'email'" [validators]="['required','email']"></app-validators>

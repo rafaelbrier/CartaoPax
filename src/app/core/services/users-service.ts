@@ -7,6 +7,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
 export class User {
+  name: string;
+  imgProfile: string;
   cpf: string;
   Expires_At: string;
 }
@@ -29,8 +31,8 @@ export interface userData {
   complemento: string,
   sex: string,
   birthDate: string,
-  roles: { id: number, name?: string},
-  planos: { id: number, name?: string},
+  roles: { id: number, name?: string },
+  planos: { id: number, name?: string },
   planPrice: number
 }
 
@@ -48,7 +50,10 @@ export class UsersService {
     private router: Router) {
 
     this.currentUserSubject = new BehaviorSubject<User>(
-      this.getUser() ? { cpf: this.getUser(), Expires_At: this.getExpiration() } : null
+      this.getUser() ? {
+        name: this.getName(), imgProfile: this.getImgProfile(),
+        cpf: this.getUser(), Expires_At: this.getExpiration()
+      } : null
     );
     this.currentUser = this.currentUserSubject.asObservable();
   }
@@ -64,7 +69,7 @@ export class UsersService {
   findUserByCpf(Cpf: string) {
     return this.http.get(`${myConstants.restBaseUrl}${myConstants.usersPath}?searchTerm=${Cpf}`)
   }
-  
+
   findUserById(id: string) {
     return this.http.get(`${myConstants.restBaseUrl}${myConstants.usersPath}/${id}`);
   }
@@ -142,9 +147,18 @@ export class UsersService {
     }
   }
 
+  public getImgProfile() {
+    const payload = this.getTokenPayload();
+    if (payload) {
+      return payload.imgProfile;
+    } else {
+      return null;
+    }
+  }
+
   public havePermission(Role: String) {
     let userRole = this.getRole();
-    
+
     if (userRole) {
       switch (userRole) {
         case "ADMIN":
@@ -174,7 +188,7 @@ export class UsersService {
   public getName() {
     const payload = this.getTokenPayload();
     if (payload) {
-      return payload.role;
+      return payload.name;
     } else {
       return null;
     }
@@ -182,7 +196,10 @@ export class UsersService {
 
   private setCurrentUser() {
     if (!this.currentUserValue) {
-      this.setCurrentUserValue(this.getUser() ? { cpf: this.getUser(), Expires_At: this.getExpiration() } : null);
+      this.setCurrentUserValue(this.getUser() ? { 
+        name: this.getName(), imgProfile: this.getImgProfile(),
+        cpf: this.getUser(), Expires_At: this.getExpiration()  
+       } : null);
     }
   }
 

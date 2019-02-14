@@ -1,13 +1,13 @@
 <div class="avatar-text-container">
   <div class="avatar-frame">
     <span class="helper"></span>
-    <img alt="avatar" src="../../../../assets/images/avatar.png">
+    <image alt="avatar" [imgSrc]="comment?.imgProfile || '../../../../assets/images/avatar.png'"
+    [height]="'50px'" [width]="'50px'" [style]="{'border-radius': '50%'}"></image>
   </div>
-
   <div class="avatar-text-textcontainer">
     <div class="comment-title">
       Escrito por
-      <span>
+      <span [ngClass]="{'text-success': !comment?.authorEmail}">
         {{comment?.authorName}}
       </span>
       - {{comment?.date | date: "dd/MM/yyyy 'às' HH'h'mm"}}

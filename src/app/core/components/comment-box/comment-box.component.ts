@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { commentData } from '../../services/comments-service';
 
 @Component({
   selector: 'app-comment-box',
@@ -8,7 +9,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class CommentBoxComponent implements OnInit {
 
   @Input()
-  comment: any;
+  comment: commentData;
 
   charMax: number = 190;
 

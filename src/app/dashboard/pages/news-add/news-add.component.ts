@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { whiteSpace } from 'src/app/core/components/utils/validators/custom-validators';
-import { NewsService } from 'src/app/core/services/news.service';
+import { NewsService, newsData } from 'src/app/core/services/news.service';
 import { SharedService } from 'src/app/core/services/shared-services';
 import { ModalComponent } from '../../../core/components/utils/modal/modal.component';
 import { FireStorageService } from '../../../core/services/firebase-storage/fire-storage.service';
@@ -22,7 +22,7 @@ export class NewsAddComponent implements OnInit {
   progressImg: number;
   inProgress: boolean = false;
   uploadError: boolean = false;
-  downloadURL: String = undefined;
+  downloadURL: string = undefined;
   fileOverSize: boolean = false;
   mustBeImg: boolean = false;
 
@@ -91,7 +91,7 @@ export class NewsAddComponent implements OnInit {
 
   sendNews(): void {
     const values = this.newsManagerForm.value;
-    let news = {};
+    let news: newsData;
     if (this.isEditing) {
       news = {
         id: this.newsToEdit.id,

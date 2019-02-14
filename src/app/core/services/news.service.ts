@@ -1,6 +1,19 @@
 import { Injectable } from '@angular/core';
 import { myConstants } from './constants';
 import { HttpClient } from '@angular/common/http';
+import { commentData } from './comments-service';
+
+
+export interface newsData {
+  id?: string,
+  commentCount?: string,
+  date?: string,
+  title: string,
+  imgPath?: string,
+  body: string,
+  comments?: commentData
+}
+
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +22,7 @@ export class NewsService {
 
   constructor(private http: HttpClient) { }
   
-  registerNews(data: any) {
+  registerNews(data: newsData) {
     return this.http.post(myConstants.restBaseUrl + myConstants.newsPath, {
       id: data.id ? data.id : '',
       date: data.date ? data.date : '',
