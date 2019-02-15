@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { commentData } from '../../services/comments-service';
 
 @Component({
@@ -10,6 +10,9 @@ export class CommentBoxComponent implements OnInit {
 
   @Input()
   comment: commentData;
+
+  @Output()
+  deleteComment: EventEmitter<string> = new EventEmitter();
 
   charMax: number = 190;
 
@@ -35,6 +38,10 @@ export class CommentBoxComponent implements OnInit {
   expandText() {
     this.readMore = false;
     this.comment.body = this.readMoreDataHolder;
+  }
+
+  removeComment() {
+   this.deleteComment.emit(this.comment.id);
   }
 
 }

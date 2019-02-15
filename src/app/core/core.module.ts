@@ -22,6 +22,7 @@ import { CpfPipe } from './pipes/cpf.pipe';
 import { MyDatePipe } from './pipes/date.pipe';
 import { BRCurrencyPipe } from './pipes/brcurrency.pipe';
 import { EmptyListComponent } from './components/utils/empty-list/empty-list.component';
+import { AuthorityDirective } from './directive/authority.directive';
 
 @NgModule({
   imports: [
@@ -44,7 +45,11 @@ import { EmptyListComponent } from './components/utils/empty-list/empty-list.com
     ImgLazyComponent,
     ModalComponent,
     ValidatorsComponent,
+    
+    //Directive
     SortTableDirective,
+    AuthorityDirective,
+
      //Pipe
      BrPhoneFormatPipe,
      ImgInputFileComponent,
@@ -69,6 +74,7 @@ import { EmptyListComponent } from './components/utils/empty-list/empty-list.com
     
     //Exported Directives
     SortTableDirective,
+    AuthorityDirective,
 
     //Exporter Pipes
     BrPhoneFormatPipe,

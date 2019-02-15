@@ -19,7 +19,7 @@ export class CommentsService {
 
   constructor(private http: HttpClient) { }
   
-  registerComment(data: commentData, newsId: String) {
+  registerComment(data: commentData, newsId: string) {
     return this.http.post(`${myConstants.restBaseUrl}${myConstants.newsPath}/${newsId}${myConstants.commentsPath}`, {
       authorName: data.authorName,
       authorEmail: data.authorEmail,
@@ -33,13 +33,13 @@ export class CommentsService {
     return this.http.get(myConstants.restBaseUrl + myConstants.newsPath);
   }
 
-  findCommentsByNewsIdPageable(newsId: String, page: number, size: number, sort: String, order: String) {
+  findCommentsByNewsIdPageable(newsId: string, page: number, size: number, sort: string, order: string) {
     return this.http.get(
         `${myConstants.restBaseUrl}${myConstants.newsPath}/${newsId}${myConstants.commentsPath}?page=${page}&size=${size}&sort=${sort},${order}`
         );
   }
 
-  removeCommentById(id: String) {
+  removeCommentById(id: string) {
     return this.http.delete(`${myConstants.restBaseUrl}${myConstants.commentsPath}/${id}`);
   }
 }

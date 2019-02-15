@@ -1,14 +1,14 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { UsersService } from 'src/app/core/services/users-service';
 import { ModalComponent } from '../../../core/components/utils/modal/modal.component';
 import { whiteSpace } from '../../../core/components/utils/validators/custom-validators';
 import { CommentsService } from '../../../core/services/comments-service';
 import { NewsService } from '../../../core/services/news.service';
 import { SharedService } from '../../../core/services/shared-services';
-import { DomSanitizer } from '@angular/platform-browser';
-import { UsersService } from 'src/app/core/services/users-service';
-import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -35,7 +35,7 @@ export class NewsPageComponent implements OnInit {
   readMore: boolean = false;
 
   newsData: any = {};
-  newsId: String;
+  newsId: string;
   commentsData: any = {};
   comments: any = [];
 
@@ -77,9 +77,15 @@ export class NewsPageComponent implements OnInit {
     if (this.newsId) {
       this.newsService.findById(this.newsId)
         .subscribe((resData: any) => {
-          this.newsData = resData;
-          this.newsData.body = this.sanitizer.bypassSecurityTrustHtml(this.newsData.body);
-          this.isLoading = false;
+          if(resData) {
+            this.newsData = resData;
+            this.newsData.body = this.sanitizer.bypassSecurityTrustHtml(this.newsData.body);
+            this.isLoading = false;
+          } else {
+            this.modal.openModal("Erro!", `Não existe notícia com identificação <b>#${this.newsId}</b>.`, "fail")
+            .then(() => { location.href = '/home' + '/#news';})
+            .catch(() => { location.href = '/home' + '/#news';})
+          }
         }, () => {
           this.isLoading = false;
           this.loadError = true;
@@ -173,6 +179,13 @@ export class NewsPageComponent implements OnInit {
         this.comments = this.commentsData.content;
         delete this.commentsData.content;
       })
+  }
+
+  deleteComment(id: string) {
+    this.commentsService.removeCommentById(id)
+    .subscribe(() => {
+      this.loadComments(this.commentsDefaultLimit);
+    });
   }
 
   expandText() {

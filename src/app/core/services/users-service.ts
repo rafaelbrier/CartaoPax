@@ -7,6 +7,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
 export class User {
+  id: string;
   name: string;
   imgProfile: string;
   cpf: string;
@@ -51,6 +52,7 @@ export class UsersService {
 
     this.currentUserSubject = new BehaviorSubject<User>(
       this.getUser() ? {
+        id: this.getId(),
         name: this.getName(), imgProfile: this.getImgProfile(),
         cpf: this.getUser(), Expires_At: this.getExpiration()
       } : null
@@ -147,6 +149,15 @@ export class UsersService {
     }
   }
 
+  public getId() {
+    const payload = this.getTokenPayload();
+    if (payload) {
+      return payload.id;
+    } else {
+      return null;
+    }
+  }
+
   public getImgProfile() {
     const payload = this.getTokenPayload();
     if (payload) {
@@ -197,6 +208,7 @@ export class UsersService {
   private setCurrentUser() {
     if (!this.currentUserValue) {
       this.setCurrentUserValue(this.getUser() ? { 
+        id: this.getId(),
         name: this.getName(), imgProfile: this.getImgProfile(),
         cpf: this.getUser(), Expires_At: this.getExpiration()  
        } : null);

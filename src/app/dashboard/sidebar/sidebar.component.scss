@@ -203,10 +203,9 @@ ul {
     img {
         height: 36px;
         padding: 0px 36px;
-    }
+      }
     a {
-        white-space: nowrap;
-        width: 120px;
+        width: 160px;
         display: block;
         font-size: 20px;
         height: 100%;
@@ -242,6 +241,7 @@ ul {
     }
     a {
         color: rgba(95,111,129,0.6);
+        width: 120px !important;
         font-size: 18px !important;
     }
 }
@@ -268,7 +268,7 @@ ul {
 
 .arrow {
     position: fixed;
-    right: 25%;
+    right: 20%;
     line-height: 36px;
     color: $grayBlue;
     transform: rotate(0deg);

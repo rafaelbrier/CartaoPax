@@ -59,7 +59,7 @@
       </ng-template>
     </div>
 
-    <app-comment-box *ngFor="let comment of comments" [comment]="comment"></app-comment-box>
+    <app-comment-box *ngFor="let comment of comments" [comment]="comment" (deleteComment)="deleteComment($event)"></app-comment-box>
 
     <button type="button" class="btn btn-outline-success btn-lg btn-block" *ngIf="commentsData?.numberOfElements != commentsData.totalElements"
       (click)="loadMoreComments()">Mostrar mais comentários</button>

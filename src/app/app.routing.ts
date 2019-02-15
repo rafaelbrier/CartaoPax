@@ -16,7 +16,7 @@ import { UsersManagerComponent } from './dashboard/pages/users-manager/users-man
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: BodyComponent, data: { breadcrumb: "Home" } },
-  { path: 'news', component: NewsPageComponent, data: { breadcrumb: "Notícias" } },
+  // { path: 'news', component: NewsPageComponent, data: { breadcrumb: "Notícias" } },
   { path: 'news/:id', component: NewsPageComponent, data: { breadcrumb: "Notícias" } },
   { path: 'planos', component: PlanosComponent, data: { breadcrumb: "Planos" } },
   {

@@ -22,11 +22,11 @@ export class ProfileComponent implements OnInit {
     this.boxLoadingError = false;
 
     this.userRole = this.usersService.getRole();
-    this.usersService.findUserByCpf(this.usersService.getUser())
+    this.usersService.findUserById(this.usersService.getId())
     .subscribe( (res:any) =>
       {
-        if(res.content) {
-          this.user = res.content[0];
+        if(res) {
+          this.user = res;
         }
         this.isBoxLoading = false;
       }, () => { this.errorOnRetrieve(); }

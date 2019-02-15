@@ -16,6 +16,9 @@
       {{comment?.body}}
       <span *ngIf="readMore" (click)="expandText()">Ver Mais</span>
     </div>
+
   </div>
+
+    <i class="fas fa-times" *hasAuthority="'EMPLOYEE'" (click)="removeComment()" ngbTooltip="Deletar Comentário"></i>
 
 </div>

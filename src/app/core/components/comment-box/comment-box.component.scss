@@ -5,6 +5,7 @@
     margin: 1% auto !important;
     border: 1px solid lightgray;
     background-color: white;
+    position: relative;
 
     .avatar-text-textcontainer {
         margin-left: 20px !important;
@@ -26,5 +27,15 @@
             color: $linkColor;
             cursor: pointer;
         }    
+    }
+
+    .fa-times {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 40px;
+        font-size: 22px;
+        color: red;
+        cursor: pointer;
     }
 }
