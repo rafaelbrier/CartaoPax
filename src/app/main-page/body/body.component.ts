@@ -61,8 +61,8 @@ export class BodyComponent implements OnInit {
         "imageAutoPlay": true, "imageAutoPlayInterval": 5000, "spinnerIcon": "fas fa-spinner fa-pulse fa-3x fa-fw",
         "previewZoom": true, "previewCloseOnClick": true
       },
-      { "breakpoint": 600, "width": "300px", "height": "300px", "thumbnailsColumns": 3 },
-      { "breakpoint": 300, "width": "100%", "height": "200px", "thumbnailsColumns": 2 }
+      { "breakpoint": 767, "width": "100%", "height": "300px", "thumbnailsColumns": 3,
+      "thumbnailsPercent": 25 },
     ]
 
 
@@ -114,7 +114,7 @@ export class BodyComponent implements OnInit {
         "thumbnailSize": "contain", "thumbnailsColumns": 6, "thumbnailsArrows": true,
         "preview": false, "previewInfinityMove": true, "thumbnailsArrowsAutoHide": true,
         "arrowPrevIcon": "fas fa-chevron-circle-left text-success", "arrowNextIcon": "fas fa-chevron-circle-right text-success" },
-      { "breakpoint": 500, "width": "100%" }
+      { "breakpoint": 767, "width": "100%", "height": "150px", "thumbnailsColumns": 2 }
     ]
 
     this.partnersGalleryImages = [{
