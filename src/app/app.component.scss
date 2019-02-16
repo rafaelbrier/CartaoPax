@@ -21,6 +21,7 @@ $linkColor: #3c8dbc;
             width: 25% !important;
         }
       }
+    text-align: start !important;
     color: black;
     font-size: 4vh;
     padding: 3%;
@@ -107,28 +108,28 @@ $linkColor: #3c8dbc;
     white-space: nowrap;
 }
 
-    .mw-px-2 { min-width: 160px;}
-    .mw-px-3 { min-width: 240px;}      
-    .mw-px-4 { min-width: 320px;}
-    .mw-px-5 { min-width: 400px;}
-    .mw-px-6 { min-width: 480px;}      
-    .mw-px-7 { min-width: 560px;}
-    .mw-px-8 { min-width: 640px;}
-    .mw-px-9 { min-width: 720px;}
-    .mw-px-10{ min-width: 800px;}
-    .mw-px-11{ min-width: 880px;}
-    .mw-px-12{ min-width: 960px;}
+    .mw-px-2 { min-width: 160px!important;}
+    .mw-px-3 { min-width: 240px!important;}      
+    .mw-px-4 { min-width: 320px!important;}
+    .mw-px-5 { min-width: 400px!important;}
+    .mw-px-6 { min-width: 480px!important;}      
+    .mw-px-7 { min-width: 560px!important;}
+    .mw-px-8 { min-width: 640px!important;}
+    .mw-px-9 { min-width: 720px!important;}
+    .mw-px-10{ min-width: 800px!important;}
+    .mw-px-11{ min-width: 880px!important;}
+    .mw-px-12{ min-width: 960px!important;}
 
     
-    .w-1 {width: 8.3333%;   }
-    .w-2 {width: 16.6666%;  }
-    .w-3 {width: 25%;       }
-    .w-4 {width: 33.3333%;  }
-    .w-5 {width: 41.6666%;  }
-    .w-6 {width: 50%;       }
-    .w-7 {width: 58.3333%;  }
-    .w-8 {width: 66.6666%;  }
-    .w-9 {width: 75%;     }
-    .w-10 {width: 83.3333% }
-    .w-11 {width: 91.6666% }
-    .w-12 {width: 100%     }
+    .w-1 {width: 8.3333% !important;   }
+    .w-2 {width: 16.6666%!important;  }
+    .w-3 {width: 25%!important;       }
+    .w-4 {width: 33.3333%!important;  }
+    .w-5 {width: 41.6666%!important;  }
+    .w-6 {width: 50%!important;       }
+    .w-7 {width: 58.3333%!important;  }
+    .w-8 {width: 66.6666%!important;  }
+    .w-9 {width: 75%!important;     }
+    .w-10 {width: 83.3333%!important; }
+    .w-11 {width: 91.6666%!important; }
+    .w-12 {width: 100%!important;     }

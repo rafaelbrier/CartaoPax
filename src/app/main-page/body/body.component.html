@@ -1,6 +1,6 @@
 <div class="content">
 
-  <div class="row w-12">
+  <div class="row w-12 section">
 
     <div class="col-sm-5">
         <h3 class="info-text">
@@ -15,14 +15,14 @@
       <h3 class="info-text">
           Seja Filiado
         </h3>
-        <ngx-gallery [options]="galleryOptions" [images]="galleryImages"></ngx-gallery>
+        <ngx-gallery [options]="clubGalleryOptions" [images]="clubGalleryImages"></ngx-gallery>
         <article class="info-begin">SEJA UM ASSOCIADO DO CLUBE ACQUA PAX, UM COMPLETO COMPLEXO DE LAZER PARA TODA FAMÍLIA.</article>
         <button type="button" class="btn btn-success club-button" onclick="window.open('http://acquapax.surge.sh','_blank');">Apenas R$200,00 anual, associe-se já!</button>
       </div>
 
   </div>
 
-  <div class="app flex-row align-items-center">
+  <div class="app flex-row align-items-center section">
 
     <h3 class="info-text">
         Notícias
@@ -43,4 +43,52 @@
     </div>
 
   </div>
+
+  <div class="flex-row align-items-center section text-center" #parceiros>
+
+      <h3 class="info-text">
+          Parceiros
+        </h3>
+
+        <ngx-gallery id="partners" [options]="partnersGalleryOptions" [images]="partnersGalleryImages"></ngx-gallery>
+  
+    </div>
+
+  <div class="footer-container section" #footer>
+    <div class="row allign-items-center w-12">
+
+      <div class="offset-sm-1 col-sm-1 position-relative">
+					<ul class="footer-follow">
+              <li class="facebook"><a href="www.facebook.com/cartao.pax" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+              <li class="twitter"><a href="#" target="_blank"><i class="fab fa-twitter"></i></a></li>
+              <li class="instagram"><a href="#" target="_blank"><i class="fab fa-instagram"></i></a></li>
+            </ul>
+      </div>
+
+      <div class="info-container col-sm-5">
+        <div>
+          <img src="../assets/images/cartaopax-logo.png" height="48px">
+          <h5>Cartão Pax</h5>
+        </div>
+        <br>
+        <h6><b>Visite nosso escritório</b></h6>
+        <br>
+        <p style="margin-top: -1vh;">Rua Teófilo Otoni, 220 </p>
+        <p>Esplanada, Gov. Valadares</p>
+        <p>35020-600</p>
+        <br>
+        <p><b>Fale conosco:</b> (33) 3271-6271</p>
+        <p><b>E-mail:</b> contato@cartaopax.com.br</p>
+      </div>
+
+      <div class="map-container col-sm-5">
+        <h6><b>Localização</b></h6>
+        <div class="mapouter">
+          <div class="gmap_canvas"><iframe width="100%" height="75%" id="gmap_canvas" src="https://maps.google.com/maps?q=Rua%20Te%C3%B3filo%20Oton%C3%AD%20220%20-%20Esplanada+(T%C3%ADtulo)&amp;ie=UTF8&amp;t=&amp;z=17&amp;iwloc=B&amp;output=embed"
+              frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe></div>          
+        </div>
+      </div>
+    </div>
+
+    <h6 class="copyright">© 2019 Cartão Pax. Todos os direitos reservados.</h6>
 </div>
