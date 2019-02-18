@@ -20,6 +20,7 @@ export class UsersManagerComponent implements OnInit {
   limitValue: number = 10;
   limitOptions: number[] = [10, 20, 30, 40];
   pagNumberOfPages: number;
+  showDesactivatedUsers: boolean = false;
 
   usersData: any;
   users: any;
@@ -31,34 +32,34 @@ export class UsersManagerComponent implements OnInit {
   constructor(private usersService: UsersService, private router: Router) { }
 
   ngOnInit() {
-    this.loadUsers(this.pages, this.limit, this.orderBy, this.orderAscOrDesc, this.searchValue);
+    this.loadUsers(this.pages, this.limit, this.orderBy, this.orderAscOrDesc, this.searchValue, this.showDesactivatedUsers);
   }
 
   sortBy(orderBy: string) {
     this.orderBy = orderBy;
     this.orderAscOrDesc = this.orderAscOrDesc === "asc" ? "desc" : "asc";
-    this.loadUsers(this.pages, this.limit, this.orderBy, this.orderAscOrDesc, this.searchValue);
+    this.loadUsers(this.pages, this.limit, this.orderBy, this.orderAscOrDesc, this.searchValue, this.showDesactivatedUsers);
   }
 
   deleteUser(user: userData) {
     this.modal.openModal("Deletar Usuário", `Tem certeza que deseja deletar o usuário de CPF: <b>${user.cpf}</b>?`, "normal", true)
-    .then(() => {      
-      this.modal.loaderModal();
+      .then(() => {
+        this.modal.loaderModal();
 
-      this.usersService.delete(user.id)
-      .subscribe(() => {
-        this.modal.closeAll();
-        this.modal.openModal("Usuário Deletado", `O usuário de CPF: <b>${user.cpf}, foi deletado com sucesso.`, "success");
-        if(this.usersService.getUser() === user.cpf) {
-          this.usersService.logout();
-        }
-        this.loadUsers(this.pages, this.limit, this.orderBy, this.orderAscOrDesc, this.searchValue);
-      }, () => {
-        this.modal.closeAll();
-        this.modal.openModal("Erro!", "Houve algum erro ao deletar o usuário. Por favor tente novamente mais tarde.", "fail");
-      });
+        this.usersService.delete(user.id)
+          .subscribe(() => {
+            this.modal.closeAll();
+            this.modal.openModal("Usuário Deletado", `O usuário de CPF: <b>${user.cpf}, foi deletado com sucesso.`, "success");
+            if (this.usersService.getUser() === user.cpf) {
+              this.usersService.logout();
+            }
+            this.loadUsers(this.pages, this.limit, this.orderBy, this.orderAscOrDesc, this.searchValue, this.showDesactivatedUsers);
+          }, () => {
+            this.modal.closeAll();
+            this.modal.openModal("Erro!", "Houve algum erro ao deletar o usuário. Por favor tente novamente mais tarde.", "fail");
+          });
 
-    }).catch(()=>{return});
+      }).catch(() => { return });
   }
 
   showData(user: userData) {
@@ -92,44 +93,62 @@ export class UsersManagerComponent implements OnInit {
   }
 
   editUser(user: userData) {
-    this.router.navigate(['dashboard/usersadd'], {queryParams: {id: user.id}});
+    this.router.navigate(['dashboard/usersadd'], { queryParams: { id: user.id } });
+  }
+
+  enableDisableUser(user: userData) {
+    if(user) {
+      this.usersService.activateOrDesactivate(user.id)
+        .subscribe(() => {
+          this.modal.openModal("Sucesso!", `Usuário de CPF: <b>${user.cpf} </b> foi 
+          <b>${user.active ? 'DESABILITADO' : 'HABILITADO'}</b> com sucesso.`, "success");
+          this.loadUsers(this.pages, this.limit, this.orderBy, this.orderAscOrDesc, this.searchValue, this.showDesactivatedUsers);
+        }, () => {
+          this.modal.openModal("Erro!", "Houve algum erro ao modificar o estado do usuário. Por favor tente novamente mais tarde.", "fail");
+        })
+    }
   }
 
   onSearchChange(searchValue: string) {
     this.searchValue = searchValue;
-    this.loadUsers(this.pages, this.limit, this.orderBy, this.orderAscOrDesc, this.searchValue);
+    this.loadUsers(this.pages, this.limit, this.orderBy, this.orderAscOrDesc, this.searchValue, this.showDesactivatedUsers);
   }
-  
+
+  onCheckChange(checkBox: boolean) {
+    this.showDesactivatedUsers = checkBox;
+    this.loadUsers(this.pages, this.limit, this.orderBy, this.orderAscOrDesc, this.searchValue, this.showDesactivatedUsers);
+  }
+
   onSelectChange(limitValue: number) {
     this.limit = limitValue;
-    this.loadUsers(this.pages, this.limit, this.orderBy, this.orderAscOrDesc, this.searchValue);
+    this.loadUsers(this.pages, this.limit, this.orderBy, this.orderAscOrDesc, this.searchValue, this.showDesactivatedUsers);
   }
 
   onPageChange(page: number) {
     this.pages = page - 1;
-    this.loadUsers(this.pages, this.limit, this.orderBy, this.orderAscOrDesc, this.searchValue);
+    this.loadUsers(this.pages, this.limit, this.orderBy, this.orderAscOrDesc, this.searchValue, this.showDesactivatedUsers);
   }
 
-  loadUsers(pages: number, limit: number, orderBy: string, orderAscOrDesc: string, searchTerm: string) {
+  loadUsers(pages: number, limit: number, orderBy: string, orderAscOrDesc: string, searchTerm: string, showDesactivated: boolean) {
 
     this.isBoxLoading = true;
     this.boxLoadingError = false;
 
-    this.usersService.findAllPageable(pages, limit, orderBy, orderAscOrDesc, searchTerm)
+    this.usersService.findAllPageable(pages, limit, orderBy, orderAscOrDesc, searchTerm, showDesactivated)
 
       .subscribe((resData): any => {
         this.usersData = resData;
         this.users = this.usersData.content;
         delete this.usersData.content;
-        this.pagNumberOfPages = 10*Math.ceil(this.usersData.totalElements / this.limitValue);
+        this.pagNumberOfPages = 10 * Math.ceil(this.usersData.totalElements / this.limitValue);
         this.isBoxLoading = false;
 
         let totalElementsCount = this.users ? this.users.length : 0;
-        this.users = 
-        this.users.filter(obj => this.usersService.havePermission(obj.roles.role) === true);
+        this.users =
+          this.users.filter(obj => this.usersService.havePermission(obj.roles.role) === true);
         let croppedElementsCount = totalElementsCount - this.users.length;
 
-        if(this.users) {
+        if (this.users) {
           this.usersData.totalElements = this.usersData.totalElements - croppedElementsCount;
           this.usersData.numberOfElements = this.usersData.numberOfElements - croppedElementsCount;
         }

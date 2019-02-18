@@ -27,6 +27,9 @@ $menuItemColor: #4D4D4D;
             min-width: 100%;
             margin-top: 10px;
         }
+    }
+    .form-check {
+        padding-left: 3.25rem !important;
     } 
 }
 @media screen and (min-width: 768px) {
@@ -54,7 +57,7 @@ table {
 
 tbody td, tbody th {
     vertical-align: middle;
-    .btn-outline-danger {
+    .btn-outline-danger, .btn-outline-secondary {
         margin-left: 10px;
     }
 }

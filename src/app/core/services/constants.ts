@@ -4,6 +4,7 @@ export const myConstants = {
     commentsPath:'/comments',
     loginPath: '/login',
     usersPath: '/users',
+    activateOrDesactivatePath: '/actOrDesact',
     signUpPath: '/users/signup',
     roles: '/roles',
     planos: '/planos',

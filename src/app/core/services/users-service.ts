@@ -34,7 +34,8 @@ export interface userData {
   birthDate: string,
   roles: { id: number, name?: string },
   planos: { id: number, name?: string },
-  planPrice: number
+  planPrice: number,
+  active?: boolean
 }
 
 @Injectable({
@@ -76,12 +77,16 @@ export class UsersService {
     return this.http.get(`${myConstants.restBaseUrl}${myConstants.usersPath}/${id}`);
   }
 
-  findAllPageable(page: number, size: number, sort: String, order: String, searchTerm: string = '') {
-    return this.http.get(`${myConstants.restBaseUrl}${myConstants.usersPath}?page=${page}&size=${size}&sort=${sort},${order}&searchTerm=${searchTerm}`);
+  findAllPageable(page: number, size: number, sort: String, order: String, searchTerm: string = '', showDesactivated: boolean = false) {
+    return this.http.get(`${myConstants.restBaseUrl}${myConstants.usersPath}?page=${page}&size=${size}&sort=${sort},${order}&searchTerm=${searchTerm}&showDesactivated=${showDesactivated}`);
   }
 
   signUp(data: userData) {
     return this.http.post(myConstants.restBaseUrl + myConstants.signUpPath, data);
+  }
+
+  activateOrDesactivate (userId: string) {
+    return this.http.post(`${myConstants.restBaseUrl}${myConstants.usersPath}${myConstants.activateOrDesactivatePath}`, userId);
   }
 
   login(data: any) {
