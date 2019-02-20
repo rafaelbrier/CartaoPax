@@ -11,6 +11,9 @@ import { UsersAddComponent } from './pages/users-add/users-add.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { UsersManagerComponent } from './pages/users-manager/users-manager.component';
+import { SobrePlanoComponent } from './pages/sobre-plano/sobre-plano.component';
+import { DescricaoPagamentosComponent } from './pages/descricao-pagamentos/descricao-pagamentos.component';
+import { BoletosComponent } from './pages/boletos/boletos.component';
 
 @NgModule({
     imports: [
@@ -44,7 +47,10 @@ import { UsersManagerComponent } from './pages/users-manager/users-manager.compo
         NewsCommentsComponent,
         UsersAddComponent,
         ProfileComponent,
-        UsersManagerComponent
+        UsersManagerComponent,
+        SobrePlanoComponent,
+        DescricaoPagamentosComponent,
+        BoletosComponent
     ],
     exports: [],
     providers: [],

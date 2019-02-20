@@ -1,0 +1,41 @@
+@import "../../dashboard.scss";
+
+
+@media screen and (max-width: 767px) {
+    .plan-descricao {
+        width: 90% !important;
+        margin: 0 !important;
+    }
+    img {
+        margin-left: 10px;
+    }
+    ol li {
+      line-height: 1.5 !important;
+    }
+}
+
+.plan-descricao {
+    width: 500px;
+    margin: 10px
+  }
+   
+  ol {
+    color: #ccc;
+    list-style-type: none;
+  }
+   
+  ol li {
+    position: relative;
+    font: bold italic 20px Helvetica, Verdana, sans-serif;
+    margin-bottom: 30px;
+  }
+   
+  li p {
+    font: 14px/1.5 Helvetica, sans-serif;
+    padding-left: 60px;
+    color: #4d4d4d;
+  }
+   
+  span {
+    position: absolute;
+  }

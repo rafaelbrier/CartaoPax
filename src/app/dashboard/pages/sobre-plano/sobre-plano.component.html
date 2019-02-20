@@ -1,0 +1,37 @@
+<div class="component-title">
+  Sobre o Plano
+</div>
+
+<div>
+  <div class="d-flex">
+    <img src="../../../../assets/images/icons/id-card.svg" height="32px" width="32px">
+    <b style="font-size: 24px; line-height: 32px; margin-left: 20px;">{{userPlano?.name}}</b>
+  </div>
+  <hr>
+  
+  <div class="plan-descricao">
+    <ol>
+      <li><span>1.</span>
+        <p>Coberturas de 100% (nos procedimentos do ROL da ANS)</p>
+      </li>
+      <li><span>2.</span>
+        <p> Número ilimitado de consultas e atendimentos</p>
+      </li>
+      <li><span>3.</span>
+        <p>Demais procedimentos descontos na Tabela CROE</p>
+      </li>
+      <li><span>4.</span>
+        <p>Abrangência geográfica: municipal, restringindo-se as garantias de cobertura à cidade de Juiz de Fora</p>
+      </li>
+      <li><span>5.</span>
+        <p>Número de registro: 434.231/00-3</p>
+      </li>
+      <li><span>6.</span>
+        <p>Segmentação assistencial: exclusivamente odontológica</p>
+      </li>
+    </ol>
+  </div>
+
+  <app-error-load [loadError]="boxLoadingError" [isLoading]="isBoxLoading"></app-error-load>
+
+</div>

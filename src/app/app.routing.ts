@@ -11,6 +11,9 @@ import { AuthGuard } from './_guard/auth.guard';
 import { ProfileComponent } from './dashboard/pages/profile/profile.component';
 import { PlanosComponent } from './main-page/pages/planos/planos.component';
 import { UsersManagerComponent } from './dashboard/pages/users-manager/users-manager.component';
+import { SobrePlanoComponent } from './dashboard/pages/sobre-plano/sobre-plano.component';
+import { BoletosComponent } from './dashboard/pages/boletos/boletos.component';
+import { DescricaoPagamentosComponent } from './dashboard/pages/descricao-pagamentos/descricao-pagamentos.component';
 
 
 export const routes: Routes = [
@@ -66,6 +69,33 @@ export const routes: Routes = [
         data: {
           breadcrumb: "Gerenciar Usuários",
           expectedRole: 'EMPLOYEE'
+        }
+      },
+      {
+        path: 'sobreplano',
+        component: SobrePlanoComponent,
+        canActivate: [AuthGuard],
+        data: {
+          breadcrumb: "Sobre o Plano",
+          expectedRole: 'CLIENT'
+        }
+      },
+      {
+        path: 'boletos',
+        component: BoletosComponent,
+        canActivate: [AuthGuard],
+        data: {
+          breadcrumb: "Boletos",
+          expectedRole: 'CLIENT'
+        }
+      },
+      {
+        path: 'descricaopagamentos',
+        component: DescricaoPagamentosComponent,
+        canActivate: [AuthGuard],
+        data: {
+          breadcrumb: "Descrição de Pagamentos",
+          expectedRole: 'CLIENT'
         }
       },
       
