@@ -16,6 +16,7 @@ export class User {
 
 export interface userData {
   id?: string,
+  age?: string,
   name: string,
   cpf: string,
   imgProfile: string,
@@ -83,6 +84,10 @@ export class UsersService {
 
   signUp(data: userData) {
     return this.http.post(myConstants.restBaseUrl + myConstants.signUpPath, data);
+  }
+
+  userEdit(data: userData) {
+    return this.http.post(`${myConstants.restBaseUrl}${myConstants.userEditPath}/${data.id}`, data);
   }
 
   activateOrDesactivate (userId: string) {

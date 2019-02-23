@@ -1,16 +1,67 @@
 @import "../../dashboard.scss";
 
 
+@media screen and (max-width: 767px) {
+    .form-inline {
+        margin-bottom: 1rem;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .col-sm-5 input{
+        margin-left: 15px;
+    }
+}
+
+.profile-pic {
+	position: relative;
+	display: inline-block;
+}
+
+.profile-pic:hover {
+    .edit {
+        display: block;
+    }
+}
+
+.edit {
+    position: absolute;
+	right: 0;
+    top: 0;
+    font-size: 20px;
+	display: none;
+}
+
+.edit i {
+    cursor: pointer;
+    color: #000;
+    color: #4d4d4d;
+    border: 2px solid #4d4d4d;
+    border-radius: 30%;
+    padding: 5px;
+}
+
 .sub-menu {
     margin-top: 20px;
 }
 
 .row {
-        p  {
-        color: #6c757d;
+    min-height: 40px;
+    label  {
+        color: rgba(0,0,0,0.87);
+        display: table-cell;
+        line-height: 25px;
     }
-    b {
+    input {
+        display: table-cell;
+        width: 90%;
         text-transform: uppercase;
         color: black;
+        font-weight: bold;
+        padding: 0px .75rem !important;
     }
+}
+
+.form-inline {
+    display: table;
 }

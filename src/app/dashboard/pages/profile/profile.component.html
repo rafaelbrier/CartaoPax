@@ -7,8 +7,33 @@
   <app-error-load [loadError]="boxLoadingError" [isLoading]="isBoxLoading"></app-error-load>
   <div *ngIf="!boxLoadingError && !isBoxLoading" class="row">
     <div class="col-sm-3 text-center">
-      <image [imgSrc]="user?.imgProfile || '../../../../assets/images/add-user-avatar.png'" [width]="'80%'" [height]="'158px'"
-      [style]="{'border-radius': '50%'}"></image>
+
+      <div class="profile-pic"  *ngIf="!editImage; else editImgComp">
+        <image [imgSrc]="user?.imgProfile || '../../../../assets/images/add-user-avatar.png'" [width]="'158px'"
+          [height]="'158px'" [style]="{'border-radius': '50%'}">
+        </image>
+        <div class="edit" >
+            <i class="fas fa-pencil-alt" (click)="editImg()" ngbTooltip="Editar"></i>
+        </div>
+      </div>
+
+      <ng-template #editImgComp>
+        <div class="col-sm-10 mx-auto">
+          <i class="fas fa-times" (click)="editImage = false" ngbTooltip="Sair do modo edição"></i>
+          <app-img-input-file [imgPath]="downloadURL" (imgFile)="fileImg($event)"></app-img-input-file>
+
+          <div class="progress" *ngIf="inProgress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+              [attr.aria-valuenow]="progressImg" aria-valuemin="0" aria-valuemax="100"
+              [ngClass]="[progressImg === 100 ? 'bg-success' :'' , uploadError ? 'bg-danger' : '']"
+              [ngStyle]="{'width': progressImg + '%'}">
+              {{progressImg}}%
+            </div>
+          </div>
+
+        </div>
+      </ng-template>
+
       <div class="text-left sub-menu">
         <p>Tipo:
           <b
@@ -17,19 +42,21 @@
           </b>
         </p>
         <p>Status: <b [ngClass]="{'text-primary': user?.active, 'text-danger': !user?.active}">
-          {{user?.active ? "ATIVO" : "DESATIVADO"}}
-        </b>
-      </p>
+            {{user?.active ? "ATIVO" : "DESATIVADO"}}
+          </b>
+        </p>
         <p>Plano: <b style="color: #8c0202">{{user?.planos?.name}}</b></p>
         <p>Mensalidade: <b class="text-info">{{(user?.planPrice || 0.00) | BRCurrencyPipe}}</b></p>
       </div>
 
     </div>
+
     <div class="col-sm-9">
 
       <div class="row">
-        <div class="col-sm-7">
-          <p>Nome: <b>{{user?.name}}</b></p>
+        <div class="col-sm-7 form-inline">
+          <label>Nome:</label>
+          <input class="form-control" type="text" [(ngModel)]="user.name" maxlength="101">
         </div>
         <div class="col-sm-5">
           <p>CPF: <b>{{user?.cpf}}</b></p>
@@ -40,6 +67,7 @@
         <div class="col-sm-7">
           <p>Data de Nascimento: <b>{{user?.birthDate}}</b></p>
         </div>
+
         <div class="col-sm-5">
           <p>Idade: <b>{{user?.age}} anos</b></p>
         </div>
@@ -54,50 +82,77 @@
         </div>
       </div>
 
-      <p>Email: <b>{{user?.email}}</b></p>
+      <div class="row">
+        <div class="col-sm-7 form-inline">
+          <label>Email:</label>
+          <input class="form-control" type="email" [(ngModel)]="user.email" email>
+        </div>
+        <div class="col-sm-5 form-inline">
+          <label>Telefone:</label>
+          <input class="form-control" type="email" [(ngModel)]="user.telephone" email>
+        </div>
+      </div>
+
       <hr class="d-none d-sm-block">
 
       <div class="row">
-        <div class="col-sm-7">
-          <p>CEP: <b>{{user?.cep}}</b></p>
+        <div class="col-sm-7 form-inline">
+          <label>CEP:</label>
+          <input class="form-control" type="text" [ngModel]="user.cep | cep" maxlength="9"
+            (ngModelChange)="consultaCep($event)" onkeypress="return event.charCode >= 48 && event.charCode <= 57">
         </div>
-        <div class="col-sm-5">
-          <p>Estado: <b>{{user?.estado}}</b></p>
+
+        <div class="col-sm-5 form-inline">
+          <label>Estado:</label>
+          <input class="form-control" type="text" [(ngModel)]="user.estado" maxlength="51" [disabled]="retrievingCep">
         </div>
       </div>
 
       <div class="row">
-        <div class="col-sm-7">
-          <p>Cidade: <b>{{user?.cidade}}</b></p>
+        <div class="col-sm-7 form-inline">
+          <label>Cidade:</label>
+          <input class="form-control" type="text" [(ngModel)]="user.cidade" maxlength="51" [disabled]="retrievingCep">
         </div>
-        <div class="col-sm-5">
-          <p>Bairro: <b>{{user?.bairro}}</b></p>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-sm-7">
-          <p>Endereço: <b>{{user?.endereco}}</b></p>
-        </div>
-        <div class="col-sm-5">
-          <p>Número: <b>{{user?.numero}}</b></p>
+        <div class="col-sm-5 form-inline">
+          <label>Bairro:</label>
+          <input class="form-control" type="text" [(ngModel)]="user.bairro" maxlength="51" [disabled]="retrievingCep">
         </div>
       </div>
 
       <div class="row">
-        <div class="col-sm-7">
-          <p>Complemento: <b>{{user?.complemento}}</b></p>
+        <div class="col-sm-7 form-inline">
+          <label>Endereço:</label>
+          <input class="form-control" type="text" [(ngModel)]="user.endereco" maxlength="51" [disabled]="retrievingCep">
+        </div>
+        <div class="col-sm-5 form-inline">
+          <label>Número:</label>
+          <input class="form-control" type="text" [(ngModel)]="user.numero" maxlength="7">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-7 form-inline">
+          <label>Complemento:</label>
+          <input class="form-control" type="text" [(ngModel)]="user.complemento" maxlength="16">
         </div>
       </div>
 
     </div>
-    <div class="form-end">
-      <span>Para modificar qualquer informação, favor entrar em contato na central.</span>
-  </div>
+
+    <div class="form-end w-12">
+      <span>Para modificar seus dados, altere o campo e clique em Salvar.</span>
+      <button type="button" class="btn btn-info float-right" [disabled]="submitting"
+        (click)="submitForm()">Salvar</button>
+    </div>
+
   </div>
 </div>
 
-<hr><hr>
+<hr>
+<hr>
 <p>Admin -> 111.057.326-06 - 31/05/1995</p>
-<p>Funci -> 938.693.716-68	- 31/05/1974</p>
+<p>Funci -> 938.693.716-68 - 31/05/1974</p>
 <p>Clien -> 836.968.540-42 - 31/06/1854</p>
+
+<!-- Modal -->
+<app-modal hidden="true"></app-modal>

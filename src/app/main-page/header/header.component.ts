@@ -40,9 +40,6 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (window.innerWidth < 1350)
-      document.getElementById("telephone").remove();
-
     this.userSubscription = this.usersService.currentUser.subscribe(u => {
       this.isAnyUserLogged = u ? true : false;
     });
