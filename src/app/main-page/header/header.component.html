@@ -64,8 +64,6 @@
     </ul>
   </div>
   
-  <div class="telephone" id="telephone"><i class="fas fa-phone"></i>(33) 3271-6271</div>
-  
   <div class="login-button" [style.display]="isNavbarCollapsed ? 'contents' : 'flex'">
     <button type="button" class="btn btn-success" (click)="isLoginCollapsed = !isLoginCollapsed" *ngIf="!isAnyUserLogged; else SignOutButton"
       [attr.aria-expanded]="!isLoginCollapsed" aria-controls="collapseLogin"><i class="fas fa-user"></i>Fazer Login</button>

@@ -2,45 +2,36 @@
 
 @import '../../app.component.scss';
 
-@media screen and (min-width: 1350px) {
-    .navbar {
-       background: url('../../../assets/images/header.png') no-repeat center top;
-       height: 143px;
-       background-size: cover;
-       width: 100%;
-   }
-   .navbar-opacity {
-      opacity: 0.9;
-   }   
-   .nav {
-       margin-top: -75px !important;
-   }  
-   .card {
-    top: 90% !important;
-    }   
-   .navbar-brand img {
-    margin-bottom: 35px;
-    margin-right: 9px;
-   }
+.navbar {
+    background-image: linear-gradient(to bottom right, rgb(18, 184, 8) , rgb(9, 110, 6));
+    padding: 0 1rem !important;
+    z-index: 9999;
 }
-
-@media screen and (max-width: 1349px) {
-    .navbar {
-        background-image: linear-gradient(to right, rgb(18, 184, 8) , rgb(9, 110, 6));
+.navbar-container {
+    background-color: white;
+    border-bottom: 2px solid #10ac08;
+    border-radius: 0% 55% 60% 0%;
+    margin-left: -1rem;
+    img {
+        padding-left: 1.5rem;
+        padding-right: 3rem;
     }
-    .navbar-opacity {
-        background: linear-gradient(to right, rgba(18, 184, 8, 0.5) , rgba(9, 110, 6, 0.5)) !important;
-        .login-button {
-            opacity: 0.5;
-        }
-    }
+}
+.navbar-opacity {
+    background: linear-gradient(to bottom right, rgba(18, 184, 8, 0.7) , rgba(9, 110, 6, 0.7)) !important;
     .login-button {
-        top: 80% !important;   
-    }   
-    .navbar-logo {
-        max-height: 48px !important;  
-        transition: max-height 1s;  
+        opacity: 0.7;
     }
+}
+.login-button {
+    top: 80% !important;   
+    button {
+        margin-bottom: 10px;
+    }
+}   
+.navbar-logo {
+    max-height: 48px !important;  
+    transition: max-height 1s;  
 }
 
 .nav {
@@ -50,26 +41,6 @@
 .navbar-brand img{
     transition: max-height 1s;  
      max-height: 84px;     
-}
-
-@media screen and (min-width: 1700px) {
-    .telephone {
-        top: 3.7vw;
-    }
-}
-@media screen and (min-width: 1400px) {
-    .navbar-container {
-        min-width: 22%; 
-    }
-}
-
-.telephone {
-    position: fixed;
-    left: 29vw;
-    font-weight: 700;
-    i {
-        margin-right: 15px;
-    }
 }
 
 .login-button {
