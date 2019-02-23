@@ -12,6 +12,8 @@ export class ProfileComponent implements OnInit {
   isActive: boolean = true;
   user: userData;
 
+  isEditting: boolean = false;
+
   constructor(private usersService: UsersService) { }
 
   isBoxLoading: boolean = false;
