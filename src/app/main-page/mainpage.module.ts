@@ -5,6 +5,7 @@ import { BodyComponent } from './body/body.component';
 import { HeaderComponent } from './header/header.component';
 import { NewsPageComponent } from './pages/news-page/news-page.component';
 import { PlanosComponent } from './pages/planos/planos.component';
+import { ObituarioComponent } from './pages/obituario/obituario.component';
 
 @NgModule({
     imports: [
@@ -16,6 +17,7 @@ import { PlanosComponent } from './pages/planos/planos.component';
         HeaderComponent,
         NewsPageComponent,
         PlanosComponent,
+        ObituarioComponent,
     ],
     exports: [
         HeaderComponent,

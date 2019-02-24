@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule } from '@angular/router';
 import * as firebase from 'firebase/app';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing';
@@ -25,7 +24,6 @@ firebase.initializeApp(fireBaseConfig);
     DashboardModule,
     MainPageModule,
     CoreModule.forRoot(),
-    RouterModule,
     AppRoutingModule
   ],
   exports: [],  

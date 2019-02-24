@@ -14,6 +14,7 @@ import { UsersManagerComponent } from './dashboard/pages/users-manager/users-man
 import { SobrePlanoComponent } from './dashboard/pages/sobre-plano/sobre-plano.component';
 import { BoletosComponent } from './dashboard/pages/boletos/boletos.component';
 import { DescricaoPagamentosComponent } from './dashboard/pages/descricao-pagamentos/descricao-pagamentos.component';
+import { ObituarioComponent } from './main-page/pages/obituario/obituario.component';
 
 
 export const routes: Routes = [
@@ -21,6 +22,7 @@ export const routes: Routes = [
   { path: 'home', component: BodyComponent, data: { breadcrumb: "Home" } },
   // { path: 'news', component: NewsPageComponent, data: { breadcrumb: "Notícias" } },
   { path: 'news/:id', component: NewsPageComponent, data: { breadcrumb: "Notícias" } },
+  { path: 'obituario', component: ObituarioComponent, data: { breadcrumb: "Obituário" } },
   { path: 'planos', component: PlanosComponent, data: { breadcrumb: "Planos" } },
   {
     path: 'dashboard',
@@ -106,4 +108,7 @@ export const routes: Routes = [
   //   
 ];
 
-export const AppRoutingModule: ModuleWithProviders = RouterModule.forRoot(routes);
+export const AppRoutingModule: ModuleWithProviders = RouterModule.forRoot(routes,{
+    scrollPositionRestoration: 'enabled',
+    anchorScrolling: 'enabled',
+  });

@@ -23,6 +23,7 @@ import { MyDatePipe } from './pipes/date.pipe';
 import { BRCurrencyPipe } from './pipes/brcurrency.pipe';
 import { EmptyListComponent } from './components/utils/empty-list/empty-list.component';
 import { AuthorityDirective } from './directive/authority.directive';
+import { EventsService } from './services/events-service';
 
 @NgModule({
   imports: [
@@ -95,7 +96,7 @@ import { AuthorityDirective } from './directive/authority.directive';
     NgbModalModule
   ],
 
-  providers: [NgbActiveModal, TokenService],
+  providers: [NgbActiveModal, TokenService, EventsService],
   entryComponents: [ModalComponent],
 })
 export class CoreModule {

@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { whiteSpace } from 'src/app/core/components/utils/validators/custom-validators';
@@ -6,13 +6,14 @@ import { SharedService } from 'src/app/core/services/shared-services';
 import { UsersService } from 'src/app/core/services/users-service';
 import { Subscription } from 'rxjs';
 import { ModalComponent } from 'src/app/core/components/utils/modal/modal.component';
+import { EventsService } from 'src/app/core/services/events-service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, AfterViewInit {
 
   @ViewChild(ModalComponent) modal: ModalComponent;
 
@@ -23,6 +24,9 @@ export class HeaderComponent implements OnInit {
   showPassword: boolean = false;
 
   isLoginCollapsed: boolean = false;
+
+  breadCrumbShow: boolean = false;
+  pageName: string;
 
   phoneElement: HTMLElement;
 
@@ -35,7 +39,8 @@ export class HeaderComponent implements OnInit {
   constructor(private router: Router,
     private formBuilder: FormBuilder,
     private sharedService: SharedService,
-    private usersService: UsersService) {
+    private usersService: UsersService,
+    private cdRef: ChangeDetectorRef) {
     this.isNavBarCollapsed = true;
   }
 
@@ -46,7 +51,16 @@ export class HeaderComponent implements OnInit {
     this.loginFormBuilder();
   }
 
-  ngOnDestroy() {
+  ngAfterViewInit(): void {
+    EventsService.get('BREADCRUMB').subscribe((data: {show: boolean, name: string}) => {
+      this.breadCrumbShow = data.show ? data.show : false;
+      this.pageName = data.name ? data.name : null;
+      this.cdRef.detectChanges();     
+    });
+  }
+
+  ngOnDestroy(): void {
+    EventsService.get('BREADCRUMB').unsubscribe();
     this.userSubscription.unsubscribe();
   }
 

@@ -11,22 +11,29 @@ interface IBreadcrumb {
 @Component({
   selector: "breadcrumb",
   template: `
-        <a [routerLink]="['../' + homePage]" class="home-page">
+        <a [routerLink]="['../' + homePage.toLowerCase()]" class="home-page" [style.color]="color ? color : '#007bff'">
           {{homePage}}         
         </a>     
-        <a *ngFor="let breadcrumb of breadcrumbs" [routerLink]="['../'+homePage+breadcrumb.url, breadcrumb.params]">
+        <a *ngFor="let breadcrumb of breadcrumbs" [routerLink]="['../' + (isDefault ? '' : homePage.toLowerCase()) + breadcrumb.url, breadcrumb.params]"
+        [style.color]="color ? color : '#007bff'">
           / {{breadcrumb.label}}
         </a>   
       `,
 styles: [`
   .home-page {
     text-transform: capitalize;
-  }  
+  }    
 `]})
 export class BreadcrumbComponent implements OnInit {
 
   @Input()
   homePage: string;
+
+  @Input()
+  isDefault: boolean = false;
+
+  @Input()
+  color: string;
 
   public breadcrumbs: IBreadcrumb[];
 

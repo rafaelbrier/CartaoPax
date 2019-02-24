@@ -9,6 +9,7 @@ import { whiteSpace } from '../../../core/components/utils/validators/custom-val
 import { CommentsService } from '../../../core/services/comments-service';
 import { NewsService } from '../../../core/services/news.service';
 import { SharedService } from '../../../core/services/shared-services';
+import { EventsService } from 'src/app/core/services/events-service';
 
 
 @Component({
@@ -63,6 +64,7 @@ export class NewsPageComponent implements OnInit {
   }
 
   ngOnInit() {
+    EventsService.get('BREADCRUMB').emit({show: true, name: "NOTÍCIAS"});
     this.isLoading = true;
     this.commentFormBuilder();
 

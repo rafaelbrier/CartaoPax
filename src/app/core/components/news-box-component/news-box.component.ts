@@ -41,7 +41,7 @@ export class NewsBoxComponent {
   }
 
   goToDetailComments() {
-    location.href = '/news/' + this.data.id + '/#comments';
+    this.router.navigate(['/news/' + this.data.id], {fragment: "comments"});
   }
 
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NewsService } from '../../core/services/news.service';
+import { EventsService } from 'src/app/core/services/events-service';
 
 @Component({
   selector: 'app-body',
@@ -25,6 +26,7 @@ export class BodyComponent implements OnInit {
   constructor(private newsService: NewsService) { }
 
   ngOnInit() {
+    EventsService.get('BREADCRUMB').emit({show: false});
     this.initGallery();
     this.loadNews(this.newsLoadDefaultLimit);
   }

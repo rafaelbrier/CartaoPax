@@ -1,0 +1,112 @@
+<div class="row w-11 mx-auto mt-4">
+
+  <div class="col-sm-8 col-12">
+    <app-error-load [isLoading]="isLoading" [loadError]="loadError"></app-error-load>
+  
+    <div *ngIf="!isLoading && !loadError">
+  
+      <h3 class="title">
+        {{newsData?.title}}
+      </h3>
+  
+      <div class="subheader">
+        <h5>
+          <span>
+            Postado em
+          </span>
+          {{newsData?.date | date: "dd/MM/yyyy 'às' HH:mm"}}.
+        </h5>
+  
+      </div>
+      <div class="body">
+        <image *ngIf="newsData?.imgPath" [imgSrc]="newsData?.imgPath" [style]="{'max-width':'300px'}"></image>
+        <p [innerHTML]="newsData?.body">
+          {{newsData?.body}}
+        </p>
+      </div>
+  
+      <div class="avatar-text-container" id="comments">
+        <div class="avatar-frame">
+          <span class="helper"></span>
+          <img alt="avatar" src="../../../../assets/images/avatar.png">
+        </div>
+  
+        <div class="avatar-text-textcontainer">
+          <div class="author-title">
+            Escrito por
+            <a href="#"> Rafael Brier </a>
+          </div>
+          <div class="author-body">
+            {{fakeData}}
+            <span href *ngIf="readMore" (click)="expandText()">Ver Mais</span>
+          </div>
+        </div>
+  
+      </div>
+  
+      <div class="info-text">
+        Comentários
+      </div>
+  
+      <div class="subheader">
+        <h5 class="comment-count" *ngIf="commentsData?.numberOfElements != 0 && commentsData?.numberOfElements != null; else noComment">
+          Mostrando {{commentsData?.numberOfElements}} de {{commentsData?.totalElements}}
+          {{newsData?.commentCount === 1 ? "comentário." : "comentários."}}
+        </h5>
+        <ng-template #noComment>
+          <h5 class="comment-count">
+            Ninguém comentou a notícia ainda.
+          </h5>
+        </ng-template>
+      </div>
+  
+      <app-comment-box *ngFor="let comment of comments" [comment]="comment" (deleteComment)="deleteComment($event)"></app-comment-box>
+  
+      <button type="button" class="btn btn-outline-success btn-lg btn-block" *ngIf="commentsData?.numberOfElements != commentsData?.totalElements"
+        (click)="loadMoreComments()">Mostrar mais comentários</button>
+  
+      <div class="comment-form-content">
+  
+        <h5>Deixe um Comentário</h5>
+  
+        <!-- <form class="comment-form" [formGroup]="commentForm" (ngSubmit)="submitCommentForm()"> -->
+  
+  
+          <!-- <div class="col-sm-8 form-group"> -->
+            <!-- <textarea formControlName="comment" type="text" class="form-control" placeholder="Mensagem" ></textarea> -->
+            <!-- Validador Comentário  -->
+            <!-- <app-validators [form]="commentForm" [input]="f.comment" [inputName]="'comentário'" [validators]="['required']"></app-validators> -->
+          <!-- </div> -->
+  
+          <!-- <div class="col-sm-4"> -->
+  
+            <!-- <div class="form-group"> -->
+              <!-- <input formControlName="name" type="text" class="form-control" placeholder="Nome"> -->
+              <!-- Validador Nome  -->
+              <!-- <app-validators [form]="commentForm" [input]="f.name" [inputName]="'nome'" [validators]="['required']"></app-validators> -->
+            <!-- </div> -->
+  
+            <!-- <div class="form-group"> -->
+              <!-- <input formControlName="email" type="email" class="form-control" placeholder="A@a.com" email> -->
+  
+              <!-- Validador Email  -->
+              <!-- <app-validators [form]="commentForm" [input]="f.email" [inputName]="'email'" [validators]="['required','email']"></app-validators> -->
+            <!-- </div> -->
+  
+            <!-- <button type="submit" class="btn btn-success" [disabled]="submitting">Publicar Comentário</button> -->
+            
+          <!-- </div> -->
+          
+        <!-- </form> -->
+        
+      </div>
+  
+    </div>
+
+  </div>
+
+
+</div>
+
+<!-- Modal -->
+<app-modal hidden="true"></app-modal>
