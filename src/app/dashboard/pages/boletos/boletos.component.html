@@ -1,3 +1,93 @@
 <div class="component-title">
   Boletos
 </div>
+
+<div class="table-container">
+
+  <div class="form-inline justify-content-center">
+
+      <div class="col-sm-4 d-flex">
+          <label>Mostrar</label>
+          <select class="custom-select" [(ngModel)]="limitValue" (ngModelChange)="onSelectChange($event)">
+              <option *ngFor="let limitOption of limitOptions" [value]="limitOption">{{limitOption}}</option>
+          </select>
+          <label>entradas.</label>
+      </div>
+
+      <div class="col-sm-4 offset-sm-4 d-flex">
+          <label>Filtrar:</label>
+          <input type="text" class="form-control" placeholder="id, data, título ..."
+              (ngModelChange)="onSearchChange($event)" [(ngModel)]="searchValue"
+              ngbTooltip="Exemplo de busca de data: 01/01/2019 13h30">
+      </div>
+  </div>
+
+  <table class="table">
+
+      <thead>
+          <tr>
+              <th id="date" scope="col" class="mw-px-2" (click)="sortBy('date')" appSortTable
+                  [sort]="[orderBy,orderAscOrDesc]">Mês/Ano</th>
+              <th id="title" scope="col" class="mw-px-3" (click)="sortBy('title')" appSortTable
+                  [sort]="[orderBy,orderAscOrDesc]">Tipo de Pagamento</th>
+              <th id="status"  scope="col" class="mw-px-1" (click)="sortBy('status')" appSortTable
+                  [sort]="[orderBy,orderAscOrDesc]">Status</th>
+              <th scope="col" class="mw-px-3">Data de Vencimento</th>
+              <th scope="col" class="mw-px-1">Valor</th>
+              <th scope="col" class="mw-px-2">Gerar 2ª Via</th>
+          </tr>
+      </thead>
+
+      <tbody>
+
+          <tr *ngFor="let new of news">
+              <th scope="row">{{new?.id}}</th>
+              <td class="td-full-wd">{{new?.date | date: "dd/MM/yyyy 'às' HH'h'mm"}}</td>
+              <td class="font-weight-bold">
+                  <a target="_blank"  [routerLink]="['/news/' + new?.id]" ngbTooltip="Ver página da notícia">
+                      {{new?.title}}
+                  </a>
+              </td>
+              <td>
+                  BLABLA
+              </td>
+              <td>
+                  BLABLA
+              </td>
+              <td class="td-full-wd">
+                 BLABLA 
+              </td>
+              <td>
+                BLABLA
+              </td>
+          </tr>
+      </tbody>
+  </table>
+
+  <!-- Loading -->
+  <app-error-load [loadError]="boxLoadingError" [isLoading]="isBoxLoading"></app-error-load>
+  <!-- Se a lista estiver vazia -->
+  <app-empty-list [show]="newsData?.totalElements === 0"></app-empty-list>
+
+  <div class="row">
+
+      <div class="col-sm-5 d-flex justify-content-center data-info" *ngIf="newsData">
+          <span *ngIf="newsData?.totalElements === 0; else itemsfound">
+              Nenhum resultado corresponde à pesquisa.
+          </span>
+          <ng-template #itemsfound>Exibindo {{(pages*limitValue + 1) ===
+              newsData?.totalElements ? "notícia" : "notícias"}} de
+              {{pages*limitValue + 1}} a {{(pages*limitValue) + newsData?.numberOfElements}}
+              de um total de {{newsData?.totalElements}}.
+          </ng-template>
+      </div>
+
+      <div class="col">
+          <ngb-pagination class="d-flex justify-content-end" [collectionSize]="pagNumberOfPages" [page]="pages + 1"
+              [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="onPageChange($event)">
+          </ngb-pagination>
+      </div>
+
+  </div>
+
+</div>

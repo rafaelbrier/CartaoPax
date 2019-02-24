@@ -14,12 +14,13 @@
       <label>entradas.</label>
     </div>
 
-    <div class=" col-sm-3 d-flex form-check">
-      <input type="checkbox" class="form-check-input" [(ngModel)]="showDesactivatedUsers" (ngModelChange)="onCheckChange($event)">
-      <label class="form-check-label" >Mostrar Desativados</label>
+    <div class="col-sm-4 d-flex form-check">
+      <input type="checkbox" class="form-check-input" [(ngModel)]="showDesactivatedUsers"
+        (ngModelChange)="onCheckChange($event)">
+      <label class="form-check-label">Mostrar Desativados</label>
     </div>
 
-    <div class="col-sm-3 d-flex">
+    <div class="col-sm-4 d-flex">
       <label>Filtrar:</label>
       <input type="text" class="form-control" placeholder="id, nome, CPF ..." (ngModelChange)="onSearchChange($event)"
         [(ngModel)]="searchValue">
@@ -34,10 +35,12 @@
           #</th>
         <th id="cpf" class="mw-px-3" scope="col" (click)="sortBy('cpf')" appSortTable [sort]="[orderBy,orderAscOrDesc]">
           CPF</th>
-        <th id="planos_id" class="mw-px-1" scope="col" (click)="sortBy('planos_id')" appSortTable [sort]="[orderBy,orderAscOrDesc]">
+        <th id="planos_id" class="mw-px-1" scope="col" (click)="sortBy('planos_id')" appSortTable
+          [sort]="[orderBy,orderAscOrDesc]">
           Plano</th>
-        <th id="plan_price" class="mw-px-1" scope="col" (click)="sortBy('plan_price')" appSortTable [sort]="[orderBy,orderAscOrDesc]">
-              Mensalidade</th>
+        <th id="plan_price" class="mw-px-1" scope="col" (click)="sortBy('plan_price')" appSortTable
+          [sort]="[orderBy,orderAscOrDesc]">
+          Mensalidade</th>
         <th scope="col" class="mw-px-1">Informações</th>
         <th scope="col" class="mw-px-3">Ações</th>
       </tr>
@@ -47,11 +50,11 @@
 
       <tr *ngFor="let user of users" [ngClass]="{'table-danger': !user?.active}">
 
-          <th scope="row" class="box">{{user?.id}}
-              <div class="ribbon" [ngClass]="{'r-blue': user?.roles?.id === 2, 'd-none': user?.roles?.id === 3}">
-              <span>{{user?.roles?.name}}</span>
-            </div>
-          </th>
+        <th scope="row" class="box">{{user?.id}}
+          <div class="ribbon" [ngClass]="{'r-blue': user?.roles?.id === 2, 'd-none': user?.roles?.id === 3}">
+            <span>{{user?.roles?.name}}</span>
+          </div>
+        </th>
 
         <td>{{user?.cpf | cpf}}</td>
         <td class="plano-text" [ngClass]="{'p-blue': user?.planos?.id === 2, 'p-green': user?.planos?.id === 3}">
@@ -69,9 +72,9 @@
             <img src="../../../../assets/images/icons/edit.svg" width="24px" height="24px">
           </button>
           <button type="button" class="btn btn-outline-danger btn-table" (click)="deleteUser(user)"
-          ngbTooltip="Remover usuário">
-          <img src="../../../../assets/images/icons/delete.svg" width="24px" height="24px">
-        </button>
+            ngbTooltip="Remover usuário">
+            <img src="../../../../assets/images/icons/delete.svg" width="24px" height="24px">
+          </button>
           <button type="button" class="btn btn-outline-secondary btn-table" (click)="enableDisableUser(user)"
             ngbTooltip="Ativar ou Desativar usuário">
             <img src="../../../../assets/images/icons/userdisable.svg" width="24px" height="24px">

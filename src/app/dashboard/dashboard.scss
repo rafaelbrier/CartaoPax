@@ -69,7 +69,7 @@ tbody td, tbody th {
     }
 }
 
-.fa-times {
+.fa-times, .fa-chevron-right {
     margin-left: 5px;
     color: red;
     font-size: 16px;
@@ -201,5 +201,27 @@ tbody td, tbody th {
             opacity: 1;
             font-weight: bold;
         }
+    }
+}
+
+.form-inline {
+    margin-bottom: 15px;
+    label {
+        height: calc(2.25rem + 2px);
+        color: $grayBlue;
+        margin: 0 10px;
+    }
+}
+
+select {
+text-indent: 1.5vw;
+}
+
+@media screen and (max-width: 767px) {
+    .col-sm-4 {
+        margin: 10px 0;
+    }
+    select {
+        text-indent: 40%;
     }
 }

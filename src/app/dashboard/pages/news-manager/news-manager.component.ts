@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ModalComponent } from '../../../core/components/utils/modal/modal.component';
-import { NewsService } from 'src/app/core/services/news.service';
+import { NewsService, newsData } from 'src/app/core/services/news.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -21,7 +21,7 @@ export class NewsManagerComponent implements OnInit {
   pagNumberOfPages: number;
 
   newsData: any;
-  news: any;
+  news: newsData;
   pages: number = 0;
   limit: number = 10;
   orderBy: string = "date";
