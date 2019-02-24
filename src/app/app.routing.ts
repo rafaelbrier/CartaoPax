@@ -111,4 +111,5 @@ export const routes: Routes = [
 export const AppRoutingModule: ModuleWithProviders = RouterModule.forRoot(routes,{
     scrollPositionRestoration: 'enabled',
     anchorScrolling: 'enabled',
+    scrollOffset: [0, 0]
   });

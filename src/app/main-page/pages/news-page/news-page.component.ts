@@ -1,15 +1,15 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { EventsService } from 'src/app/core/services/events-service';
 import { UsersService } from 'src/app/core/services/users-service';
 import { ModalComponent } from '../../../core/components/utils/modal/modal.component';
 import { whiteSpace } from '../../../core/components/utils/validators/custom-validators';
 import { CommentsService } from '../../../core/services/comments-service';
 import { NewsService } from '../../../core/services/news.service';
 import { SharedService } from '../../../core/services/shared-services';
-import { EventsService } from 'src/app/core/services/events-service';
 
 
 @Component({
@@ -17,7 +17,7 @@ import { EventsService } from 'src/app/core/services/events-service';
   templateUrl: './news-page.component.html',
   styleUrls: ['./news-page.component.scss']
 })
-export class NewsPageComponent implements OnInit {
+export class NewsPageComponent implements OnInit, AfterViewInit {
 
   @ViewChild(ModalComponent) modal: ModalComponent;
 
@@ -48,7 +48,6 @@ export class NewsPageComponent implements OnInit {
   commentForm: FormGroup;
   submitting: boolean = false;
 
-
   constructor(
     private activatedRoute: ActivatedRoute,
     private newsService: NewsService,
@@ -64,35 +63,22 @@ export class NewsPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    EventsService.get('BREADCRUMB').emit({show: true, name: "NOTÍCIAS"});
+    EventsService.get('BREADCRUMB').emit({ show: true, name: "NOTÍCIAS" });
+
     this.isLoading = true;
     this.commentFormBuilder();
 
+    //TEmporário
     if (this.fakeData && this.fakeData.length > this.charMax) {
       this.readMoreDataHolder = this.fakeData;
       this.fakeData = this.fakeData.substr(0, this.charMax) + "...";
       this.readMore = true;
     }
+    //
 
     this.newsId = this.activatedRoute.snapshot.params.id;
-
     if (this.newsId) {
-      this.newsService.findById(this.newsId)
-        .subscribe((resData: any) => {
-          if(resData) {
-            this.newsData = resData;
-            this.newsData.body = this.sanitizer.bypassSecurityTrustHtml(this.newsData.body);
-            this.isLoading = false;
-          } else {
-            this.modal.openModal("Erro!", `Não existe notícia com identificação <b>#${this.newsId}</b>.`, "fail")
-            .then(() => { location.href = '/home' + '/#news';})
-            .catch(() => { location.href = '/home' + '/#news';})
-          }
-        }, () => {
-          this.isLoading = false;
-          this.loadError = true;
-        });
-      this.loadComments(this.commentsDefaultLimit);
+      this.findNewsById();
     }
 
     this.userSubscription = this.usersService.currentUser.subscribe(u => {
@@ -108,11 +94,33 @@ export class NewsPageComponent implements OnInit {
       this.userName = this.userName ? this.userName.split(' ').slice(0, 2).join(' ') : "Anônimo";
       this.userImgProfile = u.imgProfile;
     });
+  }
 
+  ngAfterViewInit(): void {
+    this.sharedService.scrollToAnchor(this.activatedRoute.snapshot.fragment);        
   }
 
   ngOnDestroy(): void {
     this.userSubscription.unsubscribe();
+  }
+
+  findNewsById() {
+    this.newsService.findById(this.newsId)
+      .subscribe((resData: any) => {
+        if (resData) {
+          this.newsData = resData;
+          this.newsData.body = this.sanitizer.bypassSecurityTrustHtml(this.newsData.body);
+          this.isLoading = false;
+        } else {
+          this.modal.openModal("Erro!", `Não existe notícia com identificação <b>#${this.newsId}</b>.`, "fail")
+            .then(() => { location.href = '/home' + '/#news'; })
+            .catch(() => { location.href = '/home' + '/#news'; })
+        }
+      }, () => {
+        this.isLoading = false;
+        this.loadError = true;
+      });
+    this.loadComments(this.commentsDefaultLimit);
   }
 
   // FORM FUNCTIONS
@@ -185,9 +193,9 @@ export class NewsPageComponent implements OnInit {
 
   deleteComment(id: string) {
     this.commentsService.removeCommentById(id)
-    .subscribe(() => {
-      this.loadComments(this.commentsDefaultLimit);
-    });
+      .subscribe(() => {
+        this.loadComments(this.commentsDefaultLimit);
+      });
   }
 
   expandText() {

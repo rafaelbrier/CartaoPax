@@ -96,12 +96,22 @@ export class SharedService {
     consultaCEP(cep: string) {
         cep = cep.replace(/\D/g, '');
         if (cep !== '') {
-          const validaCepNoDash = /^[0-9]{8}$/;
-          if (validaCepNoDash.test(cep)) {
-            return this.http.get(`//viacep.com.br/ws/${cep}/json`);
-          } 
+            const validaCepNoDash = /^[0-9]{8}$/;
+            if (validaCepNoDash.test(cep)) {
+                return this.http.get(`//viacep.com.br/ws/${cep}/json`);
+            }
         }
-      }
+    }
+
+    scrollToAnchor(anchor: string) {
+        if (anchor) {
+            try {
+                setTimeout(() => {
+                    document.querySelector('#' + anchor).scrollIntoView({ behavior: "smooth", block: "start", inline: "start" });
+                }, 200)
+            } catch (err) { }
+        }
+    }
 }
 
 
