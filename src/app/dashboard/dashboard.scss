@@ -15,10 +15,12 @@ $menuItemColor: #4D4D4D;
     padding: 5px;
 }
 
-.form-end span {
-    font-size: 12px;
-    margin-left: 10px;
-    color: darkgray;
+.form-end {
+    span, h6 {
+        font-size: 12px;
+        margin-left: 10px;
+        color: darkgray;
+    }
 }
 
 @media screen and (max-width: 767px) {

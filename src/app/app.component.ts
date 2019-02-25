@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { FireStorageService } from './core/services/firebase-storage/fire-storage.service';
@@ -9,10 +9,11 @@ import { UsersService } from './core/services/users-service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy {
 
   title = 'cartaopax-site';
   routerEventsSubscription: Subscription;
+  currentUserSubscription: Subscription;
   routerUrl: string = "";
 
   constructor(private router: Router, private fireStorageService: FireStorageService, private usersService: UsersService) {
@@ -22,6 +23,7 @@ export class AppComponent {
         this.routerUrl = window.location.pathname.substring(0, indexOfBackslash > 0 ? indexOfBackslash : window.location.pathname.length);
       });
       
+     this.currentUserSubscription =
       this.usersService.currentUser.subscribe(u => {
         if(u)
         this.fireStorageService.checkLoginBeforeContinue();
@@ -29,6 +31,7 @@ export class AppComponent {
   }
 
   ngOnDestroy(): void {
-    this.routerEventsSubscription.unsubscribe();    
+      this.routerEventsSubscription.unsubscribe();    
+      this.currentUserSubscription.unsubscribe();
   }
 }

@@ -34,7 +34,7 @@
         </div>
       </ng-template>
 
-      <div class="text-left sub-menu">
+      <div class="text-left sub-menu border-bottom" style="border-color: #4d4d4d">
         <p>Tipo:
           <b
             [ngClass]="{'text-success': userRole==='ADMIN', 'text-warning': userRole==='EMPLOYEE', 'text-primary': userRole!=='ADMIN' || userRole!=='EMPLOYEE'}">
@@ -54,35 +54,40 @@
     <div class="col-sm-9">
 
       <div class="row">
-        <div class="col-sm-7 form-inline">
+        <div class="col-sm-7 form-inline mt-3 mt-sm-0">
           <label>Nome:</label>
           <input class="form-control" type="text" [(ngModel)]="user.name" maxlength="101">
         </div>
-        <div class="col-sm-5">
-          <p>CPF: <b>{{user?.cpf}}</b></p>
+        <div class="col-sm-5 form-inline">
+          <label>CPF:</label>
+          <input class="form-control-plaintext" type="text" [ngModel]="user.cpf" maxlength="14" readonly>
         </div>
       </div>
 
       <div class="row">
-        <div class="col-sm-7">
-          <p>Data de Nascimento: <b>{{user?.birthDate}}</b></p>
+        <div class="col-sm-7 form-inline">
+            <label>Data de Nascimento:</label>
+            <input class="form-control-plaintext" type="text" [ngModel]="user.birthDate" maxlength="10" readonly>
         </div>
 
-        <div class="col-sm-5">
-          <p>Idade: <b>{{user?.age}} anos</b></p>
+        <div class="col-sm-5 form-inline">
+            <label>Idade:</label>
+            <input class="form-control-plaintext" type="text" [ngModel]="user.age" maxlength="4" readonly>
         </div>
       </div>
 
       <div class="row">
-        <div class="col-sm-7">
-          <p>Escolaridade: <b>{{user?.escolaridade}}</b></p>
+        <div class="col-sm-7 form-inline">
+            <label>Escolaridade:</label>
+            <input class="form-control-plaintext" type="text" [ngModel]="user.escolaridade" maxlength="50" readonly>
         </div>
-        <div class="col-sm-5">
-          <p>Sexo: <b>{{user?.sex === 'M' ? "Masculino" : "Feminino"}}</b></p>
+        <div class="col-sm-5 form-inline">
+            <label>Sexo:</label>
+            <input class="form-control-plaintext" type="text" [ngModel]="user.sex === 'M' ? 'Masculino' : 'Feminino'" maxlength="10" readonly>
         </div>
       </div>
 
-      <div class="row">
+      <div class="row border-bottom" style="border-color: #4d4d4d">
         <div class="col-sm-7 form-inline">
           <label>Email:</label>
           <input class="form-control" type="email" [(ngModel)]="user.email" email>
@@ -93,9 +98,7 @@
         </div>
       </div>
 
-      <hr class="d-none d-sm-block">
-
-      <div class="row">
+      <div class="row mt-3">
         <div class="col-sm-7 form-inline">
           <label>CEP:</label>
           <input class="form-control" type="text" [ngModel]="user.cep | cep" maxlength="9"
@@ -139,10 +142,15 @@
 
     </div>
 
-    <div class="form-end w-12">
-      <span>Para modificar seus dados, altere o campo e clique em Salvar.</span>
-      <button type="button" class="btn btn-info float-right" [disabled]="submitting"
-        (click)="submitForm()">Salvar</button>
+    <div class="row form-end w-12 mx-auto">
+      <div class="col-md-10">
+        <h6>Para modificar seus dados, altere o campo e clique em Salvar.</h6>
+        <h6> Os dados não editáveis só podem ser alterados entrando em contato com a central do Cartão Pax.</h6>
+      </div>
+      <div class="col-md-2">
+        <button type="button" class="btn btn-info float-right" [disabled]="submitting"
+          (click)="submitForm()">Salvar</button>
+      </div>
     </div>
 
   </div>

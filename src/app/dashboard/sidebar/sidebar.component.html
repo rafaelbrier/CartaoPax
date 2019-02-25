@@ -25,21 +25,21 @@
 
 </mat-toolbar>
 
-<mat-sidenav-container>
+<mat-sidenav-container autosize>
 
   <mat-sidenav #sidenav [opened]="!isMobile" [mode]="!isMobile ? 'side' : 'over'" [ngClass]="sideBarOpened ? 'scale-sidenav' : ''">
 
     <div class="menu-content">
 
       <ul>
-
-          <li class="menu-item ripple" [ngClass]="sideBarOpened ? '' : 'icon-only'" [routerLink]="['/dashboard']">
+          <li class="menu-item ripple" [ngClass]="sideBarOpened ? '' : 'icon-only'" [routerLink]="['/dashboard']"
+          tabindex="1">
             <img src="../../../../assets/images/icons/profile.svg" alt="MENU">
             <a>Perfil</a>
           </li>
 
          <!-- with submenu -->
-         <div class="sub-menu" *hasAuthority="'EMPLOYEE'">
+         <div class="sub-menu" *hasAuthority="'EMPLOYEE'" tabindex="2">
             <li class="menu-item ripple sub-menu-toggler" [ngClass]="sideBarOpened ? '' : 'icon-only'">
               <img src="../../../../assets/images/icons/user.svg" alt="MENU">
               <a>Usuários</a>
@@ -60,7 +60,7 @@
           <!-- with submenu -->
 
         <!-- with submenu -->
-        <div class="sub-menu" *hasAuthority="'EMPLOYEE'">
+        <div class="sub-menu" *hasAuthority="'EMPLOYEE'" tabindex="3">
           <li class="menu-item ripple sub-menu-toggler" [ngClass]="sideBarOpened ? '' : 'icon-only'">
             <img src="../../../../assets/images/icons/news.svg" alt="MENU">
             <a>Notícias</a>
@@ -81,8 +81,8 @@
         <!-- with submenu -->
 
         <!-- with submenu -->
-        <div class="sub-menu">
-          <li class="menu-item ripple sub-menu-toggler" [ngClass]="sideBarOpened ? '' : 'icon-only'">
+        <div class="sub-menu" tabindex="4">
+          <li class="menu-item ripple sub-menu-toggler" [ngClass]="sideBarOpened ? '' : 'icon-only'" >
             <img src="../../../../assets/images/icons/health.svg" alt="MENU">
             <a>Meu Plano</a>
             <div class="arrow">&#9654;</div>
@@ -105,12 +105,14 @@
         </div>
         <!-- with submenu -->
 
-        <li class="menu-item ripple" [ngClass]="sideBarOpened ? '' : 'icon-only'" [routerLink]="['/planos']">
+        <li class="menu-item ripple" [ngClass]="sideBarOpened ? '' : 'icon-only'" [routerLink]="['/planos']"
+        tabindex="5">
           <img src="../../../../assets/images/icons/money.svg" alt="MENU">
           <a>Calcular Preço dos Planos</a>
         </li>
 
-        <li class="menu-item ripple" [ngClass]="sideBarOpened ? '' : 'icon-only'" [routerLink]="['./newsmanager']">
+        <li class="menu-item ripple" [ngClass]="sideBarOpened ? '' : 'icon-only'" [routerLink]="['./newsmanager']"
+        tabindex="6">
           <img src="../../../../assets/images/icons/gear.svg" alt="MENU">
           <a>Menu 5</a>
         </li>

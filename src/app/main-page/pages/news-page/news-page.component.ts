@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
@@ -17,7 +17,7 @@ import { SharedService } from '../../../core/services/shared-services';
   templateUrl: './news-page.component.html',
   styleUrls: ['./news-page.component.scss']
 })
-export class NewsPageComponent implements OnInit, AfterViewInit {
+export class NewsPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild(ModalComponent) modal: ModalComponent;
 
@@ -68,13 +68,13 @@ export class NewsPageComponent implements OnInit, AfterViewInit {
     this.isLoading = true;
     this.commentFormBuilder();
 
-    //TEmporário
+    //Temporário
     if (this.fakeData && this.fakeData.length > this.charMax) {
       this.readMoreDataHolder = this.fakeData;
       this.fakeData = this.fakeData.substr(0, this.charMax) + "...";
       this.readMore = true;
     }
-    //
+    /////
 
     this.newsId = this.activatedRoute.snapshot.params.id;
     if (this.newsId) {

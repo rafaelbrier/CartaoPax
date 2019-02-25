@@ -23,8 +23,6 @@ export class SortTableDirective {
   // protected _elementClass: string;
 
 
-
-
   constructor(private elementRef: ElementRef) {
     this.elementId = this.elementRef.nativeElement.getAttribute('id');
     let _class = this.elementRef.nativeElement.getAttribute('class');

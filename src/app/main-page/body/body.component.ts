@@ -26,8 +26,8 @@ export class BodyComponent implements OnInit {
   constructor(private newsService: NewsService) { }
 
   ngOnInit() {
-    EventsService.get('BREADCRUMB').emit({show: false});
     this.initGallery();
+    EventsService.get('BREADCRUMB').emit({show: false});
     this.loadNews(this.newsLoadDefaultLimit);
   }
 
@@ -42,7 +42,7 @@ export class BodyComponent implements OnInit {
         delete this.newsData.content;
         this.recentNews = this.news.shift();
         this.isBoxLoading = false;
-      }, error => {
+      }, () => {
         this.isBoxLoading = false;
         this.boxLoadingError = true;
       })
@@ -52,7 +52,6 @@ export class BodyComponent implements OnInit {
     this.newsLoadDefaultLimit = this.newsLoadDefaultLimit + 3;
     this.loadNews(this.newsLoadDefaultLimit);
   }
-
 
   initGallery() {
     this.clubGalleryOptions = [
@@ -66,7 +65,6 @@ export class BodyComponent implements OnInit {
       { "breakpoint": 767, "width": "100%", "height": "300px", "thumbnailsColumns": 3,
       "thumbnailsPercent": 25 },
     ]
-
 
     this.clubGalleryImages = [
       {

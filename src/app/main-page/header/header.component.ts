@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit, ViewChild, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import { Component, HostListener, OnInit, ViewChild, AfterViewInit, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { whiteSpace } from 'src/app/core/components/utils/validators/custom-validators';
@@ -13,7 +13,7 @@ import { EventsService } from 'src/app/core/services/events-service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit, AfterViewInit {
+export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild(ModalComponent) modal: ModalComponent;
 
@@ -35,6 +35,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   submitting: boolean = false;
   loginError: boolean = false;
   unknownError: boolean = false;
+  breadcrumbSubscription: Subscription;
 
   constructor(private router: Router,
     private formBuilder: FormBuilder,
@@ -52,7 +53,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    EventsService.get('BREADCRUMB').subscribe((data: {show: boolean, name: string}) => {
+    this.breadcrumbSubscription = EventsService.get('BREADCRUMB').subscribe((data: {show: boolean, name: string}) => {
       this.breadCrumbShow = data.show ? data.show : false;
       this.pageName = data.name ? data.name : null;
       this.cdRef.detectChanges();     
@@ -60,7 +61,7 @@ export class HeaderComponent implements OnInit, AfterViewInit {
   }
 
   ngOnDestroy(): void {
-    EventsService.get('BREADCRUMB').unsubscribe();
+    this.breadcrumbSubscription.unsubscribe();
     this.userSubscription.unsubscribe();
   }
 
@@ -81,10 +82,10 @@ export class HeaderComponent implements OnInit, AfterViewInit {
     };
 
     this.usersService.login(loginData)
-      .subscribe((res) => {
+      .subscribe(() => {
         this.submitting = false;
         this.loginError = false;
-        this.navigateToDashboard(true);
+        this.navigateToDashboard();
       }, (err) => {
         if(err.status != 401)
         {
@@ -107,9 +108,8 @@ export class HeaderComponent implements OnInit, AfterViewInit {
 
   get v() { return this.loginForm.value; }
 
-  navigateToDashboard(logInNow: boolean): void {
-    logInNow ? location.href = '/dashboard/' :
-               this.router.navigate(['/dashboard']);
+  navigateToDashboard(): void {
+    this.router.navigate(['/dashboard']);
   }
 
   logout() {

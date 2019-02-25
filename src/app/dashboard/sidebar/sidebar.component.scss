@@ -28,8 +28,8 @@ $borderColor: #c5cacf;
 @media screen and (min-width: 768px) {
 
     .dashboard-content {
-        min-width: 75%;
-        margin: 100px 150px 35px 220px;
+        width: 94%;
+        margin: 100px 0px 35px 45px;
         padding: 15px;
     }
 
@@ -99,14 +99,15 @@ mat-sidenav {
     margin-top: 64px;
     position: fixed;
     background: $navBackColor;
-    width: 100px;
+    max-width: 100px;
     -webkit-transition: width 0.8s; /* Safari */
     transition: width 0.8s;
     border-right: 0.5px solid $borderColor;
 }
 
 .scale-sidenav {
-  width: 300px;
+  min-width: 300px;
+  max-width: 300px;
 }
 
 .top-menu {
@@ -214,8 +215,7 @@ ul {
         cursor: pointer;
         animation-name: fadeInText;
         animation-fill-mode: forwards;
-        animation-delay: 0.3s;
-        animation-duration: 0.7s;
+        animation-duration: 0.4s;
     }
 
     &:hover {
@@ -254,13 +254,17 @@ ul {
 .sub-menu {
     &:hover, &:active, &:focus {
         .arrow {
-            color: white;
             transform: rotate(90deg);
             transition: 0.3s;
         }
         .sub-menu-content {
             transition: max-height 0.8s ease-in !important;
             max-height: 500px !important;
+        }
+    }
+    &:hover {
+        .arrow {
+            color: white !important;
         }
     }   
 }
