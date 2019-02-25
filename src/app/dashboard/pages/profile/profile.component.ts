@@ -172,7 +172,6 @@ export class ProfileComponent implements OnInit {
         this.retrieveUser();
 
       }, (err) => {
-        console.log(err)
         this.submitting = false;
         this.modal.closeAll();
         this.handleErrorResponse(err);
@@ -202,6 +201,8 @@ export class ProfileComponent implements OnInit {
     } else {
       this.modal.openModal("Erro!", `Houve algum erro ao editar os dados. Por favor tente novamente mais tarde.`, "fail");
     }
+
+    this.retrieveUser();
   }
 
   submitComplete() {
