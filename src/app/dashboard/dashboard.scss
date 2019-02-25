@@ -164,12 +164,20 @@ tbody td, tbody th {
     background-position: 50%;
     transform: scale(10,10);
     opacity: 0;
+    -moz-transition:  transform 1s,opacity 1s;
+    -ms-transition: transform 1s,opacity 1s;
+    -o-transition: transform 1s,opacity 1s;
+    -webkit-transition: transform 1s,opacity 1s;
     transition: transform 1s,opacity 1s;
 }
 
 .ripple:active:after {
     transform: scale(0,0);
     opacity: .2;
+    -moz-transition: 0s;
+    -ms-transition: 0s;
+    -o-transition: 0s;
+    -webkit-transition: 0s;
     transition: 0s;
 }
 
@@ -186,6 +194,10 @@ tbody td, tbody th {
         pointer-events: none;
         font-size: 17px;
         top: 6px;
+        -moz-transition:  0.3s ease all;
+        -ms-transition:  0.3s ease all;
+        -o-transition: 0.3s ease all;
+        -webkit-transition: 0.3s ease all;
         transition: 0.3s ease all;
         left: 30px;
         color: #928e8e;

@@ -100,7 +100,9 @@ mat-sidenav {
     position: fixed;
     background: $navBackColor;
     max-width: 100px;
-    -webkit-transition: width 0.8s; /* Safari */
+    -moz-transition:  width 0.8s;
+    -ms-transition: width 0.8s;
+    -webkit-transition: width 0.8s;
     transition: width 0.8s;
     border-right: 0.5px solid $borderColor;
 }
@@ -245,28 +247,33 @@ ul {
     }
 }
 
-.sub-menu-content {
+
+.collapse {
+    display: block !important;
     overflow: hidden; 
     max-height: 0;
-    transition: max-height 0.8s ease-out;  
+    -moz-transition: max-height 0.4s ease-out;
+    -ms-transition: max-height 0.4s ease-out;
+    -o-transition: max-height 0.4s ease-out;
+    -webkit-transition: max-height 0.4s ease-out;
+    transition: max-height 0.4s ease-out;
+}
+
+.show {
+    -moz-transition: max-height 0.8s ease-in !important;
+    -ms-transition: max-height 0.8s ease-in !important;
+    -o-transition:  max-height 0.8s ease-in !important;
+    -webkit-transition:  max-height 0.8s ease-in !important;
+    transition: max-height 0.8s ease-in !important;
+    max-height: 500px !important;
 }
 
 .sub-menu {
-    &:hover, &:active, &:focus {
-        .arrow {
-            transform: rotate(90deg);
-            transition: 0.3s;
-        }
-        .sub-menu-content {
-            transition: max-height 0.8s ease-in !important;
-            max-height: 500px !important;
-        }
-    }
     &:hover {
         .arrow {
             color: white !important;
         }
-    }   
+    }
 }
 
 .arrow {
@@ -275,9 +282,23 @@ ul {
     line-height: 36px;
     color: $grayBlue;
     transform: rotate(0deg);
+    -moz-transition:  transform 0.3s;
+    -ms-transition: transform 0.3s;
+    -o-transition: transform 0.3s;
+    -webkit-transition: transform 0.3s;
     transition: transform 0.3s;
-    transition-delay: 0.5s;  
+    transition-delay: 0.1s;  
 }
+
+.arrow-rotate {
+    transform: rotate(90deg) !important;
+    -moz-transition:   0.3s !important;
+    -ms-transition:  0.3s !important;
+    -o-transition:  0.3s !important;
+    -webkit-transition:  0.3s !important;
+    transition: 0.3s !important;
+}
+
 
 @media screen and (min-width: 768px) {
     .icon-only  {

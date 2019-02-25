@@ -31,6 +31,10 @@
 }   
 .navbar-logo {
     max-height: 48px !important;  
+    -moz-transition: max-height 1s; 
+    -ms-transition: max-height 1s; 
+    -o-transition: max-height 1s; 
+    -webkit-transition: max-height 1s; 
     transition: max-height 1s;  
 }
 
@@ -39,7 +43,11 @@
 }
 
 .navbar-brand img{
-    transition: max-height 1s;  
+    -moz-transition: max-height 1s; 
+    -ms-transition: max-height 1s; 
+    -o-transition: max-height 1s; 
+    -webkit-transition: max-height 1s; 
+    transition: max-height 1s; 
      max-height: 84px;     
 }
 

@@ -39,14 +39,15 @@
           </li>
 
          <!-- with submenu -->
-         <div class="sub-menu" *hasAuthority="'EMPLOYEE'" tabindex="2">
-            <li class="menu-item ripple sub-menu-toggler" [ngClass]="sideBarOpened ? '' : 'icon-only'">
+         <div class="sub-menu" *hasAuthority="'EMPLOYEE'" tabindex="2" (click)="collapseSubMenu_1 = !collapseSubMenu_1"
+         (mouseenter)="collapseSubMenu_1 = true">
+            <li class="menu-item ripple" [ngClass]="sideBarOpened ? '' : 'icon-only'">
               <img src="../../../../assets/images/icons/user.svg" alt="MENU">
               <a>Usuários</a>
-              <div class="arrow">&#9654;</div>
+              <div class="arrow" [ngClass]="{'arrow-rotate': collapseSubMenu_1}">&#9654;</div>
             </li>
   
-            <div class="sub-menu-content">
+            <div class="sub-menu-content" [ngbCollapse]="!collapseSubMenu_1">
               <li class="menu-item ripple sub-item" [ngClass]="sideBarOpened ? '' : 'icon-only'" [routerLink]="['./usersadd']">
                 <img src="../../../../assets/images/icons/add.svg" alt="MENU">
                 <a>Adicionar</a>
@@ -60,14 +61,15 @@
           <!-- with submenu -->
 
         <!-- with submenu -->
-        <div class="sub-menu" *hasAuthority="'EMPLOYEE'" tabindex="3">
-          <li class="menu-item ripple sub-menu-toggler" [ngClass]="sideBarOpened ? '' : 'icon-only'">
+        <div class="sub-menu" *hasAuthority="'EMPLOYEE'" tabindex="3" (click)="collapseSubMenu_2 = !collapseSubMenu_2"
+        (mouseenter)="collapseSubMenu_2 = true">
+          <li class="menu-item ripple" [ngClass]="sideBarOpened ? '' : 'icon-only'">
             <img src="../../../../assets/images/icons/news.svg" alt="MENU">
             <a>Notícias</a>
-            <div class="arrow">&#9654;</div>
+            <div class="arrow" [ngClass]="{'arrow-rotate': collapseSubMenu_2}">&#9654;</div>
           </li>
 
-          <div class="sub-menu-content">
+          <div class="sub-menu-content" [ngbCollapse]="!collapseSubMenu_2">
             <li class="menu-item ripple sub-item" [ngClass]="sideBarOpened ? '' : 'icon-only'" [routerLink]="['./newsadd']">
               <img src="../../../../assets/images/icons/add.svg" alt="MENU">
               <a>Adicionar</a>
@@ -81,14 +83,15 @@
         <!-- with submenu -->
 
         <!-- with submenu -->
-        <div class="sub-menu" tabindex="4">
-          <li class="menu-item ripple sub-menu-toggler" [ngClass]="sideBarOpened ? '' : 'icon-only'" >
+        <div class="sub-menu" tabindex="4" (click)="collapseSubMenu_3 = !collapseSubMenu_3"
+        (mouseenter)="collapseSubMenu_3 = true">
+          <li class="menu-item ripple" [ngClass]="sideBarOpened ? '' : 'icon-only'" >
             <img src="../../../../assets/images/icons/health.svg" alt="MENU">
             <a>Meu Plano</a>
-            <div class="arrow">&#9654;</div>
+            <div class="arrow" [ngClass]="{'arrow-rotate': collapseSubMenu_3}">&#9654;</div>
           </li>
 
-          <div class="sub-menu-content">
+          <div class="sub-menu-content" [ngbCollapse]="!collapseSubMenu_3">
             <li class="menu-item ripple sub-item" [ngClass]="sideBarOpened ? '' : 'icon-only'" [routerLink]="['./sobreplano']">
               <img src="../../../../assets/images/icons/info.svg" alt="MENU">
               <a>Sobre o Plano</a>
