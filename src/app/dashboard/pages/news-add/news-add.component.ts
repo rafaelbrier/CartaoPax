@@ -99,8 +99,8 @@ export class NewsAddComponent implements OnInit {
 
   sendNews(): void {
     const values = this.newsManagerForm.value;
-    let news = {
-      id: this.isEditing ? this.newsToEdit.id : "",
+    let news: newsData = {
+      id: this.isEditing ? this.newsToEdit.id : '',
       category: this.isEditing ? this.newsToEdit.category : values.category,
       title: values.title,
       body: values.body,
