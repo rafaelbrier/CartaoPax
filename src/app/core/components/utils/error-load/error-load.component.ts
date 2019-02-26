@@ -21,10 +21,7 @@ const styles = `
   max-width: 100%;
   color: #b5b0b0;
   text-align: center;
-}
-
-:host(app-error-load) {
-  margin: 20px auto;
+  margin: 50px auto;
 }
 
 .overlay {

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { SharedService } from '../../services/shared-services';
 
@@ -7,7 +7,7 @@ import { SharedService } from '../../services/shared-services';
   templateUrl: './news-box.component.html',
   styleUrls: ['./news-box.component.scss']
 })
-export class NewsBoxComponent {
+export class NewsBoxComponent implements OnChanges  {
 
   @Input()
   newsData: any;

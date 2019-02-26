@@ -5,6 +5,7 @@
       Último
     </h3>
     <app-news-page class="obituario-coloring" *ngIf="newsId" [id]="newsId"></app-news-page>
+    <app-error-load [loadError]="boxLoadingError" [isLoading]="isBoxLoading"></app-error-load>
 
   </div>
 
@@ -35,7 +36,6 @@
     </div>
 
     <app-empty-list [show]="newsData?.totalElements === 0"></app-empty-list>
-    <app-error-load [loadError]="boxLoadingError" [isLoading]="isBoxLoading"></app-error-load>
 
     <button type="button" class="btn btn-outline-success w-12" *ngIf="newsData?.numberOfElements != newsData?.totalElements"
       (click)="loadMoreObituarios()">Mostrar mais obituários</button>

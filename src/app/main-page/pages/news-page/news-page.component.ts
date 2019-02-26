@@ -3,12 +3,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { EventsService } from 'src/app/core/services/events-service';
+import { EventsService, breadCrumbEventModel, commentCountEventModel } from 'src/app/core/services/events-service';
 import { UsersService } from 'src/app/core/services/users-service';
 import { ModalComponent } from '../../../core/components/utils/modal/modal.component';
 import { whiteSpace } from '../../../core/components/utils/validators/custom-validators';
 import { CommentsService } from '../../../core/services/comments-service';
-import { NewsService } from '../../../core/services/news.service';
+import { NewsService, newsData } from '../../../core/services/news.service';
 import { SharedService } from '../../../core/services/shared-services';
 
 
@@ -65,7 +65,7 @@ export class NewsPageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit() {
-    EventsService.get('BREADCRUMB').emit({ show: true, name: "NOTÍCIAS" });
+    EventsService.get<breadCrumbEventModel>('BREADCRUMB').emit({ show: true, name: "NOTÍCIAS" });
 
     this.isLoading = true;
     this.commentFormBuilder();
@@ -115,11 +115,13 @@ export class NewsPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   findNewsById() {
     this.newsService.findById(this.newsId)
-      .subscribe((resData: any) => {
+      .subscribe((resData: newsData) => {
         if (resData) {
           this.newsData = resData;
           this.newsData.body = this.sanitizer.bypassSecurityTrustHtml(this.newsData.body);
           this.isLoading = false;
+          EventsService.get<commentCountEventModel>('COMMENTCOUNT')
+          .emit({id: this.newsData.id, commentCount: this.newsData.commentCount});
         } else {
           this.modal.openModal("Erro!", `Não existe notícia com identificação <b>#${this.newsId}</b>.`, "fail")
             .then(() => { location.href = '/home' + '/#news'; })
@@ -149,7 +151,7 @@ export class NewsPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.submitting = true;
     const values = this.commentForm.value;
-    let comment;
+    let comment: any;
 
     if (this.userLoggedIn) {
       comment = {
@@ -173,6 +175,8 @@ export class NewsPageComponent implements OnInit, AfterViewInit, OnDestroy {
         this.submitting = false;
         this.commentForm.reset();
         this.loadComments(this.commentsDefaultLimit);
+        this.findNewsById();
+
         this.modal.openModal("Sucesso!", "Seu comentário foi adicionado.", "success");
       }, () => {
         this.submitting = false;
@@ -204,6 +208,7 @@ export class NewsPageComponent implements OnInit, AfterViewInit, OnDestroy {
     this.commentsService.removeCommentById(id)
       .subscribe(() => {
         this.loadComments(this.commentsDefaultLimit);
+        this.findNewsById();
       });
   }
 

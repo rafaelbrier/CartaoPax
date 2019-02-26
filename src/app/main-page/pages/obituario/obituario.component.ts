@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { EventsService } from 'src/app/core/services/events-service';
+import { EventsService, breadCrumbEventModel } from 'src/app/core/services/events-service';
 import { NewsService } from 'src/app/core/services/news.service';
 import { ActivatedRoute } from '@angular/router';
 
@@ -24,7 +24,7 @@ export class ObituarioComponent implements OnInit {
     private activatedRoute: ActivatedRoute, ) { }
 
   ngOnInit() {
-    EventsService.get('BREADCRUMB').emit({ show: true, name: "OBITUÁRIO" });
+    EventsService.get<breadCrumbEventModel>('BREADCRUMB').emit({ show: true, name: "OBITUÁRIO" });
     this.loadObituarios(this.newsLoadDefaultLimit);
   }
 

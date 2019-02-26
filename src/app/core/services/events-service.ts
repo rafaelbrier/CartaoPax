@@ -1,18 +1,17 @@
 import { EventEmitter } from "@angular/core";
 
-interface breadCrumbEventModel {show: boolean;name?: string;}
+export interface breadCrumbEventModel {show: boolean;name?: string;}; //"BREADCRUMB"
+export interface commentCountEventModel {id: string, commentCount: number}; //"COMMENTCOUNT"
 
 export class EventsService {
 
-    static interface
-
     private static emitters: {
-        [BREADCRUMB: string]: EventEmitter<breadCrumbEventModel>
-    } = {}
+        [nameOfEvent: string]: EventEmitter<any>,
+    } = {};
 
-    static get (nameOfEvent:string): EventEmitter<breadCrumbEventModel> {
+    static get<T>(nameOfEvent:string): EventEmitter<T> {
         if (!this.emitters[nameOfEvent])
-            this.emitters[nameOfEvent] = new EventEmitter<breadCrumbEventModel>();
+            this.emitters[nameOfEvent] = new EventEmitter<T>();
         return this.emitters[nameOfEvent];
     }
 

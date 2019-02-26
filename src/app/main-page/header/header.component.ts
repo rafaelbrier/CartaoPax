@@ -6,7 +6,7 @@ import { SharedService } from 'src/app/core/services/shared-services';
 import { UsersService } from 'src/app/core/services/users-service';
 import { Subscription } from 'rxjs';
 import { ModalComponent } from 'src/app/core/components/utils/modal/modal.component';
-import { EventsService } from 'src/app/core/services/events-service';
+import { EventsService, breadCrumbEventModel } from 'src/app/core/services/events-service';
 
 @Component({
   selector: 'app-header',
@@ -53,7 +53,7 @@ export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    this.breadcrumbSubscription = EventsService.get('BREADCRUMB').subscribe((data: {show: boolean, name: string}) => {
+    this.breadcrumbSubscription = EventsService.get('BREADCRUMB').subscribe((data: breadCrumbEventModel) => {
       this.breadCrumbShow = data.show ? data.show : false;
       this.pageName = data.name ? data.name : null;
       this.cdRef.detectChanges();     
