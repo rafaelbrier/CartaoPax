@@ -1,11 +1,10 @@
 import { Component, Input } from '@angular/core';
 
 const html = `
-<div class="wrapper">
-    <div class="overlay" *ngIf="isLoading">
+    <div class="overlay wrapper" *ngIf="isLoading">
         <i class="fas fa-sync-alt fa-spin"></i>
     </div>
-  <div *ngIf="loadError">
+  <div class="wrapper" *ngIf="loadError">
       <i class="fas fa-exclamation-triangle"></i>
       <p>
         Erro ao carregar conteúdo.   
@@ -14,7 +13,6 @@ const html = `
         Recarregue a página para tentar novamente.
       </p>
   </div>   
-</div>
 `;
 const styles = `
 .wrapper {

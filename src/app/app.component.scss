@@ -36,6 +36,10 @@ $menuItemColor: #4D4D4D;
     }
 }
 
+.section {
+    margin-top: 5%;
+}
+
 .avatar-text-container {
     @media screen and (max-width: 767px){
         max-width: 100%;    
@@ -146,6 +150,17 @@ $menuItemColor: #4D4D4D;
     border-width: 12px;
     border-left-color: green;
     border-top-color: green;
+  }
+
+  .box-menu {
+      border-bottom: 0.5px solid #c5cacf !important;
+      border-top: none !important;
+      border-left: none !important;
+      border-right: none !important;
+      &::before {
+        border-left-color: #8a8a8a !important;
+        border-top-color: #8a8a8a !important;
+      }
   }
 
 .mw-px-1 { min-width: 80px;}

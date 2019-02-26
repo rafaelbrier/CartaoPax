@@ -1,3 +1,5 @@
 <app-header *ngIf="!routerUrl.includes('dashboard')"></app-header>
 
 <router-outlet></router-outlet>
+
+<app-footer *ngIf="!routerUrl.includes('dashboard')"></app-footer>

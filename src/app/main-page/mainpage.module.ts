@@ -6,6 +6,7 @@ import { HeaderComponent } from './header/header.component';
 import { NewsPageComponent } from './pages/news-page/news-page.component';
 import { PlanosComponent } from './pages/planos/planos.component';
 import { ObituarioComponent } from './pages/obituario/obituario.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
     imports: [
@@ -18,9 +19,11 @@ import { ObituarioComponent } from './pages/obituario/obituario.component';
         NewsPageComponent,
         PlanosComponent,
         ObituarioComponent,
+        FooterComponent,
     ],
     exports: [
         HeaderComponent,
+        FooterComponent
     ],
     providers: [],
     entryComponents: [BodyComponent],

@@ -40,7 +40,7 @@
 
          <!-- with submenu -->
          <div class="sub-menu" *hasAuthority="'EMPLOYEE'" tabindex="2" (click)="collapseSubMenu_1 = !collapseSubMenu_1">
-            <li class="menu-item ripple" [ngClass]="sideBarOpened ? '' : 'icon-only'">
+            <li class="menu-item ripple box-container-selected box-menu" [ngClass]="sideBarOpened ? '' : 'icon-only'">
               <img src="../../../../assets/images/icons/user.svg" alt="MENU">
               <a>Usuários</a>
               <div class="arrow" [ngClass]="{'arrow-rotate': collapseSubMenu_1}">&#9654;</div>
@@ -61,7 +61,7 @@
 
         <!-- with submenu -->
         <div class="sub-menu" *hasAuthority="'EMPLOYEE'" tabindex="3" (click)="collapseSubMenu_2 = !collapseSubMenu_2">
-          <li class="menu-item ripple" [ngClass]="sideBarOpened ? '' : 'icon-only'">
+          <li class="menu-item ripple box-container-selected box-menu" [ngClass]="sideBarOpened ? '' : 'icon-only'">
             <img src="../../../../assets/images/icons/news.svg" alt="MENU">
             <a>Notícias</a>
             <div class="arrow" [ngClass]="{'arrow-rotate': collapseSubMenu_2}">&#9654;</div>
@@ -118,6 +118,10 @@
         </li>
 
       </ul>
+
+      <div class="form-end" *hasAuthority="'EMPLOYEE'">
+        <h6 *ngIf="sideBarOpened || isMobile">Os menus marcados são vistos somente por funcionários e administradores.</h6>
+      </div>
 
     </div>
 

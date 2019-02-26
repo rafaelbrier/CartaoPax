@@ -3,6 +3,7 @@ import { PlanosService } from 'src/app/core/services/planos-service';
 import { ModalComponent } from 'src/app/core/components/utils/modal/modal.component';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { whiteSpace } from 'src/app/core/components/utils/validators/custom-validators';
+import { EventsService, breadCrumbEventModel } from 'src/app/core/services/events-service';
 
 @Component({
   selector: 'app-planos',
@@ -25,6 +26,7 @@ export class PlanosComponent implements OnInit {
               private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    EventsService.get<breadCrumbEventModel>('BREADCRUMB').emit({ show: true, name: "PLANOS" });
     this.planosPriceFormBuilder();
     this.populatePlanos();
 
