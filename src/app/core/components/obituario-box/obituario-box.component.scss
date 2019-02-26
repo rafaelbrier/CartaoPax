@@ -1,0 +1,35 @@
+@import "../news-box-component/news-box.component.scss";
+
+$gray: #4d4d4d;
+
+.row .col-md-3 {
+    margin-right: -15px !important;
+}
+
+.box {
+    border-top-color: black !important;
+    margin-bottom: 0px !important;
+    min-height: 120px !important;
+}
+
+image:hover {
+    cursor: pointer;
+}
+
+.box-title-container {
+    img {
+        height: 36px;
+        width: 36px;
+        margin-left: 15px;
+    }
+}
+
+.box-title {
+    &:hover {
+        color: darkgray;
+    }
+    color: black;
+}
+.box-subheader {
+    background-color: $gray !important;
+}

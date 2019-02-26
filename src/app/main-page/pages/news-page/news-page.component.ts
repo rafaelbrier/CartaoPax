@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild, OnDestroy, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
@@ -18,6 +18,8 @@ import { SharedService } from '../../../core/services/shared-services';
   styleUrls: ['./news-page.component.scss']
 })
 export class NewsPageComponent implements OnInit, AfterViewInit, OnDestroy {
+
+  @Input() id: string;
 
   @ViewChild(ModalComponent) modal: ModalComponent;
 
@@ -76,7 +78,7 @@ export class NewsPageComponent implements OnInit, AfterViewInit, OnDestroy {
     }
     /////
 
-    this.newsId = this.activatedRoute.snapshot.params.id;
+    this.newsId = this.activatedRoute.snapshot.params.id || this.id;
     if (this.newsId) {
       this.findNewsById();
     }
@@ -94,6 +96,13 @@ export class NewsPageComponent implements OnInit, AfterViewInit, OnDestroy {
       this.userName = this.userName ? this.userName.split(' ').slice(0, 2).join(' ') : "Anônimo";
       this.userImgProfile = u.imgProfile;
     });
+  }
+
+  ngOnChanges(changes: any) {
+    if (changes.id) {
+     this.newsId = changes.id.currentValue;
+     this.findNewsById();
+    }
   }
 
   ngAfterViewInit(): void {

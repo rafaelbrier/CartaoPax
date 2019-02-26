@@ -1,6 +1,4 @@
-<div class="row w-10 mx-auto mt-3">
-
-  <app-error-load [isLoading]="isLoading" [loadError]="loadError"></app-error-load>
+<div class="row mx-auto mt-3">
 
   <div *ngIf="!isLoading && !loadError">
 
@@ -101,6 +99,8 @@
     </div>
 
   </div>
+
+  <app-error-load [isLoading]="isLoading" [loadError]="loadError"></app-error-load>
 
 </div>
 

@@ -20,7 +20,7 @@
       <ng-template #editImgComp>
         <div class="col-sm-10 mx-auto">
           <i class="fas fa-chevron-right" (click)="editImage = false" ngbTooltip="Sair do modo edição"></i>
-          <app-img-input-file [imgPath]="downloadURL" (imgFile)="fileImg($event)"></app-img-input-file>
+          <app-img-input-file class="profile-style" [imgPath]="downloadURL" (imgFile)="fileImg($event)"></app-img-input-file>
 
           <div class="progress" *ngIf="inProgress">
             <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"

@@ -30,6 +30,11 @@ export class NewsAddComponent implements OnInit {
   newsManagerForm: FormGroup;
   submitting: boolean = false;
 
+  category: string;
+  categoryOptions: any[] = [{ value: "N", info: "Notícia" }, { value: "O", info: "Obituário" }];
+
+  categoryName: string;
+
   //Edit
   isEditing: boolean = false;
   newsToEdit: any;
@@ -51,15 +56,16 @@ export class NewsAddComponent implements OnInit {
     if (this.activatedRoute.snapshot.params['id']) {
       this.isEditing = true;
       this.newsToEdit = this.activatedRoute.snapshot.params;
-      this.newsManagerForm.setValue({
+      this.newsManagerForm.patchValue({
         title: this.newsToEdit.title,
         body: this.newsToEdit.body,
-        image: this.newsToEdit.imgPath
+        image: this.newsToEdit.imgPath,
+        category: this.newsToEdit.category
       });
       this.downloadURL = this.newsToEdit.imgPath;
       //Vem do db como "null" e não null, por algum motivo
       this.downloadURL = this.downloadURL === "null" ? null : this.downloadURL;
-      
+
     } else {
       this.isEditing = false;
       this.newsToEdit = null;
@@ -71,9 +77,11 @@ export class NewsAddComponent implements OnInit {
     if (this.newsManagerForm.invalid) {
       return;
     }
+    this.categoryName = this.categoryOptions.filter(el => el.value == this.v.category)[0]["info"];
+
     this.submitting = true;
-    this.modal.openModal("Publicar Notícia",
-      `Tem certeza que deseja publicar a notícia${this.isEditing ? ` editada de id <b>#${this.newsToEdit.id}</b>` : ''}?`, "normal", true)
+    this.modal.openModal(`Publicar ${this.categoryName}`,
+      `Tem certeza que deseja publicar a(o) ${this.categoryName}${this.isEditing ? ` editada(o) de id <b>#${this.newsToEdit.id}</b>` : ''}?`, "normal", true)
       .then(() => {
         if (this.file) {
           this.retrieveImg()
@@ -91,26 +99,20 @@ export class NewsAddComponent implements OnInit {
 
   sendNews(): void {
     const values = this.newsManagerForm.value;
-    let news: newsData;
-    if (this.isEditing) {
-      news = {
-        id: this.newsToEdit.id,
-        date: this.newsToEdit.date,
-        title: values.title,
-        body: values.body,
-        imgPath: this.downloadURL
-      }
-    } else {
-      news = {
-        title: values.title,
-        body: values.body,
-        imgPath: this.downloadURL
-      }
+    let news = {
+      id: this.isEditing ? this.newsToEdit.id : "",
+      category: this.isEditing ? this.newsToEdit.category : values.category,
+      title: values.title,
+      body: values.body,
+      imgPath: this.downloadURL
     }
     this.newsService.registerNews(news)
       .subscribe((res: any) => {
         this.modal.openModal("Sucesso!",
-          `A notícia foi publicada. <a href="/news/${res.id}">Clique aqui </a> para visualizá-la.`
+          `${this.categoryName} publicada(o). 
+          ${news.category == 'N'
+            ? `<a href="/news/${res.id}" target="_blank">Clique aqui </a> para visualizá-la(o).`
+            : `<a href ="/obituario/${res.id}" target="_blank">Clique aqui </a> para visualizá-la(o).`}`
           , "success");
         if (this.isEditing) this.router.navigate(['dashboard/newsmanager']);
         this.submitComplete();
@@ -119,19 +121,21 @@ export class NewsAddComponent implements OnInit {
         if (this.uploadedFileName) {
           this.fireStorageService.deleteImg(this.uploadedFileName, 'news-images');
         }
-        this.modal.openModal("Erro!", "Houve algum erro ao publicar a notícia. Por favor tente novamente mais tarde.", "fail");
+        this.modal.openModal("Erro!", `Houve algum erro ao publicar a(o) ${this.categoryName}. Por favor tente novamente mais tarde.`, "fail");
       })
   }
 
   newsManagerFormBuilder(): void {
     this.newsManagerForm = this.formBuilder.group({
       title: ['', [Validators.required, whiteSpace, Validators.maxLength(100)]],
-      body: ['', [Validators.required, whiteSpace]],
+      body: ['', [Validators.required, whiteSpace, Validators.maxLength(1000)]],
       image: [''],
+      category: ['', [Validators.required, whiteSpace, Validators.maxLength(3)]]
     });
   }
 
   get f() { return this.newsManagerForm.controls; }
+  get v() { return this.newsManagerForm.value; }
 
   onChange(event: EventTarget): boolean {
     this.fileOverSize = false;
@@ -150,13 +154,14 @@ export class NewsAddComponent implements OnInit {
       this.fileOverSize = true;
       this.removeSelectedImg();
       return false;
-    }  
+    }
     this.file = files[0];
   }
 
   retrieveImg(): Promise<any> {
     this.inProgress = true;
-    let uploadTask = this.fireStorageService.uploadImage(this.file, 'news-images');
+    let fileName = this.isEditing ? ("imagem-principal-" + this.newsToEdit.id) : null;
+    let uploadTask = this.fireStorageService.uploadImage(this.file, 'news-images', fileName);
     this.uploadedFileName = uploadTask.fileName;
 
     uploadTask.uploadObs((snapshot: { bytesTransferred: number; totalBytes: number; }) => {

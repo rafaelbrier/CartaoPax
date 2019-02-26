@@ -24,6 +24,7 @@ import { BRCurrencyPipe } from './pipes/brcurrency.pipe';
 import { EmptyListComponent } from './components/utils/empty-list/empty-list.component';
 import { AuthorityDirective } from './directive/authority.directive';
 import { EventsService } from './services/events-service';
+import { ObituarioBoxComponent } from './components/obituario-box/obituario-box.component';
 
 @NgModule({
   imports: [
@@ -46,6 +47,8 @@ import { EventsService } from './services/events-service';
     ImgLazyComponent,
     ModalComponent,
     ValidatorsComponent,
+    EmptyListComponent,
+    ObituarioBoxComponent,
     
     //Directive
     SortTableDirective,
@@ -58,7 +61,6 @@ import { EventsService } from './services/events-service';
      CpfPipe,
      MyDatePipe,
      BRCurrencyPipe,
-     EmptyListComponent,
   ],
 
   exports: [
@@ -72,6 +74,7 @@ import { EventsService } from './services/events-service';
     ValidatorsComponent,
     ImgInputFileComponent,
     EmptyListComponent,
+    ObituarioBoxComponent,
     
     //Exported Directives
     SortTableDirective,

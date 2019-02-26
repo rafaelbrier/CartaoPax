@@ -116,21 +116,21 @@ export class UsersAddComponent implements OnInit {
 
   usersAddFormBuilder(): void {
     this.usersAddForm = this.formBuilder.group({
-      name: ['', [Validators.required, whiteSpace, Validators.maxLength(100)]],
+      name: ['', [Validators.required, whiteSpace, Validators.minLength(3), Validators.maxLength(100)]],
       cpf: ['', [Validators.required, whiteSpace, Validators.maxLength(14), Validators.minLength(14)]],
       sex: ['', [Validators.required, whiteSpace, Validators.maxLength(2)]],
       telephone: ['', [Validators.required, whiteSpace, Validators.maxLength(15), Validators.minLength(14)]],
-      telephoneOp: ['', [Validators.maxLength(15), Validators.minLength(14)]],
-      email: ['', [Validators.maxLength(100)]],
-      birthDate: ['', [Validators.required, whiteSpace, Validators.maxLength(10)]],
+      telephoneOp: ['', [Validators.maxLength(15)]],
+      email: ['', [Validators.minLength(3), Validators.maxLength(100)]],
+      birthDate: ['', [Validators.required, whiteSpace, Validators.minLength(10), Validators.maxLength(10)]],
       cep: ['', [Validators.required, whiteSpace, Validators.maxLength(9), Validators.minLength(9)]],
-      endereco: ['', [Validators.required, whiteSpace, Validators.maxLength(100)]],
-      numero: ['', [Validators.required, whiteSpace, Validators.maxLength(6)]],
-      complemento: ['', [Validators.maxLength(15)]],
+      endereco: ['', [Validators.required, whiteSpace, Validators.minLength(6), Validators.maxLength(100)]],
+      numero: ['', [Validators.required, whiteSpace, Validators.minLength(1), Validators.maxLength(6)]],
+      complemento: ['', [Validators.maxLength(15), Validators.minLength(2)]],
       escolaridade: ['', [Validators.required, whiteSpace, Validators.maxLength(50)]],
-      bairro: ['', [Validators.required, whiteSpace, Validators.maxLength(50)]],
-      estado: ['', [Validators.required, whiteSpace, Validators.maxLength(50)]],
-      cidade: ['', [Validators.required, whiteSpace, Validators.maxLength(50)]],
+      bairro: ['', [Validators.required, whiteSpace, Validators.maxLength(50), Validators.minLength(2)]],
+      estado: ['', [Validators.required, whiteSpace, Validators.maxLength(50), Validators.minLength(2)]],
+      cidade: ['', [Validators.required, whiteSpace, Validators.maxLength(50), Validators.minLength(2)]],
       role: ['', [Validators.required, whiteSpace, Validators.maxLength(20)]],
       plano: ['', [Validators.required, whiteSpace, Validators.maxLength(50)]],
       precomensalidade: [0.00, [Validators.required, whiteSpace, Validators.maxLength(10)]]
@@ -210,7 +210,7 @@ export class UsersAddComponent implements OnInit {
 
   handleErrorResponse(err: any) {
     if (this.uploadedFileName) {
-      this.fireStorageService.deleteImg(this.uploadedFileName, 'profiles-images');
+      this.fireStorageService.deleteImg(this.uploadedFileName, 'profiles-images/' + this.v.cpf);
     }
     if (err.error) {
       if (err.error.errors) {
@@ -258,7 +258,8 @@ export class UsersAddComponent implements OnInit {
 
   retrieveImg(): Promise<any> {
     this.inProgress = true;
-    let uploadTask = this.fireStorageService.uploadImage(this.profileImg, 'profiles-images');
+    let fileName = "imagem-perfil";
+    let uploadTask = this.fireStorageService.uploadImage(this.profileImg, 'profiles-images/' + this.v.cpf, fileName);
     this.uploadedFileName = uploadTask.fileName;
 
     uploadTask.uploadObs((snapshot: { bytesTransferred: number; totalBytes: number; }) => {
@@ -319,6 +320,8 @@ export class UsersAddComponent implements OnInit {
   submitComplete() {
     this.inProgress = false;
     this.submitting = false;
+    this.isEditing = false;
+    this.userToEdit = null;
     this.removeMainImg();
     this.usersAddForm.reset();
   }

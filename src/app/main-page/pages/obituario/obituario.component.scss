@@ -1,1 +1,36 @@
 @import '../news-page/news-page.component.scss';
+
+$gray: #4d4d4d;
+
+.info-text::after {
+    border-top: 4px solid $gray !important;
+}
+
+.box-container {
+    position: relative;
+}
+
+/deep/ .obituario-coloring .row{
+    @media screen and (max-width: 767px) {
+        width: 100% !important;
+    }
+    width: 90% !important;
+    margin-top: 0 !important;
+
+    #comments {
+        background-color: $gray !important;  
+    }
+
+    .body {
+        display: grid;
+        image {
+            margin: 0 auto;
+            img {
+                max-width: 100% !important;
+            }
+        }
+        p {
+            margin-top: 10px;
+        }
+    }
+}

@@ -1,0 +1,38 @@
+<div class="row">
+
+    <div class="col-md-3 text-center">
+        <image [imgSrc]="data?.imgPath || '../../../assets/images/rip.gif'" (click)="openObituario(data)"
+            [height]="'120px'" [style]="{'max-width': '100%'}"></image>
+    </div>
+
+    <div class="col-md-9">
+        <div class="box">
+            <div class="box-header">
+                <div class="box-subheader">
+
+                    <h5>
+                        <i class="far fa-calendar"></i>
+                        {{data?.date | date: 'dd MMM yyyy' }}
+                    </h5>
+
+                    <h5 >
+                        <i class="far fa-comments"></i>
+                        {{data?.commentCount > 0 ? data?.commentCount : "Nenhum"}}
+                        {{data?.commentCount > 1 ? "Comentários" : "Comentário"}}
+                    </h5>
+
+                </div>
+
+                <div class="box-title-container">
+                    <img src="../../../../assets/images/icons/bible.svg" alt="BIBLE">
+                    <h3 class="box-title" (click)="openObituario(data)">{{data?.title}}</h3>
+                </div>
+            </div>
+            <div class="box-body">
+                <p [innerHTML]="data?.body">{{data?.body}}</p>
+                <a href="javascript:void(0)" (click)="openObituario(data)" *ngIf="readMore">Leia Mais</a>
+            </div>
+        </div>
+    </div>
+
+</div>

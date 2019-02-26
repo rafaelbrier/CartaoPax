@@ -27,7 +27,7 @@
 
 <mat-sidenav-container autosize>
 
-  <mat-sidenav #sidenav [opened]="!isMobile" [mode]="!isMobile ? 'side' : 'over'" [ngClass]="sideBarOpened ? 'scale-sidenav' : ''">
+  <mat-sidenav id="sidenav" #sidenav [opened]="!isMobile" [mode]="!isMobile ? 'side' : 'over'" [ngClass]="sideBarOpened ? 'scale-sidenav' : ''">
 
     <div class="menu-content">
 
@@ -39,8 +39,7 @@
           </li>
 
          <!-- with submenu -->
-         <div class="sub-menu" *hasAuthority="'EMPLOYEE'" tabindex="2" (click)="collapseSubMenu_1 = !collapseSubMenu_1"
-         (mouseenter)="collapseSubMenu_1 = true">
+         <div class="sub-menu" *hasAuthority="'EMPLOYEE'" tabindex="2" (click)="collapseSubMenu_1 = !collapseSubMenu_1">
             <li class="menu-item ripple" [ngClass]="sideBarOpened ? '' : 'icon-only'">
               <img src="../../../../assets/images/icons/user.svg" alt="MENU">
               <a>Usuários</a>
@@ -61,8 +60,7 @@
           <!-- with submenu -->
 
         <!-- with submenu -->
-        <div class="sub-menu" *hasAuthority="'EMPLOYEE'" tabindex="3" (click)="collapseSubMenu_2 = !collapseSubMenu_2"
-        (mouseenter)="collapseSubMenu_2 = true">
+        <div class="sub-menu" *hasAuthority="'EMPLOYEE'" tabindex="3" (click)="collapseSubMenu_2 = !collapseSubMenu_2">
           <li class="menu-item ripple" [ngClass]="sideBarOpened ? '' : 'icon-only'">
             <img src="../../../../assets/images/icons/news.svg" alt="MENU">
             <a>Notícias</a>
@@ -83,8 +81,7 @@
         <!-- with submenu -->
 
         <!-- with submenu -->
-        <div class="sub-menu" tabindex="4" (click)="collapseSubMenu_3 = !collapseSubMenu_3"
-        (mouseenter)="collapseSubMenu_3 = true">
+        <div class="sub-menu" tabindex="4" (click)="collapseSubMenu_3 = !collapseSubMenu_3">
           <li class="menu-item ripple" [ngClass]="sideBarOpened ? '' : 'icon-only'" >
             <img src="../../../../assets/images/icons/health.svg" alt="MENU">
             <a>Meu Plano</a>

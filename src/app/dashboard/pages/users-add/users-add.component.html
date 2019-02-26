@@ -13,7 +13,7 @@
                     <span>Nome Completo*</span>
                     <!-- Validador  -->
                     <app-validators [form]="usersAddForm" [input]="f.name" [inputName]="'nome completo'"
-                     [validators]="['required','maxlength', 100]"></app-validators>
+                     [validators]="['required','minlength', 3, 'maxlength', 100]"></app-validators>
                 </div>
 
                 <div class="form-row">
@@ -24,7 +24,7 @@
                         <span>CPF*</span>
                         <!-- Validador  -->
                         <app-validators [form]="usersAddForm" [input]="f.cpf" [inputName]="'cpf'"
-                         [validators]="['required','maxlength', 14, 'minlength', 14]"></app-validators>
+                         [validators]="['required','minlength', 14,'maxlength', 14, 'minlength', 14]"></app-validators>
                     </div>
                     <div class="offset-sm-1 col-sm-5 floating-label">
                         <select class="custom-select form-control" formControlName="sex" required>
@@ -64,7 +64,7 @@
                 <span>Data de Nascimento*</span>
                 <!-- Validador  -->
                 <app-validators [form]="usersAddForm" [input]="f.birthDate" [inputName]="'data de nascimento'" 
-                [validators]="['required','maxlength', 10]"></app-validators>
+                [validators]="['required','minlength', 10,'maxlength', 10]"></app-validators>
             </div>
 
             <div class="form-group offset-sm-1 col-sm-4 floating-label">
@@ -105,7 +105,7 @@
                 <span>Email</span>
                 <!-- Validador  -->
                 <app-validators [form]="usersAddForm" [input]="f.email" [inputName]="'email'"
-                 [validators]="['required', 'email', 'maxlength',100]"></app-validators>
+                 [validators]="['email', 'minlength', 3, 'maxlength',100]"></app-validators>
             </div>
 
 
@@ -113,9 +113,10 @@
                 <input formControlName="telephoneOp" type="tel" class="form-control" placeholder=" "
                 [value]="v.telephoneOp | brphone" maxlength="15"
                 onkeypress="return event.charCode >= 48 && event.charCode <= 57">
-                <span>Telefone Opcional</span>
+                <span>Telefone Opcional {{v.telephoneOp}}</span>
                 <!-- Validador  -->
-                <app-validators [form]="usersAddForm" [input]="f.telephoneOp" [inputName]="'telefone opcional'">
+                <app-validators [form]="usersAddForm" [input]="f.telephoneOp" [inputName]="'telefone opcional'"
+                [validators]="['maxlength', 15]">
                 </app-validators>
             </div>
         </div>
@@ -144,7 +145,7 @@
                 <span>Endereço*</span>
                 <!-- Validador  -->
                 <app-validators [form]="usersAddForm" [input]="f.endereco" [inputName]="'endereço'"
-                 [validators]="['required', 'maxlength', 100]"></app-validators>
+                 [validators]="['required', 'minlength', 6, 'maxlength', 100]"></app-validators>
             </div>
 
 
@@ -154,7 +155,7 @@
                 <span>Nº* </span>
                 <!-- Validador  -->
                 <app-validators [form]="usersAddForm" [input]="f.numero" [inputName]="'numero'" 
-                [validators]="['required', 'maxlength', 6]"></app-validators>
+                [validators]="['required', 'minlength', 1, 'maxlength', 6]"></app-validators>
             </div>
 
 
@@ -164,7 +165,7 @@
                 <span>Complemento</span>
                   <!-- Validador  -->
                   <app-validators [form]="usersAddForm" [input]="f.complemento" [inputName]="'complemento'" 
-                  [validators]="['maxlength', 15]"></app-validators>
+                  [validators]="['minlength', 2, 'maxlength', 15]"></app-validators>
             </div>
         </div>
 
@@ -176,7 +177,7 @@
                 <span>Bairro*</span>
                 <!-- Validador  -->
                 <app-validators [form]="usersAddForm" [input]="f.bairro" [inputName]="'bairro'"
-                 [validators]="['required', 'maxlength', 50]"></app-validators>
+                 [validators]="['required', 'minlength', 2, 'maxlength', 50]"></app-validators>
             </div>
 
             <div class="form-group offset-sm-1 col-sm-3 floating-label">
@@ -185,7 +186,7 @@
                 <span>Estado*</span>
                  <!-- Validador  -->
                  <app-validators [form]="usersAddForm" [input]="f.estado" [inputName]="'estado'"
-                 [validators]="['required', 'maxlength', 50]"></app-validators>
+                 [validators]="['required', 'minlength', 2, 'maxlength', 50]"></app-validators>
             </div>
 
             <div class="form-group offset-sm-1 col-sm-4 floating-label">
@@ -194,7 +195,7 @@
                 <span>Cidade* </span>
                 <!-- Validador  -->
                 <app-validators [form]="usersAddForm" [input]="f.cidade" [inputName]="'cidade'" 
-                [validators]="['required', 'maxlength', 50]"></app-validators>
+                [validators]="['required', 'minlength', 2, 'maxlength', 50]"></app-validators>
             </div>
 
         </div>

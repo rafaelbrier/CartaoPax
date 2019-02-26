@@ -7,10 +7,10 @@ import { commentData } from './comments-service';
 export interface newsData {
   id?: string,
   commentCount?: string,
-  date?: string,
   title: string,
   imgPath?: string,
   body: string,
+  category: string,
   comments?: commentData
 }
 
@@ -25,20 +25,20 @@ export class NewsService {
   registerNews(data: newsData) {
     return this.http.post(myConstants.restBaseUrl + myConstants.newsPath, {
       id: data.id ? data.id : '',
-      date: data.date ? data.date : '',
       title: data.title,
       body: data.body,
+      category: data.category,
       imgPath: data.imgPath
     });
   }
 
-  findAllNews() {
-    return this.http.get(myConstants.restBaseUrl + myConstants.newsPath);
-  }
+  // findAllNews() {
+  //   return this.http.get(`${myConstants.restBaseUrl}${myConstants.newsPath}`);
+  // }
 
-  findNewsPageable(page: number, size: number, sort: String, order: String, searchTerm: string = '') {
+  findNewsPageable(page: number, size: number, sort: String, order: String, searchTerm: string = '', category: string = ' ') {
     return this.http.get(
-        `${myConstants.restBaseUrl}${myConstants.newsPath}?page=${page}&size=${size}&sort=${sort},${order}&searchTerm=${searchTerm}`
+        `${myConstants.restBaseUrl}${myConstants.newsPath}?page=${page}&size=${size}&sort=${sort},${order}&searchTerm=${searchTerm}&category=${category}`
         );
   }
 

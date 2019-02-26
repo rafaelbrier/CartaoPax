@@ -11,7 +11,14 @@
     .col-sm-5 input{
         margin-left: 15px;
     }
+    
+    /deep/ .profile-style {
+        .container img {
+            float: none !important;
+        }
+    }
 }
+
 
 .profile-pic {
 	position: relative;

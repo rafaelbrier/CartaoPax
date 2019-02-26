@@ -14,21 +14,19 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   isMobile: boolean;
 
   constructor(private router: Router, private cdRef: ChangeDetectorRef,
-              private usersService: UsersService) {
+    private usersService: UsersService) {
   }
 
   ngOnInit() {
-    this.sideBarOpened = false;
-    this.checkMobileOrDesktop(window.innerWidth);
-    window.onresize = () => {
-      this.checkMobileOrDesktop(window.innerWidth);
-    };
   }
 
   ngAfterViewInit(): void {
-    this.toggleSideBar("#sidenav");   
-    this.cdRef.detectChanges();     
-    }  
+    this.sideBarOpened = false;
+    this.handleSidenavResponsivity(window.innerWidth);
+    window.onresize = () => {
+      this.handleSidenavResponsivity(window.innerWidth);
+    };
+  }
 
   toggleSideBar(sidenav: any) {
     if (!this.isMobile) {
@@ -38,11 +36,18 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     }
   }
 
-  checkMobileOrDesktop(screenWidth: number) {
+  handleSidenavResponsivity(screenWidth: number) {
     if (screenWidth > 768)
       this.isMobile = false;
     else
       this.isMobile = true;
+
+    if (!this.isMobile) {
+      this.toggleSideBar("#sidenav");
+    } else {
+      document.getElementById("sidenav").classList.add("scale-sidenav");
+    }
+    this.cdRef.detectChanges();
   }
 
   logout() {

@@ -18,37 +18,52 @@
             <app-validators [form]="newsManagerForm" [input]="f.body" [inputName]="'corpo da notícia'" [validators]="['required']"></app-validators>
         </div>
 
-        <div class="form-group">
-            <label>
-                Imagem Principal da Notícia
-                <b target="_blank" *ngIf="isEditing">
-                    <span *ngIf="downloadURL; else noimage">
-                        <a href="{{downloadURL}}">-- Imagem Atual --</a>
-                        <i class="fas fa-times" (click)="removeMainImg()" ngbTooltip="Remover imagem principal da notícia"></i>
-                    </span>
-                    <ng-template #noimage>-- Nenhuma imagem salva na notícia --</ng-template>
-                </b>
-            </label>
-
-            <div class="inner-addon right-addon">
-                <i class="fas fa-times" *ngIf="file" (click)="removeSelectedImg()" ngbTooltip="Remover imagem selecionada"></i>
-                <input #inputFile type="file" class="form-control" name="newsimage" accept="image/png, image/jpeg"
-                    (change)="onChange($event)">
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                    <label>Categoria*</label>
+                    <select class="custom-select form-control" formControlName="category" required>
+                            <option *ngFor="let categoryOption of categoryOptions" [value]="categoryOption?.value"
+                             placeholder=" ">{{categoryOption?.info}}</option>
+                    </select>
+                    <!-- Validador Comentário  -->
+                    <app-validators [form]="newsManagerForm" [input]="f.category" [inputName]="'categoria'" [validators]="['required','maxlength', 3]"></app-validators>
             </div>
 
-            <div class="progress" *ngIf="inProgress">
-                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
-                    [attr.aria-valuenow]="progressImg" aria-valuemin="0" aria-valuemax="100" [ngClass]="[progressImg === 100 ? 'bg-success' :'' , uploadError ? 'bg-danger' : '']"
-                    [ngStyle]="{'width': progressImg + '%'}">
-                    {{progressImg}}%
+            <div class="form-group offset-md-1 col-md-7">
+                <label>
+                    Imagem Principal da Notícia
+                    <b target="_blank" *ngIf="isEditing">
+                        <span *ngIf="downloadURL; else noimage">
+                            <a href="{{downloadURL}}">-- Imagem Atual --</a>
+                            <i class="fas fa-times" (click)="removeMainImg()" ngbTooltip="Remover imagem principal da notícia"></i>
+                        </span>
+                        <ng-template #noimage>-- Nenhuma imagem salva na notícia --</ng-template>
+                    </b>
+                </label>
+    
+                <div class="inner-addon right-addon">
+                    <i class="fas fa-times" *ngIf="file" (click)="removeSelectedImg()" ngbTooltip="Remover imagem selecionada"></i>
+                    <input #inputFile type="file" class="form-control" name="newsimage" accept="image/png, image/jpeg"
+                        (change)="onChange($event)">
                 </div>
+    
+                <div class="progress" *ngIf="inProgress">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                        [attr.aria-valuenow]="progressImg" aria-valuemin="0" aria-valuemax="100" [ngClass]="[progressImg === 100 ? 'bg-success' :'' , uploadError ? 'bg-danger' : '']"
+                        [ngStyle]="{'width': progressImg + '%'}">
+                        {{progressImg}}%
+                    </div>
+                </div>
+                <p *ngIf="fileOverSize" class="text-danger">Tamanho limite de 1MB para a imagem!</p>
+                <p *ngIf="mustBeImg" class="text-danger">O arquivo deve ser uma imagem!</p>
             </div>
-            <p *ngIf="fileOverSize" class="text-danger">Tamanho limite de 1MB para a imagem!</p>
-            <p *ngIf="mustBeImg" class="text-danger">O arquivo deve ser uma imagem!</p>
+           
         </div>
+
+
         <div class="form-end">
             <span>Os campos com * são obrigatórios.</span>
-            <button type="submit" class="btn btn-success" [disabled]="submitting">Publicar Notícia</button>
+            <button type="submit" class="btn btn-success" [disabled]="submitting">Publicar</button>
             <!-- <button type="reset" class="btn btn-info" [disabled]="submitting">Limpar Campos</button> -->
         </div>
     </form>

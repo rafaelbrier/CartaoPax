@@ -7,19 +7,28 @@
     <div class="form-inline justify-content-center">
 
         <div class="col-sm-4 d-flex">
+            <label>Filtrar:</label>
+            <input type="text" class="form-control w-7" placeholder="id, data, título ..."
+                (ngModelChange)="onSearchChange($event)" [(ngModel)]="searchValue"
+                ngbTooltip="Exemplo de busca de data: 01/01/2019 13h30">
+        </div>
+
+        <div class="col-sm-4 d-flex">
+            <label>Categoria:</label>
+            <select class="custom-select w-6" [(ngModel)]="category" (ngModelChange)="onCategoryChange($event)">
+                    <option *ngFor="let categoryOption of categoryOptions" [value]="categoryOption?.value"
+                     placeholder=" ">{{categoryOption?.info}}</option>
+            </select>
+        </div>
+
+        <div class="col-sm-4 d-flex">
             <label>Mostrar</label>
-            <select class="custom-select" [(ngModel)]="limitValue" (ngModelChange)="onSelectChange($event)">
+            <select class="custom-select w-6" [(ngModel)]="limitValue" (ngModelChange)="onSelectChange($event)">
                 <option *ngFor="let limitOption of limitOptions" [value]="limitOption">{{limitOption}}</option>
             </select>
             <label>entradas.</label>
         </div>
 
-        <div class="col-sm-4 offset-sm-4 d-flex">
-            <label>Filtrar:</label>
-            <input type="text" class="form-control" placeholder="id, data, título ..."
-                (ngModelChange)="onSearchChange($event)" [(ngModel)]="searchValue"
-                ngbTooltip="Exemplo de busca de data: 01/01/2019 13h30">
-        </div>
     </div>
 
     <table class="table">
@@ -32,6 +41,8 @@
                     [sort]="[orderBy,orderAscOrDesc]">Data</th>
                 <th id="title" class="mw-px-3" scope="col" (click)="sortBy('title')" appSortTable
                     [sort]="[orderBy,orderAscOrDesc]">Título</th>
+                <th id="category" class="mw-px-1" scope="col" (click)="sortBy('category')" appSortTable
+                    [sort]="[orderBy,orderAscOrDesc]">Categoria</th>
                 <th scope="col" class="mw-px-1">Corpo</th>
                 <th scope="col" class="mw-px-1">Imagem</th>
                 <th scope="col" class="mw-px-2">Ações</th>
@@ -44,9 +55,14 @@
                 <th scope="row">{{new?.id}}</th>
                 <td class="td-full-wd">{{new?.date | date: "dd/MM/yyyy 'às' HH'h'mm"}}</td>
                 <td class="font-weight-bold">
-                    <a target="_blank"  [routerLink]="['/news/' + new?.id]" ngbTooltip="Ver página da notícia">
+                    <a target="_blank" [routerLink]="[goToNewsPage(new)]" ngbTooltip="Ver página da notícia">
                         {{new?.title}}
                     </a>
+                </td>
+                <td class="font-weight-bold">
+                    <span [ngClass]="{'text-success': new?.category === 'N'}">
+                        {{new?.categoryMask}}
+                    </span>
                 </td>
                 <td>
                     <button type="button" class="btn btn-outline-info btn-table" (click)="showBody(new?.body)"

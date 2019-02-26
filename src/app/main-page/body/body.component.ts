@@ -32,20 +32,27 @@ export class BodyComponent implements OnInit {
   }
 
 
-  loadNews(limit: number) {
+  loadNews(limit: number, searchValue: string = "") {
     this.isBoxLoading = true;
     this.boxLoadingError = false;
-    this.newsService.findNewsPageable(0, limit, "date", "desc")
+    this.newsService.findNewsPageable(0, limit, "date", "desc", searchValue, 'N')
       .subscribe((resData): any => {
         this.newsData = resData;
         this.news = this.newsData.content;
-        delete this.newsData.content;
-        this.recentNews = this.news.shift();
+        if (this.news && this.news.length > 0) {
+          delete this.newsData.content;
+          this.recentNews = this.news.shift();
+        }
+       
         this.isBoxLoading = false;
       }, () => {
         this.isBoxLoading = false;
         this.boxLoadingError = true;
       })
+  }
+
+  onSearchChange(searchValue: string) {
+    this.loadNews(this.newsLoadDefaultLimit, searchValue);
   }
 
   loadMoreNews() {

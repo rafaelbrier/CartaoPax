@@ -23,6 +23,7 @@ export const routes: Routes = [
   // { path: 'news', component: NewsPageComponent, data: { breadcrumb: "Notícias" } },
   { path: 'news/:id', component: NewsPageComponent, data: { breadcrumb: "Notícias" } },
   { path: 'obituario', component: ObituarioComponent, data: { breadcrumb: "Obituário" } },
+  { path: 'obituario/:id', component: ObituarioComponent, data: { breadcrumb: "Obituário" } },
   { path: 'planos', component: PlanosComponent, data: { breadcrumb: "Planos" } },
   {
     path: 'dashboard',

@@ -23,11 +23,16 @@ export class FireStorageService {
         this.token = fireBaseConfig.apiKey.split('-').pop();
     }
 
-    uploadImage(file: File, folder: string) {
+    uploadImage(file: File, folder: string, name?: string) {
 
         this.checkLoginBeforeContinue();
+        let fileName: string;
 
-        const fileName = file.name.split('.')[0] + Math.random().toString().split('.').pop() + '.jpg';
+        if (name) {
+            fileName = name;
+        } else {
+            fileName = file.name.split('.')[0] + Math.random().toString().split('.').pop() + '.jpg';
+        }
 
         this.uploadTask = this.storageRef
             .child(folder + '/' + fileName)

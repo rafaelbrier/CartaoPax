@@ -5,13 +5,11 @@
 <div class="table-container">
 
   <div class="form-inline justify-content-center">
-
+    
     <div class="col-sm-4 d-flex">
-      <label>Mostrar</label>
-      <select class="custom-select" [(ngModel)]="limitValue" (ngModelChange)="onSelectChange($event)">
-        <option *ngFor="let limitOption of limitOptions" [value]="limitOption">{{limitOption}}</option>
-      </select>
-      <label>entradas.</label>
+        <label>Filtrar:</label>
+        <input type="text" class="form-control w-7" placeholder="id, nome, CPF ..." (ngModelChange)="onSearchChange($event)"
+          [(ngModel)]="searchValue">
     </div>
 
     <div class="col-sm-4 d-flex form-check">
@@ -21,10 +19,13 @@
     </div>
 
     <div class="col-sm-4 d-flex">
-      <label>Filtrar:</label>
-      <input type="text" class="form-control" placeholder="id, nome, CPF ..." (ngModelChange)="onSearchChange($event)"
-        [(ngModel)]="searchValue">
+        <label>Mostrar</label>
+        <select class="custom-select w-6" [(ngModel)]="limitValue" (ngModelChange)="onSelectChange($event)">
+          <option *ngFor="let limitOption of limitOptions" [value]="limitOption">{{limitOption}}</option>
+        </select>
+        <label>entradas.</label>
     </div>
+    
   </div>
 
   <table class="table">

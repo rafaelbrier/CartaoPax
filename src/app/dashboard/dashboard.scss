@@ -1,7 +1,5 @@
 @import '../app.component.scss';
 
-$grayBlue: #5f6f81;
-$menuItemColor: #4D4D4D;
 
 .component-title {
     position: absolute;
@@ -17,6 +15,7 @@ $menuItemColor: #4D4D4D;
 
 .form-end {
     span, h6 {
+        margin-top: 5px;
         font-size: 12px;
         margin-left: 10px;
         color: darkgray;
@@ -215,15 +214,6 @@ tbody td, tbody th {
             opacity: 1;
             font-weight: bold;
         }
-    }
-}
-
-.form-inline {
-    margin-bottom: 15px;
-    label {
-        height: calc(2.25rem + 2px);
-        color: $grayBlue;
-        margin: 0 10px;
     }
 }
 

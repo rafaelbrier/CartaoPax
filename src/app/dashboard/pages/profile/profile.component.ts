@@ -94,7 +94,8 @@ export class ProfileComponent implements OnInit {
 
   retrieveImg(): Promise<any> {
     this.inProgress = true;
-    let uploadTask = this.fireStorageService.uploadImage(this.profileImg, 'profiles-images');
+    let fileName = "imagem-perfil";
+    let uploadTask = this.fireStorageService.uploadImage(this.profileImg, 'profiles-images/' + this.user.cpf, fileName);
     this.uploadedFileName = uploadTask.fileName;
 
     uploadTask.uploadObs((snapshot: { bytesTransferred: number; totalBytes: number; }) => {
@@ -128,7 +129,6 @@ export class ProfileComponent implements OnInit {
 
             }).catch(() => { this.submitting = false; return });
         } else {
-          this.uploadedFileName = null;
           this.sendUser();
         }
       }).catch(() => { this.submitting = false; return });
@@ -180,7 +180,7 @@ export class ProfileComponent implements OnInit {
 
   handleErrorResponse(err: any) {
     if (this.uploadedFileName) {
-      this.fireStorageService.deleteImg(this.uploadedFileName, 'profiles-images');
+      this.fireStorageService.deleteImg(this.uploadedFileName, 'profiles-images/' + this.user.cpf);
     }
     if (err.error) {
       if (err.error.errors) {
@@ -201,15 +201,12 @@ export class ProfileComponent implements OnInit {
     } else {
       this.modal.openModal("Erro!", `Houve algum erro ao editar os dados. Por favor tente novamente mais tarde.`, "fail");
     }
-
-    this.retrieveUser();
   }
 
   submitComplete() {
     this.inProgress = false;
     this.submitting = false;
     this.editImage = false;
-    this.removeMainImg();
   }
 
   removeMainImg() {
