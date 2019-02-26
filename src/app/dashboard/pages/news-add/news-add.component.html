@@ -1,4 +1,4 @@
-<div class="component-title">
+<div class="component-title" [style.color]="isEditing ? 'red' : ''">
     {{isEditing ? 'Editar' : 'Adicionar'}} Notícia <b>{{isEditing ? [' - #' + newsToEdit?.id] : ''}}</b>
 </div>
 
@@ -64,7 +64,6 @@
         <div class="form-end">
             <span>Os campos com * são obrigatórios.</span>
             <button type="submit" class="btn btn-success" [disabled]="submitting">Publicar</button>
-            <!-- <button type="reset" class="btn btn-info" [disabled]="submitting">Limpar Campos</button> -->
         </div>
     </form>
 </div>

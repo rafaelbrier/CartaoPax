@@ -20,17 +20,8 @@
       <ng-template #editImgComp>
         <div class="col-sm-10 mx-auto">
           <i class="fas fa-chevron-right" (click)="editImage = false" ngbTooltip="Sair do modo edição"></i>
-          <app-img-input-file class="profile-style" [imgPath]="downloadURL" (imgFile)="fileImg($event)"></app-img-input-file>
-
-          <div class="progress" *ngIf="inProgress">
-            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
-              [attr.aria-valuenow]="progressImg" aria-valuemin="0" aria-valuemax="100"
-              [ngClass]="[progressImg === 100 ? 'bg-success' :'' , uploadError ? 'bg-danger' : '']"
-              [ngStyle]="{'width': progressImg + '%'}">
-              {{progressImg}}%
-            </div>
-          </div>
-
+          <app-img-input-file class="profile-style" [imgPath]="downloadURL" (imgFile)="fileImg($event)"
+          [inProgress]="inProgress" [progressPercentage]="progressImg"></app-img-input-file>
         </div>
       </ng-template>
 
