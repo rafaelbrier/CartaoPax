@@ -212,25 +212,7 @@ export class UsersAddComponent implements OnInit {
     if (this.uploadedFileName) {
       this.fireStorageService.deleteImg(this.uploadedFileName, 'profiles-images/' + this.v.cpf);
     }
-    if (err.error) {
-      if (err.error.errors) {
-        if (err.error.errors.length >= 1) {
-          let errorsArr = err.error.errors;
-          let messagesArr = [];
-          errorsArr.forEach(element => {
-            messagesArr.push('<div>- ' + element["defaultMessage"] + '</div>');
-          });
-          let errorMessages = `<div class="alert alert-danger text-left col-sm-11 mx-auto">
-          ${messagesArr.join('')}</div>`;
-          this.modal.openModal("Erro!", errorMessages, "fail");
-          return;
-        }
-      } else {
-        this.modal.openModal("Erro!", `<div class="alert alert-danger text-left col-sm-11 mx-auto">${err.error}</div>`, "fail");
-      }
-    } else {
-      this.modal.openModal("Erro!", `Houve algum erro ao ${this.isEditing ? "editar": "cadastrar"} o usuário. Por favor tente novamente mais tarde.`, "fail");
-    }
+    this.sharedService.handleErrorResponse(err, this.modal, this.isEditing);
   }
 
   populateRoles() {

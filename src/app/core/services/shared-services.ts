@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { ModalComponent } from '../components/utils/modal/modal.component';
 
 @Injectable({
     providedIn: 'root'
@@ -111,6 +112,33 @@ export class SharedService {
                 }, 200)
             } catch (err) { }
         }
+    }
+
+    handleErrorResponse(err: any, modal: ModalComponent, isEdit: boolean) {
+        let modalText = isEdit ? "editar" : "adicionar";
+        if(err.status == 0) {
+            modal.openModal("Erro!", `<div class="alert alert-danger text-left col-sm-11 mx-auto">Erro desconhecido, favor contatar o administrador do sistema.</div>`, "fail");
+            return;
+        }
+        if (err.error) {
+            if (err.error.errors) {
+              if (err.error.errors.length >= 1) {
+                let errorsArr = err.error.errors;
+                let messagesArr = [];
+                errorsArr.forEach(element => {
+                  messagesArr.push('<div>- ' + element["message"] + '</div>');
+                });
+                let errorMessages = `<div class="alert alert-danger text-left col-sm-11 mx-auto">
+                ${messagesArr.join('')}</div>`;
+                modal.openModal(err.error.message, errorMessages, "fail");
+                return;
+              }
+            } else {
+              modal.openModal("Erro!", `<div class="alert alert-danger text-left col-sm-11 mx-auto">${err.error.message}</div>`, "fail");
+            }
+          } else {
+            modal.openModal("Erro!", `<div class="alert alert-danger text-left col-sm-11 mx-auto">Houve algum erro ao ${modalText} os dados. Por favor tente novamente mais tarde.</div>`, "fail");
+          }
     }
 }
 

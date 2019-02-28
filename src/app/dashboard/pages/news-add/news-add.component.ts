@@ -116,12 +116,12 @@ export class NewsAddComponent implements OnInit {
           , "success");
         if (this.isEditing) this.router.navigate(['dashboard/newsmanager']);
         this.submitComplete();
-      }, () => {
+      }, (err) => {
         this.submitting = false;
         if (this.uploadedFileName) {
           this.fireStorageService.deleteImg(this.uploadedFileName, 'news-images');
         }
-        this.modal.openModal("Erro!", `Houve algum erro ao publicar a(o) ${this.categoryName}. Por favor tente novamente mais tarde.`, "fail");
+        this.sharedService.handleErrorResponse(err, this.modal, this.isEditing);
       })
   }
 
